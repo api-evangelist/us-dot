@@ -1,0 +1,124 @@
+generated: '2026-07-28'
+method: derived
+source: openapi/*.yml 4xx/5xx responses + live probes of the anonymous FAA and Socrata endpoints
+format: none
+format_note: >-
+  No U.S. DOT or FAA surface uses RFC 9457 application/problem+json. The FAA Gravitee
+  gateway returns a flat JSON object {"message": ..., "http_status_code": ...}; the FAA
+  ASWS and APRA services return an empty body with the status code and a human-readable
+  description declared in the OpenAPI; Socrata SODA returns its own envelope
+  {"code": ..., "error": true, "message": ..., "data": {...}}. Three different error
+  shapes across one department — recorded honestly rather than normalised.
+envelopes:
+- surface: FAA API gateway (Gravitee, external-api.faa.gov / external.apic4e.faa.gov)
+  media_type: application/json
+  shape:
+    message: string
+    http_status_code: integer
+  evidence: 'Live probe 2026-07-28 of https://external-api.faa.gov/notamapi/v1/notams returned {"message":"Unauthorized","http_status_code":401}.'
+- surface: FAA ASWS / APRA services
+  media_type: none
+  shape: empty body
+  evidence: 'OpenAPI declares 400/404/500 with `content: {}` on every operation.'
+- surface: Socrata SODA 2.1 (data.transportation.gov, datahub.transportation.gov, data.bts.gov)
+  media_type: application/json
+  shape:
+    code: string
+    error: boolean
+    message: string
+    data: object
+  evidence: https://dev.socrata.com/docs/errors.html
+problems:
+- status: 400
+  title: Illegal arguments provided to service
+  detail: One or more of the service parameter values is invalid.
+  source_operations:
+  - openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml#getCIFPRelease
+  - openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml#getTPPRelease
+  - openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml#getNASRSubscription
+  remediation: Check the `edition` (current|next), `format` and `geoname` query parameters against the enum declared in the spec.
+  applies_to: us-dot:faa-aeronautic-product-release-api
+- status: 404
+  title: Requested edition not released or not found
+  detail: Requested edition has not been released for download or could not be found on the FAA aeronautical products site.
+  source_operations:
+  - openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml#getTPPEdition
+  - openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml#getNASREdition
+  remediation: Call the matching /info operation first to learn the current and next edition dates before requesting a /chart download link.
+  applies_to: us-dot:faa-aeronautic-product-release-api
+- status: 404
+  title: Product deprecated
+  detail: This product has been deprecated and is no longer published by the FAA.
+  source_operations:
+  - openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml
+  remediation: Retire the integration for that chart product. FAA signals product retirement only through this 404 description; there is no Sunset header.
+  applies_to: us-dot:faa-aeronautic-product-release-api
+  note: This is the only deprecation signal DOT or FAA publishes on any API.
+- status: 500
+  title: Internal service error
+  detail: Internal service error occurred which prevented a valid response from being returned.
+  source_operations:
+  - openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml
+  remediation: Retry with backoff. All APRA operations are safe GETs, so retry is unconditionally safe.
+  applies_to: us-dot:faa-aeronautic-product-release-api
+- status: 404
+  title: Airport delays unavailable
+  detail: Airport delays from fly.faa.gov are unavailable.
+  source_operations:
+  - openapi/us-dot-faa-airport-status-web-service-openapi.yml#getDelays
+  remediation: Upstream NAS status feed is down. Retry; fall back to https://nasstatus.faa.gov/api/airport-status-information.
+  applies_to: us-dot:faa-airport-status-web-service
+- status: 404
+  title: Airport not supported
+  detail: Delays are available only for major United States airports.
+  source_operations:
+  - openapi/us-dot-faa-airport-status-web-service-openapi.yml#getAirportStatus
+  remediation: The service covers roughly 40 airports enumerated in the operation description (BOS, LGA, TEB, EWR, JFK, ... SEA). Validate the IATA/ICAO code against that list.
+  applies_to: us-dot:faa-airport-status-web-service
+- status: 500
+  title: Upstream fly.faa.gov error
+  detail: Airport information from fly.faa.gov returned an error response.
+  source_operations:
+  - openapi/us-dot-faa-airport-status-web-service-openapi.yml#getDelays
+  - openapi/us-dot-faa-airport-status-web-service-openapi.yml#getAirportStatus
+  remediation: Retry with backoff.
+  applies_to: us-dot:faa-airport-status-web-service
+- status: 401
+  title: Unauthorized
+  detail: Credential missing or invalid at the FAA API gateway.
+  source_operations: []
+  evidence: 'Live probe 2026-07-28: https://external-api.faa.gov/notamapi/v1/notams -> {"message":"Unauthorized","http_status_code":401}'
+  remediation: Register in the FAA developer portal (https://api.faa.gov/s/) and send client_id/client_secret headers, or X-API-KEY + X-APP-ID for SAS.
+  applies_to: [us-dot:faa-air-carrier-prd-api, us-dot:faa-safety-assurance-system-api]
+- status: 400
+  title: Error in body request
+  detail: Value input error in the submitted TIM/PDM payload.
+  source_operations:
+  - openapi/us-dot-its-jpo-ode-rest-api-openapi.yml#tim_post
+  - openapi/us-dot-its-jpo-ode-rest-api-openapi.yml#pdm_post
+  remediation: Validate the payload against the TravelerInputData / ProbeDataManagement definitions in the spec.
+  applies_to: us-dot:its-jpo-ode-rest-api
+- status: 408
+  title: Timeout
+  detail: RSU SNMP query or TIM deposit timed out.
+  source_operations:
+  - openapi/us-dot-its-jpo-ode-rest-api-openapi.yml#snmp_get
+  - openapi/us-dot-its-jpo-ode-rest-api-openapi.yml#tim_query
+  remediation: The roadside unit did not answer. Retry; do not assume the write did not land — the ODE has no idempotency key.
+  applies_to: us-dot:its-jpo-ode-rest-api
+- status: 500
+  title: Internal Server Error
+  detail: See the response body or ODE User Guide for details.
+  source_operations:
+  - openapi/us-dot-its-jpo-ode-rest-api-openapi.yml
+  applies_to: us-dot:its-jpo-ode-rest-api
+- status: 403
+  title: Access Denied (Akamai)
+  detail: HTML "Access Denied" page returned to every non-browser client.
+  source_operations: []
+  evidence: 'Live probes 2026-07-28: www.transportation.gov, www.dot.gov, www.bts.gov return 403 to curl and to any automated fetcher on every path.'
+  remediation: >-
+    Not an API error — it is the departmental web tier bot-blocking automation. Use the
+    data platforms (data.transportation.gov, data.bts.gov, catalog.data.faa.gov) instead;
+    they answer anonymously.
+  applies_to: departmental web surfaces

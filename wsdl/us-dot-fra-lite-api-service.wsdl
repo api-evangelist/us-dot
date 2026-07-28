@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="https://safetydata.fra.dot.gov/MasterWebService/LiteApiService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="https://safetydata.fra.dot.gov/MasterWebService/LiteApiService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="https://safetydata.fra.dot.gov/MasterWebService/LiteApiService">
+      <s:element name="GetTrainsAccidentDataByYear">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="year" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTrainsAccidentDataByYearResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTrainsAccidentDataByYearResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthHeader" type="tns:AuthHeader" />
+      <s:complexType name="AuthHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="GetCasualtyDataByYear">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="year" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCasualtyDataByYearResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCasualtyDataByYearResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSummaryDataByYear">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="year" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSummaryDataByYearResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSummaryDataByYearResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTenYearsDataByYear">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="year" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTenYearsDataByYearResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTenYearsDataByYearResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEnforcementDataByYear">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="year" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RailroadCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEnforcementDataByYearResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEnforcementDataByYearResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetTrainsAccidentDataByYearSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTrainsAccidentDataByYear" />
+  </wsdl:message>
+  <wsdl:message name="GetTrainsAccidentDataByYearSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTrainsAccidentDataByYearResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTrainsAccidentDataByYearAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetCasualtyDataByYearSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCasualtyDataByYear" />
+  </wsdl:message>
+  <wsdl:message name="GetCasualtyDataByYearSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCasualtyDataByYearResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCasualtyDataByYearAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetSummaryDataByYearSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSummaryDataByYear" />
+  </wsdl:message>
+  <wsdl:message name="GetSummaryDataByYearSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSummaryDataByYearResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSummaryDataByYearAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetTenYearsDataByYearSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTenYearsDataByYear" />
+  </wsdl:message>
+  <wsdl:message name="GetTenYearsDataByYearSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTenYearsDataByYearResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTenYearsDataByYearAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetEnforcementDataByYearSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEnforcementDataByYear" />
+  </wsdl:message>
+  <wsdl:message name="GetEnforcementDataByYearSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEnforcementDataByYearResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEnforcementDataByYearAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:portType name="Lite_x0020_APIs_x0020_ServiceSoap">
+    <wsdl:operation name="GetTrainsAccidentDataByYear">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Accident/Incident Report data by Year, Where Year should be four digits like 2012 full year (not current year; no partial years)  and Returns XMLDocument</wsdl:documentation>
+      <wsdl:input message="tns:GetTrainsAccidentDataByYearSoapIn" />
+      <wsdl:output message="tns:GetTrainsAccidentDataByYearSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCasualtyDataByYear">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Casualty Report data by Year, Where Year should be four digits like 2012 full year (not current year; no partial years)  and Returns XMLDocument</wsdl:documentation>
+      <wsdl:input message="tns:GetCasualtyDataByYearSoapIn" />
+      <wsdl:output message="tns:GetCasualtyDataByYearSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSummaryDataByYear">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Summary Report data by Year, Where Year should be four digits like 2012 full year (not current year; no partial years)  and Returns XMLDocument</wsdl:documentation>
+      <wsdl:input message="tns:GetSummaryDataByYearSoapIn" />
+      <wsdl:output message="tns:GetSummaryDataByYearSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTenYearsDataByYear">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Ten Year Accident/Incident Report data by Year, Where Year should be four digits like 2012 concluding year (not current year) of ten year span and Returns XMLDocument</wsdl:documentation>
+      <wsdl:input message="tns:GetTenYearsDataByYearSoapIn" />
+      <wsdl:output message="tns:GetTenYearsDataByYearSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEnforcementDataByYear">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Enforcement data by Year, Where Year should be four digits like 2012 full year (not current year; no partial years)  and Railroad like ALL or valid Railroad Code and Returns XMLDocument</wsdl:documentation>
+      <wsdl:input message="tns:GetEnforcementDataByYearSoapIn" />
+      <wsdl:output message="tns:GetEnforcementDataByYearSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Lite_x0020_APIs_x0020_ServiceSoap" type="tns:Lite_x0020_APIs_x0020_ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetTrainsAccidentDataByYear">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/LiteApiService/GetTrainsAccidentDataByYear" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetTrainsAccidentDataByYearAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCasualtyDataByYear">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/LiteApiService/GetCasualtyDataByYear" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetCasualtyDataByYearAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSummaryDataByYear">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/LiteApiService/GetSummaryDataByYear" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetSummaryDataByYearAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTenYearsDataByYear">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/LiteApiService/GetTenYearsDataByYear" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetTenYearsDataByYearAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEnforcementDataByYear">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/LiteApiService/GetEnforcementDataByYear" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetEnforcementDataByYearAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Lite_x0020_APIs_x0020_ServiceSoap12" type="tns:Lite_x0020_APIs_x0020_ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetTrainsAccidentDataByYear">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/LiteApiService/GetTrainsAccidentDataByYear" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetTrainsAccidentDataByYearAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCasualtyDataByYear">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/LiteApiService/GetCasualtyDataByYear" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetCasualtyDataByYearAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSummaryDataByYear">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/LiteApiService/GetSummaryDataByYear" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetSummaryDataByYearAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTenYearsDataByYear">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/LiteApiService/GetTenYearsDataByYear" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetTenYearsDataByYearAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEnforcementDataByYear">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/LiteApiService/GetEnforcementDataByYear" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetEnforcementDataByYearAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Lite_x0020_APIs_x0020_Service">
+    <wsdl:port name="Lite_x0020_APIs_x0020_ServiceSoap" binding="tns:Lite_x0020_APIs_x0020_ServiceSoap">
+      <soap:address location="https://safetydata.fra.dot.gov/MasterWebService/LiteApiService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Lite_x0020_APIs_x0020_ServiceSoap12" binding="tns:Lite_x0020_APIs_x0020_ServiceSoap12">
+      <soap12:address location="https://safetydata.fra.dot.gov/MasterWebService/LiteApiService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

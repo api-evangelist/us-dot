@@ -1,0 +1,100 @@
+generated: '2026-07-28'
+method: searched
+source: >-
+  https://github.com/usdot-jpo-ode/wzdx/releases (GitHub Releases API, read 2026-07-28),
+  https://apim-api.apic4e.faa.gov/portal/environments/DEFAULT/apis (Gravitee portal
+  catalog created_at/updated_at, read anonymously 2026-07-28),
+  openapi/*.yml info.version, https://dev.socrata.com/changelog/
+summary: >-
+  U.S. DOT publishes no API changelog. No release notes page, no "what's new" feed, no
+  dated version history for any of the FAA, BTS or DOT Data Hub APIs. The only dated,
+  structured change history the department itself maintains is on GitHub, for
+  SPECIFICATIONS rather than services — the Work Zone Data Exchange releases. Everything
+  else below is reconstructed from timestamps the FAA API gateway exposes in its public
+  catalog, which is a change signal, not a changelog.
+scheme: none
+scheme_note: >-
+  Versions live in OpenAPI info.version (FAA), in the URL path (Socrata /resource is
+  SODA 2.1; CKAN /api/3), or in a GitHub tag (WZDx). No surface negotiates version by
+  header or date, and no surface runs more than one version concurrently.
+current_versions:
+- api: us-dot:faa-airport-status-web-service
+  version: 1.2.1
+- api: us-dot:faa-aeronautic-product-release-api
+  version: 1.4.0
+- api: us-dot:faa-air-carrier-prd-api
+  version: v1
+- api: us-dot:faa-safety-assurance-system-api
+  version: 1.0.0
+- api: us-dot:its-jpo-ode-rest-api
+  version: 0.0.1
+- api: [us-dot:dot-data-hub-soda-api, us-dot:bts-open-data-soda-api]
+  version: SODA 2.1
+- api: us-dot:faa-data-catalog-ckan-api
+  version: CKAN 2.11.4
+changelogs:
+- name: WZDx Specification releases
+  url: https://github.com/usdot-jpo-ode/wzdx/releases
+  operator: USDOT ITS Joint Program Office
+  kind: dated-github-releases
+  covers: json-schema/us-dot-wzdx-4.2-*.json
+  verified: '2026-07-28'
+- name: Socrata (Tyler Data & Insights) platform changelog
+  url: https://dev.socrata.com/changelog/
+  operator: Tyler Data & Insights
+  kind: dated-platform-changelog
+  covers: [us-dot:dot-data-hub-soda-api, us-dot:bts-open-data-soda-api]
+  note: >-
+    The platform vendor's changelog, not DOT's. Relevant because DOT's two largest API
+    surfaces are Socrata tenancies and inherit every platform change.
+- name: FAA Gravitee portal catalog timestamps
+  url: https://apim-api.apic4e.faa.gov/portal/environments/DEFAULT/apis?page=1&size=200
+  kind: machine-readable-change-signal
+  note: >-
+    Not a changelog, but the only per-API change signal the FAA emits. Each catalog entry
+    carries created_at and updated_at. Poll it to detect that an FAA API definition
+    changed; the catalog will not tell you what changed.
+entries:
+- version: v4.2
+  name: WZDx Specification v4.2
+  date: '2023-02-14'
+  artifact: json-schema/us-dot-wzdx-4.2-*.json
+  source: https://github.com/usdot-jpo-ode/wzdx/releases
+- version: v4.1
+  name: WZDx Specification v4.1
+  date: '2022-09-19'
+  source: https://github.com/usdot-jpo-ode/wzdx/releases
+- version: v4.0
+  name: WZDx Specification v4.0
+  date: '2021-12-15'
+  breaking: true
+  source: https://github.com/usdot-jpo-ode/wzdx/releases
+- version: v3.1
+  name: WZDx Specification v3.1
+  date: '2021-04-06'
+  source: https://github.com/usdot-jpo-ode/wzdx/releases
+- version: v3.0
+  name: WZDx Specification v3.0
+  date: '2020-09-18'
+  breaking: true
+  source: https://github.com/usdot-jpo-ode/wzdx/releases
+- version: v2.0
+  name: WZDx Specification v2.0
+  date: '2020-01-14'
+  breaking: true
+  source: https://github.com/usdot-jpo-ode/wzdx/releases
+- version: v1.1
+  name: WZDx Specification v1.1
+  date: '2019-12-30'
+  source: https://github.com/usdot-jpo-ode/wzdx/releases
+faa_catalog_change_signals:
+- api: Air Carrier PRD API
+  created_at: '2026-03-30'
+  updated_at: '2026-07-09'
+- api: Safety Assurance System (SAS) API
+  created_at: '2026-02-27'
+  updated_at: '2026-04-21'
+gaps:
+- No dated changelog for the FAA ASWS or APRA services, whose 34 chart products change on a 28/56-day AIRAC cycle.
+- No changelog for the DOT Data Hub or BTS Socrata tenancies. Per-dataset `modified` in /data.json is the only signal.
+- No RSS or Atom feed for API changes anywhere in the department. The only subscription surface is a human email list at https://www.faa.gov/data/subscribe.

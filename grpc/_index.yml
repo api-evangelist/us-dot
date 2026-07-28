@@ -1,0 +1,32 @@
+generated: '2026-07-28'
+method: searched
+source: >-
+  https://github.com/usdot-jpo-ode/jpo-mec-deposit — located via a GitHub code search for
+  .proto files across the usdot-jpo-ode organization on 2026-07-28 and fetched verbatim
+  from the repository contents API.
+note: >-
+  These are proto3 MESSAGE TYPES, not gRPC service definitions. There is no gRPC service,
+  no rpc block and no reflection endpoint anywhere in the U.S. DOT estate. The ITS JPO
+  Multi-access Edge Computing depositor serializes these envelopes and publishes them to
+  an MQTT broker. Java package us.dot.its.jpo.ode.mec.deposit.models.etx.mqtt.
+protos:
+- file: us-dot-ode-geoRoutedMsg.proto
+  package: georoutedmsg
+  messages: [Position, GeoRoutedMsg]
+  transport: mqtt
+  repo: https://github.com/usdot-jpo-ode/jpo-mec-deposit
+  path: jpo-mec-deposit/src/main/proto/geoRoutedMsg.proto
+  note: 'Message envelope carrying raw J2735 bytes, a timestamp and an optional lat/long Position.'
+- file: us-dot-ode-geoHashRoutedMsg.proto
+  package: geohashroutedmsg
+  messages: [GeoHashRoutedMsg]
+  transport: mqtt
+  repo: https://github.com/usdot-jpo-ode/jpo-mec-deposit
+  path: jpo-mec-deposit/src/main/proto/geoHashRoutedMsg.proto
+  note: 'Same envelope keyed by geohash string instead of an explicit coordinate pair.'
+related:
+  asyncapi: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  event_surfaces: asyncapi/us-dot-event-surfaces.yml
+  asn1_note: >-
+    The J2735 payload inside msgBytes is ASN.1 UPER encoded, not protobuf. ASN.1
+    definitions live at github.com/usdot-jpo-ode/scms-asn1 and in the ODE's asn1_codec.

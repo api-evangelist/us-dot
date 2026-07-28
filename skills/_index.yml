@@ -1,0 +1,46 @@
+generated: '2026-07-28'
+method: generated
+source: >-
+  openapi/*.yml (every operationId verified verbatim in the referenced spec),
+  conventions/us-dot-conventions.yml, errors/us-dot-problem-types.yml,
+  agentic-access/us-dot-agentic-access.yml, sandbox/us-dot-sandbox.yml
+note: >-
+  No U.S. DOT, FAA or BTS agent skill, AGENTS.md or skill package was found published
+  anywhere — the GitHub org usdot-jpo-ode, the FAA developer portal and the DOT developer
+  resources page were all searched on 2026-07-28. These are generated from the harvested
+  contracts and the repo's own conventions/errors artifacts. Every operationId listed
+  below exists verbatim in the referenced spec; where the FAA spec declares no
+  operationId, the skill addresses the operation by path and method and says so.
+skills:
+- file: us-dot-check-airport-delays.md
+  name: Check US airport delays and ground stops
+  api: openapi/us-dot-faa-airport-status-web-service-openapi.yml
+  operations: [getDelays, getAirportStatus]
+  auth: none
+  consequence: read
+- file: us-dot-download-aeronautical-products.md
+  name: Download FAA aeronautical charts and airspace data
+  api: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml
+  operations: [getNASREdition, getNASRSubscription, getTPPEdition, getTPPRelease, getCIFPEdition, getCIFPRelease, getIFREnrouteEdition, getIFREnrouteRelease, getDDOFEdition, getDDOFRelease, getSectionalInfo, getSectionalChart, getOceanicRouteEdition, getOceanicRouteChart]
+  auth: none
+  consequence: read
+- file: us-dot-query-bts-aviation-statistics.md
+  name: Query BTS and DOT open data with SoQL
+  api: null
+  operations: []
+  auth: none (optional Socrata app token)
+  consequence: read
+  note: Socrata publishes no OpenAPI; grounded in verified live resource ids and the documented SoQL parameter set.
+- file: us-dot-submit-sas-discrepancy.md
+  name: Submit a passenger hazmat discrepancy to the FAA SAS
+  api: openapi/us-dot-faa-safety-assurance-system-api-openapi.yml
+  operations: []
+  auth: X-API-KEY + X-APP-ID
+  consequence: write
+  note: 'FAA declares no operationId; the skill addresses POST /axhsubmitdiscrepancies by path. Carries passenger PII.'
+- file: us-dot-deposit-tim-to-roadside-unit.md
+  name: Deposit a Traveler Information Message to a roadside unit (ODE)
+  api: openapi/us-dot-its-jpo-ode-rest-api-openapi.yml
+  operations: [getVersion, tim_query, tim_post, tim_put, tim_delete, snmp_get, pdm_post]
+  auth: operator-defined (self-hosted)
+  consequence: safety-critical

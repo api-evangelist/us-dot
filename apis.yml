@@ -17,10 +17,15 @@ description: >-
   Gravitee API portal at api.faa.gov whose public catalog is enumerable without login and
   serves genuinely open, unauthenticated OpenAPI 3.0.1 services for national airspace delay
   status and aeronautical chart product releases, alongside gated APIs for pilot records and
-  safety reporting. API posture, honestly: transportation.gov itself is bot-blocked (HTTP 403
-  to any non-browser client) and publishes no departmental OpenAPI, but the data surfaces
-  underneath it are open, unmetered, public domain, and fully bulk-exportable — this is a
-  provider with an excellent exit path and no commercial lock-in of any kind.
+  safety reporting. Beyond aviation the operating administrations each run their own surface:
+  NHTSA publishes anonymous vehicle, recall, complaint and safety-rating APIs; FRA publishes
+  SOAP/WSDL rail safety services; FMCSA issues the department's only self-serve API key
+  behind a Login.gov account. API posture, honestly: transportation.gov itself is bot-blocked
+  (HTTP 403 to any non-browser client) and publishes no departmental OpenAPI, there is no
+  OAuth, no idempotency key, no RFC 9457 errors, no Sunset headers and no security.txt
+  anywhere — but the data surfaces underneath are open, unmetered, public domain and fully
+  bulk-exportable. This is a provider with an excellent exit path and no commercial lock-in
+  of any kind.
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/dot.png
 tags:
 - Travel
@@ -33,6 +38,11 @@ tags:
 - Distribution
 - Aviation Consumer Protection
 - Open Data
+- Transportation
+- Safety
+- Statistics
+- Automotive
+- Rail
 created: '2026-07-28'
 modified: '2026-07-28'
 specificationVersion: '0.19'
@@ -57,8 +67,13 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/us-dot-faa-airport-status-web-service-openapi.yml
+  - type: Overlay
+    url: overlays/us-dot-faa-airport-status-web-service-overlay.yaml
   - type: Documentation
     url: https://api.faa.gov/s/
+  - type: AgentSkill
+    name: Check US airport delays and ground stops
+    url: skills/us-dot-check-airport-delays.md
 - aid: us-dot:faa-aeronautic-product-release-api
   name: FAA Aeronautic Product Release API (APRA)
   description: >-
@@ -67,7 +82,8 @@ apis:
     Publication (dTPP), IFR enroute and oceanic charts, VFR charts, the Coded Instrument
     Flight Procedures data set, the NFDC/NASR 28-day airspace subscription, the Digital
     Obstacle File and more. Verified anonymously with HTTP 200 on 2026-07-28 against
-    /apra/nfdc/nasr/info and /apra/dtpp/info — no API key required.
+    /apra/nfdc/nasr/info and /apra/dtpp/info — no API key required. Two operations
+    (getDERSRelease, getDERSEdition) are marked deprecated in the spec.
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
@@ -79,8 +95,13 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml
+  - type: Overlay
+    url: overlays/us-dot-faa-aeronautic-product-release-api-overlay.yaml
   - type: Documentation
     url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: AgentSkill
+    name: Download FAA aeronautical charts and airspace data
+    url: skills/us-dot-download-aeronautical-products.md
 - aid: us-dot:faa-air-carrier-prd-api
   name: FAA Air Carrier Pilot Records Database (PRD) API
   description: >-
@@ -88,8 +109,9 @@ apis:
     create/update/delete, pilot data tracking, and asynchronous pilot data search request and
     response. Access is restricted by the FAA to operators under 14 CFR Part 121, 135, 125,
     91K, Air Tour, Public Aircraft, or Part 91 Corporate — this is an accreditation-style gate,
-    not a self-serve signup. The OpenAPI 3.0.0 definition is published openly in the FAA
-    portal catalog and was harvested verbatim.
+    not a self-serve signup. Credentials are client_id and client_secret request headers
+    declared as ordinary parameters, not as securitySchemes. The OpenAPI 3.0.0 definition is
+    published openly in the FAA portal catalog and was harvested verbatim.
   humanURL: https://api.faa.gov/s/
   baseURL: https://external.apic4e.faa.gov
   tags:
@@ -101,15 +123,21 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/us-dot-faa-air-carrier-prd-api-openapi.yml
+  - type: Overlay
+    url: overlays/us-dot-faa-air-carrier-prd-overlay.yaml
   - type: Documentation
     url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
 - aid: us-dot:faa-safety-assurance-system-api
   name: FAA Safety Assurance System (SAS) API
   description: >-
     Single-operation submission API for passenger discrepancy reporting into the FAA Safety
-    Assurance System. The harvested OpenAPI 3.0.0 declares apiKey and appId security schemes,
-    so a credential is required; the definition itself is published openly in the FAA portal
-    catalog.
+    Assurance System. Air carriers submit hazardous-material discrepancies discovered on
+    passengers or in passenger baggage. The harvested OpenAPI 3.0.0 declares apiKey and appId
+    security schemes (X-API-KEY plus X-APP-ID), so a credential is required; the definition
+    itself is published openly in the FAA portal catalog. The request body carries passenger
+    PII and a PNR locator and is the most sensitive payload in the DOT surface area.
   humanURL: https://api.faa.gov/s/
   baseURL: https://external.apic4e.faa.gov/axh-sasp-api/sas
   tags:
@@ -120,8 +148,42 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/us-dot-faa-safety-assurance-system-api-openapi.yml
+  - type: Overlay
+    url: overlays/us-dot-faa-safety-assurance-system-overlay.yaml
+  - type: Examples
+    url: examples/_index.yml
   - type: Documentation
     url: https://api.faa.gov/s/
+  - type: AgentSkill
+    name: Submit a passenger hazmat discrepancy to the FAA SAS
+    url: skills/us-dot-submit-sas-discrepancy.md
+- aid: us-dot:faa-data-catalog-ckan-api
+  name: FAA Data Catalog (CKAN Action API v3)
+  description: >-
+    The Federal Aviation Administration's open data catalog, running CKAN 2.11.4 and exposing
+    the full CKAN Action API v3 anonymously at /api/3/action/. package_list, package_search,
+    package_show, organization_list and status_show all answer without a credential; verified
+    2026-07-28. The catalog also publishes a Project Open Data / DCAT-US 1.1 document at
+    /data.json, harvested to well-known/us-dot-faa-catalog-data.json. Small — six datasets —
+    but it is the only CKAN surface in the department and the only one with a documented,
+    self-describing action API (help_show returns the parameter contract per action).
+  humanURL: https://catalog.data.faa.gov/
+  baseURL: https://catalog.data.faa.gov/api/3
+  tags:
+  - Open Data
+  - Aviation
+  - Catalog
+  - CKAN
+  - FAA
+  properties:
+  - type: Documentation
+    url: https://docs.ckan.org/en/2.11/api/
+  - type: Portal
+    url: https://catalog.data.faa.gov/
+  - type: APICatalog
+    url: https://catalog.data.faa.gov/data.json
+  - type: License
+    url: https://www.usa.gov/government-works
 - aid: us-dot:dot-data-hub-soda-api
   name: DOT Data Hub Open Data API
   description: >-
@@ -129,10 +191,11 @@ apis:
     datahub.transportation.gov on Socrata SODA 2.1. For travel and aviation this is where the
     DOT Office of the Assistant Secretary for Aviation and International Affairs publishes the
     Consumer Airfare Report city-pair fare tables (Tables 1, 1a, 2, 5, 6 and 7), the Airline
-    Quarterly Financial Review, and international seat and passenger reports. Datasets are
-    licensed Public Domain U.S. Government (USGOV_WORKS). Verified anonymously with HTTP 200
-    on 2026-07-28 against /resource/4f3n-jbg2.json and /resource/tfrh-tu9e.json — no app token
-    required for the volumes tested.
+    Quarterly Financial Review, and international seat and passenger reports. 1,542 datasets
+    enumerated in the DCAT-US 1.1 document at /data.json. Datasets are licensed Public Domain
+    U.S. Government (USGOV_WORKS). Verified anonymously with HTTP 200 on 2026-07-28 against
+    /resource/4f3n-jbg2.json and /resource/tfrh-tu9e.json — no app token required for the
+    volumes tested.
   humanURL: https://data.transportation.gov/
   baseURL: https://datahub.transportation.gov/resource
   tags:
@@ -144,12 +207,21 @@ apis:
   properties:
   - type: Documentation
     url: https://dev.socrata.com/docs/endpoints.html
+  - type: APIReference
+    url: https://dev.socrata.com/docs/queries/
   - type: Portal
     url: https://data.transportation.gov/
   - type: Portal
     url: https://datahub.transportation.gov/
+  - type: APICatalog
+    url: https://data.transportation.gov/data.json
+  - type: StatusPage
+    url: https://status.socrata.com/
   - type: License
     url: https://www.usa.gov/government-works
+  - type: AgentSkill
+    name: Query BTS and DOT open data with SoQL
+    url: skills/us-dot-query-bts-aviation-statistics.md
 - aid: us-dot:bts-open-data-soda-api
   name: Bureau of Transportation Statistics Open Data API
   description: >-
@@ -158,9 +230,9 @@ apis:
     include T-100 segment summaries by carrier, country, origin airport and month; Air Carrier
     Financial (Form 41) fuel, revenue, employee and fleet-age series; average air fare by
     carrier and by quarter; commercial aviation mishandled baggage and mishandled wheelchairs
-    and scooters; and involuntary denied boardings by airline. Verified anonymously with HTTP
-    200 on 2026-07-28 against /resource/bu82-4pwz.json, /resource/6u8d-47ih.json and
-    /resource/xyfb-hgtv.json.
+    and scooters; and involuntary denied boardings by airline. 420 datasets enumerated in the
+    DCAT-US 1.1 document at /data.json. Verified anonymously with HTTP 200 on 2026-07-28
+    against /resource/bu82-4pwz.json, /resource/6u8d-47ih.json and /resource/xyfb-hgtv.json.
   humanURL: https://data.bts.gov/
   baseURL: https://data.bts.gov/resource
   tags:
@@ -172,21 +244,261 @@ apis:
   properties:
   - type: Documentation
     url: https://dev.socrata.com/docs/endpoints.html
+  - type: APIReference
+    url: https://dev.socrata.com/docs/queries/
   - type: Portal
     url: https://data.bts.gov/
+  - type: APICatalog
+    url: https://data.bts.gov/data.json
+  - type: StatusPage
+    url: https://status.socrata.com/
   - type: BulkData
     url: https://www.transtats.bts.gov/
   - type: License
     url: https://www.usa.gov/government-works
+- aid: us-dot:nhtsa-vpic-api
+  name: NHTSA vPIC (Vehicle Product Information Catalog) API
+  description: >-
+    The National Highway Traffic Safety Administration's Vehicle Product Information Catalog
+    and VIN decoder, and the most widely consumed API in the department. Decodes any US-market
+    VIN into make, model, model year, body class, engine, plant and safety-equipment fields,
+    and enumerates the full manufacturer, make, model and vehicle-type reference data behind
+    it. Verified anonymously with HTTP 200 on 2026-07-28 — DecodeVinValues returned a decoded
+    2011 BMW VIN and getallmakes returned 12,306 makes. No API key, no registration, no rate
+    charge. Responses support format=json or format=xml. NHTSA publishes no OpenAPI for it;
+    the reference is HTML at vpic.nhtsa.dot.gov/api/.
+  humanURL: https://vpic.nhtsa.dot.gov/api/
+  baseURL: https://vpic.nhtsa.dot.gov/api/vehicles
+  tags:
+  - Automotive
+  - Vehicles
+  - VIN
+  - Safety
+  - NHTSA
+  - Open Data
+  properties:
+  - type: Documentation
+    url: https://vpic.nhtsa.dot.gov/api/
+  - type: APIReference
+    url: https://vpic.nhtsa.dot.gov/api/
+- aid: us-dot:nhtsa-safety-api
+  name: NHTSA Safety API (recalls, complaints, safety ratings)
+  description: >-
+    The NHTSA public safety API that powers the dynamic search applications on nhtsa.gov.
+    Three families: /recalls for safety recalls by vehicle or campaign number, /complaints for
+    consumer complaints filed with NHTSA (each with ODI number, crash and fire flags, injury
+    and death counts and incident dates), and /SafetyRatings for the New Car Assessment
+    Program 5-Star Safety Ratings walked by model year, make and model. Verified anonymously
+    with HTTP 200 on 2026-07-28 — complaintsByVehicle for a 2020 Honda Accord returned 341
+    records and /SafetyRatings returned 37 model years. No API key. Governed by the NHTSA API
+    Use Policy published at the base host.
+  humanURL: https://www.nhtsa.gov/nhtsa-datasets-and-apis
+  baseURL: https://api.nhtsa.gov
+  tags:
+  - Automotive
+  - Recalls
+  - Safety
+  - Consumer Protection
+  - NHTSA
+  - Open Data
+  properties:
+  - type: Documentation
+    url: https://www.nhtsa.gov/nhtsa-datasets-and-apis
+  - type: TermsOfService
+    url: https://api.nhtsa.gov/
+- aid: us-dot:fra-safety-data-api
+  name: FRA Safety Data Web Services
+  description: >-
+    The Federal Railroad Administration's rail safety web services, and the only SOAP surface
+    in the department. Two WSDL 1.1 contracts were retrieved live and harvested verbatim on
+    2026-07-28. The Master Web Service (DatadownloadService.asmx, 30 operations) exposes the
+    Rail Equipment Accident/Incident Report (Form 54), the Highway-Rail Grade Crossing
+    Accident/Incident Report (Form 57), Form 55 and 55a, grade crossing inventory, defect and
+    PHMSA defect data, hazmat shipper data and railroad reference data, each retrievable by
+    railroad or by state, plus per-form schema operations. The Lite API (LiteApiService.asmx,
+    5 operations) returns casualty, enforcement, summary, ten-year and train accident series
+    by year. Declared a pilot by FRA. Accounts are requested by email to RsisSupport@dot.gov —
+    the Master service and the Lite API require separate requests.
+  humanURL: https://safetydata.fra.dot.gov/MasterWebService/FRASafetyDataAPIs.aspx
+  baseURL: https://safetydata.fra.dot.gov/MasterWebService
+  tags:
+  - Rail
+  - Safety
+  - Accidents
+  - Grade Crossings
+  - FRA
+  - SOAP
+  properties:
+  - type: WSDL
+    name: FRA Master Web Service (Data Download)
+    url: wsdl/us-dot-fra-datadownload-service.wsdl
+  - type: WSDL
+    name: FRA Lite API Service
+    url: wsdl/us-dot-fra-lite-api-service.wsdl
+  - type: Documentation
+    url: https://safetydata.fra.dot.gov/MasterWebService/FRASafetyDataAPIs.aspx
+  - type: TermsOfService
+    url: https://safetydata.fra.dot.gov/MasterWebService/Terms.aspx
+  - type: BulkData
+    url: https://safetydata.fra.dot.gov/OfficeofSafety/publicsite/on_the_fly_download.aspx
+- aid: us-dot:fmcsa-qcmobile-api
+  name: FMCSA QCMobile API
+  description: >-
+    The Federal Motor Carrier Safety Administration's carrier data API — real-time queries on
+    motor carrier registration, authority and safety data, including all of the passenger
+    carrier data that used to be served by the retired SaferBus API. RESTful, keyed by a free
+    webKey query parameter. This is the only self-serve API credential anywhere in the
+    department: create a Login.gov account, sign in to the FMCSA developer site and generate a
+    key. The developer site publishes a quick start guide, an API access guide, the QCMobile
+    API reference and an API response element reference. FMCSA publishes no OpenAPI.
+  humanURL: https://mobile.fmcsa.dot.gov/QCDevsite/
+  baseURL: https://mobile.fmcsa.dot.gov/qc/services
+  tags:
+  - Trucking
+  - Motor Carriers
+  - Safety
+  - Compliance
+  - FMCSA
+  properties:
+  - type: DeveloperPortal
+    url: https://mobile.fmcsa.dot.gov/QCDevsite/
+  - type: Documentation
+    url: https://mobile.fmcsa.dot.gov/QCDevsite/docs/qcApi
+  - type: GettingStarted
+    url: https://mobile.fmcsa.dot.gov/QCDevsite/docs/getStarted
+  - type: APIReference
+    url: https://mobile.fmcsa.dot.gov/QCDevsite/docs/apiElements
+  - type: SignUp
+    url: https://mobile.fmcsa.dot.gov/QCDevsite/logingovInfo
+  - type: Support
+    url: https://mobile.fmcsa.dot.gov/QCDevsite/docs/support
+- aid: us-dot:its-jpo-ode-rest-api
+  name: USDOT ITS JPO Operational Data Environment (ODE) REST API
+  description: >-
+    The reference connected-vehicle data platform authored by the USDOT Intelligent
+    Transportation Systems Joint Program Office. Eight operations over SAE J2735 messaging —
+    Traveler Information Message query, create, update and delete against physical roadside
+    units, Probe Data Management deposit, SNMP query and on-board-unit log upload. This is
+    DEPLOYABLE SOFTWARE, not a DOT-hosted service: the Swagger 2.0 host is the literal
+    placeholder "yourhostname" and an operator runs it on its own infrastructure under Apache
+    2.0. The REST API is the thin edge of a Kafka platform whose 35 topics are declared in the
+    ODE's own configuration and captured as an AsyncAPI 3.0 document here. Safety-critical —
+    the TIM writes change what roadside units broadcast to vehicles, and there is no
+    idempotency key anywhere on the surface.
+  humanURL: https://github.com/usdot-jpo-ode/jpo-ode
+  baseURL: https://github.com/usdot-jpo-ode/jpo-ode
+  tags:
+  - Connected Vehicles
+  - ITS
+  - Roadside Units
+  - SAE J2735
+  - Safety
+  - Kafka
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-its-jpo-ode-rest-api-openapi.yml
+  - type: Overlay
+    url: overlays/us-dot-its-jpo-ode-rest-api-overlay.yaml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    name: Geo-routed MEC deposit message
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    name: Geohash-routed MEC deposit message
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+  - type: AgentSkill
+    name: Deposit a Traveler Information Message to a roadside unit (ODE)
+    url: skills/us-dot-deposit-tim-to-roadside-unit.md
 common:
 - type: Website
   url: https://www.transportation.gov/
+- type: DeveloperPortal
+  url: https://www.transportation.gov/developer
+- type: Portal
+  url: https://api.faa.gov/s/
 - type: Portal
   url: https://data.transportation.gov/
 - type: Portal
   url: https://data.bts.gov/
 - type: Documentation
   url: https://api.faa.gov/s/
+- type: APIReference
+  url: https://dev.socrata.com/docs/queries/
+- type: GettingStarted
+  url: https://mobile.fmcsa.dot.gov/QCDevsite/docs/getStarted
+- type: Support
+  url: https://api.faa.gov/s/help
+- type: Blog
+  url: https://www.transportation.gov/blog
+- type: SignUp
+  url: https://mobile.fmcsa.dot.gov/QCDevsite/logingovInfo
+- type: TermsOfService
+  url: https://www.transportation.gov/web-policies
+- type: PrivacyPolicy
+  url: https://www.transportation.gov/privacy
+- type: Security
+  url: https://www.transportation.gov/vulnerability-disclosure-policy
+- type: VulnerabilityDisclosure
+  url: security/us-dot-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/us-dot-domain-security.yml
+- type: Authentication
+  url: authentication/us-dot-authentication.yml
+- type: Conventions
+  url: conventions/us-dot-conventions.yml
+- type: ErrorCatalog
+  url: errors/us-dot-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/us-dot-lifecycle.yml
+- type: StatusPage
+  url: https://status.socrata.com/
+- type: ChangeLog
+  url: changelog/us-dot-changelog.yml
+- type: Conformance
+  url: conformance/us-dot-conformance.yml
+- type: DataModel
+  url: data-model/us-dot-data-model.yml
+- type: Examples
+  url: examples/_index.yml
+- type: Packages
+  url: packages/us-dot-packages.yml
+- type: WellKnown
+  url: well-known/us-dot-well-known.yml
+- type: APICatalog
+  url: https://data.transportation.gov/data.json
+- type: LLMsTxt
+  url: llms/us-dot-llms.txt
+- type: AgenticAccess
+  url: agentic-access/us-dot-agentic-access.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: ToolCrosswalk
+  url: mcp/us-dot-tool-crosswalk.yml
+- type: AsyncAPI
+  url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+- type: JSONSchema
+  name: WZDx 4.2 Work Zone Feed
+  url: json-schema/us-dot-wzdx-4.2-workzonefeed.json
+- type: JSONSchema
+  name: WZDx 4.2 Device Feed
+  url: json-schema/us-dot-wzdx-4.2-devicefeed.json
+- type: JSONSchema
+  name: WZDx 4.2 Road Event Feature
+  url: json-schema/us-dot-wzdx-4.2-roadeventfeature.json
+- type: JSONSchema
+  name: WZDx 4.2 Feed Info
+  url: json-schema/us-dot-wzdx-4.2-feedinfo.json
+- type: JSONSchema
+  name: WZDx 4.2 Bounding Box
+  url: json-schema/us-dot-wzdx-4.2-boundingbox.json
+- type: JSONSchema
+  name: WZDx 4.2 Direction
+  url: json-schema/us-dot-wzdx-4.2-direction.json
 - type: BulkData
   url: https://www.transtats.bts.gov/
 - type: BulkData

@@ -1,0 +1,295 @@
+{
+  "@context": "https://project-open-data.cio.gov/v1.1/schema/catalog.jsonld",
+  "@id": "https://catalog.data.faa.gov/data.json",
+  "@type": "dcat:Catalog",
+  "conformsTo": "https://project-open-data.cio.gov/v1.1/schema",
+  "describedBy": "https://project-open-data.cio.gov/v1.1/schema/catalog.json",
+  "dataset": [
+    {
+      "license": "https://project-open-data.cio.gov/unknown-license/",
+      "contactPoint": {
+        "@type": "vcard:Contact",
+        "fn": "Chief Data Office",
+        "hasEmail": "mailto:9-EIM-InfoLink@faa.gov"
+      },
+      "identifier": "74b18f7e-84c1-4c2b-a6ee-4ecc690526ab",
+      "issued": "2020-11-14T04:05:52.567337",
+      "modified": "2021-11-09",
+      "primaryITInvestmentUII": "021-129509270",
+      "programCode": [
+        "021:001"
+      ],
+      "accessLevel": "public",
+      "systemOfRecords": "https://www.govinfo.gov/content/pkg/FR-2016-08-15/pdf/2016-19354.pdf",
+      "version": "v1.1",
+      "@type": "dcat:Dataset",
+      "bureauCode": [
+        "021:12"
+      ],
+      "keyword": [
+        "georeference",
+        "geospatial",
+        "raster",
+        "vfr",
+        "visual-chart"
+      ],
+      "publisher": {
+        "@type": "org:Organization",
+        "name": "Federal Aviation Administration"
+      },
+      "landingPage": "https://catalog.data.faa.gov/dataset/28-day-set-vfr-charts---aeronautical-information-services-digital-products",
+      "description": "The following files contain just the set of the Digital Visual charts that have changed during the previous 28 day cycle.",
+      "title": "28-Day Set VFR Charts - Aeronautical Information Services Digital Products",
+      "distribution": [
+        {
+          "@type": "dcat:Distribution",
+          "downloadURL": "http://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/",
+          "mediaType": "application/zip",
+          "title": "Aeronautical Information Services Digital Products"
+        }
+      ],
+      "language": [
+        "en-US"
+      ]
+    },
+    {
+      "license": "https://project-open-data.cio.gov/unknown-license/",
+      "contactPoint": {
+        "@type": "vcard:Contact",
+        "fn": "Chief Data Office",
+        "hasEmail": "mailto:9-EIM-InfoLink@faa.gov"
+      },
+      "identifier": "3ec9a4a2-c653-460b-b812-90ded2fbe093",
+      "issued": "2020-11-14T04:05:52.07969",
+      "modified": "2021-11-09",
+      "primaryITInvestmentUII": "021-129509270",
+      "programCode": [
+        "021:001"
+      ],
+      "accessLevel": "public",
+      "systemOfRecords": "https://www.govinfo.gov/content/pkg/FR-2016-08-15/pdf/2016-19354.pdf",
+      "version": "v1.1",
+      "@type": "dcat:Dataset",
+      "bureauCode": [
+        "021:12"
+      ],
+      "keyword": [
+        "altitude",
+        "digital-chart",
+        "enroute"
+      ],
+      "publisher": {
+        "@type": "org:Organization",
+        "name": "Federal Aviation Administration"
+      },
+      "landingPage": "https://catalog.data.faa.gov/dataset/56-day-complete-set-of-all-of-the-digital-enroute-charts---aeronautical-information-servic",
+      "description": "The following ZIP files contain all of the Digital Enroute charts, except for Caribbean charts, for a given effective date range. Due to the large file sizes, it is best to download one zip file at a time using a broadband internet connection during off-peak internet hours. Each zip file contains multiple zip files each of which contain a mixture of PDF and HTML files.",
+      "title": "56-Day Complete Set of all of the Digital Enroute Charts - Aeronautical Information Services Digital Products",
+      "distribution": [
+        {
+          "@type": "dcat:Distribution",
+          "downloadURL": "http://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/",
+          "mediaType": "application/zip",
+          "title": "Aeronautical Information Services Digital Products"
+        }
+      ],
+      "language": [
+        "en-US"
+      ]
+    },
+    {
+      "license": "https://project-open-data.cio.gov/unknown-license/",
+      "contactPoint": {
+        "@type": "vcard:Contact",
+        "fn": "Chief Data Office",
+        "hasEmail": "mailto:9-EIM-InfoLink@faa.gov"
+      },
+      "identifier": "8fa3e4cb-513b-4c1b-9348-30da21c722cb",
+      "issued": "2020-11-14T04:05:09.903756",
+      "modified": "2021-11-09",
+      "primaryITInvestmentUII": "021-129509270",
+      "programCode": [
+        "021:001"
+      ],
+      "accessLevel": "public",
+      "systemOfRecords": "https://www.govinfo.gov/content/pkg/FR-2016-08-15/pdf/2016-19354.pdf",
+      "version": "v1.1",
+      "@type": "dcat:Dataset",
+      "bureauCode": [
+        "021:12"
+      ],
+      "keyword": [
+        "aircraft",
+        "airport",
+        "airspace",
+        "base",
+        "heliport",
+        "navaid",
+        "notice",
+        "procedure",
+        "vfr"
+      ],
+      "publisher": {
+        "@type": "org:Organization",
+        "name": "Federal Aviation Administration"
+      },
+      "landingPage": "https://catalog.data.faa.gov/dataset/chart-supplements---aeronautical-information-services-digital-products",
+      "description": "The Chart Supplements are searchable by individual airport in PDF format. They contain data on public and joint use airports, seaplane bases, heliports, VFR airport sketches, NAVAIDs, communications data, weather data, airspace, special notices, and operational procedures.",
+      "title": "Chart Supplements - Aeronautical Information Services Digital Products",
+      "distribution": [
+        {
+          "@type": "dcat:Distribution",
+          "downloadURL": "http://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/",
+          "mediaType": "application/zip",
+          "title": "Aeronautical Information Services Digital Products"
+        }
+      ],
+      "language": [
+        "en-US"
+      ]
+    },
+    {
+      "license": "https://project-open-data.cio.gov/unknown-license/",
+      "contactPoint": {
+        "@type": "vcard:Contact",
+        "fn": "Chief Data Office",
+        "hasEmail": "mailto:9-EIM-InfoLink@faa.gov"
+      },
+      "identifier": "6cc8afc1-111c-4338-8d92-60c3d16c749d",
+      "issued": "2020-11-14T04:03:32.105309",
+      "modified": "2021-11-09",
+      "primaryITInvestmentUII": "021-129509270",
+      "programCode": [
+        "021:001"
+      ],
+      "accessLevel": "public",
+      "systemOfRecords": "https://www.govinfo.gov/content/pkg/FR-2016-08-15/pdf/2016-19354.pdf",
+      "version": "v1.1",
+      "@type": "dcat:Dataset",
+      "bureauCode": [
+        "021:12"
+      ],
+      "keyword": [
+        "georeference",
+        "geospatial",
+        "raster",
+        "vfr",
+        "visual-chart"
+      ],
+      "publisher": {
+        "@type": "org:Organization",
+        "name": "Federal Aviation Administration"
+      },
+      "landingPage": "https://catalog.data.faa.gov/dataset/sectional-vfr-charts",
+      "description": "The Federal Aviation Administration (FAA) digital-Visual Chart series is designed to meet the needs of users who require georeferenced raster images of FAA Visual Flight Rules (VFR) charts. An Aeronautical Raster Chart is a digital image of an FAA VFR Chart. All information that is part of the paper chart is included in the file. The area inside the neat line is georeferenced to the surface of the earth. Only the main body of the chart is accurately georeferenced. Each digital-Visual Chart is provided in one TIF file. The files are 300 dots per inch and 8-bit color.",
+      "title": "Sectional VFR Charts",
+      "distribution": [
+        {
+          "@type": "dcat:Distribution",
+          "downloadURL": "http://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/",
+          "mediaType": "application/zip",
+          "title": "Aeronautical Information Services Digital Products"
+        }
+      ],
+      "language": [
+        "en-US"
+      ]
+    },
+    {
+      "license": "https://project-open-data.cio.gov/unknown-license/",
+      "contactPoint": {
+        "@type": "vcard:Contact",
+        "fn": "Chief Data Office",
+        "hasEmail": "mailto:9-EIM-InfoLink@faa.gov"
+      },
+      "identifier": "845b3607-95c8-4d1e-a4e9-4437d76473a1",
+      "issued": "2020-11-14T04:03:19.311571",
+      "modified": "2021-11-09",
+      "primaryITInvestmentUII": "021-129509270",
+      "programCode": [
+        "021:001"
+      ],
+      "accessLevel": "public",
+      "systemOfRecords": "https://www.govinfo.gov/content/pkg/FR-2016-08-15/pdf/2016-19354.pdf",
+      "version": "v1.1",
+      "@type": "dcat:Dataset",
+      "bureauCode": [
+        "021:12"
+      ],
+      "keyword": [
+        "georeference",
+        "geospatial",
+        "raster",
+        "vfr",
+        "visual-chart"
+      ],
+      "publisher": {
+        "@type": "org:Organization",
+        "name": "Federal Aviation Administration"
+      },
+      "landingPage": "https://catalog.data.faa.gov/dataset/terminal-area-vfr-charts",
+      "description": "The Federal Aviation Administration (FAA) digital-Visual Chart series is designed to meet the needs of users who require georeferenced raster images of FAA Visual Flight Rules (VFR) Terminal Area charts. An Aeronautical Raster Chart is a digital image of an FAA VFR Chart. All information that is part of the paper chart is included in the file. The area inside the neat line is georeferenced to the surface of the earth. Only the main body of the chart is accurately georeferenced. Each digital-Visual Chart is provided in one TIF file. The files are 300 dots per inch and 8-bit color.",
+      "title": "Terminal Area VFR Charts",
+      "distribution": [
+        {
+          "@type": "dcat:Distribution",
+          "downloadURL": "http://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/",
+          "mediaType": "application/zip",
+          "title": "Aeronautical Information Services Digital Products"
+        }
+      ],
+      "language": [
+        "en-US"
+      ]
+    },
+    {
+      "license": "https://project-open-data.cio.gov/unknown-license/",
+      "contactPoint": {
+        "@type": "vcard:Contact",
+        "fn": "Chief Data Office",
+        "hasEmail": "mailto:9-EIM-InfoLink@faa.gov"
+      },
+      "identifier": "a7622fac-345f-486c-8a4e-b9316ecb165c",
+      "issued": "2020-11-14T04:03:18.587735",
+      "modified": "2021-11-09",
+      "primaryITInvestmentUII": "021-129509270",
+      "programCode": [
+        "021:001"
+      ],
+      "accessLevel": "public",
+      "systemOfRecords": "https://www.govinfo.gov/content/pkg/FR-2016-08-15/pdf/2016-19354.pdf",
+      "version": "v1.1",
+      "@type": "dcat:Dataset",
+      "bureauCode": [
+        "021:12"
+      ],
+      "keyword": [
+        "approach",
+        "arrival",
+        "departure",
+        "instrument",
+        "procedure",
+        "radar",
+        "takeoff"
+      ],
+      "publisher": {
+        "@type": "org:Organization",
+        "name": "Federal Aviation Administration"
+      },
+      "landingPage": "https://catalog.data.faa.gov/dataset/terminal-procedures-publicationairport-diagrams---aeronautical-information-services-digita",
+      "description": "The U.S. Terminal Procedure Publications (TPPs) is a 26 volume set of printed paper books containing Instrument Approach Procedure charts (IAP), Departure Procedure charts (DP), Standard Terminal Arrival charts (STAR), and Airport Diagrams. Also included are Takeoff, Radar, and Alternate Minima textual procedures.",
+      "title": "Terminal Procedures Publication/Airport Diagrams - Aeronautical Information Services Digital Products",
+      "distribution": [
+        {
+          "@type": "dcat:Distribution",
+          "downloadURL": "http://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/",
+          "mediaType": "application/zip",
+          "title": "Aeronautical Information Services Digital Products"
+        }
+      ],
+      "language": [
+        "en-US"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+# generated: '2026-07-28'
+# method: generated
+# source: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for FAA Aeronautic Product Release API (APRA)
+  version: 1.0.0
+extends: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: us-dot
+      x-apievangelist-api: us-dot:faa-aeronautic-product-release-api
+      x-apievangelist-verified: '2026-07-28'
+      x-apievangelist-access: >-
+        Verified anonymously with HTTP 200 on 2026-07-28 against /nfdc/nasr/info and
+        /dtpp/info. No API key required. Responses are XML productSet documents; the
+        /chart operations return download URLs, not the ZIP bytes.
+      x-apievangelist-pattern: >-
+        Every product follows the same pair: /info returns edition metadata (current and
+        next edition dates), /chart returns the download link for an edition. Always call
+        /info first — requesting a /chart for an unreleased edition is a 404.
+      x-apievangelist-release-cadence: >-
+        28-day AIRAC cycle for NASR, dTPP and CIFP; 56-day for digital enroute and
+        oceanic charts; daily for the Digital Obstacle File.
+      x-apievangelist-artifacts:
+        conventions: conventions/us-dot-conventions.yml
+        errors: errors/us-dot-problem-types.yml
+        lifecycle: lifecycle/us-dot-lifecycle.yml
+        changelog: changelog/us-dot-changelog.yml
+        skills: skills/_index.yml
+  - target: $.paths['/ders/chart'].get
+    update:
+      x-apievangelist-deprecation: >-
+        Retired product. The FAA signals retirement ONLY through the 404 response
+        description — there is no Sunset header, no Deprecation header and no policy
+        page. This operation and /ders/info are the department's only machine-readable
+        deprecation signal.
+      x-apievangelist-replacement: null
+  - target: $.paths['/ders/info'].get
+    update:
+      x-apievangelist-deprecation: >-
+        Retired product. See /ders/chart. deprecated:true is correctly set in the source
+        spec.
+  - target: $.paths['/nfdc/nasr/info'].get
+    update:
+      x-apievangelist-note: >-
+        The NASR 28-day subscription is the single highest-value product on this API —
+        the national airspace fixed data set (airports, navaids, airways, fixes). Poll
+        this operation to learn the next edition date, then fetch /nfdc/nasr/chart.

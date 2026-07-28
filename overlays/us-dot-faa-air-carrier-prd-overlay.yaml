@@ -1,0 +1,42 @@
+# generated: '2026-07-28'
+# method: generated
+# source: openapi/us-dot-faa-air-carrier-prd-api-openapi.yml
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for FAA Air Carrier Pilot Records Database (PRD) API
+  version: 1.0.0
+extends: openapi/us-dot-faa-air-carrier-prd-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: us-dot
+      x-apievangelist-api: us-dot:faa-air-carrier-prd-api
+      x-apievangelist-verified: '2026-07-28'
+      x-apievangelist-access: >-
+        Accreditation-gated, not self-serve. Access is restricted by the FAA to operators
+        under 14 CFR Part 121, 135, 125, 91K, Air Tour, Public Aircraft or Part 91
+        Corporate. Request access through https://api.faa.gov/s/.
+      x-apievangelist-auth: >-
+        client_id and client_secret are sent as REQUEST HEADERS declared as ordinary
+        parameters — the spec declares no securitySchemes at all. This is an OAuth-shaped
+        credential pair without the OAuth protocol.
+      x-apievangelist-spec-gaps: >-
+        No operationIds on any of the 8 operations; no response schemas beyond the literal
+        string "success"; no 4xx/5xx responses declared. Anything an agent needs beyond
+        the happy path is undocumented.
+      x-apievangelist-artifacts:
+        authentication: authentication/us-dot-authentication.yml
+        sandbox: sandbox/us-dot-sandbox.yml
+        agentic-access: agentic-access/us-dot-agentic-access.yml
+  - target: $.servers
+    update:
+      - url: https://external.apic4e.faa.gov
+        description: Production environment. Use this host.
+      - url: https://external-api.faa.gov/AirCarrierApi
+        description: >-
+          DEPRECATED production URL, labelled as such by the FAA in the source spec. Do
+          not build against it.
+      - url: https://dev-external.apic4e.faa.gov/Test/AirCarrierApi
+        description: >-
+          Staging environment. NOT publicly reachable — probed 2026-07-28 and the edge
+          returned {"error":{"code":"EGE-ER-OS-4004","message":"Domain not supported."}}.

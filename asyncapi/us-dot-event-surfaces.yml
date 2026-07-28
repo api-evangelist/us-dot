@@ -1,0 +1,60 @@
+generated: '2026-07-28'
+method: searched
+source: >-
+  github.com/usdot-jpo-ode/jpo-ode (application.yaml, kafka.md),
+  github.com/usdot-jpo-ode/jpo-mec-deposit (MQTT protobuf),
+  https://dev.socrata.com/docs/, https://www.faa.gov/data/subscribe,
+  live probes of the FAA and Socrata surfaces 2026-07-28
+summary: >-
+  U.S. DOT operates NO public webhook, streaming or push surface. Every consumable DOT
+  API in this repo is poll-only: FAA ASWS and APRA are plain GETs with no callback
+  registration; Socrata SODA 2.1 has no subscription mechanism (Tyler Data & Insights
+  has discussed SMS/webhook/websocket alerts but ships none on the SODA consumer API);
+  CKAN exposes no event API. The only genuine event architecture the department ships is
+  in the ITS JPO Operational Data Environment — Kafka topics and MQTT protobuf — and
+  that is DEPLOYABLE SOFTWARE an operator runs on its own infrastructure, not a
+  DOT-hosted broker. That surface is captured in us-dot-its-jpo-ode-asyncapi.yml.
+webhooks:
+  supported: false
+  detail: >-
+    No U.S. DOT, FAA or BTS API accepts a callback URL, signs outbound deliveries, or
+    documents a webhook event catalog. There is nothing to capture.
+streaming:
+- name: ITS JPO ODE Kafka
+  protocol: kafka
+  hosted_by: operator (self-hosted)
+  asyncapi: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  topics: 35
+  source: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/jpo-ode-svcs/src/main/resources/application.yaml
+  note: Topic names copied verbatim from the ODE Spring configuration; payload schemas are the ODE JSON projections of SAE J2735.
+- name: ITS JPO MEC deposit (MQTT)
+  protocol: mqtt
+  hosted_by: operator (self-hosted)
+  encoding: protobuf3
+  proto:
+  - grpc/us-dot-ode-geoRoutedMsg.proto
+  - grpc/us-dot-ode-geoHashRoutedMsg.proto
+  source: https://github.com/usdot-jpo-ode/jpo-mec-deposit
+  note: >-
+    Geo-routed and geohash-routed message envelopes published to a Multi-access Edge
+    Computing broker over MQTT. Saved verbatim to grpc/. There is no gRPC service
+    definition — these are message types only.
+- name: ITS JPO ODE UDP receivers
+  protocol: udp
+  hosted_by: operator (self-hosted)
+  ports: {generic: 44990, bsm: 46800, map: 44920, psm: 44940, spat: 44910, srm: 44930, ssm: 44900, tim: 47900, sdsm: 44950, rtcm: 44960, rsm: 44970}
+  source: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/jpo-ode-svcs/src/main/resources/application.yaml
+  note: Roadside-unit ingest ports. Not an internet-facing surface.
+polling_substitutes:
+- surface: FAA aeronautical products (APRA)
+  mechanism: 'Poll the per-product /info operation; it returns current and next edition dates on a 28-day (NASR/dTPP/CIFP) or 56-day (enroute) AIRAC cycle.'
+  operations: [getNASREdition, getTPPEdition, getCIFPEdition, getIFREnrouteEdition, getOceanicRouteEdition, getDDOFEdition]
+- surface: FAA aeronautical data
+  mechanism: Email subscription, human-readable only.
+  url: https://www.faa.gov/data/subscribe
+- surface: Socrata datasets
+  mechanism: 'Poll /data.json (DCAT-US 1.1) — each dataset carries `modified` and `accrualPeriodicity`; or conditional GET with ETag/If-None-Match on the resource.'
+  urls: [https://data.transportation.gov/data.json, https://data.bts.gov/data.json, https://catalog.data.faa.gov/data.json]
+- surface: WZDx specification
+  mechanism: GitHub Releases (dated, semantic).
+  url: https://github.com/usdot-jpo-ode/wzdx/releases

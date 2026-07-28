@@ -1,0 +1,214 @@
+asyncapi: 3.0.0
+info:
+  title: USDOT ITS JPO Operational Data Environment (ODE) — Kafka event surface
+  version: '1.0.0'
+  description: >-
+    DERIVED, NOT PUBLISHED BY USDOT. The U.S. Department of Transportation publishes no
+    AsyncAPI document. This document is a faithful derivation of the Kafka topic catalog
+    the USDOT ITS Joint Program Office declares verbatim in
+    github.com/usdot-jpo-ode/jpo-ode at
+    jpo-ode-svcs/src/main/resources/application.yaml (ode.kafka.topics), read on
+    2026-07-28. Every channel address below is a topic name copied from that file; no
+    topic, message or payload was invented.
+
+    The ODE is deployable connected-vehicle infrastructure, not a DOT-hosted service.
+    There is no public DOT-operated broker: an operator (a state DOT, a research site)
+    runs the ODE against its own Kafka cluster and its own roadside units. Payload
+    schemas are the ODE JSON projections of SAE J2735 messages, documented in the ODE
+    User Guide; they are deliberately left unresolved here rather than guessed.
+  license:
+    name: Apache License 2.0
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+  externalDocs:
+    description: ODE Kafka documentation
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/kafka.md
+defaultContentType: application/json
+servers:
+  kafka:
+    host: '{brokers}'
+    protocol: kafka
+    description: >-
+      Operator-supplied Kafka cluster. Configured through the ODE_KAFKA_BROKERS
+      environment variable; the ODE also supports Confluent Cloud via CONFLUENT_KEY /
+      CONFLUENT_SECRET. No U.S. DOT public broker exists.
+    variables:
+      brokers:
+        default: localhost:9092
+        description: ODE_KAFKA_BROKERS
+channels:
+  Asn1DecoderInput:
+    address: topic.Asn1DecoderInput
+    description: ASN.1 UPER-encoded messages queued for decoding.
+    messages:
+      asn1DecoderInput:
+        name: Asn1DecoderInput
+        contentType: application/json
+  Asn1DecoderOutput:
+    address: topic.Asn1DecoderOutput
+    description: Decoded ASN.1 output emitted by the asn1_codec.
+    messages:
+      asn1DecoderOutput:
+        name: Asn1DecoderOutput
+        contentType: application/json
+  Asn1EncoderInput:
+    address: topic.Asn1EncoderInput
+    description: Messages queued for ASN.1 UPER encoding prior to RSU or SDX deposit.
+    messages:
+      asn1EncoderInput:
+        name: Asn1EncoderInput
+        contentType: application/json
+  Asn1EncoderOutput:
+    address: topic.Asn1EncoderOutput
+    description: ASN.1 UPER-encoded output ready for deposit.
+    messages:
+      asn1EncoderOutput:
+        name: Asn1EncoderOutput
+        contentType: application/json
+  OdeBsmJson:
+    address: topic.OdeBsmJson
+    description: Basic Safety Messages (SAE J2735 BSM) as ODE JSON.
+    messages:
+      odeBsm: {name: OdeBsm, contentType: application/json}
+  OdeMapJson:
+    address: topic.OdeMapJson
+    description: MAP intersection geometry messages as ODE JSON.
+    messages:
+      odeMap: {name: OdeMap, contentType: application/json}
+  OdePsmJson:
+    address: topic.OdePsmJson
+    description: Personal Safety Messages (vulnerable road users) as ODE JSON.
+    messages:
+      odePsm: {name: OdePsm, contentType: application/json}
+  OdeSpatJson:
+    address: topic.OdeSpatJson
+    description: Signal Phase and Timing messages as ODE JSON.
+    messages:
+      odeSpat: {name: OdeSpat, contentType: application/json}
+  OdeSrmJson:
+    address: topic.OdeSrmJson
+    description: Signal Request Messages as ODE JSON.
+    messages:
+      odeSrm: {name: OdeSrm, contentType: application/json}
+  OdeSsmJson:
+    address: topic.OdeSsmJson
+    description: Signal Status Messages as ODE JSON.
+    messages:
+      odeSsm: {name: OdeSsm, contentType: application/json}
+  OdeTimJson:
+    address: topic.OdeTimJson
+    description: Traveler Information Messages as ODE JSON.
+    messages:
+      odeTim: {name: OdeTim, contentType: application/json}
+  OdeSdsmJson:
+    address: topic.OdeSdsmJson
+    description: Sensor Data Sharing Messages as ODE JSON.
+    messages:
+      odeSdsm: {name: OdeSdsm, contentType: application/json}
+  OdeRtcmJson:
+    address: topic.OdeRtcmJson
+    description: RTCM differential correction messages as ODE JSON.
+    messages:
+      odeRtcm: {name: OdeRtcm, contentType: application/json}
+  OdeRsmJson:
+    address: topic.OdeRsmJson
+    description: Road Safety Messages as ODE JSON.
+    messages:
+      odeRsm: {name: OdeRsm, contentType: application/json}
+  OdeDriverAlertJson:
+    address: topic.OdeDriverAlertJson
+    description: Driver alert events emitted by the ODE.
+    messages:
+      odeDriverAlert: {name: OdeDriverAlert, contentType: application/json}
+  FilteredOdeBsmJson:
+    address: topic.FilteredOdeBsmJson
+    description: BSMs after privacy filtering (jpo-cvdp privacy protection module).
+    messages:
+      filteredOdeBsm: {name: FilteredOdeBsm, contentType: application/json}
+  FilteredOdeSpatJson:
+    address: topic.FilteredOdeSpatJson
+    description: SPaT messages after filtering.
+    messages:
+      filteredOdeSpat: {name: FilteredOdeSpat, contentType: application/json}
+  FilteredOdeTimJson:
+    address: topic.FilteredOdeTimJson
+    description: TIMs after filtering.
+    messages:
+      filteredOdeTim: {name: FilteredOdeTim, contentType: application/json}
+  OdeTimJsonTMCFiltered:
+    address: topic.OdeTimJsonTMCFiltered
+    description: TIMs filtered for Traffic Management Center consumption.
+    messages:
+      odeTimTmcFiltered: {name: OdeTimTMCFiltered, contentType: application/json}
+  OdeTIMCertExpirationTimeJson:
+    address: topic.OdeTIMCertExpirationTimeJson
+    description: Security-credential expiration times for deposited TIMs.
+    messages:
+      odeTimCertExpiration: {name: OdeTIMCertExpirationTime, contentType: application/json}
+  OdeTimKTableJson:
+    address: topic.OdeTimKTableJson
+    description: Kafka Streams KTable of current TIM state.
+    messages:
+      odeTimKTable: {name: OdeTimKTable, contentType: application/json}
+  OdeRawEncodedBSMJson:
+    address: topic.OdeRawEncodedBSMJson
+    messages: {raw: {name: OdeRawEncodedBSM, contentType: application/json}}
+  OdeRawEncodedMAPJson:
+    address: topic.OdeRawEncodedMAPJson
+    messages: {raw: {name: OdeRawEncodedMAP, contentType: application/json}}
+  OdeRawEncodedPSMJson:
+    address: topic.OdeRawEncodedPSMJson
+    messages: {raw: {name: OdeRawEncodedPSM, contentType: application/json}}
+  OdeRawEncodedSPATJson:
+    address: topic.OdeRawEncodedSPATJson
+    messages: {raw: {name: OdeRawEncodedSPAT, contentType: application/json}}
+  OdeRawEncodedSRMJson:
+    address: topic.OdeRawEncodedSRMJson
+    messages: {raw: {name: OdeRawEncodedSRM, contentType: application/json}}
+  OdeRawEncodedSSMJson:
+    address: topic.OdeRawEncodedSSMJson
+    messages: {raw: {name: OdeRawEncodedSSM, contentType: application/json}}
+  OdeRawEncodedTIMJson:
+    address: topic.OdeRawEncodedTIMJson
+    messages: {raw: {name: OdeRawEncodedTIM, contentType: application/json}}
+  OdeRawEncodedSDSMJson:
+    address: topic.OdeRawEncodedSDSMJson
+    messages: {raw: {name: OdeRawEncodedSDSM, contentType: application/json}}
+  OdeRawEncodedRTCMJson:
+    address: topic.OdeRawEncodedRTCMJson
+    messages: {raw: {name: OdeRawEncodedRTCM, contentType: application/json}}
+  OdeRawEncodedRSMJson:
+    address: topic.OdeRawEncodedRSMJson
+    messages: {raw: {name: OdeRawEncodedRSM, contentType: application/json}}
+  SDWDepositorInput:
+    address: topic.SDWDepositorInput
+    description: Messages queued for deposit into the Situation Data Exchange (SDX).
+    messages:
+      sdwDepositorInput: {name: SDWDepositorInput, contentType: application/json}
+operations:
+  receiveBsm:
+    action: receive
+    channel: {$ref: '#/channels/OdeBsmJson'}
+    summary: Consume decoded Basic Safety Messages.
+  receiveMap:
+    action: receive
+    channel: {$ref: '#/channels/OdeMapJson'}
+  receiveSpat:
+    action: receive
+    channel: {$ref: '#/channels/OdeSpatJson'}
+  receiveTim:
+    action: receive
+    channel: {$ref: '#/channels/OdeTimJson'}
+    summary: Consume Traveler Information Messages deposited through the ODE REST API.
+  receivePsm:
+    action: receive
+    channel: {$ref: '#/channels/OdePsmJson'}
+  receiveSdsm:
+    action: receive
+    channel: {$ref: '#/channels/OdeSdsmJson'}
+  receiveDriverAlert:
+    action: receive
+    channel: {$ref: '#/channels/OdeDriverAlertJson'}
+  sendSdwDeposit:
+    action: send
+    channel: {$ref: '#/channels/SDWDepositorInput'}
+    summary: Queue a message for deposit into the SDX.

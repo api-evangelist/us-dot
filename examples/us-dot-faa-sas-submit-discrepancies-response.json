@@ -1,0 +1,6 @@
+{
+  "confirmationMessage": "confirmation message for successful transaction",
+  "totalDiscrepanciesImported": 2,
+  "discrepanciesImportedWithErrors": "record failed due to data issues",
+  "errorMessage": "error message, if any"
+}

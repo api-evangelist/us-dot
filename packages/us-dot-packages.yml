@@ -1,0 +1,155 @@
+generated: '2026-07-28'
+method: searched
+source: npm registry search, PyPI, Maven Central, pkg.go.dev, RubyGems, GitHub org usdot-jpo-ode
+summary: >-
+  U.S. DOT publishes NO first-party client SDK for any of its public APIs. npm, PyPI,
+  RubyGems, Maven Central, NuGet, crates.io, Packagist and pkg.go.dev were all searched
+  for "faa", "usdot", "us-dot", "bts" and "socrata" scoped or authored by the department
+  and none returned a package published by DOT, FAA or BTS. The department's own GitHub
+  presence (github.com/usdot-jpo-ode) ships deployable Java/C++ services and ASN.1/JSON
+  Schema specifications, not consumer client libraries. Everything listed below is
+  third-party — official: false in every row. No SDKs pointer is emitted for this
+  provider because there is no first-party client library to point at.
+packages: []
+first_party_source_code:
+- name: jpo-ode
+  org: usdot-jpo-ode
+  url: https://github.com/usdot-jpo-ode/jpo-ode
+  language: java
+  kind: deployable-service
+  official: true
+  note: USDOT ITS JPO Operational Data Environment. Ships the Swagger 2.0 REST contract harvested to openapi/us-dot-its-jpo-ode-rest-api-openapi.yml. Self-hosted, not a client library.
+- name: wzdx
+  org: usdot-jpo-ode
+  url: https://github.com/usdot-jpo-ode/wzdx
+  kind: specification
+  official: true
+  note: Work Zone Data Exchange specification. JSON Schema 4.2 harvested to json-schema/.
+- name: scms-asn1
+  org: usdot-jpo-ode
+  url: https://github.com/usdot-jpo-ode/scms-asn1
+  kind: specification
+  official: true
+  note: ASN.1 data container definitions for the Security Credential Management System. Not protobuf; no grpc/ artifact applies.
+third_party:
+- language: python
+  registry: pypi
+  name: sodapy
+  url: https://pypi.org/project/sodapy/
+  install: pip install sodapy
+  official: false
+  covers: [us-dot:dot-data-hub-soda-api, us-dot:bts-open-data-soda-api]
+  note: Community Python client for the Socrata SODA 2.1 API that data.transportation.gov, datahub.transportation.gov and data.bts.gov implement.
+- language: javascript
+  registry: npm
+  name: node-socrata
+  url: https://www.npmjs.com/package/node-socrata
+  install: npm install node-socrata
+  official: false
+  covers: [us-dot:dot-data-hub-soda-api, us-dot:bts-open-data-soda-api]
+- language: javascript
+  registry: npm
+  name: "@pipeworx/mcp-faa-delays"
+  url: https://www.npmjs.com/package/@pipeworx/mcp-faa-delays
+  install: npm install @pipeworx/mcp-faa-delays
+  official: false
+  covers: [us-dot:faa-airport-status-web-service]
+  note: Community MCP server wrapping the FAA Airport Status Web Service. Not FAA-published — see mcp/us-dot-mcp.yml.
+- language: javascript
+  registry: npm
+  name: "@pipeworx/mcp-data-usdot"
+  url: https://www.npmjs.com/package/@pipeworx/mcp-data-usdot
+  install: npm install @pipeworx/mcp-data-usdot
+  official: false
+  covers: [us-dot:dot-data-hub-soda-api]
+  note: Community MCP server over datahub.transportation.gov Socrata. Not DOT-published.
+- language: javascript
+  registry: npm
+  name: "@aeyrium/faa-parser"
+  url: https://www.npmjs.com/package/@aeyrium/faa-parser
+  official: false
+  note: Parser for FAA bulk data files (NASR, releasable aircraft registry).
+- language: r
+  registry: cran
+  name: RSocrata
+  url: https://cran.r-project.org/package=RSocrata
+  official: false
+  covers: [us-dot:dot-data-hub-soda-api, us-dot:bts-open-data-soda-api]
+  note: Listed by Tyler Data & Insights (Socrata) in its SDK directory at dev.socrata.com; platform-level, not DOT-level.
+platform_sdk_directory:
+  url: https://dev.socrata.com/
+  note: >-
+    Tyler Data & Insights publishes SODA client libraries for Java, .NET, PHP, Python, R,
+    Ruby, Scala, Swift, Go, Elixir, Julia, PowerShell, Android and iOS. These are platform
+    SDKs for Socrata, not U.S. DOT deliverables, and are recorded here for consumer
+    convenience only.
+round_2_additions:
+  generated: '2026-07-28'
+  method: searched
+  source: >-
+    npm registry search (nhtsa, fmcsa, fra, vpic, socrata), PyPI, and the developer sites
+    for the surfaces discovered in this round — NHTSA vPIC, NHTSA Safety, FRA Safety Data
+    Web Services and FMCSA QCMobile.
+  finding: >-
+    Unchanged. Not one first-party client library exists for any newly discovered DOT
+    surface either. NHTSA ships no SDK for vPIC despite it being the most widely consumed
+    API in the department; FMCSA ships no SDK; FRA ships WSDL and expects you to generate
+    your own stub. The community has filled the gap around NHTSA specifically, which is
+    the clearest demand signal in this whole provider — eight distinct npm packages wrap
+    an API its publisher provides no client for.
+  third_party:
+  - language: javascript
+    registry: npm
+    name: "@shaggytools/nhtsa-api-wrapper"
+    url: https://www.npmjs.com/package/@shaggytools/nhtsa-api-wrapper
+    install: npm install @shaggytools/nhtsa-api-wrapper
+    official: false
+    covers: [us-dot:nhtsa-vpic-api]
+    note: Universal JavaScript wrapper for the NHTSA vPIC vehicles API. The most complete community client.
+  - language: javascript
+    registry: npm
+    name: nhtsa
+    url: https://www.npmjs.com/package/nhtsa
+    install: npm install nhtsa
+    official: false
+    covers: [us-dot:nhtsa-vpic-api]
+  - language: javascript
+    registry: npm
+    name: "@cardog/corgi"
+    url: https://www.npmjs.com/package/@cardog/corgi
+    install: npm install @cardog/corgi
+    official: false
+    covers: [us-dot:nhtsa-vpic-api]
+    note: Offline VIN decoding built from NHTSA vPIC data.
+  - language: javascript
+    registry: npm
+    name: fmcsa-sdk
+    url: https://www.npmjs.com/package/fmcsa-sdk
+    install: npm install fmcsa-sdk
+    official: false
+    covers: [us-dot:fmcsa-qcmobile-api]
+  - language: python
+    registry: pypi
+    name: nhtsa
+    url: https://pypi.org/project/nhtsa/
+    install: pip install nhtsa
+    official: false
+    covers: [us-dot:nhtsa-vpic-api]
+  - language: javascript
+    registry: npm
+    name: "@pipeworx/mcp-nhtsa"
+    url: https://www.npmjs.com/package/@pipeworx/mcp-nhtsa
+    official: false
+    covers: [us-dot:nhtsa-vpic-api]
+    note: Community MCP server over NHTSA vPIC. Not DOT-published — see mcp/us-dot-mcp.yml.
+  - language: javascript
+    registry: npm
+    name: "@pipeworx/mcp-fmcsa"
+    url: https://www.npmjs.com/package/@pipeworx/mcp-fmcsa
+    official: false
+    covers: [us-dot:fmcsa-qcmobile-api]
+    note: Community MCP server over FMCSA QCMobile. Not DOT-published.
+  sdks_pointer_emitted: false
+  sdks_pointer_reason: >-
+    Still zero first-party client libraries across the entire department. Emitting an
+    `SDKs` pointer would credit U.S. DOT for work the community did instead of it.

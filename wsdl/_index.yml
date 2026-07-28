@@ -1,0 +1,36 @@
+generated: '2026-07-28'
+method: searched
+source: >-
+  https://safetydata.fra.dot.gov/MasterWebService/FRASafetyDataAPIs.aspx — the FRA Safety
+  Data APIs page links both .asmx endpoints; each WSDL was retrieved live with the
+  classic ?WSDL query string on 2026-07-28 and saved verbatim.
+note: >-
+  The only SOAP surface in the U.S. DOT estate, and the only machine-readable API
+  contracts the department publishes outside the four FAA OpenAPI documents. FRA calls
+  this a pilot. Both WSDLs declare SOAP 1.1, SOAP 1.2 and HTTP GET/POST bindings; neither
+  declares a WS-Security policy, so the credential model for the "web service account" is
+  not published.
+wsdls:
+- file: us-dot-fra-datadownload-service.wsdl
+  api: us-dot:fra-safety-data-api
+  service: FRA Master Web Service (Data Download)
+  endpoint: https://safetydata.fra.dot.gov/MASTERWEBSERVICE/DatadownloadService.asmx
+  version: WSDL 1.1
+  operations: 30
+  operation_names: [GetAccident54DataByRailroad, GetAccident54DataByState, GetAccident55DataByRailroad, GetAccident55DataByState, GetAccident55aDataByRailroad, GetAccident55aDataByState, GetAccident57DataByRailroad, GetAccident57DataByState, GetActivityData, GetCrossingData, GetCrossingDataByRailroad, GetCrossingDataByState, GetDefectData, GetDefectDataDownload, GetDefectDataDownloadWithSubUnits, GetDefectDataWithSubUnits, GetDeletedDefectData, GetF54Schema, GetF55Schema, GetF55aSchema, GetF57Schema, GetF71Schema, GetF96DataDownloadSchema, GetF96DataDownloadSchemaWithSubUnits, GetF96DeletedSchema, GetF96Schema, GetF96SchemaWithSubUnits, GetHazmatShipperData, GetPHMSADefectData, GetRailroadData]
+  bytes: 75909
+- file: us-dot-fra-lite-api-service.wsdl
+  api: us-dot:fra-safety-data-api
+  service: FRA Lite API Service
+  endpoint: https://safetydata.fra.dot.gov/MasterWebService/LiteApiService.asmx
+  version: WSDL 1.1
+  operations: 5
+  operation_names: [GetCasualtyDataByYear, GetEnforcementDataByYear, GetSummaryDataByYear, GetTenYearsDataByYear, GetTrainsAccidentDataByYear]
+  bytes: 15252
+account_request:
+  mechanism: email
+  master_service: 'mailto:RsisSupport@dot.gov?subject=API (Web Service) Account Request'
+  lite_api: 'mailto:RsisSupport@dot.gov?subject=Lite API (Web Service) Account Request'
+  self_serve: false
+terms: https://safetydata.fra.dot.gov/MasterWebService/Terms.aspx
+sample_payload: http://safetydata.fra.dot.gov/PublicObjects/FRASafetyDataAPIsSamples/Form57Sample.xml

@@ -1,0 +1,36 @@
+generated: '2026-07-28'
+method: derived
+source: >-
+  openapi/us-dot-faa-safety-assurance-system-api-openapi.yml — the only U.S. DOT / FAA
+  OpenAPI that carries in-spec request and response examples. Extracted verbatim; no
+  values were invented. The FAA ASWS and APRA specs declare `content: {}` on every
+  response and therefore contain no examples to extract, and Socrata SODA / CKAN publish
+  no OpenAPI at all.
+examples:
+- file: us-dot-faa-sas-submit-discrepancies-request.json
+  api: us-dot:faa-safety-assurance-system-api
+  spec: openapi/us-dot-faa-safety-assurance-system-api-openapi.yml
+  operation: POST /axhsubmitdiscrepancies
+  kind: request
+  media_type: application/json
+  note: >-
+    Verbatim copy of the `example` block on the requestBody. The values are the FAA's
+    own synthetic sample (fictional carrier "Al's Airline", fictional passenger), not
+    live data.
+- file: us-dot-faa-sas-submit-discrepancies-response.json
+  api: us-dot:faa-safety-assurance-system-api
+  spec: openapi/us-dot-faa-safety-assurance-system-api-openapi.yml
+  operation: POST /axhsubmitdiscrepancies
+  kind: response
+  status: 200
+  media_type: application/json
+  note: Verbatim copy of the `example` block on the 200 response.
+gaps:
+- api: us-dot:faa-airport-status-web-service
+  reason: 'Schemas are fully typed but every response declares no example; content: {} on 4xx/5xx.'
+- api: us-dot:faa-aeronautic-product-release-api
+  reason: 'All 34 operations declare `content: {}` on 200/400/404/500 — no schema, no example.'
+- api: us-dot:faa-air-carrier-prd-api
+  reason: 'Response schemas carry only the literal `example: "success"`; request bodies $ref a pilotData_example schema with no populated example object.'
+- api: [us-dot:dot-data-hub-soda-api, us-dot:bts-open-data-soda-api]
+  reason: No OpenAPI exists; Socrata publishes examples in narrative docs at dev.socrata.com only.

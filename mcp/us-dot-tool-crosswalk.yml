@@ -1,0 +1,135 @@
+generated: '2026-07-28'
+method: derived
+source: mcp/us-dot-mcp.yml + openapi/*.yml (operationIds verified verbatim in each spec)
+note: >-
+  U.S. DOT publishes no MCP server, so there is no vendor tool list to bind. This
+  crosswalk binds the DERIVED candidate tool set in mcp/us-dot-mcp.yml to the real
+  operationIds in the harvested OpenAPI, and records where the agent surface cannot
+  be backed by a REST operation at all (Socrata SODA and CKAN have no OpenAPI).
+  Confidence is high only where the operationId was greped out of the spec verbatim.
+surfaces:
+  openapi:
+  - file: openapi/us-dot-faa-airport-status-web-service-openapi.yml
+    operations: 2
+    gated: false
+  - file: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml
+    operations: 34
+    gated: false
+  - file: openapi/us-dot-faa-air-carrier-prd-api-openapi.yml
+    operations: 8
+    gated: true
+    note: No operationIds declared in the spec; access gated by FAA operator accreditation.
+  - file: openapi/us-dot-faa-safety-assurance-system-api-openapi.yml
+    operations: 1
+    gated: true
+    note: No operationId declared; requires X-API-KEY + X-APP-ID.
+  - file: openapi/us-dot-its-jpo-ode-rest-api-openapi.yml
+    operations: 8
+    gated: true
+    note: Swagger 2.0, self-hosted software (host "yourhostname"); no DOT-operated instance.
+  graphql: null
+  mcp:
+    url: null
+    published: false
+    tools_list_probed: false
+    note: No MCP endpoint exists to introspect.
+  soda:
+    endpoints: [https://datahub.transportation.gov/resource, https://data.transportation.gov/resource, https://data.bts.gov/resource]
+    contract: Socrata SODA 2.1, documented at https://dev.socrata.com/docs/endpoints.html
+    machine_readable_spec: false
+  ckan:
+    endpoint: https://catalog.data.faa.gov/api/3
+    contract: CKAN Action API v3 (ckan_version 2.11.4)
+    machine_readable_spec: false
+crosswalk:
+- tool: get_airport_delays
+  category: airspace-status
+  rest: [getDelays]
+  spec: openapi/us-dot-faa-airport-status-web-service-openapi.yml
+  binding: rest
+  confidence: high
+- tool: get_airport_status
+  category: airspace-status
+  rest: [getAirportStatus]
+  spec: openapi/us-dot-faa-airport-status-web-service-openapi.yml
+  binding: rest
+  confidence: high
+- tool: get_terminal_procedures_edition
+  category: aeronautical-charts
+  rest: [getTPPEdition]
+  spec: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml
+  binding: rest
+  confidence: high
+- tool: get_terminal_procedures_download
+  category: aeronautical-charts
+  rest: [getTPPRelease]
+  spec: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml
+  binding: rest
+  confidence: high
+- tool: get_nasr_edition
+  category: airspace-data
+  rest: [getNASREdition]
+  spec: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml
+  binding: rest
+  confidence: high
+- tool: get_nasr_subscription
+  category: airspace-data
+  rest: [getNASRSubscription]
+  spec: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml
+  binding: rest
+  confidence: high
+- tool: get_sectional_chart
+  category: aeronautical-charts
+  rest: [getSectionalChart]
+  spec: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml
+  binding: rest
+  confidence: high
+- tool: get_ifr_enroute_chart
+  category: aeronautical-charts
+  rest: [getIFREnrouteRelease]
+  spec: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml
+  binding: rest
+  confidence: high
+- tool: get_cifp_release
+  category: flight-procedures
+  rest: [getCIFPRelease]
+  spec: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml
+  binding: rest
+  confidence: high
+- tool: get_digital_obstacle_file
+  category: obstacles
+  rest: [getDDOFRelease]
+  spec: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml
+  binding: rest
+  confidence: high
+mcp_only:
+- tool: query_dot_dataset
+  reason: Backed by Socrata SODA 2.1 on datahub.transportation.gov / data.transportation.gov. Socrata publishes no OpenAPI, so there is no operationId to bind; the input contract is the SoQL parameter set ($select/$where/$order/$group/$limit/$offset/$q).
+- tool: query_bts_dataset
+  reason: Same SODA 2.1 contract on data.bts.gov. No OpenAPI exists.
+- tool: list_faa_datasets
+  reason: Backed by the CKAN Action API v3 at catalog.data.faa.gov. CKAN exposes /api/3/action/help_show per action but no OpenAPI document.
+rest_only:
+- capability: aeronautical chart products not surfaced as candidate tools
+  operations: [getCIFPEdition, getDDOFEdition, getDECRelease, getDECEdition, getDERSRelease, getDERSEdition, getGOMRelease, getGOMEdition, getIFREnrouteEdition, getOceanicRouteChart, getOceanicRouteEdition, getIfrPlanningChart, getIfrPlanningInfo, getSupplementRelease, getSupplementEdition, getGrandCanyonRelease, getGrandCanyonEdition, getHelicopterRelease, getGulfCoastRelease, getGulfCoastEdition, getHelicopterEdition, getSectionalInfo, getTACRelease, getTACEdition, getProductRelease, getProductEdition]
+  spec: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml
+  reason: Same request/response shape as the tools already bound; folded into the chart tools rather than emitted one tool per product.
+- capability: Pilot Records Database writes
+  operations: []
+  spec: openapi/us-dot-faa-air-carrier-prd-api-openapi.yml
+  reason: 8 operations across 4 paths, none carrying an operationId in the spec. Accreditation-gated writes; deliberately not exposed as tools.
+- capability: Safety Assurance System discrepancy submission
+  operations: []
+  spec: openapi/us-dot-faa-safety-assurance-system-api-openapi.yml
+  reason: 1 POST operation, no operationId declared. Credentialed write; deliberately not exposed as a tool.
+- capability: ITS ODE roadside message control
+  operations: [getVersion, tim_query, tim_put, tim_post, tim_delete, snmp_get, pdm_post, upload-obulog]
+  spec: openapi/us-dot-its-jpo-ode-rest-api-openapi.yml
+  reason: Self-hosted safety-critical control surface; no DOT-operated host. See agentic-access/us-dot-agentic-access.yml.
+coverage:
+  tools_named: 13
+  tools_bound_to_rest: 10
+  mcp_only: 3
+  rest_operations_total: 53
+  rest_operations_with_a_tool: 10
+  rest_operations_gated_or_excluded: 17

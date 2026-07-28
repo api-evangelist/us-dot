@@ -1,0 +1,128 @@
+generated: '2026-07-28'
+method: searched
+source: live probes of every apis.yml baseURL host, every OpenAPI servers[] host, and the docs/portal hosts
+summary: >-
+  No RFC 8615 /.well-known/ document is published on any U.S. DOT, BTS or FAA host.
+  Every /.well-known/ path probed returned 404, except the two Gravitee portal hosts
+  (api.faa.gov, portal.apic4e.faa.gov) which return HTTP 200 with the Angular SPA
+  index.html shell for any path — a false positive, not a real document — and
+  www.transportation.gov / www.dot.gov / www.bts.gov which return HTTP 403 to every
+  non-browser client (Akamai bot block) for all paths including /.well-known/.
+  What DOT does publish instead is the federal Project Open Data / DCAT-US 1.1
+  catalog document at /data.json on all three data platforms. Those are recorded
+  below as real machine-readable catalogs.
+hosts_probed:
+- https://external-api.faa.gov
+- https://external.apic4e.faa.gov
+- https://api.faa.gov
+- https://portal.apic4e.faa.gov
+- https://data.transportation.gov
+- https://datahub.transportation.gov
+- https://data.bts.gov
+- https://www.faa.gov
+- https://faa.gov
+- https://www.transportation.gov
+- https://transportation.gov
+- https://www.dot.gov
+- https://www.bts.gov
+documents:
+- path: /.well-known/security.txt
+  status: 404
+  hosts: [external-api.faa.gov, external.apic4e.faa.gov, data.transportation.gov, datahub.transportation.gov, data.bts.gov, www.faa.gov, faa.gov]
+  note: RFC 9116 security.txt is not published. The DOT and FAA vulnerability disclosure policies exist as HTML pages only — see security/us-dot-vulnerability-disclosure.yml.
+- path: /.well-known/security.txt
+  status: 403
+  hosts: [www.transportation.gov, transportation.gov, www.dot.gov, dot.gov, www.bts.gov]
+  note: Akamai "Access Denied" to all non-browser clients; cannot be confirmed either way.
+- path: /.well-known/openid-configuration
+  status: 404
+  hosts: [external-api.faa.gov, external.apic4e.faa.gov, data.transportation.gov, datahub.transportation.gov, data.bts.gov, www.faa.gov]
+- path: /.well-known/oauth-authorization-server
+  status: 404
+  hosts: [external-api.faa.gov, external.apic4e.faa.gov, data.transportation.gov, datahub.transportation.gov, data.bts.gov, www.faa.gov]
+- path: /.well-known/api-catalog
+  status: 404
+  hosts: [external-api.faa.gov, external.apic4e.faa.gov, data.transportation.gov, datahub.transportation.gov, data.bts.gov, www.faa.gov]
+- path: /.well-known/ai-plugin.json
+  status: 404
+  hosts: [external-api.faa.gov, external.apic4e.faa.gov, data.transportation.gov, datahub.transportation.gov, data.bts.gov, www.faa.gov]
+- path: /llms.txt
+  status: 404
+  hosts: [external-api.faa.gov, external.apic4e.faa.gov, data.transportation.gov, datahub.transportation.gov, data.bts.gov, www.faa.gov]
+  note: No provider-published llms.txt. A generated one is in llms/us-dot-llms.txt.
+- path: /.well-known/*
+  status: 200
+  hosts: [api.faa.gov, portal.apic4e.faa.gov]
+  note: >-
+    FALSE POSITIVE. The Gravitee portal serves its Angular index.html for every unmatched
+    path; the body begins with a Gravitee Apache-2.0 licence HTML comment, not a document.
+    Treated as "not published".
+catalogs:
+- url: https://catalog.data.faa.gov/data.json
+  status: 200
+  format: DCAT-US 1.1 (Project Open Data)
+  conformsTo: https://project-open-data.cio.gov/v1.1/schema
+  datasets: 6
+  file: us-dot-faa-catalog-data.json
+  note: FAA CKAN 2.11.4 catalog. Saved verbatim (11.8 KB).
+- url: https://data.transportation.gov/data.json
+  status: 200
+  format: DCAT-US 1.1 (Project Open Data)
+  conformsTo: https://project-open-data.cio.gov/v1.1/schema
+  datasets: 1542
+  file: null
+  note: 2.7 MB; indexed by URL rather than saved. Same tenant as datahub.transportation.gov.
+- url: https://data.bts.gov/data.json
+  status: 200
+  format: DCAT-US 1.1 (Project Open Data)
+  conformsTo: https://project-open-data.cio.gov/v1.1/schema
+  datasets: 420
+  file: null
+  note: 598 KB; indexed by URL rather than saved.
+- url: https://catalog.data.faa.gov/api/3/action/package_list
+  status: 200
+  format: CKAN Action API v3
+  datasets: 6
+  note: Anonymous. status_show reports ckan_version 2.11.4, site_title "Federal Aviation Administration".
+- url: https://apim-api.apic4e.faa.gov/portal/environments/DEFAULT/apis?page=1&size=200
+  status: 200
+  format: Gravitee portal catalog (JSON)
+  apis: 7
+  note: Anonymous API catalog for the FAA developer portal; re-verified 2026-07-28.
+round_2_additions:
+  generated: '2026-07-28'
+  note: >-
+    Second enrichment round re-probed /.well-known/security.txt across every host
+    including the newly discovered NHTSA, FRA and FMCSA surfaces. Result unchanged: no
+    RFC 9116 document anywhere. Two live coordinated vulnerability disclosure programs
+    were found by SEARCH instead — see security/us-dot-vulnerability-disclosure.yml.
+  hosts_added:
+  - https://vpic.nhtsa.dot.gov
+  - https://api.nhtsa.gov
+  - https://safetydata.fra.dot.gov
+  - https://mobile.fmcsa.dot.gov
+  documents:
+  - path: /llms.txt
+    status: 404
+    hosts: [vpic.nhtsa.dot.gov, api.nhtsa.gov, safetydata.fra.dot.gov, mobile.fmcsa.dot.gov]
+    note: No provider-published llms.txt. A generated one is at llms/us-dot-llms.txt.
+  - path: /openapi.json
+    status: 404
+    hosts: [api.nhtsa.gov, vpic.nhtsa.dot.gov, safetydata.fra.dot.gov, external-api.faa.gov, external.apic4e.faa.gov, datahub.transportation.gov, data.bts.gov]
+    note: >-
+      Full contract-discovery sweep run 2026-07-28 against every baseURL host and every
+      OpenAPI servers[] host — /openapi.json, /openapi.yaml, /swagger.json,
+      /v1/openapi.json, /api-docs, /swagger/v1/swagger.json, /api/openapi.json. Zero
+      hits. The only machine-readable contracts outside the four FAA OpenAPI documents
+      are the two FRA WSDLs (wsdl/), retrieved with the classic ?WSDL query string.
+  wsdl_discovery:
+  - url: https://safetydata.fra.dot.gov/MASTERWEBSERVICE/DatadownloadService.asmx?WSDL
+    status: 200
+    format: WSDL 1.1
+    operations: 30
+    file: wsdl/us-dot-fra-datadownload-service.wsdl
+  - url: https://safetydata.fra.dot.gov/MasterWebService/LiteApiService.asmx?WSDL
+    status: 200
+    format: WSDL 1.1
+    operations: 5
+    file: wsdl/us-dot-fra-lite-api-service.wsdl

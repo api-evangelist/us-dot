@@ -1,0 +1,58 @@
+# generated: '2026-07-28'
+# method: generated
+# source: openapi/us-dot-faa-safety-assurance-system-api-openapi.yml
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for FAA Safety Assurance System (SAS) API
+  version: 1.0.0
+extends: openapi/us-dot-faa-safety-assurance-system-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      title: FAA Safety Assurance System (SAS) API
+      description: >-
+        Single-operation submission API for passenger discrepancy reporting into the FAA
+        Safety Assurance System. Air carriers submit hazardous-material discrepancies
+        discovered on passengers or in passenger baggage.
+      x-apievangelist-provider: us-dot
+      x-apievangelist-api: us-dot:faa-safety-assurance-system-api
+      x-apievangelist-verified: '2026-07-28'
+      x-apievangelist-auth: >-
+        Requires BOTH X-API-KEY and X-APP-ID request headers. Both are declared as apiKey
+        securitySchemes but neither is applied via a security requirement on the
+        operation — the spec has no top-level or operation-level `security` block.
+      x-apievangelist-pii: >-
+        This payload carries passenger PII (full name, address, phone, email) and a PNR
+        locator. It is the most sensitive request body in the U.S. DOT surface area.
+        Never log it, never cache it, never route it through a general-purpose agent
+        context. See agentic-access/us-dot-agentic-access.yml.
+      x-apievangelist-artifacts:
+        authentication: authentication/us-dot-authentication.yml
+        examples: examples/_index.yml
+        data-model: data-model/us-dot-data-model.yml
+  - target: $.servers
+    update:
+      - url: https://external.apic4e.faa.gov/axh-sasp-api/sas
+        description: >-
+          Production entrypoint, read from the FAA Gravitee portal catalog 2026-07-28.
+          The source spec declares servers[0].url as "/" — a build artefact, not a usable
+          base URL.
+  - target: $.paths['/axhsubmitdiscrepancies'].post
+    update:
+      operationId: submitDiscrepancies
+      summary: Submit passenger hazardous-material discrepancy reports
+      x-apievangelist-operationid-note: >-
+        The source spec declares no operationId. `submitDiscrepancies` is an API
+        Evangelist addition for tooling; it is NOT an FAA-published identifier and must
+        not be treated as one.
+      x-apievangelist-idempotency: >-
+        None. There is no Idempotency-Key and no dedupe field. A retried POST will import
+        the discrepancies again — the response returns totalDiscrepanciesImported, so
+        reconcile on that rather than retrying blindly.
+      x-agentic-access:
+        action-class: acting
+        consequence: write
+        subject: required
+        token:
+          max-ttl: 900
+        audit: required

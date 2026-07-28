@@ -1,0 +1,113 @@
+generated: '2026-07-28'
+method: searched
+source: >-
+  openapi/*.yml info.version + servers[], FAA aeronautical products publication schedule,
+  github.com/usdot-jpo-ode/wzdx releases, status.socrata.com, live probes 2026-07-28
+versioning:
+  scheme: mixed
+  detail: >-
+    There is no departmental API versioning policy. Each surface versions independently:
+    FAA APRA and ASWS carry a semantic info.version in the OpenAPI with no version segment
+    in the path; the PRD Air Carrier API uses info.version "v1" with no path segment;
+    Socrata SODA is versioned in the path (/resource/ is SODA 2.1, /api/v3/ is SODA 3);
+    the CKAN Action API is versioned in the path (/api/3/action/); the WZDx specification
+    uses semantic major.minor releases on GitHub.
+  current:
+  - api: us-dot:faa-airport-status-web-service
+    version: 1.2.1
+    source: openapi info.version
+  - api: us-dot:faa-aeronautic-product-release-api
+    version: 1.4.0
+    source: openapi info.version
+  - api: us-dot:faa-air-carrier-prd-api
+    version: v1
+    source: openapi info.version
+  - api: us-dot:faa-safety-assurance-system-api
+    version: 1.0.0
+    source: openapi info.version
+  - api: us-dot:dot-data-hub-soda-api
+    version: SODA 2.1
+    source: https://dev.socrata.com/docs/endpoints.html
+  - api: us-dot:bts-open-data-soda-api
+    version: SODA 2.1
+    source: https://dev.socrata.com/docs/endpoints.html
+  - api: us-dot:faa-data-catalog-ckan-api
+    version: CKAN Action API v3 (ckan_version 2.11.4)
+    source: 'https://catalog.data.faa.gov/api/3/action/status_show, probed 2026-07-28'
+  - api: us-dot:its-jpo-ode-rest-api
+    version: 0.0.1
+    source: swagger info.version
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  policy_published: false
+  detail: >-
+    Neither DOT nor FAA publishes an API deprecation or sunset policy, and no surface
+    emits RFC 8594 Sunset or Deprecation headers (verified on live 200 responses from
+    external-api.faa.gov 2026-07-28 — the only non-standard headers are Gravitee tracing
+    and Akamai). Deprecation is communicated in-band only:
+  evidence:
+  - source: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml
+    signal: 'A 404 response description reads "This product has been deprecated and is no longer published by the FAA."'
+  - source: openapi/us-dot-faa-air-carrier-prd-api-openapi.yml
+    signal: 'servers[1] https://external-api.faa.gov/AirCarrierApi is labelled "Production deprecated url." while servers[0] https://external.apic4e.faa.gov is the live production host.'
+deprecated_operations:
+- operation: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml#getDERSRelease
+  path: /ders/chart
+  api: us-dot:faa-aeronautic-product-release-api
+  signal: 'deprecated: true in the spec; the only declared response is 404 "This product has been deprecated and is no longer published by the FAA."'
+  replacement: null
+  product: Digital Enroute Supplement (DERS)
+- operation: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml#getDERSEdition
+  path: /ders/info
+  api: us-dot:faa-aeronautic-product-release-api
+  signal: 'deprecated: true in the spec; only a 404 response is declared.'
+  replacement: null
+  product: Digital Enroute Supplement (DERS)
+deprecated_operations_note: >-
+  Two of the 34 APRA operations carry `deprecated: true`. This is the ONLY use of the
+  OpenAPI deprecated flag anywhere in the department, and it is the only structured
+  deprecation signal DOT or FAA emits — there is no Sunset header, no Deprecation header
+  and no policy page.
+deprecated_hosts:
+- host: https://external-api.faa.gov/AirCarrierApi
+  replacement: https://external.apic4e.faa.gov
+  api: us-dot:faa-air-carrier-prd-api
+  source: openapi servers[] description
+sla:
+  url: null
+  uptime_target: null
+  detail: >-
+    No published SLA. These are free public-domain U.S. Government services with no
+    commercial agreement, no minimum term and therefore no availability commitment.
+status_page: https://status.socrata.com/
+status_pages:
+- url: https://status.socrata.com/
+  operator: Tyler Data & Insights (Socrata)
+  covers: [us-dot:dot-data-hub-soda-api, us-dot:bts-open-data-soda-api]
+  verified: '2026-07-28'
+  note: >-
+    Platform status page for the Socrata tenancy that data.transportation.gov,
+    datahub.transportation.gov and data.bts.gov run on. Components reported include
+    Authentication, Catalog, Data Sharing, Data Table, Homepage and Ingress/Publishing
+    per region. This is the operator's page, not a DOT-branded page — DOT publishes none.
+- url: https://nasstatus.faa.gov/
+  operator: Federal Aviation Administration
+  covers: []
+  verified: '2026-07-28'
+  note: >-
+    NAS Status — operational airspace status for the flying public, NOT an API service
+    status page. Recorded for completeness; it does not report FAA API availability.
+release_cadence:
+- surface: FAA aeronautical products (APRA)
+  cadence: 28-day AIRAC cycle for NASR/dTPP/CIFP; 56-day for digital enroute charts; daily for the Digital Obstacle File
+  mechanism: 'Every product exposes an /info operation returning the current and next edition; clients poll rather than subscribe.'
+- surface: WZDx specification
+  cadence: semantic releases on GitHub
+  url: https://github.com/usdot-jpo-ode/wzdx/releases
+- surface: Socrata datasets
+  cadence: per-dataset; the DCAT-US catalog at /data.json carries modified and accrualPeriodicity per dataset
+subscribe:
+- url: https://www.faa.gov/data/subscribe
+  note: FAA "Subscribe for Updates" for aeronautical data and products changes.

@@ -1,0 +1,100 @@
+generated: '2026-07-28'
+method: derived
+status: candidate
+source: openapi/us-dot-faa-airport-status-web-service-openapi.yml, openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml, apis.yml
+search_result: >-
+  No official U.S. DOT, BTS or FAA hosted or remote MCP server exists. npm was searched for
+  first-party @usdot / @faa / @bts scopes (none), and the FAA Gravitee portal catalog
+  (7 APIs, enumerated anonymously 2026-07-28) advertises no MCP surface. Two community
+  servers do exist and are recorded under third_party below; neither is DOT-published.
+  The tool list below is therefore a DERIVED CANDIDATE mapped one-to-one onto real,
+  verified operationIds in the harvested OpenAPI, restricted to the surfaces that answer
+  anonymously (FAA ASWS and FAA APRA) plus the two Socrata SODA read surfaces.
+server:
+  name: us-dot
+  transport: http
+  url: null
+  auth: none required for the candidate tool set
+tools:
+- name: get_airport_delays
+  description: Current National Airspace System delay summary across the ~40 major US airports FAA reports on.
+  source_operation: openapi/us-dot-faa-airport-status-web-service-openapi.yml#getDelays
+  auth: none
+- name: get_airport_status
+  description: Per-airport status by IATA or ICAO code, including ground delays, ground stops, arrival/departure delays and closures.
+  source_operation: openapi/us-dot-faa-airport-status-web-service-openapi.yml#getAirportStatus
+  auth: none
+- name: get_terminal_procedures_edition
+  description: Current or next edition metadata for the digital Terminal Procedures Publication (dTPP).
+  source_operation: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml#getTPPEdition
+  auth: none
+- name: get_terminal_procedures_download
+  description: Download link for a digital Terminal Procedures Publication edition.
+  source_operation: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml#getTPPRelease
+  auth: none
+- name: get_nasr_edition
+  description: Edition metadata for the NFDC/NASR 28-day airspace subscription.
+  source_operation: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml#getNASREdition
+  auth: none
+- name: get_nasr_subscription
+  description: Download link for the NFDC/NASR 28-day airspace subscription ZIP.
+  source_operation: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml#getNASRSubscription
+  auth: none
+- name: get_sectional_chart
+  description: VFR sectional chart download link by edition, format and geoname.
+  source_operation: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml#getSectionalChart
+  auth: none
+- name: get_ifr_enroute_chart
+  description: IFR enroute chart download link by edition, format and geoname.
+  source_operation: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml#getIFREnrouteRelease
+  auth: none
+- name: get_cifp_release
+  description: Coded Instrument Flight Procedures (CIFP) release download link.
+  source_operation: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml#getCIFPRelease
+  auth: none
+- name: get_digital_obstacle_file
+  description: Daily Digital Obstacle File (DDOF) download link.
+  source_operation: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml#getDDOFRelease
+  auth: none
+- name: query_dot_dataset
+  description: Run a SoQL query against any DOT Data Hub Socrata resource by four-by-four id.
+  source_operation: null
+  source_api: us-dot:dot-data-hub-soda-api
+  binding: soda
+  note: Socrata SODA 2.1 has no OpenAPI; the contract is documented at dev.socrata.com/docs/endpoints.html.
+  auth: none (optional X-App-Token)
+- name: query_bts_dataset
+  description: Run a SoQL query against any Bureau of Transportation Statistics Socrata resource by four-by-four id.
+  source_operation: null
+  source_api: us-dot:bts-open-data-soda-api
+  binding: soda
+  auth: none (optional X-App-Token)
+- name: list_faa_datasets
+  description: List FAA aeronautical data catalog packages via the CKAN Action API.
+  source_operation: null
+  source_api: us-dot:faa-data-catalog-ckan-api
+  binding: ckan
+  auth: none
+excluded_from_candidates:
+- api: us-dot:faa-air-carrier-prd-api
+  reason: Write path into the Pilot Records Database, gated behind FAA operator accreditation (14 CFR Part 121/135/125/91K). Not appropriate as an agent tool.
+- api: us-dot:faa-safety-assurance-system-api
+  reason: Credentialed write path (X-API-KEY + X-APP-ID) submitting passenger discrepancy reports. Not appropriate as an agent tool.
+- api: us-dot:its-jpo-ode-rest-api
+  reason: Self-hosted roadside-unit control surface (TIM broadcast, PDM). Safety-critical writes; see agentic-access/us-dot-agentic-access.yml.
+third_party:
+- name: "@pipeworx/mcp-faa-delays"
+  url: https://www.npmjs.com/package/@pipeworx/mcp-faa-delays
+  repository: https://github.com/pipeworx-io/mcp-faa-delays
+  official: false
+  covers: [us-dot:faa-airport-status-web-service]
+- name: "@pipeworx/mcp-data-usdot"
+  url: https://www.npmjs.com/package/@pipeworx/mcp-data-usdot
+  repository: https://github.com/pipeworx-io/mcp-data-usdot
+  official: false
+  covers: [us-dot:dot-data-hub-soda-api]
+- name: "@cyanheads/socrata-mcp-server"
+  url: https://www.npmjs.com/package/@cyanheads/socrata-mcp-server
+  official: false
+  covers: [us-dot:dot-data-hub-soda-api, us-dot:bts-open-data-soda-api]
+  note: Generic Socrata MCP; works against any SODA tenant including DOT and BTS.

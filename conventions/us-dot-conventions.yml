@@ -1,0 +1,112 @@
+generated: '2026-07-28'
+method: searched
+source: >-
+  https://dev.socrata.com/docs/endpoints.html, https://dev.socrata.com/docs/paging.html,
+  https://dev.socrata.com/docs/app-tokens.html, https://catalog.data.faa.gov/api/3/action/help_show,
+  openapi/*.yml, live response headers from external-api.faa.gov captured 2026-07-28
+summary: >-
+  U.S. DOT has no departmental API style guide. Three unrelated conventions coexist:
+  the FAA Gravitee gateway (plain REST, header credentials, no envelope), Socrata
+  SODA 2.1 (SoQL query language, $-prefixed parameters, offset paging), and CKAN
+  Action API v3 (POST/GET actions returning {success, result, help}). Everything below
+  is captured from published docs or observed on the wire; nothing is inferred.
+authentication:
+  style: mixed
+  detail: >-
+    Anonymous for every read surface. FAA PRD uses client_id + client_secret request
+    headers; FAA SAS uses X-API-KEY + X-APP-ID; Socrata accepts an optional X-App-Token
+    header (or $$app_token query parameter) which raises the shared-pool throttle but is
+    not authentication. See authentication/us-dot-authentication.yml.
+  artifact: authentication/us-dot-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  detail: >-
+    No U.S. DOT or FAA surface implements an idempotency key. The read surfaces (FAA
+    ASWS, FAA APRA, Socrata SODA, CKAN) are all safe GETs so retry is naturally safe.
+    The write surfaces — FAA PRD Pilot create/update/delete, FAA SAS discrepancy
+    submission, ITS ODE TIM/PDM deposit — declare no Idempotency-Key parameter in their
+    OpenAPI and document none. The ODE spec explicitly declares a 408 Timeout response
+    on tim_query and snmp_get with no safe-retry contract, so duplicate writes are a
+    real hazard on that surface.
+pagination:
+  surfaces:
+  - api: [us-dot:dot-data-hub-soda-api, us-dot:bts-open-data-soda-api]
+    style: limit-offset
+    params:
+      limit: $limit
+      offset: $offset
+    default_limit: 1000
+    max_limit: 50000
+    ordering_required_for_stable_paging: true
+    ordering_param: $order
+    docs: https://dev.socrata.com/docs/paging.html
+    note: SODA 2.1 returns a bare JSON array with no envelope, no total count and no next-link. Stable paging requires an explicit $order on a unique column (:id works).
+  - api: us-dot:faa-data-catalog-ckan-api
+    style: limit-offset
+    params:
+      limit: limit
+      offset: offset
+    docs: https://catalog.data.faa.gov/api/3/action/help_show?name=package_search
+  - api: [us-dot:faa-airport-status-web-service, us-dot:faa-aeronautic-product-release-api]
+    style: none
+    note: Both return complete collections; no paging exists or is needed.
+query_language:
+  name: SoQL
+  applies_to: [us-dot:dot-data-hub-soda-api, us-dot:bts-open-data-soda-api]
+  params: [$select, $where, $order, $group, $having, $limit, $offset, $q]
+  docs: https://dev.socrata.com/docs/queries/
+  note: SoQL is a SQL-like dialect over HTTP. Query code written against DOT moves unchanged to any other Socrata tenant.
+field_selection:
+  supported: true
+  mechanism: $select on SODA surfaces; the FAA services return fixed representations.
+metadata:
+  supported: true
+  mechanism: >-
+    Socrata asset metadata at /api/views/{fourbyfour}.json (licence, attribution,
+    provenance, category, downloadCount). Federal DCAT-US 1.1 catalogs at /data.json on
+    all three data platforms. FAA CKAN package metadata at /api/3/action/package_show.
+request_tracing:
+  supported: true
+  surface: FAA API gateway
+  headers:
+  - X-Gravitee-Transaction-Id
+  - X-Gravitee-Request-Id
+  - X-Gravitee-Client-Identifier
+  evidence: 'Observed on a live 200 from https://external-api.faa.gov/asws/api/airport/delays, 2026-07-28.'
+  note: >-
+    Response-only; there is no documented request-side correlation header. Quote the
+    X-Gravitee-Transaction-Id when reporting a problem through the FAA portal.
+  socrata: 'Socrata returns X-Socrata-RequestId on SODA responses.'
+content_negotiation:
+  faa_asws: application/json or application/xml (declared in the OpenAPI response content)
+  faa_apra: application/xml for /info edition metadata; ZIP downloads for /chart
+  soda: 'Extension-driven — .json, .csv, .geojson, .xml on the resource path'
+  ckan: application/json
+versioning:
+  artifact: lifecycle/us-dot-lifecycle.yml
+  detail: No header or date-based versioning anywhere. Version lives in info.version (FAA) or in the path (SODA /resource, CKAN /api/3).
+error_envelope:
+  artifact: errors/us-dot-problem-types.yml
+  detail: Three different shapes — Gravitee {message, http_status_code}, FAA services empty body, Socrata {code, error, message, data}. No RFC 9457 anywhere.
+rate_limit_signaling:
+  headers: none
+  detail: >-
+    No RateLimit / X-RateLimit / Retry-After headers were observed on any live 200 from
+    external-api.faa.gov (2026-07-28). Socrata documents a shared throttling pool for
+    anonymous requests and recommends registering an application token to get a
+    per-application quota, but publishes no numeric limit. No numeric limit is published
+    anywhere for the FAA services, so no rate-limits/ artifact is emitted.
+  app_token_docs: https://dev.socrata.com/docs/app-tokens.html
+caching:
+  detail: >-
+    FAA ASWS responds Cache-Control "max-age=0, no-cache, no-store" and Pragma no-cache —
+    the delay feed is explicitly uncacheable. FAA APRA /info responses are edition-scoped
+    and safe to cache for the AIRAC cycle. Socrata supports ETag/If-None-Match.
+transport_security:
+  detail: HTTPS everywhere, TLS 1.2+, HSTS max-age 31536000 on api.faa.gov, external-api.faa.gov, external.apic4e.faa.gov, data.transportation.gov, datahub.transportation.gov and data.bts.gov. See security/us-dot-domain-security.yml.
+licensing:
+  detail: >-
+    Public Domain U.S. Government (USGOV_WORKS) on the Socrata datasets; Creative Commons
+    Zero (CC0 1.0) declared in the info.license block of both public FAA OpenAPI documents.
+    There is no attribution requirement and no commercial restriction.

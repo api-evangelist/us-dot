@@ -1,0 +1,63 @@
+# generated: '2026-07-28'
+# method: generated
+# source: openapi/us-dot-faa-airport-status-web-service-openapi.yml
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for FAA Airport Status Web Service (ASWS)
+  version: 1.0.0
+extends: openapi/us-dot-faa-airport-status-web-service-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: us-dot
+      x-apievangelist-api: us-dot:faa-airport-status-web-service
+      x-apievangelist-verified: '2026-07-28'
+      x-apievangelist-access: >-
+        Verified anonymously with HTTP 200 on 2026-07-28. No API key, no registration,
+        no terms acceptance. Public domain, CC0.
+      x-apievangelist-artifacts:
+        authentication: authentication/us-dot-authentication.yml
+        conventions: conventions/us-dot-conventions.yml
+        errors: errors/us-dot-problem-types.yml
+        lifecycle: lifecycle/us-dot-lifecycle.yml
+        data-model: data-model/us-dot-data-model.yml
+        agentic-access: agentic-access/us-dot-agentic-access.yml
+        skills: skills/_index.yml
+  - target: $.servers
+    update:
+      - url: https://external-api.faa.gov
+        description: >-
+          Public FAA API gateway. Verified reachable anonymously 2026-07-28. Prefer this
+          host; external.apic4e.faa.gov is the same Gravitee gateway under its internal
+          naming and is listed first in the FAA document.
+      - url: https://external.apic4e.faa.gov
+        description: FAA Gravitee gateway (alternate hostname).
+  - target: $.paths['/api/airport/delays'].get
+    update:
+      x-apievangelist-cache: >-
+        Service responds Cache-Control "max-age=0, no-cache, no-store" and Pragma
+        no-cache. The delay feed is explicitly uncacheable; poll, do not cache.
+      x-apievangelist-upstream: >-
+        Backed by fly.faa.gov. A 404 or 500 here is an upstream NAS status failure, not a
+        client error. Fall back to https://nasstatus.faa.gov/.
+      x-agentic-access:
+        action-class: connected
+        consequence: read
+        subject: optional
+        token:
+          max-ttl: 3600
+        audit: none
+  - target: $.paths['/api/airport/status/{airportCode}'].get
+    update:
+      x-apievangelist-note: >-
+        The airportCode path parameter accepts either an IATA three-letter code (JFK) or
+        an ICAO four-letter code (KJFK); the response returns both. Coverage is limited to
+        the ~40 airports enumerated in the operation description — anything else is a 404,
+        not an error.
+      x-agentic-access:
+        action-class: connected
+        consequence: read
+        subject: optional
+        token:
+          max-ttl: 3600
+        audit: none

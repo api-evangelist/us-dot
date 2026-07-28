@@ -1,0 +1,127 @@
+generated: '2026-07-28'
+method: searched
+source: >-
+  openapi/us-dot-faa-air-carrier-prd-api-openapi.yml servers[],
+  https://mobile.fmcsa.dot.gov/QCDevsite/, https://dev.socrata.com/docs/,
+  https://github.com/usdot-jpo-ode/jpo-ode (qa/test-harness), live probes 2026-07-28
+summary: >-
+  U.S. DOT publishes no sandbox, no test keys, no magic test identifiers and no mock
+  environment for any of its APIs — and mostly does not need one. Every read surface in
+  this repo answers anonymously against PRODUCTION with real data at no cost and no rate
+  charge, so "try it" and "run it" are the same call. Where a sandbox WOULD matter — the
+  two credentialed write surfaces, FAA Pilot Records and FAA Safety Assurance System —
+  none is reachable. The PRD OpenAPI advertises a staging host that does not resolve for
+  the public.
+test_vs_live:
+  separation: none
+  detail: >-
+    There is no test/live key prefix, no mode header and no account-level test switch on
+    any DOT surface. The FAA gateway issues one credential pair per approved
+    application against production.
+staging_environments:
+- api: us-dot:faa-air-carrier-prd-api
+  url: https://dev-external.apic4e.faa.gov/Test/AirCarrierApi
+  declared_in: 'openapi/us-dot-faa-air-carrier-prd-api-openapi.yml servers[2], description "Staging environment"'
+  publicly_reachable: false
+  probe: 'curl 2026-07-28 returned an edge error: {"error":{"code":"EGE-ER-OS-4004","message":"Domain not supported."}} — the host does not serve public traffic.'
+  note: >-
+    Declared in the published spec but not usable by an outside integrator. Access
+    presumably follows the same FAA operator-accreditation gate as production.
+- api: us-dot:faa-safety-assurance-system-api
+  url: https://internal.apic4e.faa.gov/axh-sasp-api/sas
+  declared_in: 'FAA Gravitee portal catalog entrypoints[1], read anonymously 2026-07-28'
+  publicly_reachable: false
+  note: Internal FAA network only. Not a sandbox — the internal twin of the production proxy.
+anonymous_production_as_sandbox:
+  detail: >-
+    The practical substitute for a sandbox is that the read APIs are open. Every call
+    below was executed anonymously on 2026-07-28 and returned HTTP 200 with real data.
+  verified_calls:
+  - api: us-dot:faa-airport-status-web-service
+    call: 'GET https://external-api.faa.gov/asws/api/airport/status/JFK'
+    result: '200 — {"Name":"John F Kennedy Intl","City":"New York","State":"NY","ICAO":"KJFK","IATA":"JFK","SupportedAirport":true,...}'
+    auth: none
+  - api: us-dot:faa-airport-status-web-service
+    call: 'GET https://external-api.faa.gov/asws/api/airport/delays'
+    auth: none
+  - api: us-dot:faa-aeronautic-product-release-api
+    call: 'GET https://external-api.faa.gov/apra/nfdc/nasr/info'
+    result: '200 — XML productSet with editionDate 07/09/2026'
+    auth: none
+  - api: us-dot:nhtsa-vpic-api
+    call: 'GET https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/5UXWX7C5*BA?format=json&modelyear=2011'
+    result: 200 — decoded VIN
+    auth: none
+  - api: us-dot:nhtsa-safety-api
+    call: 'GET https://api.nhtsa.gov/complaints/complaintsByVehicle?make=honda&model=accord&modelYear=2020'
+    result: 200 — 341 complaint records
+    auth: none
+  - api: us-dot:bts-open-data-soda-api
+    call: 'GET https://data.bts.gov/resource/bu82-4pwz.json?$limit=5'
+    auth: none
+  - api: us-dot:faa-data-catalog-ckan-api
+    call: 'GET https://catalog.data.faa.gov/api/3/action/package_list'
+    auth: none
+safe_identifiers:
+  detail: >-
+    No provider-published magic/test values exist. The identifiers below are real values
+    published in the specs' own enums and are safe to use for a first call; they are not
+    "test" data.
+  values:
+  - surface: FAA ASWS
+    parameter: airportCode
+    examples: [JFK, KJFK, ORD, ATL, SFO]
+    published_in: 'openapi operation description — the ~40 supported airports are enumerated verbatim'
+  - surface: FAA APRA
+    parameter: edition
+    examples: [current, next, changeset]
+    published_in: openapi parameter enum
+  - surface: FAA APRA
+    parameter: geoname
+    examples: [US, Alaska, Pacific, Caribbean]
+    published_in: openapi parameter enum on getIFREnrouteRelease
+  - surface: FAA SAS
+    parameter: request body
+    examples: [examples/us-dot-faa-sas-submit-discrepancies-request.json]
+    published_in: 'openapi requestBody example — FAA''s own synthetic sample ("Al''s Airline"). This is the closest thing to a test fixture the department publishes.'
+credential_issuance:
+- api: [us-dot:faa-air-carrier-prd-api, us-dot:faa-safety-assurance-system-api]
+  portal: https://api.faa.gov/s/
+  mechanism: >-
+    Register in the FAA Gravitee developer portal, request access to a specific API,
+    receive client_id/client_secret (PRD) or X-API-KEY/X-APP-ID (SAS) on approval.
+  self_serve: false
+  gate: 'PRD is restricted to operators under 14 CFR Part 121, 135, 125, 91K, Air Tour, Public Aircraft or Part 91 Corporate. This is an accreditation gate, not a signup form.'
+  guide: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+- api: us-dot:fmcsa-qcmobile-api
+  portal: https://mobile.fmcsa.dot.gov/QCDevsite/
+  mechanism: Create a Login.gov account, sign in to the FMCSA developer site, generate a free API key (webKey).
+  self_serve: true
+  note: The only self-serve API key in the department. Login.gov is the federal identity provider.
+- api: us-dot:fra-safety-data-api
+  portal: https://safetydata.fra.dot.gov/MasterWebService/FRASafetyDataAPIs.aspx
+  mechanism: 'Email RsisSupport@dot.gov to request a web-service account. Two separate requests: "API (Web Service) Account Request" and "Lite API (Web Service) Account Request".'
+  self_serve: false
+- api: [us-dot:dot-data-hub-soda-api, us-dot:bts-open-data-soda-api]
+  portal: https://data.transportation.gov/profile/edit/developer_settings
+  mechanism: >-
+    Optional Socrata application token (X-App-Token header or $$app_token query
+    parameter). Not authentication — it moves the caller off the shared anonymous
+    throttle pool onto a per-application one. Calls work fully without it.
+  self_serve: true
+test_tooling:
+- name: ODE test harness
+  url: https://github.com/usdot-jpo-ode/jpo-ode/tree/master/qa/test-harness
+  covers: us-dot:its-jpo-ode-rest-api
+  note: >-
+    A test harness shipped with the deployable ODE software, driven by .ini fixtures.
+    Applies to an operator running their own ODE, not to a DOT-hosted service.
+- name: docker-compose local stack
+  url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/docker-compose.yml
+  covers: us-dot:its-jpo-ode-rest-api
+  note: The ODE's real "sandbox" is running the whole platform locally against a local Kafka cluster.
+absent:
+- test card numbers / payment fixtures — not applicable, nothing in the department is monetised
+- test clocks or time simulation
+- fixture generators or event triggers
+- a hosted API console or "try it" widget (the FAA Gravitee portal exposes documentation pages, not an executable console, to anonymous visitors)

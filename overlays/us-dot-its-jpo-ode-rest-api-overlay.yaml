@@ -1,0 +1,66 @@
+# generated: '2026-07-28'
+# method: generated
+# source: openapi/us-dot-its-jpo-ode-rest-api-openapi.yml
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for USDOT ITS JPO Operational Data Environment (ODE) REST API
+  version: 1.0.0
+extends: openapi/us-dot-its-jpo-ode-rest-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: us-dot
+      x-apievangelist-api: us-dot:its-jpo-ode-rest-api
+      x-apievangelist-verified: '2026-07-28'
+      x-apievangelist-hosting: >-
+        SELF-HOSTED. The `host` field is the literal placeholder "yourhostname" — there is
+        no U.S. DOT-operated ODE instance. An operator (a state DOT, a research site)
+        deploys github.com/usdot-jpo-ode/jpo-ode against its own Kafka cluster and its own
+        roadside units. Apache 2.0.
+      x-apievangelist-safety: >-
+        This is a SAFETY-CRITICAL control surface. tim_put, tim_post and tim_delete write
+        Traveler Information Messages onto physical roadside units; snmp_get and pdm_post
+        talk SNMP to field hardware. Neither the spec nor the docs define an idempotency
+        key, and tim_query and snmp_get declare a 408 Timeout with no safe-retry
+        contract — a timed-out write may or may not have landed.
+      x-apievangelist-event-surface: >-
+        The REST API is the thin edge of a Kafka platform. 35 topics are declared in the
+        ODE's own configuration; see asyncapi/us-dot-its-jpo-ode-asyncapi.yml.
+      x-apievangelist-artifacts:
+        asyncapi: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+        grpc: grpc/us-dot-ode-geoRoutedMsg.proto
+        errors: errors/us-dot-problem-types.yml
+        agentic-access: agentic-access/us-dot-agentic-access.yml
+  - target: $.paths['/tim'].post
+    update:
+      x-agentic-access:
+        action-class: acting
+        consequence: safety-critical
+        subject: required
+        token:
+          max-ttl: 120
+          proof-of-possession: true
+        human-in-the-loop: required
+        audit: required
+  - target: $.paths['/tim'].put
+    update:
+      x-agentic-access:
+        action-class: acting
+        consequence: safety-critical
+        subject: required
+        token:
+          max-ttl: 120
+          proof-of-possession: true
+        human-in-the-loop: required
+        audit: required
+  - target: $.paths['/tim'].delete
+    update:
+      x-agentic-access:
+        action-class: acting
+        consequence: safety-critical
+        subject: required
+        token:
+          max-ttl: 120
+          proof-of-possession: true
+        human-in-the-loop: required
+        audit: required

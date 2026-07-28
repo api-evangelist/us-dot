@@ -1,0 +1,1583 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService">
+      <s:element name="GetF54Schema">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetF54SchemaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetF54SchemaResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccident54DataByRailroad">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="year" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccident54DataByRailroadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccident54DataByRailroadResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthHeader" type="tns:AuthHeader" />
+      <s:complexType name="AuthHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="GetAccident54DataByState">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="year" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccident54DataByStateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccident54DataByStateResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccident57DataByState">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="year" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccident57DataByStateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccident57DataByStateResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetF57Schema">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetF57SchemaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetF57SchemaResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccident57DataByRailroad">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="year" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccident57DataByRailroadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccident57DataByRailroadResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetF55aSchema">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetF55aSchemaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetF55aSchemaResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccident55aDataByRailroad">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="year" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccident55aDataByRailroadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccident55aDataByRailroadResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccident55aDataByState">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="year" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccident55aDataByStateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccident55aDataByStateResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetF55Schema">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetF55SchemaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetF55SchemaResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccident55DataByRailroad">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="year" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccident55DataByRailroadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccident55DataByRailroadResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccident55DataByState">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="year" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccident55DataByStateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccident55DataByStateResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetF96Schema">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetF96SchemaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetF96SchemaResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetF96SchemaWithSubUnits">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetF96SchemaWithSubUnitsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetF96SchemaWithSubUnitsResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetF96DataDownloadSchema">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetF96DataDownloadSchemaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetF96DataDownloadSchemaResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetF96DataDownloadSchemaWithSubUnits">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetF96DataDownloadSchemaWithSubUnitsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetF96DataDownloadSchemaWithSubUnitsResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPHMSADefectData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stateab" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FIPScountycode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="violation_Y_N_ALL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="startDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="endDate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPHMSADefectDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPHMSADefectDataResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDefectData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stateab" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FIPScountycode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="discipline_HMOST" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="violation_Y_N_ALL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="startDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="endDate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDefectDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDefectDataResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDefectDataDownload">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stateab" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FIPScountycode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="discipline_HMOST" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="violation_Y_N_ALL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="startDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="endDate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDefectDataDownloadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDefectDataDownloadResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDefectDataWithSubUnits">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stateab" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FIPScountycode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="discipline_HMOST" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="violation_Y_N_ALL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="startDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="endDate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDefectDataWithSubUnitsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDefectDataWithSubUnitsResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDefectDataDownloadWithSubUnits">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stateab" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FIPScountycode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="discipline_HMOST" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="violation_Y_N_ALL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="startDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="endDate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDefectDataDownloadWithSubUnitsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDefectDataDownloadWithSubUnitsResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetF71Schema">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetF71SchemaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetF71SchemaResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCrossingData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stateab" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCrossingDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCrossingDataResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCrossingDataByRailroad">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rrcode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="strCrossingType" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCrossingDataByRailroadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCrossingDataByRailroadResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCrossingDataByState">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stateab" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="strCrossingType" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCrossingDataByStateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCrossingDataByStateResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetF96DeletedSchema">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetF96DeletedSchemaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetF96DeletedSchemaResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDeletedDefectData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="startDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="endDate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDeletedDefectDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDeletedDefectDataResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetActivityData">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetActivityDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetActivityDataResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRailroadData">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetRailroadDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRailroadDataResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetHazmatShipperData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stateab" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FIPScountycode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="startDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="endDate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetHazmatShipperDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetHazmatShipperDataResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetF54SchemaSoapIn">
+    <wsdl:part name="parameters" element="tns:GetF54Schema" />
+  </wsdl:message>
+  <wsdl:message name="GetF54SchemaSoapOut">
+    <wsdl:part name="parameters" element="tns:GetF54SchemaResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident54DataByRailroadSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccident54DataByRailroad" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident54DataByRailroadSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccident54DataByRailroadResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident54DataByRailroadAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident54DataByStateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccident54DataByState" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident54DataByStateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccident54DataByStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident54DataByStateAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident57DataByStateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccident57DataByState" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident57DataByStateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccident57DataByStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident57DataByStateAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetF57SchemaSoapIn">
+    <wsdl:part name="parameters" element="tns:GetF57Schema" />
+  </wsdl:message>
+  <wsdl:message name="GetF57SchemaSoapOut">
+    <wsdl:part name="parameters" element="tns:GetF57SchemaResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident57DataByRailroadSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccident57DataByRailroad" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident57DataByRailroadSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccident57DataByRailroadResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident57DataByRailroadAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetF55aSchemaSoapIn">
+    <wsdl:part name="parameters" element="tns:GetF55aSchema" />
+  </wsdl:message>
+  <wsdl:message name="GetF55aSchemaSoapOut">
+    <wsdl:part name="parameters" element="tns:GetF55aSchemaResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident55aDataByRailroadSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccident55aDataByRailroad" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident55aDataByRailroadSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccident55aDataByRailroadResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident55aDataByRailroadAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident55aDataByStateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccident55aDataByState" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident55aDataByStateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccident55aDataByStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident55aDataByStateAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetF55SchemaSoapIn">
+    <wsdl:part name="parameters" element="tns:GetF55Schema" />
+  </wsdl:message>
+  <wsdl:message name="GetF55SchemaSoapOut">
+    <wsdl:part name="parameters" element="tns:GetF55SchemaResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident55DataByRailroadSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccident55DataByRailroad" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident55DataByRailroadSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccident55DataByRailroadResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident55DataByRailroadAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident55DataByStateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccident55DataByState" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident55DataByStateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccident55DataByStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccident55DataByStateAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetF96SchemaSoapIn">
+    <wsdl:part name="parameters" element="tns:GetF96Schema" />
+  </wsdl:message>
+  <wsdl:message name="GetF96SchemaSoapOut">
+    <wsdl:part name="parameters" element="tns:GetF96SchemaResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetF96SchemaWithSubUnitsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetF96SchemaWithSubUnits" />
+  </wsdl:message>
+  <wsdl:message name="GetF96SchemaWithSubUnitsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetF96SchemaWithSubUnitsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetF96DataDownloadSchemaSoapIn">
+    <wsdl:part name="parameters" element="tns:GetF96DataDownloadSchema" />
+  </wsdl:message>
+  <wsdl:message name="GetF96DataDownloadSchemaSoapOut">
+    <wsdl:part name="parameters" element="tns:GetF96DataDownloadSchemaResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetF96DataDownloadSchemaWithSubUnitsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetF96DataDownloadSchemaWithSubUnits" />
+  </wsdl:message>
+  <wsdl:message name="GetF96DataDownloadSchemaWithSubUnitsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetF96DataDownloadSchemaWithSubUnitsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPHMSADefectDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPHMSADefectData" />
+  </wsdl:message>
+  <wsdl:message name="GetPHMSADefectDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPHMSADefectDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPHMSADefectDataAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetDefectDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDefectData" />
+  </wsdl:message>
+  <wsdl:message name="GetDefectDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDefectDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDefectDataAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetDefectDataDownloadSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDefectDataDownload" />
+  </wsdl:message>
+  <wsdl:message name="GetDefectDataDownloadSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDefectDataDownloadResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDefectDataDownloadAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetDefectDataWithSubUnitsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDefectDataWithSubUnits" />
+  </wsdl:message>
+  <wsdl:message name="GetDefectDataWithSubUnitsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDefectDataWithSubUnitsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDefectDataWithSubUnitsAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetDefectDataDownloadWithSubUnitsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDefectDataDownloadWithSubUnits" />
+  </wsdl:message>
+  <wsdl:message name="GetDefectDataDownloadWithSubUnitsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDefectDataDownloadWithSubUnitsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDefectDataDownloadWithSubUnitsAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetF71SchemaSoapIn">
+    <wsdl:part name="parameters" element="tns:GetF71Schema" />
+  </wsdl:message>
+  <wsdl:message name="GetF71SchemaSoapOut">
+    <wsdl:part name="parameters" element="tns:GetF71SchemaResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCrossingDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCrossingData" />
+  </wsdl:message>
+  <wsdl:message name="GetCrossingDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCrossingDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCrossingDataAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetCrossingDataByRailroadSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCrossingDataByRailroad" />
+  </wsdl:message>
+  <wsdl:message name="GetCrossingDataByRailroadSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCrossingDataByRailroadResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCrossingDataByRailroadAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetCrossingDataByStateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCrossingDataByState" />
+  </wsdl:message>
+  <wsdl:message name="GetCrossingDataByStateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCrossingDataByStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCrossingDataByStateAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetF96DeletedSchemaSoapIn">
+    <wsdl:part name="parameters" element="tns:GetF96DeletedSchema" />
+  </wsdl:message>
+  <wsdl:message name="GetF96DeletedSchemaSoapOut">
+    <wsdl:part name="parameters" element="tns:GetF96DeletedSchemaResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDeletedDefectDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDeletedDefectData" />
+  </wsdl:message>
+  <wsdl:message name="GetDeletedDefectDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDeletedDefectDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDeletedDefectDataAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetActivityDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetActivityData" />
+  </wsdl:message>
+  <wsdl:message name="GetActivityDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetActivityDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetActivityDataAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetRailroadDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRailroadData" />
+  </wsdl:message>
+  <wsdl:message name="GetRailroadDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRailroadDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRailroadDataAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetHazmatShipperDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetHazmatShipperData" />
+  </wsdl:message>
+  <wsdl:message name="GetHazmatShipperDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetHazmatShipperDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetHazmatShipperDataAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:portType name="DataDownloadServiceSoap">
+    <wsdl:operation name="GetF54Schema">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get XML Schema for Rail equipment Accidents (Form 54)</wsdl:documentation>
+      <wsdl:input message="tns:GetF54SchemaSoapIn" />
+      <wsdl:output message="tns:GetF54SchemaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident54DataByRailroad">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Rail Equipment Accidents data by Railroad and Year, Where Year should be four digit like 2007  and Returns XMLDocument</wsdl:documentation>
+      <wsdl:input message="tns:GetAccident54DataByRailroadSoapIn" />
+      <wsdl:output message="tns:GetAccident54DataByRailroadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident54DataByState">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Rail Equipment Accidents data by State and Year, where Year should be four digit like 2007  and Returns XMLDocument</wsdl:documentation>
+      <wsdl:input message="tns:GetAccident54DataByStateSoapIn" />
+      <wsdl:output message="tns:GetAccident54DataByStateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident57DataByState">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Highway Rail Accidents data by State and Year, where Year should be four digit like 2007  and Returns XMLDocument</wsdl:documentation>
+      <wsdl:input message="tns:GetAccident57DataByStateSoapIn" />
+      <wsdl:output message="tns:GetAccident57DataByStateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetF57Schema">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get XML Schema for Highway Rail Accidents (Form 57)</wsdl:documentation>
+      <wsdl:input message="tns:GetF57SchemaSoapIn" />
+      <wsdl:output message="tns:GetF57SchemaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident57DataByRailroad">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Highway Rail Accidents data by Railroad andYear, where Year should be four digit like 2007  and Returns XMLDocument</wsdl:documentation>
+      <wsdl:input message="tns:GetAccident57DataByRailroadSoapIn" />
+      <wsdl:output message="tns:GetAccident57DataByRailroadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetF55aSchema">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get XML Schema for Railroad Casualties (Form 55a)</wsdl:documentation>
+      <wsdl:input message="tns:GetF55aSchemaSoapIn" />
+      <wsdl:output message="tns:GetF55aSchemaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident55aDataByRailroad">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Rail Railroad Casualties data by Railroad andYear, where Year should be four digit like 2007  and Returns XMLDocument</wsdl:documentation>
+      <wsdl:input message="tns:GetAccident55aDataByRailroadSoapIn" />
+      <wsdl:output message="tns:GetAccident55aDataByRailroadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident55aDataByState">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Railroad Casualties data by State and Year, Where Year should be four digit like 2007  and Returns XMLDocument</wsdl:documentation>
+      <wsdl:input message="tns:GetAccident55aDataByStateSoapIn" />
+      <wsdl:output message="tns:GetAccident55aDataByStateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetF55Schema">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get XML Schema for Operational Data (Form 55)</wsdl:documentation>
+      <wsdl:input message="tns:GetF55SchemaSoapIn" />
+      <wsdl:output message="tns:GetF55SchemaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident55DataByRailroad">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Operational Data data by Railroad and Year, where Year should be four digit like 2007  and Returns XMLDocument</wsdl:documentation>
+      <wsdl:input message="tns:GetAccident55DataByRailroadSoapIn" />
+      <wsdl:output message="tns:GetAccident55DataByRailroadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident55DataByState">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Operational Data data by State and Year, where Year should be four digit like 2007  and Returns XMLDocument</wsdl:documentation>
+      <wsdl:input message="tns:GetAccident55DataByStateSoapIn" />
+      <wsdl:output message="tns:GetAccident55DataByStateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetF96Schema">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get XML Schema of Defect data (Form 96)</wsdl:documentation>
+      <wsdl:input message="tns:GetF96SchemaSoapIn" />
+      <wsdl:output message="tns:GetF96SchemaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetF96SchemaWithSubUnits">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get XML Schema of Defect data (Form 96)</wsdl:documentation>
+      <wsdl:input message="tns:GetF96SchemaWithSubUnitsSoapIn" />
+      <wsdl:output message="tns:GetF96SchemaWithSubUnitsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetF96DataDownloadSchema">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get XML Schema of Defect data (Form 96)</wsdl:documentation>
+      <wsdl:input message="tns:GetF96DataDownloadSchemaSoapIn" />
+      <wsdl:output message="tns:GetF96DataDownloadSchemaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetF96DataDownloadSchemaWithSubUnits">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get XML Schema of Defect data (Form 96)</wsdl:documentation>
+      <wsdl:input message="tns:GetF96DataDownloadSchemaWithSubUnitsSoapIn" />
+      <wsdl:output message="tns:GetF96DataDownloadSchemaWithSubUnitsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPHMSADefectData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Hazmat Defect data by State = All or code, County = All or code, Violation = All or Y or N,  StartDate = [MMDDYYYY like 01012007 to represent Jan 1 2007 ] and  EndDate = [MMDDYYYY like 01312007 to represent Jan 31 2007 ]  Returns XMLDocument</wsdl:documentation>
+      <wsdl:input message="tns:GetPHMSADefectDataSoapIn" />
+      <wsdl:output message="tns:GetPHMSADefectDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDefectData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Defect data by State = All or code, County = All or code, Discipline = M (MP&amp;E) or O (OP) or S (Signal) or T (Track) and B (Blank Discipline) and X (Grade Crossing) and P (Positive Train Control), violation = All or Y or N and StartDate = [MMDDYYYY like 01012007 to represent Jan 1 2007 ] and  EndDate = [MMDDYYYY like 01312007 to represent Jan 31 2007 ]  Returns XMLDocument</wsdl:documentation>
+      <wsdl:input message="tns:GetDefectDataSoapIn" />
+      <wsdl:output message="tns:GetDefectDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDefectDataDownload">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Defect data by State = All or code, County = All or code, Discipline = M (MP&amp;E) or O (OP) or S (Signal) or T (Track) and B (Blank Discipline) and X (Grade Crossing) or P (Positive Train Control), Violation = All or Y or N and StartDate = [MMDDYYYY like 01012007 to represent Jan 1 2007 ] and  EndDate = [MMDDYYYY like 01312007 to represent Jan 31 2007 ]  Returns XMLDocument</wsdl:documentation>
+      <wsdl:input message="tns:GetDefectDataDownloadSoapIn" />
+      <wsdl:output message="tns:GetDefectDataDownloadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDefectDataWithSubUnits">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Defect data by State = All or code, County = All or code, Discipline = M (MP&amp;E) or O (OP) or S (Signal) or T (Track) and B (Blank Discipline) and X (Grade Crossing) and P (Positive Train Control), violation = All or Y or N and StartDate = [MMDDYYYY like 01012007 to represent Jan 1 2007 ] and  EndDate = [MMDDYYYY like 01312007 to represent Jan 31 2007 ]  Returns XMLDocument</wsdl:documentation>
+      <wsdl:input message="tns:GetDefectDataWithSubUnitsSoapIn" />
+      <wsdl:output message="tns:GetDefectDataWithSubUnitsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDefectDataDownloadWithSubUnits">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Defect data by State = All or code, County = All or code, Discipline = M (MP&amp;E) or O (OP) or S (Signal) or T (Track) and B (Blank Discipline) and X (Grade Crossing) and P (Positive Train Control), violation = All or Y or N and StartDate = [MMDDYYYY like 01012007 to represent Jan 1 2007 ] and  EndDate = [MMDDYYYY like 01312007 to represent Jan 31 2007 ]  Returns XMLDocument</wsdl:documentation>
+      <wsdl:input message="tns:GetDefectDataDownloadWithSubUnitsSoapIn" />
+      <wsdl:output message="tns:GetDefectDataDownloadWithSubUnitsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetF71Schema">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get XML Schema of crossing data</wsdl:documentation>
+      <wsdl:input message="tns:GetF71SchemaSoapIn" />
+      <wsdl:output message="tns:GetF71SchemaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCrossingData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get all crossings Inventory by State (All or code) and returns XMLDocument </wsdl:documentation>
+      <wsdl:input message="tns:GetCrossingDataSoapIn" />
+      <wsdl:output message="tns:GetCrossingDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCrossingDataByRailroad">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get all crossings Inventory by Railroad, Type of Crossing = [1 for Pedestrian, 2 for Private, 3 for Public] and returns XMLDocument </wsdl:documentation>
+      <wsdl:input message="tns:GetCrossingDataByRailroadSoapIn" />
+      <wsdl:output message="tns:GetCrossingDataByRailroadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCrossingDataByState">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get all crossings Inventory by State, Type of Crossing = [1 for Pedestrian, 2 for Private, 3 for Public] and returns XMLDocument </wsdl:documentation>
+      <wsdl:input message="tns:GetCrossingDataByStateSoapIn" />
+      <wsdl:output message="tns:GetCrossingDataByStateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetF96DeletedSchema">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get XML Schema of Defect data (Form 96)</wsdl:documentation>
+      <wsdl:input message="tns:GetF96DeletedSchemaSoapIn" />
+      <wsdl:output message="tns:GetF96DeletedSchemaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeletedDefectData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Deleted Defect data by StartDate = [MMDDYYYY like 01012007 to represent Jan 1 2007 ] and  EndDate = [MMDDYYYY like 01312007 to represent Jan 31 2007 ]  Returns XMLDocument</wsdl:documentation>
+      <wsdl:input message="tns:GetDeletedDefectDataSoapIn" />
+      <wsdl:output message="tns:GetDeletedDefectDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetActivityData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Activity refrence file and returns XMLDocument</wsdl:documentation>
+      <wsdl:input message="tns:GetActivityDataSoapIn" />
+      <wsdl:output message="tns:GetActivityDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRailroadData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Railroad refrence file and returns XMLDocument</wsdl:documentation>
+      <wsdl:input message="tns:GetRailroadDataSoapIn" />
+      <wsdl:output message="tns:GetRailroadDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHazmatShipperData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Hazmat Shipper data by State = All or code, County = All or code, StartDate = [MMDDYYYY like 01012007 to represent Jan 1 2007 ] and  EndDate = [MMDDYYYY like 01312007 to represent Jan 31 2007 ]  Returns XMLDocument</wsdl:documentation>
+      <wsdl:input message="tns:GetHazmatShipperDataSoapIn" />
+      <wsdl:output message="tns:GetHazmatShipperDataSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DataDownloadServiceSoap" type="tns:DataDownloadServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetF54Schema">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetF54Schema" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident54DataByRailroad">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetAccident54DataByRailroad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetAccident54DataByRailroadAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident54DataByState">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetAccident54DataByState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetAccident54DataByStateAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident57DataByState">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetAccident57DataByState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetAccident57DataByStateAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetF57Schema">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetF57Schema" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident57DataByRailroad">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetAccident57DataByRailroad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetAccident57DataByRailroadAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetF55aSchema">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetF55aSchema" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident55aDataByRailroad">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetAccident55aDataByRailroad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetAccident55aDataByRailroadAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident55aDataByState">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetAccident55aDataByState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetAccident55aDataByStateAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetF55Schema">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetF55Schema" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident55DataByRailroad">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetAccident55DataByRailroad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetAccident55DataByRailroadAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident55DataByState">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetAccident55DataByState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetAccident55DataByStateAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetF96Schema">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetF96Schema" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetF96SchemaWithSubUnits">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetF96SchemaWithSubUnits" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetF96DataDownloadSchema">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetF96DataDownloadSchema" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetF96DataDownloadSchemaWithSubUnits">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetF96DataDownloadSchemaWithSubUnits" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPHMSADefectData">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetPHMSADefectData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetPHMSADefectDataAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDefectData">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetDefectData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetDefectDataAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDefectDataDownload">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetDefectDataDownload" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetDefectDataDownloadAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDefectDataWithSubUnits">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetDefectDataWithSubUnits" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetDefectDataWithSubUnitsAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDefectDataDownloadWithSubUnits">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetDefectDataDownloadWithSubUnits" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetDefectDataDownloadWithSubUnitsAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetF71Schema">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetF71Schema" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCrossingData">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetCrossingData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetCrossingDataAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCrossingDataByRailroad">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetCrossingDataByRailroad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetCrossingDataByRailroadAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCrossingDataByState">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetCrossingDataByState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetCrossingDataByStateAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetF96DeletedSchema">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetF96DeletedSchema" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeletedDefectData">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetDeletedDefectData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetDeletedDefectDataAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetActivityData">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetActivityData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetActivityDataAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRailroadData">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetRailroadData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetRailroadDataAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHazmatShipperData">
+      <soap:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetHazmatShipperData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetHazmatShipperDataAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DataDownloadServiceSoap12" type="tns:DataDownloadServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetF54Schema">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetF54Schema" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident54DataByRailroad">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetAccident54DataByRailroad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetAccident54DataByRailroadAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident54DataByState">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetAccident54DataByState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetAccident54DataByStateAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident57DataByState">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetAccident57DataByState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetAccident57DataByStateAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetF57Schema">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetF57Schema" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident57DataByRailroad">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetAccident57DataByRailroad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetAccident57DataByRailroadAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetF55aSchema">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetF55aSchema" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident55aDataByRailroad">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetAccident55aDataByRailroad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetAccident55aDataByRailroadAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident55aDataByState">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetAccident55aDataByState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetAccident55aDataByStateAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetF55Schema">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetF55Schema" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident55DataByRailroad">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetAccident55DataByRailroad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetAccident55DataByRailroadAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccident55DataByState">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetAccident55DataByState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetAccident55DataByStateAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetF96Schema">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetF96Schema" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetF96SchemaWithSubUnits">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetF96SchemaWithSubUnits" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetF96DataDownloadSchema">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetF96DataDownloadSchema" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetF96DataDownloadSchemaWithSubUnits">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetF96DataDownloadSchemaWithSubUnits" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPHMSADefectData">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetPHMSADefectData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetPHMSADefectDataAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDefectData">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetDefectData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetDefectDataAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDefectDataDownload">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetDefectDataDownload" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetDefectDataDownloadAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDefectDataWithSubUnits">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetDefectDataWithSubUnits" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetDefectDataWithSubUnitsAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDefectDataDownloadWithSubUnits">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetDefectDataDownloadWithSubUnits" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetDefectDataDownloadWithSubUnitsAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetF71Schema">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetF71Schema" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCrossingData">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetCrossingData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetCrossingDataAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCrossingDataByRailroad">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetCrossingDataByRailroad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetCrossingDataByRailroadAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCrossingDataByState">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetCrossingDataByState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetCrossingDataByStateAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetF96DeletedSchema">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetF96DeletedSchema" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeletedDefectData">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetDeletedDefectData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetDeletedDefectDataAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetActivityData">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetActivityData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetActivityDataAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRailroadData">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetRailroadData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetRailroadDataAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHazmatShipperData">
+      <soap12:operation soapAction="https://safetydata.fra.dot.gov/MasterWebService/DataDownloadService/GetHazmatShipperData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetHazmatShipperDataAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DataDownloadService">
+    <wsdl:port name="DataDownloadServiceSoap" binding="tns:DataDownloadServiceSoap">
+      <soap:address location="https://safetydata.fra.dot.gov/MASTERWEBSERVICE/DatadownloadService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DataDownloadServiceSoap12" binding="tns:DataDownloadServiceSoap12">
+      <soap12:address location="https://safetydata.fra.dot.gov/MASTERWEBSERVICE/DatadownloadService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

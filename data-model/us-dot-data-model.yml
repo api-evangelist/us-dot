@@ -1,0 +1,221 @@
+generated: '2026-07-28'
+method: derived
+source: >-
+  openapi/us-dot-faa-airport-status-web-service-openapi.yml,
+  openapi/us-dot-faa-safety-assurance-system-api-openapi.yml,
+  openapi/us-dot-faa-air-carrier-prd-api-openapi.yml,
+  openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml,
+  json-schema/us-dot-wzdx-4.2-*.json
+summary: >-
+  U.S. DOT has no departmental data model. Each surface carries its own vocabulary and
+  there are no shared identifiers across them — an FAA airport status record, a BTS T-100
+  segment row and a WZDx road event feature cannot be joined on any DOT-issued key. The
+  one genuine cross-surface join key is the airport code (IATA three-letter and ICAO
+  four-letter), which appears in FAA ASWS, FAA SAS discrepancy reports and the BTS
+  Socrata aviation datasets. This file records the entity graph that the harvested
+  machine-readable artifacts actually declare; nothing is inferred beyond $ref links and
+  id-reference field names.
+identifiers:
+- id: iata_airport_code
+  pattern: 3-letter IATA code (e.g. JFK)
+  appears_in: [AirportStatus.iata, Delays.*.airport, Discrepancy.AirportCode, Discrepancy.DestinationAirportCode]
+  cross_surface: true
+  note: The only identifier shared between the FAA services and the BTS/DOT Socrata aviation datasets.
+- id: icao_airport_code
+  pattern: 4-letter ICAO code (e.g. KJFK)
+  appears_in: [AirportStatus.icao]
+  cross_surface: false
+  note: ASWS accepts either IATA or ICAO on the airportCode path parameter and returns both on the response.
+- id: carrier_designator
+  pattern: FAA air carrier designator (DSGN), 4 characters
+  appears_in: [sasRequest.ReporterDSGN, Discrepancy.AirCarrierDSGN, Discrepancy.FlightOperatedByDSGN]
+  cross_surface: false
+- id: socrata_four_by_four
+  pattern: 'xxxx-xxxx (e.g. bu82-4pwz)'
+  appears_in: [DOT Data Hub resource paths, BTS Open Data resource paths]
+  cross_surface: false
+  note: >-
+    The dataset identifier on every SODA resource URL. Not an entity id — it identifies
+    the dataset, not a row. Resolvable to metadata at /api/views/{fourbyfour}.json.
+- id: edition
+  pattern: current | next | changeset
+  appears_in: [APRA edition query parameter on 30 of 34 operations]
+  cross_surface: false
+  note: >-
+    APRA has no row-level identifier at all. The addressable unit is (product, edition,
+    format, geoname/volume/seriesType) — a coordinate, not a key.
+entities:
+- name: AirportStatus
+  api: us-dot:faa-airport-status-web-service
+  spec: openapi/us-dot-faa-airport-status-web-service-openapi.yml
+  primary_key: iata (or icao)
+  fields: [name, city, state, icao, iata, supportedAirport, delay, delayCount, status, weather]
+- name: Status
+  api: us-dot:faa-airport-status-web-service
+  spec: openapi/us-dot-faa-airport-status-web-service-openapi.yml
+  fields: [type, reason, avgDelay, closureEnd, closureBegin, minDelay, trend, maxDelay, endTime]
+- name: Weather
+  api: us-dot:faa-airport-status-web-service
+  spec: openapi/us-dot-faa-airport-status-web-service-openapi.yml
+  fields: [content]
+- name: Delays
+  api: us-dot:faa-airport-status-web-service
+  spec: openapi/us-dot-faa-airport-status-web-service-openapi.yml
+  note: National roll-up envelope. Four parallel collections, one per delay class.
+- name: GroundDelay
+  api: us-dot:faa-airport-status-web-service
+  fields: [airport, avgTime, reason]
+- name: GroundStop
+  api: us-dot:faa-airport-status-web-service
+  fields: [airport, endTime, reason]
+- name: ArriveDepartDelay
+  api: us-dot:faa-airport-status-web-service
+  fields: [airport, maxTime, minTime, reason]
+- name: Closure
+  api: us-dot:faa-airport-status-web-service
+  fields: [airport, reason, reopen]
+- name: sasRequest
+  api: us-dot:faa-safety-assurance-system-api
+  spec: openapi/us-dot-faa-safety-assurance-system-api-openapi.yml
+  fields: [ReporterName, AirCarrierName, ReporterPhone, ReporterEmail, ReporterDSGN, Discrepancies]
+  note: Carries reporter PII (name, phone, email). Credentialed surface.
+- name: Discrepancy
+  api: us-dot:faa-safety-assurance-system-api
+  fields: [AirCarrierDSGN, FlightOperatedByDSGN, CarrierRecordId, AirportCode, LocationOfDiscovery, DiscrepancyDate, PnrLocator, PassengerFullName, PassengerAddress, PassengerCity, PassengerStateCode, PassengerZipCode, PassengerCountryCode, PassengerPhone, PassengerEmail, FlightNumber, DestinationAirportCode, HazmatItems]
+  note: >-
+    Carries passenger PII and a PNR locator. This is the most sensitive payload in the
+    whole DOT surface area and the reason SAS is credential-gated.
+- name: HazmatItem
+  api: us-dot:faa-safety-assurance-system-api
+  fields: [HazmatDescription, Quantity, HazmatType, HazmatClass]
+- name: sasResponse
+  api: us-dot:faa-safety-assurance-system-api
+  fields: [confirmationMessage, totalDiscrepanciesImported, discrepanciesImportedWithErrors, errorMessage]
+- name: pilotData_example
+  api: us-dot:faa-air-carrier-prd-api
+  spec: openapi/us-dot-faa-air-carrier-prd-api-openapi.yml
+  note: >-
+    Request body schema for Pilot create/update. The FAA publishes it under an
+    "_example" name rather than a domain name; the spec declares no operationIds and no
+    response schemas beyond the literal string "success".
+- name: RoadEventFeature
+  api: WZDx work zone feed (specification, not a DOT-hosted API)
+  spec: json-schema/us-dot-wzdx-4.2-roadeventfeature.json
+  note: GeoJSON Feature. The unit of a WZDx feed.
+- name: WorkZoneFeed
+  spec: json-schema/us-dot-wzdx-4.2-workzonefeed.json
+- name: DeviceFeed
+  spec: json-schema/us-dot-wzdx-4.2-devicefeed.json
+- name: FeedInfo
+  spec: json-schema/us-dot-wzdx-4.2-feedinfo.json
+- name: BoundingBox
+  spec: json-schema/us-dot-wzdx-4.2-boundingbox.json
+- name: Direction
+  spec: json-schema/us-dot-wzdx-4.2-direction.json
+relationships:
+- from: AirportStatus
+  to: Status
+  kind: has_many
+  via: status
+  evidence: '$ref #/components/schemas/Status in an array property'
+- from: AirportStatus
+  to: Weather
+  kind: has_one
+  via: weather
+  evidence: '$ref #/components/schemas/Weather'
+- from: Delays
+  to: GroundDelays
+  kind: has_many
+  via: GroundDelays
+  evidence: '$ref #/components/schemas/GroundDelays'
+- from: Delays
+  to: GroundStops
+  kind: has_many
+  via: GroundStops
+  evidence: '$ref #/components/schemas/GroundStops'
+- from: Delays
+  to: ArriveDepartDelays
+  kind: has_many
+  via: ArriveDepartDelays
+  evidence: '$ref #/components/schemas/ArriveDepartDelays'
+- from: Delays
+  to: Closures
+  kind: has_many
+  via: Closures
+  evidence: '$ref #/components/schemas/Closures'
+- from: GroundDelays
+  to: GroundDelay
+  kind: has_many
+  via: GroundDelay
+- from: GroundStops
+  to: GroundStop
+  kind: has_many
+  via: GroundStop
+- from: ArriveDepartDelays
+  to: ArriveDepartDelay
+  kind: has_many
+  via: ArriveDepartDelay
+- from: Closures
+  to: Closure
+  kind: has_many
+  via: Closure
+- from: GroundDelay
+  to: AirportStatus
+  kind: belongs_to
+  via: airport
+  evidence: id-reference field carrying an IATA code; not a declared $ref
+  confidence: medium
+- from: GroundStop
+  to: AirportStatus
+  kind: belongs_to
+  via: airport
+  confidence: medium
+- from: ArriveDepartDelay
+  to: AirportStatus
+  kind: belongs_to
+  via: airport
+  confidence: medium
+- from: Closure
+  to: AirportStatus
+  kind: belongs_to
+  via: airport
+  confidence: medium
+- from: sasRequest
+  to: Discrepancy
+  kind: has_many
+  via: Discrepancies
+- from: Discrepancy
+  to: HazmatItem
+  kind: has_many
+  via: HazmatItems
+- from: Discrepancy
+  to: AirportStatus
+  kind: belongs_to
+  via: AirportCode
+  evidence: id-reference field carrying an IATA code across two unrelated FAA services
+  confidence: low
+  note: A semantic join, not a contract. Nothing in either spec declares the link.
+- from: WorkZoneFeed
+  to: RoadEventFeature
+  kind: has_many
+  via: features
+  evidence: json-schema/us-dot-wzdx-4.2-workzonefeed.json
+- from: WorkZoneFeed
+  to: FeedInfo
+  kind: has_one
+  via: feed_info
+- from: RoadEventFeature
+  to: BoundingBox
+  kind: has_one
+  via: bbox
+unmodelled_surfaces:
+- surface: DOT Data Hub / BTS Socrata SODA
+  reason: >-
+    Every dataset is its own flat schema declared per-asset at /api/views/{id}.json.
+    There are 1,542 datasets on data.transportation.gov and 420 on data.bts.gov; there is
+    no cross-dataset entity model, no foreign keys and no canonical DOT entity registry.
+    Field-level types are discoverable per dataset but not unifiable.
+- surface: FAA CKAN catalog (catalog.data.faa.gov)
+  reason: 'CKAN''s own package/resource/organization/tag model, DCAT-US 1.1 profile. Metadata about datasets, not transportation entities.'
+render: null
+render_note: No subway/ visual exists for this provider.

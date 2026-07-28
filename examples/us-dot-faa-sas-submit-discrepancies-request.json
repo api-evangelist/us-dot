@@ -1,0 +1,42 @@
+{
+  "ReporterName": "Al",
+  "AirCarrierName": "Al's Airline",
+  "ReporterPhone": "1234567890",
+  "ReporterEmail": "al@al.com",
+  "ReporterDSGN": "ALLA",
+  "Discrepancies": [
+    {
+      "AirCarrierDSGN": "SWAA",
+      "FlightOperatedByDSGN": "SWAA",
+      "CarrierRecordId": "B123",
+      "AirportCode": "BOS",
+      "LocationOfDiscovery": "handbag",
+      "DiscrepancyDate": "08/15/2019",
+      "PnrLocator": "",
+      "PassengerFullName": "Juan Smith",
+      "PassengerAddress": "123 Fake St",
+      "PassengerCity": "town",
+      "PassengerStateCode": "MA",
+      "PassengerZipCode": "02909",
+      "PassengerCountryCode": "US",
+      "PassengerPhone": "",
+      "PassengerEmail": "test@test.com",
+      "FlightNumber": "bla123",
+      "DestinationAirportCode": "LAX",
+      "HazmatItems": [
+        {
+          "HazmatDescription": "Cans of beer",
+          "Quantity": "Forty",
+          "HazmatType": "ALCOHOL",
+          "HazmatClass": "Class 6: Toxic Substances and Infectious Substances"
+        },
+        {
+          "HazmatDescription": "Unknown",
+          "Quantity": "15",
+          "HazmatType": "DE-ICER",
+          "HazmatClass": "Class 9: Miscellaneous Hazardous Materials"
+        }
+      ]
+    }
+  ]
+}
