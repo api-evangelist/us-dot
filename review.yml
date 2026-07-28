@@ -1,0 +1,473 @@
+aid: us-dot
+name: U.S. Department of Transportation
+review:
+  question: >-
+    What would it cost a consumer of U.S. Department of Transportation travel and aviation
+    data or APIs to leave, and what does DOT require of the airline distribution chain?
+  answer: >-
+    Almost nothing to leave, and a great deal of the industry. DOT publishes its aviation
+    data as public-domain Socrata SODA APIs and its FAA airspace and charting services as
+    unauthenticated OpenAPI 3.0.1 endpoints, with documented bulk export in every direction.
+    There is no commercial agreement, no minimum term, no fee and no revocation risk. The
+    lock-in that matters here runs the other way: DOT is the regulator whose 14 CFR Part 256
+    governs display bias in global distribution systems, corporate booking tools and internet
+    flight search tools, and whose Parts 250, 257, 258, 259, 260 and 399.84 set the consumer
+    disclosure floor that airlines, ticket agents and OTAs must meet at every point of sale.
+  date: '2026-07-28'
+  reviewer: API Evangelist
+  tier: regulator
+  homeMarket: United States
+findings:
+  summary: >-
+    U.S. DOT has no departmental developer portal reachable by automation — www.transportation.gov
+    returns HTTP 403 (Akamai "Access Denied") to every non-browser client tested, including
+    /developer, /data and /openapi.json. Underneath it, three genuinely open surfaces exist and
+    were all verified live on 2026-07-28: the DOT Data Hub (data.transportation.gov and
+    datahub.transportation.gov) and BTS Open Data (data.bts.gov) on Socrata SODA 2.1, and the
+    FAA API portal at api.faa.gov (a Gravitee deployment redirecting to portal.apic4e.faa.gov)
+    whose portal catalog API is enumerable anonymously and returned seven APIs, four of which
+    carry published OpenAPI definitions. All four specs were harvested verbatim and parse.
+  portals:
+  - url: https://www.transportation.gov/
+    status: 403
+    note: Akamai bot block. Returns "Access Denied" HTML to curl and to WebFetch with a browser User-Agent.
+  - url: https://www.transportation.gov/developer
+    status: 403
+    note: Same block. Could not confirm whether a departmental developer page exists behind it.
+  - url: https://data.transportation.gov/
+    status: 200
+    note: DOT Data Hub, Socrata. Self-serve, no login required to query.
+  - url: https://datahub.transportation.gov/
+    status: 200
+    note: Redirects to /login for the UI, but the SODA resource and catalog endpoints answer anonymously.
+  - url: https://data.bts.gov/
+    status: 200
+    note: Bureau of Transportation Statistics open data, Socrata. Discovery API reports 597 datasets.
+  - url: https://www.bts.gov/
+    status: 403
+    note: Akamai bot block, same as transportation.gov.
+  - url: https://www.transtats.bts.gov/
+    status: 200
+    note: TranStats — the form-driven bulk download portal for T-100, DB1B and On-Time Performance.
+  - url: https://api.faa.gov/
+    status: 200
+    note: 301 to https://portal.apic4e.faa.gov/ — Gravitee API portal, Angular SPA.
+  - url: https://portal.apic4e.faa.gov/assets/config.json
+    status: 200
+    note: Exposed the portal REST base URL https://apim-api.apic4e.faa.gov/portal
+  - url: https://developer.transportation.gov/
+    status: 000
+    note: Does not resolve.
+  - url: https://developers.transportation.gov/
+    status: 000
+    note: Does not resolve.
+  - url: https://api.transportation.gov/
+    status: 000
+    note: Does not resolve.
+  - url: https://docs.transportation.gov/
+    status: 000
+    note: Does not resolve.
+  specDiscovery:
+  - url: https://apim-api.apic4e.faa.gov/portal/environments/DEFAULT/apis?page=1&size=200
+    status: 200
+    note: >-
+      Public, unauthenticated Gravitee portal catalog. Returned 7 APIs — Safety Assurance
+      System (SAS), Air Carrier PRD, demosub, Data Set API, Airport Status Web Service,
+      Aeronautic Product Release API, DMS. Requires Accept text/plain (not application/json)
+      on the /pages/{id}/content route or the gateway answers HTTP 406 wrapped as a 500.
+  - url: https://apim-api.apic4e.faa.gov/portal/apis?page=1&size=100
+    status: 401
+    note: The unscoped variant requires auth; the environments-scoped variant does not.
+  - url: https://www.transportation.gov/openapi.json
+    status: 403
+  - url: https://www.transportation.gov/swagger.json
+    status: 403
+  - url: https://www.transportation.gov/.well-known/
+    status: 403
+  - url: https://data.bts.gov/openapi.json
+    status: 404
+    note: Socrata publishes no OpenAPI; the SODA 2.1 contract is documented at dev.socrata.com.
+  - url: https://external-api.faa.gov/notamapi/v1/openapi.json
+    status: 404
+  - url: https://external-api.faa.gov/notamapi/v1/swagger.json
+    status: 404
+  liveEndpointChecks:
+  - url: https://external-api.faa.gov/asws/api/airport/delays
+    status: 200
+    auth: none
+    note: 21 active delay records returned anonymously.
+  - url: https://external-api.faa.gov/asws/api/airport/status/JFK
+    status: 200
+    auth: none
+    note: Returned ICAO KJFK, IATA JFK, ground delay reason and average delay.
+  - url: https://external-api.faa.gov/apra/nfdc/nasr/info?edition=current
+    status: 200
+    auth: none
+    note: NASR 28-day subscription edition metadata, XML.
+  - url: https://external-api.faa.gov/apra/dtpp/info?edition=current
+    status: 200
+    auth: none
+    note: Digital Terminal Procedures Publication edition metadata, XML.
+  - url: https://external-api.faa.gov/notamapi/v1/notams
+    status: 401
+    auth: required
+    note: 'Body: {"message":"Unauthorized","http_status_code":401}. NOTAM API is gated and is not in the public portal catalog.'
+  - url: https://nasstatus.faa.gov/api/airport-status-information
+    status: 200
+    auth: none
+    note: Legacy fly.faa.gov XML airport status feed, still live and public. Undocumented; not listed in apis[].
+  - url: https://registry.faa.gov/database/ReleasableAircraft.zip
+    status: 200
+    auth: none
+    note: Full FAA releasable aircraft registration database as a ZIP download.
+  - url: https://datahub.transportation.gov/resource/4f3n-jbg2.json?$limit=1
+    status: 200
+    auth: none
+    note: Consumer Airfare Report Table 1, top 1,000 contiguous-state city-pair markets, 2025 Q4 data.
+  - url: https://data.transportation.gov/resource/4f3n-jbg2.json?$limit=1
+    status: 200
+    auth: none
+    note: Same asset served from the second hostname — the two domains are the same Socrata tenant.
+  - url: https://data.bts.gov/resource/bu82-4pwz.json?$limit=1
+    status: 200
+    auth: none
+    note: T-100 Segment Summary.
+  - url: https://data.bts.gov/resource/6u8d-47ih.json?$limit=1
+    status: 200
+    auth: none
+    note: Commercial Aviation mishandled baggage, wheelchairs and scooters.
+  - url: https://data.bts.gov/resource/xyfb-hgtv.json?$limit=1
+    status: 200
+    auth: none
+    note: Commercial Aviation involuntary denied boarding.
+  - url: https://datahub.transportation.gov/api/views/4f3n-jbg2.json
+    status: 200
+    auth: none
+    note: >-
+      Asset metadata. licenseId USGOV_WORKS, license "Public Domain U.S. Government",
+      termsLink https://www.usa.gov/government-works, attribution "Department of
+      Transportation Office of the Assistant Secretary for Aviation and International
+      Affairs", provenance official, category Aviation, downloadCount 117643.
+  - url: https://www.ecfr.gov/api/versioner/v1/structure/2026-07-01/title-14.json
+    status: 200
+    auth: none
+    note: Used to confirm the 14 CFR Chapter II part list verbatim.
+  aviationDataHoldingsVerified:
+    consumerAirfareReport:
+    - 4f3n-jbg2 — Table 1, Top 1,000 Contiguous State City-Pair Markets
+    - tfrh-tu9e — Table 1a, All U.S. Airport Pair Markets
+    - wqw2-rjgd — Table 2, Top 1,000 City-Pair Markets
+    - bkh6-tj42 — Table 5, Detailed Fare Information For Highest and Lowest Fares
+    - yj5y-b2ir — Table 6, Contiguous State City-Pair Markets
+    - d6nc-s8v6 — Table 7, Fare Premiums for Select Cities
+    airlineEconomics:
+    - evch-7vws — Airline Quarterly Financial Review, Majors
+    - cx9t-c4ar — Airline Quarterly Financial Review, Nationals
+    - 6mpe-e53g — Airline Quarterly Financial Review, Main Both
+    - bpdu-tujd — International Report, Seats
+    - udzf-9fvh — International Passengers and Freight, All Types
+    btsAviation:
+    - bu82-4pwz — AFF T-100 Segment Summary
+    - q4tb-tbff — AFF T-100 Segment Summary By Carrier
+    - 56rv-9p75 — AFF T-100 Segment Summary By Country
+    - r495-tyji — AFF T-100 Segment Summary By Origin Airport
+    - jqx4-4iha — AFF T-100 Segment Summary Monthly
+    - gjp5-nh2u — AFF Average Air Fare by Carrier
+    - h77j-murt — AFF Average Air Fare by Quarter
+    - 9tn7-rkk2 — AFF P12 Operating Revenues by Carrier
+    - w8ea-nba4 — AFF P12a Air Carrier Fuel Efficiency by Year
+    - xrt2-b7j8 — AFF Air Carrier Aircraft Fleet Age
+    - 6u8d-47ih — Commercial Aviation, Mishandled Baggage and Mishandled Wheelchairs and Scooters
+    - xyfb-hgtv — Commercial Aviation, Involuntary Denied Boarding
+    - hpjf-p2n3 — Top 20 U.S. Gateways for Nonstop International Air Travel
+switchingCost:
+  interfaceShape:
+    value: standard-plus-proprietary
+    standardsNamed:
+    - OpenAPI 3.0.1 (FAA Airport Status Web Service v1.2.1, Aeronautic Product Release API v1.4.0)
+    - OpenAPI 3.0.0 (FAA Safety Assurance System API, PRD Air Carrier API)
+    - Socrata SODA 2.1 (data.transportation.gov, datahub.transportation.gov, data.bts.gov)
+    - Socrata Discovery API v1 (api.us.socrata.com catalog, used to enumerate holdings)
+    - 14 CFR Chapter II (the regulatory contract DOT imposes on the distribution chain)
+    evidence: >-
+      Every machine contract DOT and FAA publish is described in an open description format
+      and served over plain HTTP with no vendor SDK requirement. Four OpenAPI 3.0.x documents
+      were harvested verbatim from the FAA portal and all parse. The SODA query dialect is
+      publicly documented at dev.socrata.com and is implemented by hundreds of other
+      government tenants, so query code written against DOT moves to any other Socrata host
+      unchanged.
+    proprietaryElements: >-
+      The payload vocabularies are DOT and FAA specific. Nothing here conforms to OpenTravel /
+      OTA, HTNG, IATA NDC, or any travel-industry schema. APRA returns FAA ARPA-namespaced XML
+      (http://arpa.ait.faa.gov/arpa_response) and delivers chart products as opaque ZIPs. ASWS
+      returns an FAA-shaped delay object. BTS field names (mkt_carrier, citymarketid_1,
+      airportid_1) are BTS conventions. So the transport and description are standard; the
+      semantics are not, and a consumer swapping to a commercial flight-data vendor would
+      rewrite the mapping layer even though the protocol stays the same.
+  secondSource:
+    value: no-alternative
+    alternativesConsidered:
+    - >-
+      Commercial flight-status and delay vendors — FlightAware, Cirium/FlightStats, OAG,
+      aviationstack, Aviation Edge, AviationAPI. These are delivery alternatives, not source
+      alternatives: several of them resell or derive from the same FAA ASWS/NASR feeds. Moving
+      to one buys better SLAs and richer coverage but does not remove the FAA as origin.
+    - >-
+      Aeronautical charting — Jeppesen (Boeing) sells an alternative chart product, but the
+      FAA-published dTPP, enroute and CIFP products in APRA are the free US regulatory source
+      of record and Jeppesen is a paid, differently-shaped substitute, not a drop-in.
+    - >-
+      Airline economics — there is no second source for T-100, Form 41 or DB1B. Every
+      commercial airline-data product in the US market (Cirium, OAG, Diio, Airline Data Inc.)
+      is a repackaging of BTS filings. A customer can pay a vendor for a nicer interface but
+      the underlying monopoly is statutory.
+    - >-
+      Aircraft registration — the FAA registry is the only US registry. No alternative exists.
+    verdict: >-
+      no-alternative is the honest finding. DOT is the origin of record for US aviation data
+      by statute. What makes this benign rather than coercive is that the origin charges
+      nothing, gates nothing on the public surface, and licenses everything into the public
+      domain.
+  exitPath:
+    value: bulk-export-documented
+    operationsCited:
+    - >-
+      Socrata SODA bulk export — every dataset supports full extraction via
+      /resource/{id}.{json,csv,xml,tsv} with $limit and $offset paging, and
+      /api/views/{id}/rows.csv?accessType=DOWNLOAD for a whole-table dump. Verified against
+      data.bts.gov and datahub.transportation.gov.
+    - >-
+      TranStats (https://www.transtats.bts.gov/, HTTP 200) — form-driven full-table ZIP
+      downloads of T-100, DB1B and On-Time Performance, the canonical bulk route for BTS
+      aviation data.
+    - >-
+      FAA releasable aircraft registry — https://registry.faa.gov/database/ReleasableAircraft.zip
+      returned HTTP 200 with a ZIP payload, anonymously.
+    - >-
+      FAA APRA — every /info operation returns edition metadata and every /chart operation
+      returns the complete product ZIP for that edition, so the entire US aeronautical chart
+      corpus is bulk-retrievable through the documented API.
+    verdict: >-
+      Best-in-class. There is nothing a consumer holds inside DOT that they cannot take out,
+      because DOT holds nothing of theirs. Data flows one way and the whole corpus is
+      downloadable.
+  identifierPortability:
+    summary: >-
+      Global industry identifiers plus openly published DOT-assigned numeric keys — nothing
+      opaque or vendor-private.
+    identifiersFound:
+    - IATA two-letter carrier codes (NK Spirit, UA United) in BTS and DOT datasets
+    - IATA three-letter airport codes (JFK, SFO, PHL, BOS) in ASWS and BTS
+    - ICAO four-letter airport codes (KJFK) returned by ASWS alongside IATA
+    - DOT/BTS Airline ID (airline_id 20416 = Spirit; mkt_carrier_airline_id 19977 = United)
+    - BTS City Market ID (citymarketid_1 32467 Miami, 31703 New York) and Airport ID (airportid_1 10257)
+    - FAA N-number aircraft registration marks and registry serials (ReleasableAircraft)
+    - FAA facility/NASR location identifiers in the NFDC subscription
+    - US DOT Number and MC Docket Number for motor carriers (FMCSA surface, outside aviation)
+    notFound:
+    - No PNR record locators — DOT does not touch reservations
+    - No IATA/ARC agency numbers in any public API surface
+    - No GDS record IDs, hotel chain codes or GIATA IDs
+    assessment: >-
+      Because DOT keys its aviation data on IATA/ICAO codes and publishes its own numeric IDs
+      with open lookup tables, joins built against DOT data survive a move to any commercial
+      vendor. This is the opposite of the GDS pattern, where the record locator is the
+      hostage.
+  contractualLockIn:
+    published: true
+    verbatim:
+    - >-
+      Dataset license (from https://datahub.transportation.gov/api/views/4f3n-jbg2.json):
+      "license": {"name": "Public Domain U.S. Government", "termsLink":
+      "https://www.usa.gov/government-works"}, "licenseId": "USGOV_WORKS"
+    - >-
+      FAA Air Carrier PRD API access restriction (from the FAA portal catalog description):
+      "Access is restricted to operators under Part 121, 135, 125, 91K, Air Tour, Public
+      Aircraft, or 91 Corporate."
+    findings: >-
+      No minimum term, no exclusivity, no full-content agreement, no segment fee, no
+      termination notice and no revocation-on-account-closure clause is published for any DOT
+      or FAA public API, because the public APIs require no account. The only contractual
+      surface is the regulatory one, and it runs from DOT outward to industry rather than from
+      DOT inward to developers.
+    regulatoryLockInImposedOnIndustry:
+    - >-
+      14 CFR Part 256, Electronic Airline Information Systems (Docket DOT-OST-2014-0056, 81 FR
+      76828, Nov. 3, 2016). Section 256.1(a) verbatim: "The purpose of this part is to set
+      forth requirements for the display of flight options by electronic airline information
+      systems that provide air carrier or foreign air carrier schedule, fare, or availability
+      information, including, but not limited to, global distribution systems (GDSs),
+      corporate booking tools, and internet flight search tools, for use by consumers,
+      carriers, ticket agents, and other business entities so as to prevent unfair or
+      deceptive practices in the distribution and sale of air transportation." Section 256.4(b)
+      verbatim: "An EAIS's integrated display must not give any carrier's flights a
+      system-imposed preference over any other carrier's flights in that market based on
+      carrier identity unless the preference is prominently disclosed as provided for in
+      256.5." This is the single most important regulatory fact in this record — DOT directly
+      regulates GDS display neutrality.
+    - 14 CFR Part 250 — Oversales (denied boarding compensation)
+    - 14 CFR Part 257 — Disclosure of Code-Sharing Arrangements and Long-Term Wet Leases
+    - 14 CFR Part 258 — Disclosure of Change-of-Gauge Services
+    - 14 CFR Part 259 — Enhanced Protections for Airline Passengers
+    - 14 CFR Part 260 — Refunds for Airline Fare and Ancillary Service Fees
+    - 14 CFR Part 399 (incl. 399.84 full-fare advertising) — Statements of General Policy
+    - 14 CFR Part 271 — Guidelines for Subsidizing Air Carriers Providing Essential Air Transportation
+    partListSource:
+      url: https://www.ecfr.gov/api/versioner/v1/structure/2026-07-01/title-14.json
+      status: 200
+      fetched: '2026-07-28'
+  distributionModel:
+    value: not-applicable
+    rationale: >-
+      DOT sells no inventory and intermediates no booking. It sits outside the distribution
+      chain as its regulator. The relevant posture is that DOT asserts jurisdiction over every
+      electronic airline information system displayed to US consumers — GDSs, corporate
+      booking tools and internet flight search tools alike — under Part 256, and over
+      code-share and fee disclosure at every point of sale including ticket agents and OTAs.
+  ndcPosture:
+    value: not applicable — regulator, not a carrier
+    detail: >-
+      No IATA NDC reference of any kind was found in DOT or FAA published material or API
+      surfaces. DOT publishes no NDC certification, no NDC endpoint and no NDC guidance. The
+      closest US regulatory analogue to NDC's stated aim of restructuring GDS intermediation
+      is 14 CFR Part 256's display-neutrality and disclosure obligations, which regulate the
+      behaviour of the incumbent channel rather than replacing its message format.
+  accessGate:
+    value: self-serve
+    whatADeveloperMustSign: >-
+      Nothing. The FAA Airport Status Web Service, the FAA Aeronautic Product Release API, the
+      FAA releasable aircraft registry download, and every Socrata dataset on
+      data.transportation.gov, datahub.transportation.gov and data.bts.gov all answered HTTP
+      200 anonymously on 2026-07-28 with no API key, no OAuth, no registration and no terms
+      click-through. A Socrata app token is optional and only affects throttling tiers.
+    gatedSubsets:
+    - >-
+      FAA NOTAM API (https://external-api.faa.gov/notamapi/v1/notams) — HTTP 401, credential
+      required, not present in the public portal catalog. This is the one materially gated
+      aviation surface.
+    - >-
+      FAA Safety Assurance System API — the harvested OpenAPI declares apiKey and appId
+      security schemes.
+    - >-
+      FAA Air Carrier PRD API — accreditation-style gate, limited by regulation to Part 121,
+      135, 125, 91K, Air Tour, Public Aircraft and Part 91 Corporate operators.
+    - >-
+      FAA SWIM (swim.faa.gov did not resolve from this network) — historically requires an
+      account and a data use agreement; could not be verified in this pass and is therefore
+      not listed in apis[].
+  overallVerdict: >-
+    The cost of leaving U.S. DOT is effectively zero and the cost of arriving is effectively
+    zero, which makes this organization the structural inverse of the GDS and channel-manager
+    incumbents that define the travel sector. What DOT does own is monopoly origination: it is
+    the only source of US airline economic filings, US aircraft registration, US aeronautical
+    charts and US airspace status. It converts that monopoly into a public good by licensing
+    it USGOV_WORKS, serving it unauthenticated, and documenting bulk export. For a Kin Score
+    switching-cost dimension, this record is the reference point at the free end of the scale
+    — and the Part 256 material is the evidence that a regulator's real lock-in exposure is
+    measured in what it imposes on others, not in what it charges its own developers.
+sources:
+- url: https://apim-api.apic4e.faa.gov/portal/environments/DEFAULT/apis?page=1&size=200
+  type: APICatalog
+  status: 200
+  fetched: '2026-07-28'
+  note: FAA Gravitee portal catalog, 7 APIs, enumerated anonymously.
+- url: https://portal.apic4e.faa.gov/assets/config.json
+  type: Configuration
+  status: 200
+  fetched: '2026-07-28'
+  note: 'Revealed portal REST base: {"baseURL": "https://apim-api.apic4e.faa.gov/portal"}'
+- url: https://api.faa.gov/s/
+  type: Portal
+  status: 200
+  fetched: '2026-07-28'
+  note: 301 to https://portal.apic4e.faa.gov/s/ — Angular SPA, catalog browsable without login.
+- url: https://data.transportation.gov/
+  type: Portal
+  status: 200
+  fetched: '2026-07-28'
+- url: https://data.bts.gov/
+  type: Portal
+  status: 200
+  fetched: '2026-07-28'
+- url: https://www.transtats.bts.gov/
+  type: BulkData
+  status: 200
+  fetched: '2026-07-28'
+- url: https://www.ecfr.gov/current/title-14/chapter-II/subchapter-A/part-256
+  type: Regulation
+  status: 200
+  fetched: '2026-07-28'
+  note: Full text retrieved via the eCFR versioner API and quoted verbatim above.
+- url: https://dev.socrata.com/docs/endpoints.html
+  type: Documentation
+  status: 200
+  fetched: '2026-07-28'
+  note: SODA 2.1 contract documentation, the interface DOT and BTS open data implement.
+harvest:
+  openapiDirectory: openapi/
+  specs:
+  - file: openapi/us-dot-faa-airport-status-web-service-openapi.yml
+    sourceURL: https://apim-api.apic4e.faa.gov/portal/environments/DEFAULT/apis/a4c8271d-a54a-4dcc-8827-1da54a4dccad/pages/c8fa6cc8-447d-4ba0-ba6c-c8447dbba0a1/content
+    httpStatus: 200
+    fetched: '2026-07-28'
+    bytes: 8212
+    openapiVersion: 3.0.1
+    title: Airport Status Web Service
+    specVersion: 1.2.1
+    paths: 2
+    parsed: true
+    modified: false
+  - file: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml
+    sourceURL: https://apim-api.apic4e.faa.gov/portal/environments/DEFAULT/apis/d8790d55-9ecc-4d72-b90d-559eccad7286/pages/719dfd44-f165-4f07-9dfd-44f1658f07e6/content
+    httpStatus: 200
+    fetched: '2026-07-28'
+    bytes: 56840
+    openapiVersion: 3.0.1
+    title: Aeronautic Product Release API
+    specVersion: 1.4.0
+    paths: 34
+    parsed: true
+    modified: false
+  - file: openapi/us-dot-faa-air-carrier-prd-api-openapi.yml
+    sourceURL: https://apim-api.apic4e.faa.gov/portal/environments/DEFAULT/apis/51c35874-3873-4124-8358-743873012421/pages/8c9a2541-aa78-4642-9a25-41aa7856421e/content
+    httpStatus: 200
+    fetched: '2026-07-28'
+    bytes: 21905
+    openapiVersion: 3.0.0
+    title: PRD Air Carrier API
+    specVersion: v1
+    paths: 5
+    parsed: true
+    modified: false
+  - file: openapi/us-dot-faa-safety-assurance-system-api-openapi.yml
+    sourceURL: https://apim-api.apic4e.faa.gov/portal/environments/DEFAULT/apis/4f7eeb3e-2012-4095-beeb-3e2012e09593/pages/bd564db4-8c26-49cc-964d-b48c26c9cc7b/content
+    httpStatus: 200
+    fetched: '2026-07-28'
+    bytes: 13282
+    openapiVersion: 3.0.0
+    title: sas-api
+    specVersion: 1.0.0
+    paths: 1
+    parsed: true
+    modified: false
+  notHarvested:
+  - name: Data Set API (FAA)
+    reason: Listed public in the portal catalog but has zero documentation pages and its only entrypoint is https://internal-api.faa.gov/dgc/datasets — internal-only.
+  - name: DMS (FAA designee lookup)
+    reason: Listed public but zero documentation pages; entrypoint https://internal.apic4e.faa.gov/dmsapi is internal-only.
+  - name: demosub (FAA)
+    reason: Empty demo API, no description, no pages, internal entrypoint only.
+  - name: FAA NOTAM API
+    reason: Live at https://external-api.faa.gov/notamapi/v1/notams but returns 401 and is absent from the public portal catalog; no public spec found.
+notes:
+  duplicateWarning: >-
+    The api-evangelist network already carries overlapping profiles at all/dot,
+    all/department-of-transportation, all/bureau-of-transportation-statistics and
+    all/federal-aviation-administration. This us-dot record was built independently from live
+    probes and should be reconciled against those four under the duplicate-provider retirement
+    process before publication.
+  scopeNote: >-
+    FAA is an operating administration of the U.S. Department of Transportation, so its API
+    portal is recorded here as a DOT surface. NHTSA and FMCSA APIs exist under DOT as well but
+    are out of scope for this travel and aviation seam and are already profiled elsewhere in
+    the network.
