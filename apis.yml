@@ -47,43 +47,15 @@ created: '2026-07-28'
 modified: '2026-07-28'
 specificationVersion: '0.19'
 apis:
-- aid: us-dot:faa-airport-status-web-service
-  name: FAA Airport Status Web Service (ASWS)
-  description: >-
-    Real-time National Airspace System delay and airport status service operated by the
-    Federal Aviation Administration, a DOT operating administration. Two GET operations
-    return current ground delays, ground stops, arrival/departure delays and closures across
-    supported US airports, and per-airport status keyed by IATA or ICAO code. Verified
-    anonymously with HTTP 200 on 2026-07-28 — no API key, no registration, no terms
-    acceptance. Responses carry both IATA (JFK) and ICAO (KJFK) identifiers.
-  humanURL: https://api.faa.gov/s/
-  baseURL: https://external-api.faa.gov/asws/api
-  tags:
-  - Aviation
-  - Airports
-  - Delays
-  - Air Traffic
-  - FAA
-  properties:
-  - type: OpenAPI
-    url: openapi/us-dot-faa-airport-status-web-service-openapi.yml
-  - type: Overlay
-    url: overlays/us-dot-faa-airport-status-web-service-overlay.yaml
-  - type: Documentation
-    url: https://api.faa.gov/s/
-  - type: AgentSkill
-    name: Check US airport delays and ground stops
-    url: skills/us-dot-check-airport-delays.md
 - aid: us-dot:faa-aeronautic-product-release-api
   name: FAA Aeronautic Product Release API (APRA)
   description: >-
-    FAA aeronautical chart and data publication download API. Thirty-four GET operations
-    expose edition metadata and ZIP product downloads for the digital Terminal Procedures
-    Publication (dTPP), IFR enroute and oceanic charts, VFR charts, the Coded Instrument
-    Flight Procedures data set, the NFDC/NASR 28-day airspace subscription, the Digital
-    Obstacle File and more. Verified anonymously with HTTP 200 on 2026-07-28 against
-    /apra/nfdc/nasr/info and /apra/dtpp/info — no API key required. Two operations
-    (getDERSRelease, getDERSEdition) are marked deprecated in the spec.
+    FAA aeronautical chart and data publication download API. Thirty-four GET operations expose edition
+    metadata and ZIP product downloads for the digital Terminal Procedures Publication (dTPP), IFR enroute
+    and oceanic charts, VFR charts, the Coded Instrument Flight Procedures data set, the NFDC/NASR 28-day
+    airspace subscription, the Digital Obstacle File and more. Verified anonymously with HTTP 200 on 2026-07-28
+    against /apra/nfdc/nasr/info and /apra/dtpp/info — no API key required. Two operations (getDERSRelease,
+    getDERSEdition) are marked deprecated in the spec.
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
@@ -105,13 +77,12 @@ apis:
 - aid: us-dot:faa-air-carrier-prd-api
   name: FAA Air Carrier Pilot Records Database (PRD) API
   description: >-
-    Data submission API for the FAA Pilot Records Database. Five paths covering pilot record
-    create/update/delete, pilot data tracking, and asynchronous pilot data search request and
-    response. Access is restricted by the FAA to operators under 14 CFR Part 121, 135, 125,
-    91K, Air Tour, Public Aircraft, or Part 91 Corporate — this is an accreditation-style gate,
-    not a self-serve signup. Credentials are client_id and client_secret request headers
-    declared as ordinary parameters, not as securitySchemes. The OpenAPI 3.0.0 definition is
-    published openly in the FAA portal catalog and was harvested verbatim.
+    Data submission API for the FAA Pilot Records Database. Five paths covering pilot record create/update/delete,
+    pilot data tracking, and asynchronous pilot data search request and response. Access is restricted
+    by the FAA to operators under 14 CFR Part 121, 135, 125, 91K, Air Tour, Public Aircraft, or Part 91
+    Corporate — this is an accreditation-style gate, not a self-serve signup. Credentials are client_id
+    and client_secret request headers declared as ordinary parameters, not as securitySchemes. The OpenAPI
+    3.0.0 definition is published openly in the FAA portal catalog and was harvested verbatim.
   humanURL: https://api.faa.gov/s/
   baseURL: https://external.apic4e.faa.gov
   tags:
@@ -128,16 +99,17 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
 - aid: us-dot:faa-safety-assurance-system-api
   name: FAA Safety Assurance System (SAS) API
   description: >-
-    Single-operation submission API for passenger discrepancy reporting into the FAA Safety
-    Assurance System. Air carriers submit hazardous-material discrepancies discovered on
-    passengers or in passenger baggage. The harvested OpenAPI 3.0.0 declares apiKey and appId
-    security schemes (X-API-KEY plus X-APP-ID), so a credential is required; the definition
-    itself is published openly in the FAA portal catalog. The request body carries passenger
-    PII and a PNR locator and is the most sensitive payload in the DOT surface area.
+    Single-operation submission API for passenger discrepancy reporting into the FAA Safety Assurance
+    System. Air carriers submit hazardous-material discrepancies discovered on passengers or in passenger
+    baggage. The harvested OpenAPI 3.0.0 declares apiKey and appId security schemes (X-API-KEY plus X-APP-ID),
+    so a credential is required; the definition itself is published openly in the FAA portal catalog.
+    The request body carries passenger PII and a PNR locator and is the most sensitive payload in the
+    DOT surface area.
   humanURL: https://api.faa.gov/s/
   baseURL: https://external.apic4e.faa.gov/axh-sasp-api/sas
   tags:
@@ -160,12 +132,11 @@ apis:
 - aid: us-dot:faa-data-catalog-ckan-api
   name: FAA Data Catalog (CKAN Action API v3)
   description: >-
-    The Federal Aviation Administration's open data catalog, running CKAN 2.11.4 and exposing
-    the full CKAN Action API v3 anonymously at /api/3/action/. package_list, package_search,
-    package_show, organization_list and status_show all answer without a credential; verified
-    2026-07-28. The catalog also publishes a Project Open Data / DCAT-US 1.1 document at
-    /data.json, harvested to well-known/us-dot-faa-catalog-data.json. Small — six datasets —
-    but it is the only CKAN surface in the department and the only one with a documented,
+    The Federal Aviation Administration's open data catalog, running CKAN 2.11.4 and exposing the full
+    CKAN Action API v3 anonymously at /api/3/action/. package_list, package_search, package_show, organization_list
+    and status_show all answer without a credential; verified 2026-07-28. The catalog also publishes a
+    Project Open Data / DCAT-US 1.1 document at /data.json, harvested to well-known/us-dot-faa-catalog-data.json.
+    Small — six datasets — but it is the only CKAN surface in the department and the only one with a documented,
     self-describing action API (help_show returns the parameter contract per action).
   humanURL: https://catalog.data.faa.gov/
   baseURL: https://catalog.data.faa.gov/api/3
@@ -187,15 +158,14 @@ apis:
 - aid: us-dot:dot-data-hub-soda-api
   name: DOT Data Hub Open Data API
   description: >-
-    The departmental open data platform, served from both data.transportation.gov and
-    datahub.transportation.gov on Socrata SODA 2.1. For travel and aviation this is where the
-    DOT Office of the Assistant Secretary for Aviation and International Affairs publishes the
-    Consumer Airfare Report city-pair fare tables (Tables 1, 1a, 2, 5, 6 and 7), the Airline
-    Quarterly Financial Review, and international seat and passenger reports. 1,542 datasets
-    enumerated in the DCAT-US 1.1 document at /data.json. Datasets are licensed Public Domain
-    U.S. Government (USGOV_WORKS). Verified anonymously with HTTP 200 on 2026-07-28 against
-    /resource/4f3n-jbg2.json and /resource/tfrh-tu9e.json — no app token required for the
-    volumes tested.
+    The departmental open data platform, served from both data.transportation.gov and datahub.transportation.gov
+    on Socrata SODA 2.1. For travel and aviation this is where the DOT Office of the Assistant Secretary
+    for Aviation and International Affairs publishes the Consumer Airfare Report city-pair fare tables
+    (Tables 1, 1a, 2, 5, 6 and 7), the Airline Quarterly Financial Review, and international seat and
+    passenger reports. 1,542 datasets enumerated in the DCAT-US 1.1 document at /data.json. Datasets are
+    licensed Public Domain U.S. Government (USGOV_WORKS). Verified anonymously with HTTP 200 on 2026-07-28
+    against /resource/4f3n-jbg2.json and /resource/tfrh-tu9e.json — no app token required for the volumes
+    tested.
   humanURL: https://data.transportation.gov/
   baseURL: https://datahub.transportation.gov/resource
   tags:
@@ -225,13 +195,12 @@ apis:
 - aid: us-dot:bts-open-data-soda-api
   name: Bureau of Transportation Statistics Open Data API
   description: >-
-    The Bureau of Transportation Statistics open data platform on Socrata SODA 2.1, and the
-    authoritative record of US commercial aviation activity. Aviation holdings verified live
-    include T-100 segment summaries by carrier, country, origin airport and month; Air Carrier
-    Financial (Form 41) fuel, revenue, employee and fleet-age series; average air fare by
-    carrier and by quarter; commercial aviation mishandled baggage and mishandled wheelchairs
-    and scooters; and involuntary denied boardings by airline. 420 datasets enumerated in the
-    DCAT-US 1.1 document at /data.json. Verified anonymously with HTTP 200 on 2026-07-28
+    The Bureau of Transportation Statistics open data platform on Socrata SODA 2.1, and the authoritative
+    record of US commercial aviation activity. Aviation holdings verified live include T-100 segment summaries
+    by carrier, country, origin airport and month; Air Carrier Financial (Form 41) fuel, revenue, employee
+    and fleet-age series; average air fare by carrier and by quarter; commercial aviation mishandled baggage
+    and mishandled wheelchairs and scooters; and involuntary denied boardings by airline. 420 datasets
+    enumerated in the DCAT-US 1.1 document at /data.json. Verified anonymously with HTTP 200 on 2026-07-28
     against /resource/bu82-4pwz.json, /resource/6u8d-47ih.json and /resource/xyfb-hgtv.json.
   humanURL: https://data.bts.gov/
   baseURL: https://data.bts.gov/resource
@@ -259,14 +228,13 @@ apis:
 - aid: us-dot:nhtsa-vpic-api
   name: NHTSA vPIC (Vehicle Product Information Catalog) API
   description: >-
-    The National Highway Traffic Safety Administration's Vehicle Product Information Catalog
-    and VIN decoder, and the most widely consumed API in the department. Decodes any US-market
-    VIN into make, model, model year, body class, engine, plant and safety-equipment fields,
-    and enumerates the full manufacturer, make, model and vehicle-type reference data behind
-    it. Verified anonymously with HTTP 200 on 2026-07-28 — DecodeVinValues returned a decoded
-    2011 BMW VIN and getallmakes returned 12,306 makes. No API key, no registration, no rate
-    charge. Responses support format=json or format=xml. NHTSA publishes no OpenAPI for it;
-    the reference is HTML at vpic.nhtsa.dot.gov/api/.
+    The National Highway Traffic Safety Administration's Vehicle Product Information Catalog and VIN decoder,
+    and the most widely consumed API in the department. Decodes any US-market VIN into make, model, model
+    year, body class, engine, plant and safety-equipment fields, and enumerates the full manufacturer,
+    make, model and vehicle-type reference data behind it. Verified anonymously with HTTP 200 on 2026-07-28
+    — DecodeVinValues returned a decoded 2011 BMW VIN and getallmakes returned 12,306 makes. No API key,
+    no registration, no rate charge. Responses support format=json or format=xml. NHTSA publishes no OpenAPI
+    for it; the reference is HTML at vpic.nhtsa.dot.gov/api/.
   humanURL: https://vpic.nhtsa.dot.gov/api/
   baseURL: https://vpic.nhtsa.dot.gov/api/vehicles
   tags:
@@ -284,14 +252,13 @@ apis:
 - aid: us-dot:nhtsa-safety-api
   name: NHTSA Safety API (recalls, complaints, safety ratings)
   description: >-
-    The NHTSA public safety API that powers the dynamic search applications on nhtsa.gov.
-    Three families: /recalls for safety recalls by vehicle or campaign number, /complaints for
-    consumer complaints filed with NHTSA (each with ODI number, crash and fire flags, injury
-    and death counts and incident dates), and /SafetyRatings for the New Car Assessment
-    Program 5-Star Safety Ratings walked by model year, make and model. Verified anonymously
-    with HTTP 200 on 2026-07-28 — complaintsByVehicle for a 2020 Honda Accord returned 341
-    records and /SafetyRatings returned 37 model years. No API key. Governed by the NHTSA API
-    Use Policy published at the base host.
+    The NHTSA public safety API that powers the dynamic search applications on nhtsa.gov. Three families:
+    /recalls for safety recalls by vehicle or campaign number, /complaints for consumer complaints filed
+    with NHTSA (each with ODI number, crash and fire flags, injury and death counts and incident dates),
+    and /SafetyRatings for the New Car Assessment Program 5-Star Safety Ratings walked by model year,
+    make and model. Verified anonymously with HTTP 200 on 2026-07-28 — complaintsByVehicle for a 2020
+    Honda Accord returned 341 records and /SafetyRatings returned 37 model years. No API key. Governed
+    by the NHTSA API Use Policy published at the base host.
   humanURL: https://www.nhtsa.gov/nhtsa-datasets-and-apis
   baseURL: https://api.nhtsa.gov
   tags:
@@ -309,16 +276,15 @@ apis:
 - aid: us-dot:fra-safety-data-api
   name: FRA Safety Data Web Services
   description: >-
-    The Federal Railroad Administration's rail safety web services, and the only SOAP surface
-    in the department. Two WSDL 1.1 contracts were retrieved live and harvested verbatim on
-    2026-07-28. The Master Web Service (DatadownloadService.asmx, 30 operations) exposes the
-    Rail Equipment Accident/Incident Report (Form 54), the Highway-Rail Grade Crossing
-    Accident/Incident Report (Form 57), Form 55 and 55a, grade crossing inventory, defect and
-    PHMSA defect data, hazmat shipper data and railroad reference data, each retrievable by
-    railroad or by state, plus per-form schema operations. The Lite API (LiteApiService.asmx,
-    5 operations) returns casualty, enforcement, summary, ten-year and train accident series
-    by year. Declared a pilot by FRA. Accounts are requested by email to RsisSupport@dot.gov —
-    the Master service and the Lite API require separate requests.
+    The Federal Railroad Administration's rail safety web services, and the only SOAP surface in the department.
+    Two WSDL 1.1 contracts were retrieved live and harvested verbatim on 2026-07-28. The Master Web Service
+    (DatadownloadService.asmx, 30 operations) exposes the Rail Equipment Accident/Incident Report (Form
+    54), the Highway-Rail Grade Crossing Accident/Incident Report (Form 57), Form 55 and 55a, grade crossing
+    inventory, defect and PHMSA defect data, hazmat shipper data and railroad reference data, each retrievable
+    by railroad or by state, plus per-form schema operations. The Lite API (LiteApiService.asmx, 5 operations)
+    returns casualty, enforcement, summary, ten-year and train accident series by year. Declared a pilot
+    by FRA. Accounts are requested by email to RsisSupport@dot.gov — the Master service and the Lite API
+    require separate requests.
   humanURL: https://safetydata.fra.dot.gov/MasterWebService/FRASafetyDataAPIs.aspx
   baseURL: https://safetydata.fra.dot.gov/MasterWebService
   tags:
@@ -344,13 +310,13 @@ apis:
 - aid: us-dot:fmcsa-qcmobile-api
   name: FMCSA QCMobile API
   description: >-
-    The Federal Motor Carrier Safety Administration's carrier data API — real-time queries on
-    motor carrier registration, authority and safety data, including all of the passenger
-    carrier data that used to be served by the retired SaferBus API. RESTful, keyed by a free
-    webKey query parameter. This is the only self-serve API credential anywhere in the
-    department: create a Login.gov account, sign in to the FMCSA developer site and generate a
-    key. The developer site publishes a quick start guide, an API access guide, the QCMobile
-    API reference and an API response element reference. FMCSA publishes no OpenAPI.
+    The Federal Motor Carrier Safety Administration's carrier data API — real-time queries on motor carrier
+    registration, authority and safety data, including all of the passenger carrier data that used to
+    be served by the retired SaferBus API. RESTful, keyed by a free webKey query parameter. This is the
+    only self-serve API credential anywhere in the department: create a Login.gov account, sign in to
+    the FMCSA developer site and generate a key. The developer site publishes a quick start guide, an
+    API access guide, the QCMobile API reference and an API response element reference. FMCSA publishes
+    no OpenAPI.
   humanURL: https://mobile.fmcsa.dot.gov/QCDevsite/
   baseURL: https://mobile.fmcsa.dot.gov/qc/services
   tags:
@@ -375,16 +341,15 @@ apis:
 - aid: us-dot:its-jpo-ode-rest-api
   name: USDOT ITS JPO Operational Data Environment (ODE) REST API
   description: >-
-    The reference connected-vehicle data platform authored by the USDOT Intelligent
-    Transportation Systems Joint Program Office. Eight operations over SAE J2735 messaging —
-    Traveler Information Message query, create, update and delete against physical roadside
-    units, Probe Data Management deposit, SNMP query and on-board-unit log upload. This is
-    DEPLOYABLE SOFTWARE, not a DOT-hosted service: the Swagger 2.0 host is the literal
-    placeholder "yourhostname" and an operator runs it on its own infrastructure under Apache
-    2.0. The REST API is the thin edge of a Kafka platform whose 35 topics are declared in the
-    ODE's own configuration and captured as an AsyncAPI 3.0 document here. Safety-critical —
-    the TIM writes change what roadside units broadcast to vehicles, and there is no
-    idempotency key anywhere on the surface.
+    The reference connected-vehicle data platform authored by the USDOT Intelligent Transportation Systems
+    Joint Program Office. Eight operations over SAE J2735 messaging — Traveler Information Message query,
+    create, update and delete against physical roadside units, Probe Data Management deposit, SNMP query
+    and on-board-unit log upload. This is DEPLOYABLE SOFTWARE, not a DOT-hosted service: the Swagger 2.0
+    host is the literal placeholder "yourhostname" and an operator runs it on its own infrastructure under
+    Apache 2.0. The REST API is the thin edge of a Kafka platform whose 35 topics are declared in the
+    ODE's own configuration and captured as an AsyncAPI 3.0 document here. Safety-critical — the TIM writes
+    change what roadside units broadcast to vehicles, and there is no idempotency key anywhere on the
+    surface.
   humanURL: https://github.com/usdot-jpo-ode/jpo-ode
   baseURL: https://github.com/usdot-jpo-ode/jpo-ode
   tags:
@@ -414,6 +379,16 @@ apis:
   - type: AgentSkill
     name: Deposit a Traveler Information Message to a roadside unit (ODE)
     url: skills/us-dot-deposit-tim-to-roadside-unit.md
+- aid: us-dot:us-dot-faa-airport-status-web-service-openapi
+  name: U.S. Department of Transportation Airport Status Web Service
+  description: >-
+    U.S. Department of Transportation Airport Status Web Service from U.S. Department of Transportation
+    — 2 path(s) described in OpenAPI.
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-faa-airport-status-web-service-openapi.yml
 common:
 - type: Website
   url: https://www.transportation.gov/
