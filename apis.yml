@@ -390,6 +390,8 @@ apis:
   - type: OpenAPI
     url: openapi/us-dot-faa-airport-status-web-service-openapi.yml
 common:
+- type: MCPServer
+  url: mcp/us-dot-mcp.yml
 - type: Website
   url: https://www.transportation.gov/
 - type: DeveloperPortal
