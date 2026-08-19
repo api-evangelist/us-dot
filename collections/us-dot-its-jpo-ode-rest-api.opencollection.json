@@ -1,0 +1,160 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ODE REST API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Default",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get ODE version info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/version"
+          },
+          "docs": "Get ODE Version info"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "TIM",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query an RSU for set TIMs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/tim/query"
+          },
+          "docs": "Query an RSU for set TIMs"
+        },
+        {
+          "info": {
+            "name": "Submit Traveler Information Message (TIM) for broadcast to Connected Vehicles.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/tim"
+          },
+          "docs": "Submits a TIM message to ODE for distribution to the specified RSUs and SDW."
+        },
+        {
+          "info": {
+            "name": "Used to update an existing TIM already present on an RSU.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/tim"
+          },
+          "docs": "Update a Traveler Information Message (TIM) that has already been deposited to an RSU. Parameters and response codes are identical to the POST request. Will also deposit the new message to the SDW, if the SDW field is present."
+        },
+        {
+          "info": {
+            "name": "Delete a TIM message on an RSU.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/tim",
+            "params": [
+              {
+                "name": "index",
+                "value": "",
+                "type": "query",
+                "description": "Index of message to be deleted"
+              }
+            ]
+          },
+          "docs": "Sets the status of a designated message index on an RSU to 6."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SNMP",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "RSU SNMP Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rsuHeartbeat",
+            "params": [
+              {
+                "name": "ip",
+                "value": "",
+                "type": "query",
+                "description": "IP address of an RSU"
+              },
+              {
+                "name": "oid",
+                "value": "",
+                "type": "query",
+                "description": "OID of the attribute you wish to check on"
+              }
+            ]
+          },
+          "docs": "Check the health and status of RSU devices through SNMP communication. You should receive a detailed plain text response that looks like the following example. If the device is off, a 4 second timeout will occur and the ODE will indicate this with an \"[ERROR] Empty response\" message. (This specific OID returns the amount of time since the device was last powered on) \"[1.3.6.1.2.1.1.3.0 = 0:05:12.59]\""
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PDM",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PDM Interface",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/pdm"
+          },
+          "docs": "Submits a Probe Data Management message to ODE for distribution to the specified RSUs."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "log file",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "File upload interface",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/upload/obulog"
+          },
+          "docs": "Uploads an OBU log file to ODE upload folder to be processed and propaged"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

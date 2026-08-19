@@ -1,0 +1,1378 @@
+{
+  "item": [
+    {
+      "id": "afd94a31-366d-4dc0-a41f-526fd7a613ce",
+      "name": "TIM",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e71b275f-226b-456c-918e-d399383fc731",
+          "name": "Query an RSU for set TIMs",
+          "request": {
+            "name": "Query an RSU for set TIMs",
+            "description": {
+              "content": "Query an RSU for set TIMs",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tim",
+                "query"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rsuIndex\": \"<integer>\",\n  \"rsuTarget\": \"<string>\",\n  \"rsuUsername\": \"<string>\",\n  \"rsuPassword\": \"<string>\",\n  \"rsuRetries\": \"<integer>\",\n  \"rsuTimeout\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8685ae0b-dbe0-4086-ae59-7f7d4a3168a7",
+              "name": "List of messages in JSON form",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tim",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rsuIndex\": \"<integer>\",\n  \"rsuTarget\": \"<string>\",\n  \"rsuUsername\": \"<string>\",\n  \"rsuPassword\": \"<string>\",\n  \"rsuRetries\": \"<integer>\",\n  \"rsuTimeout\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55ff7c98-8e0d-416c-95db-e1415018727a",
+              "name": "Error in body request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tim",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rsuIndex\": \"<integer>\",\n  \"rsuTarget\": \"<string>\",\n  \"rsuUsername\": \"<string>\",\n  \"rsuPassword\": \"<string>\",\n  \"rsuRetries\": \"<integer>\",\n  \"rsuTimeout\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f006828-6e47-464c-8a82-1ab7fcc5a1d5",
+              "name": "Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tim",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rsuIndex\": \"<integer>\",\n  \"rsuTarget\": \"<string>\",\n  \"rsuUsername\": \"<string>\",\n  \"rsuPassword\": \"<string>\",\n  \"rsuRetries\": \"<integer>\",\n  \"rsuTimeout\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb61be6a-7f6b-4ecd-bd9e-31e6a8412c77",
+              "name": "Misc error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tim",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rsuIndex\": \"<integer>\",\n  \"rsuTarget\": \"<string>\",\n  \"rsuUsername\": \"<string>\",\n  \"rsuPassword\": \"<string>\",\n  \"rsuRetries\": \"<integer>\",\n  \"rsuTimeout\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8794d333-f9d0-4ea4-b4dc-9244df3bff34",
+          "name": "Used to update an existing TIM already present on an RSU.",
+          "request": {
+            "name": "Used to update an existing TIM already present on an RSU.",
+            "description": {
+              "content": "Update a Traveler Information Message (TIM) that has already been deposited to an RSU. Parameters and response codes are identical to the POST request. Will also deposit the new message to the SDW, if the SDW field is present.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tim"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"request\": {\n    \"rsus\": [\n      {\n        \"rsuIndex\": \"<integer>\",\n        \"rsuTarget\": \"<string>\",\n        \"rsuUsername\": \"<string>\",\n        \"rsuPassword\": \"<string>\",\n        \"rsuRetries\": \"<integer>\",\n        \"rsuTimeout\": \"<integer>\"\n      },\n      {\n        \"rsuIndex\": \"<integer>\",\n        \"rsuTarget\": \"<string>\",\n        \"rsuUsername\": \"<string>\",\n        \"rsuPassword\": \"<string>\",\n        \"rsuRetries\": \"<integer>\",\n        \"rsuTimeout\": \"<integer>\"\n      }\n    ],\n    \"snmp\": {\n      \"rsuid\": \"<string>\",\n      \"msgid\": \"<string>\",\n      \"mode\": \"<string>\",\n      \"channel\": \"<string>\",\n      \"interval\": \"<string>\",\n      \"deliverystart\": \"<string>\",\n      \"deliverystop\": \"<string>\",\n      \"enable\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    \"sdw\": {\n      \"deliverystart\": \"<string>\",\n      \"deliverystop\": \"<string>\",\n      \"groupID\": \"<string>\",\n      \"recordID\": \"<string>\",\n      \"ttl\": \"<string>\",\n      \"serviceRegion\": {\n        \"nwCorner\": {\n          \"latitude\": \"<string>\",\n          \"longitude\": \"<string>\"\n        },\n        \"seCorner\": {\n          \"latitude\": \"<string>\",\n          \"longitude\": \"<string>\"\n        }\n      }\n    }\n  },\n  \"tim\": {\n    \"msgCnt\": \"<integer>\",\n    \"timestamp\": \"<string>\",\n    \"packetId\": \"<string>\",\n    \"urlB\": \"<string>\",\n    \"dataFrames\": [\n      {\n        \"sspindex\": \"<integer>\",\n        \"doNotUse1\": \"<integer>\",\n        \"frameType\": \"<string>\",\n        \"msgId\": {\n          \"roadSignID\": {\n            \"position\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"viewAngle\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mutcdCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"crc\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"furtherInfoID\": \"<string>\"\n        },\n        \"startDateTime\": \"<string>\",\n        \"durationTime\": \"<integer>\",\n        \"priority\": \"<integer>\",\n        \"doNotUse2\": \"<integer>\",\n        \"regions\": [\n          {\n            \"name\": \"<string>\",\n            \"regulatorID\": \"<integer>\",\n            \"segmentId\": \"<integer>\",\n            \"anchor_lat\": \"<integer>\",\n            \"anchor_long\": \"<integer>\",\n            \"anchor_eleveation\": \"<integer>\",\n            \"laneWidth\": \"<number>\",\n            \"directionality\": \"<integer>\",\n            \"closedPath\": \"<string>\",\n            \"direction\": \"<string>\",\n            \"description\": \"<string>\",\n            \"path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"geometry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldRegion\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"<string>\",\n            \"regulatorID\": \"<integer>\",\n            \"segmentId\": \"<integer>\",\n            \"anchor_lat\": \"<integer>\",\n            \"anchor_long\": \"<integer>\",\n            \"anchor_eleveation\": \"<integer>\",\n            \"laneWidth\": \"<number>\",\n            \"directionality\": \"<integer>\",\n            \"closedPath\": \"<string>\",\n            \"direction\": \"<string>\",\n            \"description\": \"<string>\",\n            \"path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"geometry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldRegion\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"doNotUse4\": \"<integer>\",\n        \"doNotUse3\": \"<integer>\",\n        \"content\": \"<string>\",\n        \"items\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"sspindex\": \"<integer>\",\n        \"doNotUse1\": \"<integer>\",\n        \"frameType\": \"<string>\",\n        \"msgId\": {\n          \"roadSignID\": {\n            \"position\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"viewAngle\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mutcdCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"crc\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"furtherInfoID\": \"<string>\"\n        },\n        \"startDateTime\": \"<string>\",\n        \"durationTime\": \"<integer>\",\n        \"priority\": \"<integer>\",\n        \"doNotUse2\": \"<integer>\",\n        \"regions\": [\n          {\n            \"name\": \"<string>\",\n            \"regulatorID\": \"<integer>\",\n            \"segmentId\": \"<integer>\",\n            \"anchor_lat\": \"<integer>\",\n            \"anchor_long\": \"<integer>\",\n            \"anchor_eleveation\": \"<integer>\",\n            \"laneWidth\": \"<number>\",\n            \"directionality\": \"<integer>\",\n            \"closedPath\": \"<string>\",\n            \"direction\": \"<string>\",\n            \"description\": \"<string>\",\n            \"path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"geometry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldRegion\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"<string>\",\n            \"regulatorID\": \"<integer>\",\n            \"segmentId\": \"<integer>\",\n            \"anchor_lat\": \"<integer>\",\n            \"anchor_long\": \"<integer>\",\n            \"anchor_eleveation\": \"<integer>\",\n            \"laneWidth\": \"<number>\",\n            \"directionality\": \"<integer>\",\n            \"closedPath\": \"<string>\",\n            \"direction\": \"<string>\",\n            \"description\": \"<string>\",\n            \"path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"geometry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldRegion\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"doNotUse4\": \"<integer>\",\n        \"doNotUse3\": \"<integer>\",\n        \"content\": \"<string>\",\n        \"items\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cb59554c-92e3-4544-a5f0-c493d49f65a8",
+              "name": "Traveleer Information Message was submitted successfully. See the response body or ODE User Guide for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tim"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  },\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "285110eb-90f7-4a04-9492-0d9dee4a1b5d",
+              "name": "Bad Request. Issued if request is invalid or failed to be executed. See the response body or ODE User Guide for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tim"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  },\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54c7b1cc-15d8-42b5-b951-a0e9bcfde68e",
+              "name": "Internal Server Error. See the response body or ODE User Guide for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tim"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  },\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee1de76a-d4c0-4e38-aa4e-89379d3b2156",
+          "name": "Submit Traveler Information Message (TIM) for broadcast to Connected Vehicles.",
+          "request": {
+            "name": "Submit Traveler Information Message (TIM) for broadcast to Connected Vehicles.",
+            "description": {
+              "content": "Submits a TIM message to ODE for distribution to the specified RSUs and SDW.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tim"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"request\": {\n    \"rsus\": [\n      {\n        \"rsuIndex\": \"<integer>\",\n        \"rsuTarget\": \"<string>\",\n        \"rsuUsername\": \"<string>\",\n        \"rsuPassword\": \"<string>\",\n        \"rsuRetries\": \"<integer>\",\n        \"rsuTimeout\": \"<integer>\"\n      },\n      {\n        \"rsuIndex\": \"<integer>\",\n        \"rsuTarget\": \"<string>\",\n        \"rsuUsername\": \"<string>\",\n        \"rsuPassword\": \"<string>\",\n        \"rsuRetries\": \"<integer>\",\n        \"rsuTimeout\": \"<integer>\"\n      }\n    ],\n    \"snmp\": {\n      \"rsuid\": \"<string>\",\n      \"msgid\": \"<string>\",\n      \"mode\": \"<string>\",\n      \"channel\": \"<string>\",\n      \"interval\": \"<string>\",\n      \"deliverystart\": \"<string>\",\n      \"deliverystop\": \"<string>\",\n      \"enable\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    \"sdw\": {\n      \"deliverystart\": \"<string>\",\n      \"deliverystop\": \"<string>\",\n      \"groupID\": \"<string>\",\n      \"recordID\": \"<string>\",\n      \"ttl\": \"<string>\",\n      \"serviceRegion\": {\n        \"nwCorner\": {\n          \"latitude\": \"<string>\",\n          \"longitude\": \"<string>\"\n        },\n        \"seCorner\": {\n          \"latitude\": \"<string>\",\n          \"longitude\": \"<string>\"\n        }\n      }\n    }\n  },\n  \"tim\": {\n    \"msgCnt\": \"<integer>\",\n    \"timestamp\": \"<string>\",\n    \"packetId\": \"<string>\",\n    \"urlB\": \"<string>\",\n    \"dataFrames\": [\n      {\n        \"sspindex\": \"<integer>\",\n        \"doNotUse1\": \"<integer>\",\n        \"frameType\": \"<string>\",\n        \"msgId\": {\n          \"roadSignID\": {\n            \"position\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"viewAngle\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mutcdCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"crc\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"furtherInfoID\": \"<string>\"\n        },\n        \"startDateTime\": \"<string>\",\n        \"durationTime\": \"<integer>\",\n        \"priority\": \"<integer>\",\n        \"doNotUse2\": \"<integer>\",\n        \"regions\": [\n          {\n            \"name\": \"<string>\",\n            \"regulatorID\": \"<integer>\",\n            \"segmentId\": \"<integer>\",\n            \"anchor_lat\": \"<integer>\",\n            \"anchor_long\": \"<integer>\",\n            \"anchor_eleveation\": \"<integer>\",\n            \"laneWidth\": \"<number>\",\n            \"directionality\": \"<integer>\",\n            \"closedPath\": \"<string>\",\n            \"direction\": \"<string>\",\n            \"description\": \"<string>\",\n            \"path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"geometry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldRegion\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"<string>\",\n            \"regulatorID\": \"<integer>\",\n            \"segmentId\": \"<integer>\",\n            \"anchor_lat\": \"<integer>\",\n            \"anchor_long\": \"<integer>\",\n            \"anchor_eleveation\": \"<integer>\",\n            \"laneWidth\": \"<number>\",\n            \"directionality\": \"<integer>\",\n            \"closedPath\": \"<string>\",\n            \"direction\": \"<string>\",\n            \"description\": \"<string>\",\n            \"path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"geometry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldRegion\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"doNotUse4\": \"<integer>\",\n        \"doNotUse3\": \"<integer>\",\n        \"content\": \"<string>\",\n        \"items\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"sspindex\": \"<integer>\",\n        \"doNotUse1\": \"<integer>\",\n        \"frameType\": \"<string>\",\n        \"msgId\": {\n          \"roadSignID\": {\n            \"position\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"viewAngle\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mutcdCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"crc\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"furtherInfoID\": \"<string>\"\n        },\n        \"startDateTime\": \"<string>\",\n        \"durationTime\": \"<integer>\",\n        \"priority\": \"<integer>\",\n        \"doNotUse2\": \"<integer>\",\n        \"regions\": [\n          {\n            \"name\": \"<string>\",\n            \"regulatorID\": \"<integer>\",\n            \"segmentId\": \"<integer>\",\n            \"anchor_lat\": \"<integer>\",\n            \"anchor_long\": \"<integer>\",\n            \"anchor_eleveation\": \"<integer>\",\n            \"laneWidth\": \"<number>\",\n            \"directionality\": \"<integer>\",\n            \"closedPath\": \"<string>\",\n            \"direction\": \"<string>\",\n            \"description\": \"<string>\",\n            \"path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"geometry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldRegion\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"<string>\",\n            \"regulatorID\": \"<integer>\",\n            \"segmentId\": \"<integer>\",\n            \"anchor_lat\": \"<integer>\",\n            \"anchor_long\": \"<integer>\",\n            \"anchor_eleveation\": \"<integer>\",\n            \"laneWidth\": \"<number>\",\n            \"directionality\": \"<integer>\",\n            \"closedPath\": \"<string>\",\n            \"direction\": \"<string>\",\n            \"description\": \"<string>\",\n            \"path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"geometry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldRegion\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"doNotUse4\": \"<integer>\",\n        \"doNotUse3\": \"<integer>\",\n        \"content\": \"<string>\",\n        \"items\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5291e2bb-d83e-4437-b2c0-f907d23ed780",
+              "name": "Traveleer Information Message was submitted successfully. See the response body or ODE User Guide for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tim"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  },\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbc06f78-0f5a-475d-8dcf-b9c41b6aff3c",
+              "name": "Bad Request. Issued if request is invalid or failed to be executed. See the response body or ODE User Guide for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tim"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  },\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42b13e5c-5da5-4344-8ce0-351a37b42ee0",
+              "name": "Internal Server Error. See the response body or ODE User Guide for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tim"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  },\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d02de33-60c9-40ce-9865-8935444c4c42",
+          "name": "Delete a TIM message on an RSU.",
+          "request": {
+            "name": "Delete a TIM message on an RSU.",
+            "description": {
+              "content": "Sets the status of a designated message index on an RSU to 6.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tim"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "index",
+                  "value": "<integer>",
+                  "description": "(Required) Index of message to be deleted"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fc14df15-0f9b-4e34-b97e-8a9d8f7f3ca1",
+              "name": "Deleted index",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tim"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "index",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cc3a499-87c1-4ceb-b605-dd2eac711b97",
+              "name": "Error in body request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tim"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "index",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a20d833d-2ac9-4b08-9039-b16579ba9198",
+              "name": "Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tim"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "index",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ddb62e85-617f-440d-9bc0-5699aaedf920",
+              "name": "Misc error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tim"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "index",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "a6a274e7-407b-402f-a69b-2bbc06db705e",
+      "name": "SNMP",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5e76c8be-13c2-4abb-a0e4-243d46af9d4a",
+          "name": "RSU SNMP Query",
+          "request": {
+            "name": "RSU SNMP Query",
+            "description": {
+              "content": "Check the health and status of RSU devices through SNMP communication. You should receive a detailed plain text response that looks like the following example. If the device is off, a 4 second timeout will occur and the ODE will indicate this with an \"[ERROR] Empty response\" message. (This specific OID returns the amount of time since the device was last powered on) \"[1.3.6.1.2.1.1.3.0 = 0:05:12.59]\"",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rsuHeartbeat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ip",
+                  "value": "<string>",
+                  "description": "(Required) IP address of an RSU"
+                },
+                {
+                  "disabled": false,
+                  "key": "oid",
+                  "value": "<string>",
+                  "description": "(Required) OID of the attribute you wish to check on"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e043fffa-bd11-45ac-a56d-86ff61247fa9",
+              "name": "OID responses",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rsuHeartbeat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "oid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0dda776b-e733-44a6-a7d8-28b832c1ab8a",
+              "name": "Value input error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rsuHeartbeat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "oid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "1484ffe9-15ae-4603-bc2e-a61952d1660a",
+      "name": "PDM",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9b62e619-23d3-4b2a-ab8c-fcba4057f79b",
+          "name": "PDM Interface",
+          "request": {
+            "name": "PDM Interface",
+            "description": {
+              "content": "Submits a Probe Data Management message to ODE for distribution to the specified RSUs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pdm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ode\": {\n    \"version\": \"<integer>\"\n  },\n  \"pdm\": {\n    \"sampleStart\": \"<string>\",\n    \"sampleEnd\": \"<string>\",\n    \"directions\": \"<string>\",\n    \"termChoice\": \"<string>\",\n    \"termTime\": \"<string>\",\n    \"termDistance\": \"<string>\",\n    \"snapshotChoice\": \"<string>\",\n    \"minSnapshotTime\": \"<string>\",\n    \"maxSnapshotTime\": \"<string>\",\n    \"minSnapshotDistance\": \"<string>\",\n    \"maxSnapshotDistance\": \"<string>\",\n    \"snapshotMinSpeed\": \"<string>\",\n    \"snapshotMaxSpeed\": \"<string>\",\n    \"txInterval\": \"<string>\",\n    \"vehicleStatusRequestList\": [\n      {\n        \"tag\": \"<string>\",\n        \"subTag\": \"<string>\",\n        \"lessThenValue\": \"<string>\",\n        \"moreThenValue\": \"<string>\",\n        \"sendAll\": \"<string>\",\n        \"status\": \"<string>\"\n      },\n      {\n        \"tag\": \"<string>\",\n        \"subTag\": \"<string>\",\n        \"lessThenValue\": \"<string>\",\n        \"moreThenValue\": \"<string>\",\n        \"sendAll\": \"<string>\",\n        \"status\": \"<string>\"\n      }\n    ]\n  },\n  \"rsuList\": [\n    {\n      \"rsuIndex\": \"<integer>\",\n      \"rsuTarget\": \"<string>\",\n      \"rsuUsername\": \"<string>\",\n      \"rsuPassword\": \"<string>\",\n      \"rsuRetries\": \"<integer>\",\n      \"rsuTimeout\": \"<integer>\"\n    },\n    {\n      \"rsuIndex\": \"<integer>\",\n      \"rsuTarget\": \"<string>\",\n      \"rsuUsername\": \"<string>\",\n      \"rsuPassword\": \"<string>\",\n      \"rsuRetries\": \"<integer>\",\n      \"rsuTimeout\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cc53584b-2fde-4934-adbf-2d98065addbc",
+              "name": "Probe Data Management message was submitted successfully. See the response body or ODE User Guide for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pdm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ode\": {\n    \"version\": \"<integer>\"\n  },\n  \"pdm\": {\n    \"sampleStart\": \"<string>\",\n    \"sampleEnd\": \"<string>\",\n    \"directions\": \"<string>\",\n    \"termChoice\": \"<string>\",\n    \"termTime\": \"<string>\",\n    \"termDistance\": \"<string>\",\n    \"snapshotChoice\": \"<string>\",\n    \"minSnapshotTime\": \"<string>\",\n    \"maxSnapshotTime\": \"<string>\",\n    \"minSnapshotDistance\": \"<string>\",\n    \"maxSnapshotDistance\": \"<string>\",\n    \"snapshotMinSpeed\": \"<string>\",\n    \"snapshotMaxSpeed\": \"<string>\",\n    \"txInterval\": \"<string>\",\n    \"vehicleStatusRequestList\": [\n      {\n        \"tag\": \"<string>\",\n        \"subTag\": \"<string>\",\n        \"lessThenValue\": \"<string>\",\n        \"moreThenValue\": \"<string>\",\n        \"sendAll\": \"<string>\",\n        \"status\": \"<string>\"\n      },\n      {\n        \"tag\": \"<string>\",\n        \"subTag\": \"<string>\",\n        \"lessThenValue\": \"<string>\",\n        \"moreThenValue\": \"<string>\",\n        \"sendAll\": \"<string>\",\n        \"status\": \"<string>\"\n      }\n    ]\n  },\n  \"rsuList\": [\n    {\n      \"rsuIndex\": \"<integer>\",\n      \"rsuTarget\": \"<string>\",\n      \"rsuUsername\": \"<string>\",\n      \"rsuPassword\": \"<string>\",\n      \"rsuRetries\": \"<integer>\",\n      \"rsuTimeout\": \"<integer>\"\n    },\n    {\n      \"rsuIndex\": \"<integer>\",\n      \"rsuTarget\": \"<string>\",\n      \"rsuUsername\": \"<string>\",\n      \"rsuPassword\": \"<string>\",\n      \"rsuRetries\": \"<integer>\",\n      \"rsuTimeout\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  },\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d548975-88f5-4c61-acf9-3bafe2e6d0fe",
+              "name": "Bad Request. Issued if request is invalid or failed to be executed. See the response body or ODE User Guide for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pdm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ode\": {\n    \"version\": \"<integer>\"\n  },\n  \"pdm\": {\n    \"sampleStart\": \"<string>\",\n    \"sampleEnd\": \"<string>\",\n    \"directions\": \"<string>\",\n    \"termChoice\": \"<string>\",\n    \"termTime\": \"<string>\",\n    \"termDistance\": \"<string>\",\n    \"snapshotChoice\": \"<string>\",\n    \"minSnapshotTime\": \"<string>\",\n    \"maxSnapshotTime\": \"<string>\",\n    \"minSnapshotDistance\": \"<string>\",\n    \"maxSnapshotDistance\": \"<string>\",\n    \"snapshotMinSpeed\": \"<string>\",\n    \"snapshotMaxSpeed\": \"<string>\",\n    \"txInterval\": \"<string>\",\n    \"vehicleStatusRequestList\": [\n      {\n        \"tag\": \"<string>\",\n        \"subTag\": \"<string>\",\n        \"lessThenValue\": \"<string>\",\n        \"moreThenValue\": \"<string>\",\n        \"sendAll\": \"<string>\",\n        \"status\": \"<string>\"\n      },\n      {\n        \"tag\": \"<string>\",\n        \"subTag\": \"<string>\",\n        \"lessThenValue\": \"<string>\",\n        \"moreThenValue\": \"<string>\",\n        \"sendAll\": \"<string>\",\n        \"status\": \"<string>\"\n      }\n    ]\n  },\n  \"rsuList\": [\n    {\n      \"rsuIndex\": \"<integer>\",\n      \"rsuTarget\": \"<string>\",\n      \"rsuUsername\": \"<string>\",\n      \"rsuPassword\": \"<string>\",\n      \"rsuRetries\": \"<integer>\",\n      \"rsuTimeout\": \"<integer>\"\n    },\n    {\n      \"rsuIndex\": \"<integer>\",\n      \"rsuTarget\": \"<string>\",\n      \"rsuUsername\": \"<string>\",\n      \"rsuPassword\": \"<string>\",\n      \"rsuRetries\": \"<integer>\",\n      \"rsuTimeout\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  },\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9fa93b5-a41d-48a9-a2e5-632a43726777",
+              "name": "Internal Server Error. See the response body or ODE User Guide for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pdm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ode\": {\n    \"version\": \"<integer>\"\n  },\n  \"pdm\": {\n    \"sampleStart\": \"<string>\",\n    \"sampleEnd\": \"<string>\",\n    \"directions\": \"<string>\",\n    \"termChoice\": \"<string>\",\n    \"termTime\": \"<string>\",\n    \"termDistance\": \"<string>\",\n    \"snapshotChoice\": \"<string>\",\n    \"minSnapshotTime\": \"<string>\",\n    \"maxSnapshotTime\": \"<string>\",\n    \"minSnapshotDistance\": \"<string>\",\n    \"maxSnapshotDistance\": \"<string>\",\n    \"snapshotMinSpeed\": \"<string>\",\n    \"snapshotMaxSpeed\": \"<string>\",\n    \"txInterval\": \"<string>\",\n    \"vehicleStatusRequestList\": [\n      {\n        \"tag\": \"<string>\",\n        \"subTag\": \"<string>\",\n        \"lessThenValue\": \"<string>\",\n        \"moreThenValue\": \"<string>\",\n        \"sendAll\": \"<string>\",\n        \"status\": \"<string>\"\n      },\n      {\n        \"tag\": \"<string>\",\n        \"subTag\": \"<string>\",\n        \"lessThenValue\": \"<string>\",\n        \"moreThenValue\": \"<string>\",\n        \"sendAll\": \"<string>\",\n        \"status\": \"<string>\"\n      }\n    ]\n  },\n  \"rsuList\": [\n    {\n      \"rsuIndex\": \"<integer>\",\n      \"rsuTarget\": \"<string>\",\n      \"rsuUsername\": \"<string>\",\n      \"rsuPassword\": \"<string>\",\n      \"rsuRetries\": \"<integer>\",\n      \"rsuTimeout\": \"<integer>\"\n    },\n    {\n      \"rsuIndex\": \"<integer>\",\n      \"rsuTarget\": \"<string>\",\n      \"rsuUsername\": \"<string>\",\n      \"rsuPassword\": \"<string>\",\n      \"rsuRetries\": \"<integer>\",\n      \"rsuTimeout\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  },\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "406b0363-2927-4e70-8858-291501e1143e",
+      "name": "log file",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9f608171-1ba6-470d-be4c-67b0a4225f7b",
+          "name": "File upload interface",
+          "request": {
+            "name": "File upload interface",
+            "description": {
+              "content": "Uploads an OBU log file to ODE upload folder to be processed and propaged",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "upload",
+                "obulog"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "The file to upload."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a7133afa-ce8e-4098-8cd7-76f43a3be695",
+              "name": "File uploaded successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upload",
+                    "obulog"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "The file to upload.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  },\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af830675-daa8-4c31-ac4a-063543cbac40",
+              "name": "Bad Request. Issued if request is invalid or failed to be executed. See the response body or ODE User Guide for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upload",
+                    "obulog"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "The file to upload.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  },\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b16834a6-c0e5-48f1-85ca-dd3564161f37",
+              "name": "Internal Server Error. See the response body or ODE User Guide for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upload",
+                    "obulog"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "The file to upload.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  },\n  {\n    \"success\": false,\n    \"message\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6b3a127c-9952-4129-886c-9033aa23a634",
+      "name": "Get ODE version info",
+      "request": {
+        "name": "Get ODE version info",
+        "description": {
+          "content": "Get ODE Version info",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "version"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "2037ae74-b324-4bee-86d9-43dbfd51d040",
+          "name": "ODE version information returned",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"version\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://yourhostname",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1160fa4b-9056-4575-b7da-6d02b9ccb22d",
+    "name": "ODE REST API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Description of functions available from the Operational Data Environment (ODE) via RESTful interface. Ranges given follow interval notation, for example (0,1) or (0..1) means 0 &lt; x &lt; 1 and [0,1] or [0..1] means 0 &le; x &le; 1.",
+      "type": "text/plain"
+    }
+  }
+}

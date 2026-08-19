@@ -1,0 +1,300 @@
+{
+  "item": [
+    {
+      "id": "f8e71cf9-15a9-440f-a029-eb6201eba455",
+      "name": "FAA Airport Status Service",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e401d378-39ab-42e5-882c-4c7c1b7e371c",
+          "name": "Get airport delay summary for major US national airports.",
+          "request": {
+            "name": "Get airport delay summary for major US national airports.",
+            "description": {
+              "content": "The airport status is retrieved from fly.faa.gov and is provided in a format that can be used by applications that require airport status data.Delays will be returned for the following airports: BOS, LGA, TEB, EWR, JFK, PHL, PIT, IAD, BWI, DCA, RDU, CLT, ATL, MCO, TPA, MCO, FLL, MIA, DTW, CLE, MDW, ORD, IND, CVG, BNA, MEM, STL, MCI, MSP, DFW, IAH, DEN, SLC, PHX, LAS, SAN, LAX, SJC, SFO, PDX, SEA",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "airport",
+                "delays"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5ab094a1-4cbf-477d-b4f7-4286c38131cc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "airport",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"GroundDelays\": [\n    {\n      \"GroundDelay\": [\n        {\n          \"airport\": \"string\",\n          \"avgTime\": \"string\",\n          \"reason\": \"string\"\n        },\n        {\n          \"airport\": \"string\",\n          \"avgTime\": \"string\",\n          \"reason\": \"string\"\n        }\n      ]\n    },\n    {\n      \"GroundDelay\": [\n        {\n          \"airport\": \"string\",\n          \"avgTime\": \"string\",\n          \"reason\": \"string\"\n        },\n        {\n          \"airport\": \"string\",\n          \"avgTime\": \"string\",\n          \"reason\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"GroundStops\": [\n    {\n      \"GroundStop\": [\n        {\n          \"airport\": \"string\",\n          \"endTime\": \"string\",\n          \"reason\": \"string\"\n        },\n        {\n          \"airport\": \"string\",\n          \"endTime\": \"string\",\n          \"reason\": \"string\"\n        }\n      ]\n    },\n    {\n      \"GroundStop\": [\n        {\n          \"airport\": \"string\",\n          \"endTime\": \"string\",\n          \"reason\": \"string\"\n        },\n        {\n          \"airport\": \"string\",\n          \"endTime\": \"string\",\n          \"reason\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"ArriveDepartDelays\": [\n    {\n      \"ArriveDepartDelay\": [\n        {\n          \"airport\": \"string\",\n          \"maxTime\": \"string\",\n          \"minTime\": \"string\",\n          \"reason\": \"string\"\n        },\n        {\n          \"airport\": \"string\",\n          \"maxTime\": \"string\",\n          \"minTime\": \"string\",\n          \"reason\": \"string\"\n        }\n      ]\n    },\n    {\n      \"ArriveDepartDelay\": [\n        {\n          \"airport\": \"string\",\n          \"maxTime\": \"string\",\n          \"minTime\": \"string\",\n          \"reason\": \"string\"\n        },\n        {\n          \"airport\": \"string\",\n          \"maxTime\": \"string\",\n          \"minTime\": \"string\",\n          \"reason\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"Closures\": [\n    {\n      \"Closure\": [\n        {\n          \"airport\": \"string\",\n          \"reason\": \"string\",\n          \"reopen\": \"string\"\n        },\n        {\n          \"airport\": \"string\",\n          \"reason\": \"string\",\n          \"reopen\": \"string\"\n        }\n      ]\n    },\n    {\n      \"Closure\": [\n        {\n          \"airport\": \"string\",\n          \"reason\": \"string\",\n          \"reopen\": \"string\"\n        },\n        {\n          \"airport\": \"string\",\n          \"reason\": \"string\",\n          \"reopen\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "885f7718-39a8-4ea9-a80a-cb4c898a76ed",
+              "name": "Airport delays from http://www.fly.faa.gov are unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "airport",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2a1de9c4-be37-4659-b26c-c3020622435c",
+              "name": "Airport information from http://www.fly.faa.gov returned an error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "airport",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "85e95bc5-b523-403f-8eb2-ce6cd50924d7",
+          "name": "Get airport status based on path parameter provided on the API call. The path parameter is an IATA airport code.",
+          "request": {
+            "name": "Get airport status based on path parameter provided on the API call. The path parameter is an IATA airport code.",
+            "description": {
+              "content": "The airport status is retrieved from fly.faa.gov and is provided in a format that can be used by applications that require airport status data.Available airports include the following: BOS, LGA, TEB, EWR, JFK, PHL, PIT, IAD, BWI, DCA, RDU, CLT, ATL, MCO, TPA, MCO, FLL, MIA, DTW, CLE, MDW, ORD, IND, CVG, BNA, MEM, STL, MCI, MSP, DFW, IAH, DEN, SLC, PHX, LAS, SAN, LAX, SJC, SFO, PDX, SEA",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "airport",
+                "status",
+                ":airportCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "airportCode",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2ace8e04-a193-46cc-a257-dbba5407dfdf",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "airport",
+                    "status",
+                    ":airportCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "airportCode",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"city\": \"string\",\n  \"delay\": false,\n  \"delayCount\": 2577,\n  \"iata\": \"string\",\n  \"icao\": \"string\",\n  \"name\": \"string\",\n  \"state\": \"string\",\n  \"supportedAirport\": true,\n  \"weather\": {},\n  \"status\": [\n    {\n      \"avgDelay\": \"string\",\n      \"closureBegin\": \"string\",\n      \"closureEnd\": \"string\",\n      \"endTime\": \"string\",\n      \"maxDelay\": \"string\",\n      \"minDelay\": \"string\",\n      \"reason\": \"string\",\n      \"trend\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"avgDelay\": \"string\",\n      \"closureBegin\": \"string\",\n      \"closureEnd\": \"string\",\n      \"endTime\": \"string\",\n      \"maxDelay\": \"string\",\n      \"minDelay\": \"string\",\n      \"reason\": \"string\",\n      \"trend\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8c32c04-1acf-4a52-9026-038db562852c",
+              "name": "Delays are available only for major United States airports",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "airport",
+                    "status",
+                    ":airportCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "airportCode",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://external.apic4e.faa.gov",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e526a201-ddc4-4078-b31d-ff9d3f954849",
+    "name": "Airport Status Web Service",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "FAA Airport Status Web Service API\n\nContact Support:\n Name: Airport Status Web Service (ASWS)\n Email: edai-aero@faa.gov",
+      "type": "text/plain"
+    }
+  }
+}
