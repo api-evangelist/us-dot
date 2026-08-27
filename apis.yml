@@ -47,88 +47,6 @@ created: '2026-07-28'
 modified: '2026-07-28'
 specificationVersion: '0.23'
 apis:
-- aid: us-dot:faa-aeronautic-product-release-api
-  name: FAA Aeronautic Product Release API (APRA)
-  description: >-
-    FAA aeronautical chart and data publication download API. Thirty-four GET operations expose edition
-    metadata and ZIP product downloads for the digital Terminal Procedures Publication (dTPP), IFR enroute
-    and oceanic charts, VFR charts, the Coded Instrument Flight Procedures data set, the NFDC/NASR 28-day
-    airspace subscription, the Digital Obstacle File and more. Verified anonymously with HTTP 200 on 2026-07-28
-    against /apra/nfdc/nasr/info and /apra/dtpp/info — no API key required. Two operations (getDERSRelease,
-    getDERSEdition) are marked deprecated in the spec.
-  humanURL: https://api.faa.gov/s/
-  baseURL: https://external-api.faa.gov/apra
-  tags:
-  - Aviation
-  - Charts
-  - Aeronautical Data
-  - Airspace
-  - FAA
-  properties:
-  - type: OpenAPI
-    url: openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml
-  - type: Overlay
-    url: overlays/us-dot-faa-aeronautic-product-release-api-overlay.yaml
-  - type: Documentation
-    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
-  - type: AgentSkill
-    name: Download FAA aeronautical charts and airspace data
-    url: skills/us-dot-download-aeronautical-products.md
-- aid: us-dot:faa-air-carrier-prd-api
-  name: FAA Air Carrier Pilot Records Database (PRD) API
-  description: >-
-    Data submission API for the FAA Pilot Records Database. Five paths covering pilot record create/update/delete,
-    pilot data tracking, and asynchronous pilot data search request and response. Access is restricted
-    by the FAA to operators under 14 CFR Part 121, 135, 125, 91K, Air Tour, Public Aircraft, or Part 91
-    Corporate — this is an accreditation-style gate, not a self-serve signup. Credentials are client_id
-    and client_secret request headers declared as ordinary parameters, not as securitySchemes. The OpenAPI
-    3.0.0 definition is published openly in the FAA portal catalog and was harvested verbatim.
-  humanURL: https://api.faa.gov/s/
-  baseURL: https://external.apic4e.faa.gov
-  tags:
-  - Aviation
-  - Pilot Records
-  - Airlines
-  - Compliance
-  - FAA
-  properties:
-  - type: OpenAPI
-    url: openapi/us-dot-faa-air-carrier-prd-api-openapi.yml
-  - type: Overlay
-    url: overlays/us-dot-faa-air-carrier-prd-overlay.yaml
-  - type: Documentation
-    url: https://api.faa.gov/s/
-  - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
-- aid: us-dot:faa-safety-assurance-system-api
-  name: FAA Safety Assurance System (SAS) API
-  description: >-
-    Single-operation submission API for passenger discrepancy reporting into the FAA Safety Assurance
-    System. Air carriers submit hazardous-material discrepancies discovered on passengers or in passenger
-    baggage. The harvested OpenAPI 3.0.0 declares apiKey and appId security schemes (X-API-KEY plus X-APP-ID),
-    so a credential is required; the definition itself is published openly in the FAA portal catalog.
-    The request body carries passenger PII and a PNR locator and is the most sensitive payload in the
-    DOT surface area.
-  humanURL: https://api.faa.gov/s/
-  baseURL: https://external.apic4e.faa.gov/axh-sasp-api/sas
-  tags:
-  - Aviation
-  - Safety
-  - Compliance
-  - FAA
-  properties:
-  - type: OpenAPI
-    url: openapi/us-dot-faa-safety-assurance-system-api-openapi.yml
-  - type: Overlay
-    url: overlays/us-dot-faa-safety-assurance-system-overlay.yaml
-  - type: Examples
-    url: examples/_index.yml
-  - type: Documentation
-    url: https://api.faa.gov/s/
-  - type: AgentSkill
-    name: Submit a passenger hazmat discrepancy to the FAA SAS
-    url: skills/us-dot-submit-sas-discrepancy.md
 - aid: us-dot:faa-data-catalog-ckan-api
   name: FAA Data Catalog (CKAN Action API v3)
   description: >-
@@ -338,58 +256,752 @@ apis:
     url: https://mobile.fmcsa.dot.gov/QCDevsite/logingovInfo
   - type: Support
     url: https://mobile.fmcsa.dot.gov/QCDevsite/docs/support
-- aid: us-dot:its-jpo-ode-rest-api
-  name: USDOT ITS JPO Operational Data Environment (ODE) REST API
+- aid: us-dot:us-dot-aircarrierapi-api
+  name: U.S. Department of Transportation Air Carrier API
   description: >-
-    The reference connected-vehicle data platform authored by the USDOT Intelligent Transportation Systems
-    Joint Program Office. Eight operations over SAE J2735 messaging — Traveler Information Message query,
-    create, update and delete against physical roadside units, Probe Data Management deposit, SNMP query
-    and on-board-unit log upload. This is DEPLOYABLE SOFTWARE, not a DOT-hosted service: the Swagger 2.0
-    host is the literal placeholder "yourhostname" and an operator runs it on its own infrastructure under
-    Apache 2.0. The REST API is the thin edge of a Kafka platform whose 35 topics are declared in the
-    ODE's own configuration and captured as an AsyncAPI 3.0 document here. Safety-critical — the TIM writes
-    change what roadside units broadcast to vehicles, and there is no idempotency key anywhere on the
-    surface.
-  humanURL: https://github.com/usdot-jpo-ode/jpo-ode
-  baseURL: https://github.com/usdot-jpo-ode/jpo-ode
+    The AirCarrierApi API from U.S. Department of Transportation — 4 operation(s) for aircarrierapi.
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
   tags:
-  - Connected Vehicles
-  - ITS
-  - Roadside Units
-  - SAE J2735
-  - Safety
-  - Kafka
+  - AirCarrierApi
   properties:
   - type: OpenAPI
-    url: openapi/us-dot-its-jpo-ode-rest-api-openapi.yml
-  - type: Overlay
-    url: overlays/us-dot-its-jpo-ode-rest-api-overlay.yaml
+    url: openapi/us-dot-aircarrierapi-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
   - type: AsyncAPI
     url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
   - type: Protobuf
-    name: Geo-routed MEC deposit message
     url: grpc/us-dot-ode-geoRoutedMsg.proto
   - type: Protobuf
-    name: Geohash-routed MEC deposit message
     url: grpc/us-dot-ode-geoHashRoutedMsg.proto
   - type: SourceCode
     url: https://github.com/usdot-jpo-ode/jpo-ode
   - type: License
     url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
-  - type: AgentSkill
-    name: Deposit a Traveler Information Message to a roadside unit (ODE)
-    url: skills/us-dot-deposit-tim-to-roadside-unit.md
-- aid: us-dot:us-dot-faa-airport-status-web-service-openapi
-  name: U.S. Department of Transportation Airport Status Web Service
+- aid: us-dot:us-dot-axhsubmitdiscrepancies-api
+  name: U.S. Department of Transportation Axhsubmitdiscrepancies API
   description: >-
-    U.S. Department of Transportation Airport Status Web Service from U.S. Department of Transportation
-    — 2 path(s) described in OpenAPI.
+    The Axhsubmitdiscrepancies API from U.S. Department of Transportation — 1 operation(s) for axhsubmitdiscrepancies.
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
+  tags:
+  - Axhsubmitdiscrepancies
   properties:
   - type: OpenAPI
-    url: openapi/us-dot-faa-airport-status-web-service-openapi.yml
+    url: openapi/us-dot-axhsubmitdiscrepancies-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:us-dot-coded-instrument-flight-procedures-cifp-api
+  name: U.S. Department of Transportation Coded Instrument Flight Procedures (CIFP) API
+  description: >-
+    The Coded Instrument Flight Procedures (CIFP) API from U.S. Department of Transportation — 2 operation(s)
+    for coded instrument flight procedures (cifp).
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  tags:
+  - Coded Instrument Flight Procedures (CIFP)
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-coded-instrument-flight-procedures-cifp-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:us-dot-daily-digital-obstacle-file-ddof-api
+  name: U.S. Department of Transportation Daily Digital Obstacle File (DDOF) API
+  description: >-
+    The Daily Digital Obstacle File (DDOF) API from U.S. Department of Transportation — 2 operation(s)
+    for daily digital obstacle file (ddof).
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  tags:
+  - Daily Digital Obstacle File (DDOF)
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-daily-digital-obstacle-file-ddof-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:us-dot-digital-enroute-charts-us-ddecus-api
+  name: U.S. Department of Transportation Digital Enroute Charts US (DDECUS) API
+  description: >-
+    The Digital Enroute Charts US (DDECUS) API from U.S. Department of Transportation — 2 operation(s)
+    for digital enroute charts us (ddecus).
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  tags:
+  - Digital Enroute Charts US (DDECUS)
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-digital-enroute-charts-us-ddecus-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:us-dot-digital-enroute-supplement-ders-api
+  name: U.S. Department of Transportation Digital Enroute Supplement (DERS) API
+  description: >-
+    The Digital Enroute Supplement (DERS) API from U.S. Department of Transportation — 2 operation(s)
+    for digital enroute supplement (ders).
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  tags:
+  - Digital Enroute Supplement (DERS)
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-digital-enroute-supplement-ders-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:us-dot-faa-airport-status-service-api
+  name: U.S. Department of Transportation FAA Airport Status Service API
+  description: >-
+    The FAA Airport Status Service API from U.S. Department of Transportation — 2 operation(s) for faa
+    airport status service.
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  tags:
+  - FAA Airport Status Service
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-faa-airport-status-service-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:us-dot-grand-canyon-vfr-chart-api
+  name: U.S. Department of Transportation Grand Canyon VFR Chart API
+  description: >-
+    The Grand Canyon VFR Chart API from U.S. Department of Transportation — 2 operation(s) for grand canyon
+    vfr chart.
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  tags:
+  - Grand Canyon VFR Chart
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-grand-canyon-vfr-chart-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:us-dot-gulf-of-mexico-ifr-enroute-chart-api
+  name: U.S. Department of Transportation Gulf of Mexico IFR Enroute Chart API
+  description: >-
+    The Gulf of Mexico IFR Enroute Chart API from U.S. Department of Transportation — 2 operation(s) for
+    gulf of mexico ifr enroute chart.
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  tags:
+  - Gulf of Mexico IFR Enroute Chart
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-gulf-of-mexico-ifr-enroute-chart-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:us-dot-ifr-enroute-charts-api
+  name: U.S. Department of Transportation IFR Enroute Charts API
+  description: >-
+    The IFR Enroute Charts API from U.S. Department of Transportation — 2 operation(s) for ifr enroute
+    charts.
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  tags:
+  - IFR Enroute Charts
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-ifr-enroute-charts-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:us-dot-ifr-planning-charts-api
+  name: U.S. Department of Transportation IFR Planning Charts API
+  description: >-
+    The IFR Planning Charts API from U.S. Department of Transportation — 2 operation(s) for ifr planning
+    charts.
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  tags:
+  - IFR Planning Charts
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-ifr-planning-charts-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:us-dot-log-file-api
+  name: U.S. Department of Transportation log file API
+  description: The log file API from U.S. Department of Transportation — 1 operation(s) for log file.
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  tags:
+  - log file
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-log-file-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:us-dot-nasr-28-day-subscription-api
+  name: U.S. Department of Transportation NASR 28 Day Subscription API
+  description: >-
+    The NASR 28 Day Subscription API from U.S. Department of Transportation — 2 operation(s) for nasr
+    28 day subscription.
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  tags:
+  - NASR 28 Day Subscription
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-nasr-28-day-subscription-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:us-dot-oceanic-route-charts-api
+  name: U.S. Department of Transportation Oceanic Route Charts API
+  description: >-
+    The Oceanic Route Charts API from U.S. Department of Transportation — 2 operation(s) for oceanic route
+    charts.
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  tags:
+  - Oceanic Route Charts
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-oceanic-route-charts-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:us-dot-pdm-api
+  name: U.S. Department of Transportation PDM API
+  description: The PDM API from U.S. Department of Transportation — 1 operation(s) for pdm.
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  tags:
+  - PDM
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-pdm-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:us-dot-sectional-charts-api
+  name: U.S. Department of Transportation Sectional Charts API
+  description: >-
+    The Sectional Charts API from U.S. Department of Transportation — 2 operation(s) for sectional charts.
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  tags:
+  - Sectional Charts
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-sectional-charts-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:us-dot-snmp-api
+  name: U.S. Department of Transportation SNMP API
+  description: The SNMP API from U.S. Department of Transportation — 1 operation(s) for snmp.
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  tags:
+  - SNMP
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-snmp-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:us-dot-supplement-chart-api
+  name: U.S. Department of Transportation Supplement Chart API
+  description: >-
+    The Supplement Chart  API from U.S. Department of Transportation — 2 operation(s) for supplement chart
+    .
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  tags:
+  - 'Supplement Chart '
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-supplement-chart-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:us-dot-terminal-area-charts-api
+  name: U.S. Department of Transportation Terminal Area Charts API
+  description: >-
+    The Terminal Area Charts API from U.S. Department of Transportation — 2 operation(s) for terminal
+    area charts.
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  tags:
+  - Terminal Area Charts
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-terminal-area-charts-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:us-dot-tim-api
+  name: U.S. Department of Transportation TIM API
+  description: The TIM API from U.S. Department of Transportation — 2 operation(s) for tim.
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  tags:
+  - TIM
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-tim-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:us-dot-us-terminal-procedures-publication-tpp-api
+  name: U.S. Department of Transportation US Terminal Procedures Publication (TPP) API
+  description: >-
+    The US Terminal Procedures Publication (TPP) API from U.S. Department of Transportation — 2 operation(s)
+    for us terminal procedures publication (tpp).
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  tags:
+  - US Terminal Procedures Publication (TPP)
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-us-terminal-procedures-publication-tpp-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:us-dot-us-vfr-wall-planning-chart-api
+  name: U.S. Department of Transportation US VFR Wall Planning Chart API
+  description: >-
+    The US VFR Wall Planning Chart API from U.S. Department of Transportation — 2 operation(s) for us
+    vfr wall planning chart.
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  tags:
+  - US VFR Wall Planning Chart
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-us-vfr-wall-planning-chart-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:us-dot-version-api
+  name: U.S. Department of Transportation Version API
+  description: The Version API from U.S. Department of Transportation — 1 operation(s) for version.
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  tags:
+  - Version
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-version-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:us-dot-vfr-helicopter-route-chart-api
+  name: U.S. Department of Transportation VFR Helicopter Route Chart API
+  description: >-
+    The VFR Helicopter Route Chart API from U.S. Department of Transportation — 4 operation(s) for vfr
+    helicopter route chart.
+  humanURL: https://api.faa.gov/s/
+  baseURL: https://external-api.faa.gov/apra
+  tags:
+  - VFR Helicopter Route Chart
+  properties:
+  - type: OpenAPI
+    url: openapi/us-dot-vfr-helicopter-route-chart-api-openapi.yml
+  - type: Documentation
+    url: https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/
+  - type: Documentation
+    url: https://api.faa.gov/s/
+  - type: GettingStarted
+    url: >-
+      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+  - type: Examples
+    url: examples/_index.yml
+  - type: AsyncAPI
+    url: asyncapi/us-dot-its-jpo-ode-asyncapi.yml
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoRoutedMsg.proto
+  - type: Protobuf
+    url: grpc/us-dot-ode-geoHashRoutedMsg.proto
+  - type: SourceCode
+    url: https://github.com/usdot-jpo-ode/jpo-ode
+  - type: License
+    url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
 common:
+- type: Overlay
+  url: overlays/us-dot-faa-aeronautic-product-release-api-overlay.yaml
+- type: AgentSkill
+  url: skills/us-dot-download-aeronautical-products.md
+- type: Overlay
+  url: overlays/us-dot-faa-air-carrier-prd-overlay.yaml
+- type: Overlay
+  url: overlays/us-dot-faa-safety-assurance-system-overlay.yaml
+- type: AgentSkill
+  url: skills/us-dot-submit-sas-discrepancy.md
+- type: Overlay
+  url: overlays/us-dot-its-jpo-ode-rest-api-overlay.yaml
+- type: AgentSkill
+  url: skills/us-dot-deposit-tim-to-roadside-unit.md
 - type: MCPServer
   url: mcp/us-dot-mcp.yml
 - type: Website
