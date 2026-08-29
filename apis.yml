@@ -26,6 +26,19 @@ description: >-
   anywhere — but the data surfaces underneath are open, unmetered, public domain and fully
   bulk-exportable. This is a provider with an excellent exit path and no commercial lock-in
   of any kind.
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/dot.png
 tags:
 - Travel
@@ -988,6 +1001,10 @@ apis:
   - type: License
     url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
 common:
+- type: IssueTracker
+  url: https://github.com/usdot-jpo-ode/jpo-ode/issues
+- type: Releases
+  url: https://github.com/usdot-jpo-ode/jpo-ode/releases
 - type: Overlay
   url: overlays/us-dot-faa-aeronautic-product-release-api-overlay.yaml
 - type: AgentSkill
