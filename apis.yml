@@ -1001,6 +1001,9 @@ apis:
   - type: License
     url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
 common:
+- type: CapabilityMap
+  url: capabilities/us-dot-capability-edges.yml
+  name: U.S. Department of Transportation Business Capability Map
 - type: IssueTracker
   url: https://github.com/usdot-jpo-ode/jpo-ode/issues
 - type: Releases
