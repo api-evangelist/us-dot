@@ -1,0 +1,54 @@
+openapi: 3.2.0
+info:
+  title: ODE REST SNMP API
+  description: Description of functions available from the Operational Data Environment (ODE) via RESTful interface. Ranges given follow interval notation, for example (0,1) or (0..1) means 0 &lt; x &lt; 1 and [0,1] or [0..1] means 0 &le; x &le; 1.
+  version: 0.0.1
+servers:
+- url: https://yourhostname/
+tags:
+- name: SNMP
+paths:
+  /rsuHeartbeat:
+    get:
+      summary: RSU SNMP Query
+      operationId: snmp_get
+      description: Check the health and status of RSU devices through SNMP communication. You should receive a detailed plain text response that looks like the following example. If the device is off, a 4 second timeout will occur and the ODE will indicate this with an "[ERROR] Empty response" message. (This specific OID returns the amount of time since the device was last powered on) "[1.3.6.1.2.1.1.3.0 = 0:05:12.59]"
+      parameters:
+      - name: ip
+        in: query
+        description: IP address of an RSU
+        required: true
+        schema:
+          type: number
+          format: string
+      - name: oid
+        in: query
+        description: OID of the attribute you wish to check on
+        required: true
+        schema:
+          type: number
+          format: string
+      tags:
+      - SNMP
+      responses:
+        '200':
+          description: OID responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '400':
+          description: Value input error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+components:
+  schemas:
+    Status:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string

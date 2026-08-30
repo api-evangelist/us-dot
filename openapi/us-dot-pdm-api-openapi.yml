@@ -1,0 +1,146 @@
+openapi: 3.2.0
+info:
+  title: ODE REST PDM API
+  description: Description of functions available from the Operational Data Environment (ODE) via RESTful interface. Ranges given follow interval notation, for example (0,1) or (0..1) means 0 &lt; x &lt; 1 and [0,1] or [0..1] means 0 &le; x &le; 1.
+  version: 0.0.1
+servers:
+- url: https://yourhostname/
+tags:
+- name: PDM
+paths:
+  /pdm:
+    post:
+      summary: PDM Interface
+      operationId: pdm_post
+      description: Submits a Probe Data Management message to ODE for distribution to the specified RSUs.
+      tags:
+      - PDM
+      responses:
+        '200':
+          description: Probe Data Management message was submitted successfully. See the response body or ODE User Guide for details.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Status'
+        '400':
+          description: Bad Request. Issued if request is invalid or failed to be executed. See the response body or ODE User Guide for details.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Status'
+        '500':
+          description: Internal Server Error. See the response body or ODE User Guide for details.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Status'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProbeDataManagement'
+        description: PDM Message
+        required: true
+components:
+  schemas:
+    PDM:
+      type: object
+      properties:
+        sampleStart:
+          type: string
+        sampleEnd:
+          type: string
+        directions:
+          type: string
+        termChoice:
+          type: string
+        termTime:
+          type: string
+        termDistance:
+          type: string
+        snapshotChoice:
+          type: string
+        minSnapshotTime:
+          type: string
+        maxSnapshotTime:
+          type: string
+        minSnapshotDistance:
+          type: string
+        maxSnapshotDistance:
+          type: string
+        snapshotMinSpeed:
+          type: string
+        snapshotMaxSpeed:
+          type: string
+        txInterval:
+          type: string
+        vehicleStatusRequestList:
+          type: array
+          items:
+            $ref: '#/components/schemas/VehicleStatusRequest'
+    RSU:
+      type: object
+      description: Optional field, needed for SNMP deposit to RSU.
+      properties:
+        rsuIndex:
+          type: integer
+          description: Index of message storage on RSU.
+        rsuTarget:
+          type: string
+          description: IPv4 address of RSU
+        rsuUsername:
+          type: string
+          description: SNMP username (Not required if value is pre-configured in ODE properties)
+        rsuPassword:
+          type: string
+          description: SNMP password (Not required if value is pre-configured in ODE properties)
+        rsuRetries:
+          type: integer
+          description: Number of retries upon message send failure
+        rsuTimeout:
+          type: integer
+          description: Timeout measured in milliseconds
+    ProbeDataManagement:
+      type: object
+      properties:
+        ode:
+          $ref: '#/components/schemas/Ode'
+        pdm:
+          $ref: '#/components/schemas/PDM'
+        rsuList:
+          type: array
+          items:
+            $ref: '#/components/schemas/RSU'
+    Status:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+    VehicleStatusRequest:
+      type: object
+      properties:
+        tag:
+          type: string
+        subTag:
+          type: string
+        lessThenValue:
+          type: string
+        moreThenValue:
+          type: string
+        sendAll:
+          type: string
+        status:
+          type: string
+    Ode:
+      type: object
+      properties:
+        version:
+          type: integer

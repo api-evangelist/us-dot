@@ -1,0 +1,61 @@
+openapi: 3.2.0
+info:
+  title: ODE REST log file API
+  description: Description of functions available from the Operational Data Environment (ODE) via RESTful interface. Ranges given follow interval notation, for example (0,1) or (0..1) means 0 &lt; x &lt; 1 and [0,1] or [0..1] means 0 &le; x &le; 1.
+  version: 0.0.1
+servers:
+- url: https://yourhostname/
+tags:
+- name: log file
+paths:
+  /upload/obulog:
+    post:
+      summary: File upload interface
+      operationId: upload-obulog
+      description: Uploads an OBU log file to ODE upload folder to be processed and propaged
+      tags:
+      - log file
+      responses:
+        '200':
+          description: File uploaded successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Status'
+        '400':
+          description: Bad Request. Issued if request is invalid or failed to be executed. See the response body or ODE User Guide for details.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Status'
+        '500':
+          description: Internal Server Error. See the response body or ODE User Guide for details.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Status'
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  description: The file to upload.
+                  format: binary
+components:
+  schemas:
+    Status:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string

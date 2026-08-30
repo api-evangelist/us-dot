@@ -1,0 +1,32 @@
+openapi: 3.2.0
+info:
+  title: ODE REST Version API
+  description: Description of functions available from the Operational Data Environment (ODE) via RESTful interface. Ranges given follow interval notation, for example (0,1) or (0..1) means 0 &lt; x &lt; 1 and [0,1] or [0..1] means 0 &le; x &le; 1.
+  version: 0.0.1
+servers:
+- url: https://yourhostname/
+tags:
+- name: Version
+paths:
+  /version:
+    get:
+      summary: Get ODE version info
+      operationId: getVersion
+      description: Get ODE Version info
+      responses:
+        '200':
+          description: ODE version information returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/versionResponse'
+      tags:
+      - Version
+components:
+  schemas:
+    versionResponse:
+      type: object
+      properties:
+        version:
+          type: string
+          description: Runnign version in the form of `M.m.p[-SNAPSHOT]` where M is the Major version, m is the minor version and p is the patch or fix and square brackets signify optional component. If the software is from a nightly build, there will be an optional -SNAPSHOT postfix.
