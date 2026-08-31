@@ -795,6 +795,8 @@ apis:
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
+  - Supplement Chart
+  tags_raw:
   - 'Supplement Chart '
   properties:
   - type: OpenAPI
