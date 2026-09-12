@@ -2,30 +2,7 @@ aid: us-dot
 url: https://raw.githubusercontent.com/api-evangelist/us-dot/refs/heads/main/apis.yml
 name: U.S. Department of Transportation
 kind: company
-description: >-
-  The U.S. Department of Transportation (DOT) is the federal transportation regulator for
-  the United States, the deepest travel market in the world. In aviation DOT is not a
-  participant in the distribution chain — it is the counterweight to it: through the Office
-  of the Secretary it writes and enforces 14 CFR Part 256 on electronic airline information
-  systems (explicitly naming global distribution systems, corporate booking tools and
-  internet flight search tools), Part 257 on code-share disclosure, Part 250 on oversales,
-  Part 259 on enhanced passenger protections, Part 260 on fare and ancillary fee refunds,
-  and 399.84 on full-fare advertising. Its Bureau of Transportation Statistics is the sole
-  authoritative source for US airline economics — T-100 segment traffic, Form 41 financials,
-  the Consumer Airfare Report city-pair fare tables, denied boardings and mishandled baggage
-  — published as free Socrata SODA APIs. Its Federal Aviation Administration operates a
-  Gravitee API portal at api.faa.gov whose public catalog is enumerable without login and
-  serves genuinely open, unauthenticated OpenAPI 3.0.1 services for national airspace delay
-  status and aeronautical chart product releases, alongside gated APIs for pilot records and
-  safety reporting. Beyond aviation the operating administrations each run their own surface:
-  NHTSA publishes anonymous vehicle, recall, complaint and safety-rating APIs; FRA publishes
-  SOAP/WSDL rail safety services; FMCSA issues the department's only self-serve API key
-  behind a Login.gov account. API posture, honestly: transportation.gov itself is bot-blocked
-  (HTTP 403 to any non-browser client) and publishes no departmental OpenAPI, there is no
-  OAuth, no idempotency key, no RFC 9457 errors, no Sunset headers and no security.txt
-  anywhere — but the data surfaces underneath are open, unmetered, public domain and fully
-  bulk-exportable. This is a provider with an excellent exit path and no commercial lock-in
-  of any kind.
+description: 'The U.S. Department of Transportation (DOT) is the federal transportation regulator for the United States, the deepest travel market in the world. In aviation DOT is not a participant in the distribution chain — it is the counterweight to it: through the Office of the Secretary it writes and enforces 14 CFR Part 256 on electronic airline information systems (explicitly naming global distribution systems, corporate booking tools and internet flight search tools), Part 257 on code-share disclosure, Part 250 on oversales, Part 259 on enhanced passenger protections, Part 260 on fare and ancillary fee refunds, and 399.84 on full-fare advertising. Its Bureau of Transportation Statistics is the sole authoritative source for US airline economics — T-100 segment traffic, Form 41 financials, the Consumer Airfare Report city-pair fare tables, denied boardings and mishandled baggage — published as free Socrata SODA APIs. Its Federal Aviation Administration operates a Gravitee API portal at api.faa.gov whose public catalog is enumerable without login and serves genuinely open, unauthenticated OpenAPI 3.0.1 services for national airspace delay status and aeronautical chart product releases, alongside gated APIs for pilot records and safety reporting. Beyond aviation the operating administrations each run their own surface: NHTSA publishes anonymous vehicle, recall, complaint and safety-rating APIs; FRA publishes SOAP/WSDL rail safety services; FMCSA issues the department''s only self-serve API key behind a Login.gov account. API posture, honestly: transportation.gov itself is bot-blocked (HTTP 403 to any non-browser client) and publishes no departmental OpenAPI, there is no OAuth, no idempotency key, no RFC 9457 errors, no Sunset headers and no security.txt anywhere — but the data surfaces underneath are open, unmetered, public domain and fully bulk-exportable. This is a provider with an excellent exit path and no commercial lock-in of any kind.'
 deliveryModel:
   model: unknown
   open_source: unknown
@@ -76,13 +53,7 @@ specificationVersion: '0.23'
 apis:
 - aid: us-dot:faa-data-catalog-ckan-api
   name: FAA Data Catalog (CKAN Action API v3)
-  description: >-
-    The Federal Aviation Administration's open data catalog, running CKAN 2.11.4 and exposing the full
-    CKAN Action API v3 anonymously at /api/3/action/. package_list, package_search, package_show, organization_list
-    and status_show all answer without a credential; verified 2026-07-28. The catalog also publishes a
-    Project Open Data / DCAT-US 1.1 document at /data.json, harvested to well-known/us-dot-faa-catalog-data.json.
-    Small — six datasets — but it is the only CKAN surface in the department and the only one with a documented,
-    self-describing action API (help_show returns the parameter contract per action).
+  description: The Federal Aviation Administration's open data catalog, running CKAN 2.11.4 and exposing the full CKAN Action API v3 anonymously at /api/3/action/. package_list, package_search, package_show, organization_list and status_show all answer without a credential; verified 2026-07-28. The catalog also publishes a Project Open Data / DCAT-US 1.1 document at /data.json, harvested to well-known/us-dot-faa-catalog-data.json. Small — six datasets — but it is the only CKAN surface in the department and the only one with a documented, self-describing action API (help_show returns the parameter contract per action).
   humanURL: https://catalog.data.faa.gov/
   baseURL: https://catalog.data.faa.gov/api/3
   tags:
@@ -102,15 +73,7 @@ apis:
     url: https://www.usa.gov/government-works
 - aid: us-dot:dot-data-hub-soda-api
   name: DOT Data Hub Open Data API
-  description: >-
-    The departmental open data platform, served from both data.transportation.gov and datahub.transportation.gov
-    on Socrata SODA 2.1. For travel and aviation this is where the DOT Office of the Assistant Secretary
-    for Aviation and International Affairs publishes the Consumer Airfare Report city-pair fare tables
-    (Tables 1, 1a, 2, 5, 6 and 7), the Airline Quarterly Financial Review, and international seat and
-    passenger reports. 1,542 datasets enumerated in the DCAT-US 1.1 document at /data.json. Datasets are
-    licensed Public Domain U.S. Government (USGOV_WORKS). Verified anonymously with HTTP 200 on 2026-07-28
-    against /resource/4f3n-jbg2.json and /resource/tfrh-tu9e.json — no app token required for the volumes
-    tested.
+  description: The departmental open data platform, served from both data.transportation.gov and datahub.transportation.gov on Socrata SODA 2.1. For travel and aviation this is where the DOT Office of the Assistant Secretary for Aviation and International Affairs publishes the Consumer Airfare Report city-pair fare tables (Tables 1, 1a, 2, 5, 6 and 7), the Airline Quarterly Financial Review, and international seat and passenger reports. 1,542 datasets enumerated in the DCAT-US 1.1 document at /data.json. Datasets are licensed Public Domain U.S. Government (USGOV_WORKS). Verified anonymously with HTTP 200 on 2026-07-28 against /resource/4f3n-jbg2.json and /resource/tfrh-tu9e.json — no app token required for the volumes tested.
   humanURL: https://data.transportation.gov/
   baseURL: https://datahub.transportation.gov/resource
   tags:
@@ -139,14 +102,7 @@ apis:
     url: skills/us-dot-query-bts-aviation-statistics.md
 - aid: us-dot:bts-open-data-soda-api
   name: Bureau of Transportation Statistics Open Data API
-  description: >-
-    The Bureau of Transportation Statistics open data platform on Socrata SODA 2.1, and the authoritative
-    record of US commercial aviation activity. Aviation holdings verified live include T-100 segment summaries
-    by carrier, country, origin airport and month; Air Carrier Financial (Form 41) fuel, revenue, employee
-    and fleet-age series; average air fare by carrier and by quarter; commercial aviation mishandled baggage
-    and mishandled wheelchairs and scooters; and involuntary denied boardings by airline. 420 datasets
-    enumerated in the DCAT-US 1.1 document at /data.json. Verified anonymously with HTTP 200 on 2026-07-28
-    against /resource/bu82-4pwz.json, /resource/6u8d-47ih.json and /resource/xyfb-hgtv.json.
+  description: The Bureau of Transportation Statistics open data platform on Socrata SODA 2.1, and the authoritative record of US commercial aviation activity. Aviation holdings verified live include T-100 segment summaries by carrier, country, origin airport and month; Air Carrier Financial (Form 41) fuel, revenue, employee and fleet-age series; average air fare by carrier and by quarter; commercial aviation mishandled baggage and mishandled wheelchairs and scooters; and involuntary denied boardings by airline. 420 datasets enumerated in the DCAT-US 1.1 document at /data.json. Verified anonymously with HTTP 200 on 2026-07-28 against /resource/bu82-4pwz.json, /resource/6u8d-47ih.json and /resource/xyfb-hgtv.json.
   humanURL: https://data.bts.gov/
   baseURL: https://data.bts.gov/resource
   tags:
@@ -172,14 +128,7 @@ apis:
     url: https://www.usa.gov/government-works
 - aid: us-dot:nhtsa-vpic-api
   name: NHTSA vPIC (Vehicle Product Information Catalog) API
-  description: >-
-    The National Highway Traffic Safety Administration's Vehicle Product Information Catalog and VIN decoder,
-    and the most widely consumed API in the department. Decodes any US-market VIN into make, model, model
-    year, body class, engine, plant and safety-equipment fields, and enumerates the full manufacturer,
-    make, model and vehicle-type reference data behind it. Verified anonymously with HTTP 200 on 2026-07-28
-    — DecodeVinValues returned a decoded 2011 BMW VIN and getallmakes returned 12,306 makes. No API key,
-    no registration, no rate charge. Responses support format=json or format=xml. NHTSA publishes no OpenAPI
-    for it; the reference is HTML at vpic.nhtsa.dot.gov/api/.
+  description: The National Highway Traffic Safety Administration's Vehicle Product Information Catalog and VIN decoder, and the most widely consumed API in the department. Decodes any US-market VIN into make, model, model year, body class, engine, plant and safety-equipment fields, and enumerates the full manufacturer, make, model and vehicle-type reference data behind it. Verified anonymously with HTTP 200 on 2026-07-28 — DecodeVinValues returned a decoded 2011 BMW VIN and getallmakes returned 12,306 makes. No API key, no registration, no rate charge. Responses support format=json or format=xml. NHTSA publishes no OpenAPI for it; the reference is HTML at vpic.nhtsa.dot.gov/api/.
   humanURL: https://vpic.nhtsa.dot.gov/api/
   baseURL: https://vpic.nhtsa.dot.gov/api/vehicles
   tags:
@@ -196,14 +145,7 @@ apis:
     url: https://vpic.nhtsa.dot.gov/api/
 - aid: us-dot:nhtsa-safety-api
   name: NHTSA Safety API (recalls, complaints, safety ratings)
-  description: >-
-    The NHTSA public safety API that powers the dynamic search applications on nhtsa.gov. Three families:
-    /recalls for safety recalls by vehicle or campaign number, /complaints for consumer complaints filed
-    with NHTSA (each with ODI number, crash and fire flags, injury and death counts and incident dates),
-    and /SafetyRatings for the New Car Assessment Program 5-Star Safety Ratings walked by model year,
-    make and model. Verified anonymously with HTTP 200 on 2026-07-28 — complaintsByVehicle for a 2020
-    Honda Accord returned 341 records and /SafetyRatings returned 37 model years. No API key. Governed
-    by the NHTSA API Use Policy published at the base host.
+  description: 'The NHTSA public safety API that powers the dynamic search applications on nhtsa.gov. Three families: /recalls for safety recalls by vehicle or campaign number, /complaints for consumer complaints filed with NHTSA (each with ODI number, crash and fire flags, injury and death counts and incident dates), and /SafetyRatings for the New Car Assessment Program 5-Star Safety Ratings walked by model year, make and model. Verified anonymously with HTTP 200 on 2026-07-28 — complaintsByVehicle for a 2020 Honda Accord returned 341 records and /SafetyRatings returned 37 model years. No API key. Governed by the NHTSA API Use Policy published at the base host.'
   humanURL: https://www.nhtsa.gov/nhtsa-datasets-and-apis
   baseURL: https://api.nhtsa.gov
   tags:
@@ -220,16 +162,7 @@ apis:
     url: https://api.nhtsa.gov/
 - aid: us-dot:fra-safety-data-api
   name: FRA Safety Data Web Services
-  description: >-
-    The Federal Railroad Administration's rail safety web services, and the only SOAP surface in the department.
-    Two WSDL 1.1 contracts were retrieved live and harvested verbatim on 2026-07-28. The Master Web Service
-    (DatadownloadService.asmx, 30 operations) exposes the Rail Equipment Accident/Incident Report (Form
-    54), the Highway-Rail Grade Crossing Accident/Incident Report (Form 57), Form 55 and 55a, grade crossing
-    inventory, defect and PHMSA defect data, hazmat shipper data and railroad reference data, each retrievable
-    by railroad or by state, plus per-form schema operations. The Lite API (LiteApiService.asmx, 5 operations)
-    returns casualty, enforcement, summary, ten-year and train accident series by year. Declared a pilot
-    by FRA. Accounts are requested by email to RsisSupport@dot.gov — the Master service and the Lite API
-    require separate requests.
+  description: The Federal Railroad Administration's rail safety web services, and the only SOAP surface in the department. Two WSDL 1.1 contracts were retrieved live and harvested verbatim on 2026-07-28. The Master Web Service (DatadownloadService.asmx, 30 operations) exposes the Rail Equipment Accident/Incident Report (Form 54), the Highway-Rail Grade Crossing Accident/Incident Report (Form 57), Form 55 and 55a, grade crossing inventory, defect and PHMSA defect data, hazmat shipper data and railroad reference data, each retrievable by railroad or by state, plus per-form schema operations. The Lite API (LiteApiService.asmx, 5 operations) returns casualty, enforcement, summary, ten-year and train accident series by year. Declared a pilot by FRA. Accounts are requested by email to RsisSupport@dot.gov — the Master service and the Lite API require separate requests.
   humanURL: https://safetydata.fra.dot.gov/MasterWebService/FRASafetyDataAPIs.aspx
   baseURL: https://safetydata.fra.dot.gov/MasterWebService
   tags:
@@ -254,14 +187,7 @@ apis:
     url: https://safetydata.fra.dot.gov/OfficeofSafety/publicsite/on_the_fly_download.aspx
 - aid: us-dot:fmcsa-qcmobile-api
   name: FMCSA QCMobile API
-  description: >-
-    The Federal Motor Carrier Safety Administration's carrier data API — real-time queries on motor carrier
-    registration, authority and safety data, including all of the passenger carrier data that used to
-    be served by the retired SaferBus API. RESTful, keyed by a free webKey query parameter. This is the
-    only self-serve API credential anywhere in the department: create a Login.gov account, sign in to
-    the FMCSA developer site and generate a key. The developer site publishes a quick start guide, an
-    API access guide, the QCMobile API reference and an API response element reference. FMCSA publishes
-    no OpenAPI.
+  description: 'The Federal Motor Carrier Safety Administration''s carrier data API — real-time queries on motor carrier registration, authority and safety data, including all of the passenger carrier data that used to be served by the retired SaferBus API. RESTful, keyed by a free webKey query parameter. This is the only self-serve API credential anywhere in the department: create a Login.gov account, sign in to the FMCSA developer site and generate a key. The developer site publishes a quick start guide, an API access guide, the QCMobile API reference and an API response element reference. FMCSA publishes no OpenAPI.'
   humanURL: https://mobile.fmcsa.dot.gov/QCDevsite/
   baseURL: https://mobile.fmcsa.dot.gov/qc/services
   tags:
@@ -285,8 +211,7 @@ apis:
     url: https://mobile.fmcsa.dot.gov/QCDevsite/docs/support
 - aid: us-dot:us-dot-aircarrierapi-api
   name: U.S. Department of Transportation Air Carrier API
-  description: >-
-    The AirCarrierApi API from U.S. Department of Transportation — 4 operation(s) for aircarrierapi.
+  description: The AirCarrierApi API from U.S. Department of Transportation — 4 operation(s) for aircarrierapi.
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
@@ -299,8 +224,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -315,8 +239,7 @@ apis:
     url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
 - aid: us-dot:us-dot-axhsubmitdiscrepancies-api
   name: U.S. Department of Transportation Axhsubmitdiscrepancies API
-  description: >-
-    The Axhsubmitdiscrepancies API from U.S. Department of Transportation — 1 operation(s) for axhsubmitdiscrepancies.
+  description: The Axhsubmitdiscrepancies API from U.S. Department of Transportation — 1 operation(s) for axhsubmitdiscrepancies.
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
@@ -329,8 +252,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -345,9 +267,7 @@ apis:
     url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
 - aid: us-dot:us-dot-coded-instrument-flight-procedures-cifp-api
   name: U.S. Department of Transportation Coded Instrument Flight Procedures (CIFP) API
-  description: >-
-    The Coded Instrument Flight Procedures (CIFP) API from U.S. Department of Transportation — 2 operation(s)
-    for coded instrument flight procedures (cifp).
+  description: The Coded Instrument Flight Procedures (CIFP) API from U.S. Department of Transportation — 2 operation(s) for coded instrument flight procedures (cifp).
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
@@ -360,8 +280,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -376,9 +295,7 @@ apis:
     url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
 - aid: us-dot:us-dot-daily-digital-obstacle-file-ddof-api
   name: U.S. Department of Transportation Daily Digital Obstacle File (DDOF) API
-  description: >-
-    The Daily Digital Obstacle File (DDOF) API from U.S. Department of Transportation — 2 operation(s)
-    for daily digital obstacle file (ddof).
+  description: The Daily Digital Obstacle File (DDOF) API from U.S. Department of Transportation — 2 operation(s) for daily digital obstacle file (ddof).
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
@@ -391,8 +308,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -407,9 +323,7 @@ apis:
     url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
 - aid: us-dot:us-dot-digital-enroute-charts-us-ddecus-api
   name: U.S. Department of Transportation Digital Enroute Charts US (DDECUS) API
-  description: >-
-    The Digital Enroute Charts US (DDECUS) API from U.S. Department of Transportation — 2 operation(s)
-    for digital enroute charts us (ddecus).
+  description: The Digital Enroute Charts US (DDECUS) API from U.S. Department of Transportation — 2 operation(s) for digital enroute charts us (ddecus).
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
@@ -422,8 +336,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -438,9 +351,7 @@ apis:
     url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
 - aid: us-dot:us-dot-digital-enroute-supplement-ders-api
   name: U.S. Department of Transportation Digital Enroute Supplement (DERS) API
-  description: >-
-    The Digital Enroute Supplement (DERS) API from U.S. Department of Transportation — 2 operation(s)
-    for digital enroute supplement (ders).
+  description: The Digital Enroute Supplement (DERS) API from U.S. Department of Transportation — 2 operation(s) for digital enroute supplement (ders).
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
@@ -453,8 +364,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -469,9 +379,7 @@ apis:
     url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
 - aid: us-dot:us-dot-faa-airport-status-service-api
   name: U.S. Department of Transportation FAA Airport Status Service API
-  description: >-
-    The FAA Airport Status Service API from U.S. Department of Transportation — 2 operation(s) for faa
-    airport status service.
+  description: The FAA Airport Status Service API from U.S. Department of Transportation — 2 operation(s) for faa airport status service.
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
@@ -484,8 +392,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -500,9 +407,7 @@ apis:
     url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
 - aid: us-dot:us-dot-grand-canyon-vfr-chart-api
   name: U.S. Department of Transportation Grand Canyon VFR Chart API
-  description: >-
-    The Grand Canyon VFR Chart API from U.S. Department of Transportation — 2 operation(s) for grand canyon
-    vfr chart.
+  description: The Grand Canyon VFR Chart API from U.S. Department of Transportation — 2 operation(s) for grand canyon vfr chart.
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
@@ -515,8 +420,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -531,9 +435,7 @@ apis:
     url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
 - aid: us-dot:us-dot-gulf-of-mexico-ifr-enroute-chart-api
   name: U.S. Department of Transportation Gulf of Mexico IFR Enroute Chart API
-  description: >-
-    The Gulf of Mexico IFR Enroute Chart API from U.S. Department of Transportation — 2 operation(s) for
-    gulf of mexico ifr enroute chart.
+  description: The Gulf of Mexico IFR Enroute Chart API from U.S. Department of Transportation — 2 operation(s) for gulf of mexico ifr enroute chart.
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
@@ -546,8 +448,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -562,9 +463,7 @@ apis:
     url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
 - aid: us-dot:us-dot-ifr-enroute-charts-api
   name: U.S. Department of Transportation IFR Enroute Charts API
-  description: >-
-    The IFR Enroute Charts API from U.S. Department of Transportation — 2 operation(s) for ifr enroute
-    charts.
+  description: The IFR Enroute Charts API from U.S. Department of Transportation — 2 operation(s) for ifr enroute charts.
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
@@ -577,8 +476,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -593,9 +491,7 @@ apis:
     url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
 - aid: us-dot:us-dot-ifr-planning-charts-api
   name: U.S. Department of Transportation IFR Planning Charts API
-  description: >-
-    The IFR Planning Charts API from U.S. Department of Transportation — 2 operation(s) for ifr planning
-    charts.
+  description: The IFR Planning Charts API from U.S. Department of Transportation — 2 operation(s) for ifr planning charts.
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
@@ -608,8 +504,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -637,8 +532,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -653,9 +547,7 @@ apis:
     url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
 - aid: us-dot:us-dot-nasr-28-day-subscription-api
   name: U.S. Department of Transportation NASR 28 Day Subscription API
-  description: >-
-    The NASR 28 Day Subscription API from U.S. Department of Transportation — 2 operation(s) for nasr
-    28 day subscription.
+  description: The NASR 28 Day Subscription API from U.S. Department of Transportation — 2 operation(s) for nasr 28 day subscription.
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
@@ -668,8 +560,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -684,9 +575,7 @@ apis:
     url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
 - aid: us-dot:us-dot-oceanic-route-charts-api
   name: U.S. Department of Transportation Oceanic Route Charts API
-  description: >-
-    The Oceanic Route Charts API from U.S. Department of Transportation — 2 operation(s) for oceanic route
-    charts.
+  description: The Oceanic Route Charts API from U.S. Department of Transportation — 2 operation(s) for oceanic route charts.
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
@@ -699,8 +588,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -728,8 +616,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -744,8 +631,7 @@ apis:
     url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
 - aid: us-dot:us-dot-sectional-charts-api
   name: U.S. Department of Transportation Sectional Charts API
-  description: >-
-    The Sectional Charts API from U.S. Department of Transportation — 2 operation(s) for sectional charts.
+  description: The Sectional Charts API from U.S. Department of Transportation — 2 operation(s) for sectional charts.
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
@@ -758,8 +644,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -787,8 +672,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -803,9 +687,7 @@ apis:
     url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
 - aid: us-dot:us-dot-supplement-chart-api
   name: U.S. Department of Transportation Supplement Chart API
-  description: >-
-    The Supplement Chart  API from U.S. Department of Transportation — 2 operation(s) for supplement chart
-    .
+  description: The Supplement Chart  API from U.S. Department of Transportation — 2 operation(s) for supplement chart .
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
@@ -820,8 +702,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -836,9 +717,7 @@ apis:
     url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
 - aid: us-dot:us-dot-terminal-area-charts-api
   name: U.S. Department of Transportation Terminal Area Charts API
-  description: >-
-    The Terminal Area Charts API from U.S. Department of Transportation — 2 operation(s) for terminal
-    area charts.
+  description: The Terminal Area Charts API from U.S. Department of Transportation — 2 operation(s) for terminal area charts.
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
@@ -851,8 +730,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -880,8 +758,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -896,9 +773,7 @@ apis:
     url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
 - aid: us-dot:us-dot-us-terminal-procedures-publication-tpp-api
   name: U.S. Department of Transportation US Terminal Procedures Publication (TPP) API
-  description: >-
-    The US Terminal Procedures Publication (TPP) API from U.S. Department of Transportation — 2 operation(s)
-    for us terminal procedures publication (tpp).
+  description: The US Terminal Procedures Publication (TPP) API from U.S. Department of Transportation — 2 operation(s) for us terminal procedures publication (tpp).
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
@@ -911,8 +786,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -927,9 +801,7 @@ apis:
     url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
 - aid: us-dot:us-dot-us-vfr-wall-planning-chart-api
   name: U.S. Department of Transportation US VFR Wall Planning Chart API
-  description: >-
-    The US VFR Wall Planning Chart API from U.S. Department of Transportation — 2 operation(s) for us
-    vfr wall planning chart.
+  description: The US VFR Wall Planning Chart API from U.S. Department of Transportation — 2 operation(s) for us vfr wall planning chart.
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
@@ -942,8 +814,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -971,8 +842,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -987,9 +857,7 @@ apis:
     url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
 - aid: us-dot:us-dot-vfr-helicopter-route-chart-api
   name: U.S. Department of Transportation VFR Helicopter Route Chart API
-  description: >-
-    The VFR Helicopter Route Chart API from U.S. Department of Transportation — 4 operation(s) for vfr
-    helicopter route chart.
+  description: The VFR Helicopter Route Chart API from U.S. Department of Transportation — 4 operation(s) for vfr helicopter route chart.
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
@@ -1002,8 +870,7 @@ apis:
   - type: Documentation
     url: https://api.faa.gov/s/
   - type: GettingStarted
-    url: >-
-      https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
+    url: https://www.faa.gov/regulationspolicies/pilotrecordsdatabase/air-carrier-api-discover-learn-get-access
   - type: Examples
     url: examples/_index.yml
   - type: AsyncAPI
@@ -1016,6 +883,146 @@ apis:
     url: https://github.com/usdot-jpo-ode/jpo-ode
   - type: License
     url: https://github.com/usdot-jpo-ode/jpo-ode/blob/master/LICENSE
+- aid: us-dot:fmcsa-saferbus-api
+  name: FMCSA SaferBus API
+  description: The FMCSA SaferBus API is a RESTful service making available safety performance data for U.S. DOT-registered bus companies. It enables developers to build consumer-facing products that help travelers check the safety record of motorcoach operators before booking travel. Access requires a developer account and API webkey obtained through Login.gov.
+  humanURL: https://www.fmcsa.dot.gov/application-programming-interface-data-behind-saferbus
+  baseURL: https://mobile.fmcsa.dot.gov/qc/services
+  tags:
+  - Bus Safety
+  - Motorcoach
+  - FMCSA
+  - Consumer Safety
+  properties:
+  - type: Documentation
+    url: https://www.fmcsa.dot.gov/application-programming-interface-data-behind-saferbus
+  - type: Documentation
+    url: https://data.transportation.gov/Trucking-and-Motorcoaches/SaferBus-API-Documentation/edyh-n3ic
+- aid: us-dot:nhtsa-vpic-api
+  name: NHTSA vPIC Vehicle API
+  description: The NHTSA Vehicle Product Information Catalog (vPIC) API provides programmatic access to vehicle make, model, manufacturer, and type data compiled by NHTSA. Key capabilities include VIN decoding (single and batch up to 50 VINs), World Manufacturer Identifier (WMI) lookup, manufacturer details, vehicle variables, plant codes, and Canadian vehicle specifications. No authentication required; responses available in JSON, XML, or CSV.
+  humanURL: https://vpic.nhtsa.dot.gov/api/
+  baseURL: https://vpic.nhtsa.dot.gov/api/vehicles
+  tags:
+  - Vehicle Safety
+  - VIN
+  - NHTSA
+  - Recalls
+  - Manufacturers
+  properties:
+  - type: Documentation
+    url: https://vpic.nhtsa.dot.gov/api/
+- aid: us-dot:nhtsa-datasets-api
+  name: NHTSA Datasets and APIs
+  description: NHTSA provides public datasets and APIs covering vehicle safety complaints, recalls, safety ratings (NCAP), and defect investigations. Complaint data entered into NHTSA's Office of Defects Investigation database is searchable by make, model, and year, providing safety defect details, crash/fire/injury records, and recall campaign remedies.
+  humanURL: https://www.nhtsa.gov/nhtsa-datasets-and-apis
+  baseURL: https://api.nhtsa.gov
+  tags:
+  - Vehicle Safety
+  - Recalls
+  - Complaints
+  - NHTSA
+  - Crash Data
+  properties:
+  - type: Documentation
+    url: https://www.nhtsa.gov/nhtsa-datasets-and-apis
+- aid: us-dot:dot-data-portal
+  name: DOT Open Data Portal
+  description: The U.S. Department of Transportation Open Data Portal provides access to transportation datasets published by DOT agencies including FMCSA, NHTSA, FTA, BTS, FAA, PHMSA, and more. The portal supports REST API access to tabular datasets enabling programmatic retrieval, filtering, and export of transportation statistics.
+  humanURL: https://data.transportation.gov/
+  baseURL: https://data.transportation.gov/api
+  tags:
+  - Open Data
+  - Transportation Statistics
+  - Government
+  - BTS
+  tags_raw:
+  - OpenData
+  - Transportation Statistics
+  - Government
+  - BTS
+  properties:
+  - type: Documentation
+    url: https://data.transportation.gov/
+- aid: us-dot:dot-childseats-api
+  name: US Department of Transportation childSeats API
+  description: Child Seat search and list endpoints
+  humanURL: https://mobile.fmcsa.dot.gov/QCDevsite/docs/qcApi
+  baseURL: https://mobile.fmcsa.dot.gov/qc/services
+  tags: []
+  tags_raw:
+  - childSeats
+  properties:
+  - type: OpenAPI
+    url: openapi/dot-childseats-api-openapi.yml
+- aid: us-dot:dot-equipment-api
+  name: US Department of Transportation equipment API
+  description: Equipment search and list endpoints
+  humanURL: https://mobile.fmcsa.dot.gov/QCDevsite/docs/qcApi
+  baseURL: https://mobile.fmcsa.dot.gov/qc/services
+  tags:
+  - Equipment
+  tags_raw:
+  - equipment
+  properties:
+  - type: OpenAPI
+    url: openapi/dot-equipment-api-openapi.yml
+- aid: us-dot:dot-ewr-api
+  name: US Department of Transportation ewr API
+  description: Early Warning Report endpoints
+  humanURL: https://mobile.fmcsa.dot.gov/QCDevsite/docs/qcApi
+  baseURL: https://mobile.fmcsa.dot.gov/qc/services
+  tags:
+  - ewr
+  properties:
+  - type: OpenAPI
+    url: openapi/dot-ewr-api-openapi.yml
+- aid: us-dot:dot-foreigncampaigns-api
+  name: US Department of Transportation foreignCampaigns API
+  description: Foreign Campaign search and list endpoints
+  humanURL: https://mobile.fmcsa.dot.gov/QCDevsite/docs/qcApi
+  baseURL: https://mobile.fmcsa.dot.gov/qc/services
+  tags: []
+  tags_raw:
+  - foreignCampaigns
+  properties:
+  - type: OpenAPI
+    url: openapi/dot-foreigncampaigns-api-openapi.yml
+- aid: us-dot:dot-safetyissues-api
+  name: US Department of Transportation safetyIssues API
+  description: Recalls, Investigations, Complaints, and Manufacturer Communications
+  humanURL: https://mobile.fmcsa.dot.gov/QCDevsite/docs/qcApi
+  baseURL: https://mobile.fmcsa.dot.gov/qc/services
+  tags: []
+  tags_raw:
+  - safetyIssues
+  properties:
+  - type: OpenAPI
+    url: openapi/dot-safetyissues-api-openapi.yml
+- aid: us-dot:dot-tires-api
+  name: US Department of Transportation tires API
+  description: Tire search and list endpoints
+  humanURL: https://mobile.fmcsa.dot.gov/QCDevsite/docs/qcApi
+  baseURL: https://mobile.fmcsa.dot.gov/qc/services
+  tags:
+  - Tires
+  tags_raw:
+  - tires
+  properties:
+  - type: OpenAPI
+    url: openapi/dot-tires-api-openapi.yml
+- aid: us-dot:dot-vehicles-api
+  name: US Department of Transportation vehicles API
+  description: Vehicle search and list endpoints
+  humanURL: https://mobile.fmcsa.dot.gov/QCDevsite/docs/qcApi
+  baseURL: https://mobile.fmcsa.dot.gov/qc/services
+  tags:
+  - Vehicles
+  tags_raw:
+  - vehicles
+  properties:
+  - type: OpenAPI
+    url: openapi/dot-vehicles-api-openapi.yml
 common:
 - type: CapabilityMap
   url: capabilities/us-dot-capability-edges.yml
