@@ -605,6 +605,8 @@ apis:
   humanURL: https://api.faa.gov/s/
   baseURL: https://external-api.faa.gov/apra
   tags:
+  - Log File
+  tags_raw:
   - log file
   properties:
   - type: OpenAPI
@@ -1028,6 +1030,12 @@ apis:
   - VIN
   - NHTSA
   - Recalls
+  - Manufacturer
+  tags_raw:
+  - Vehicle Safety
+  - VIN
+  - NHTSA
+  - Recalls
   - Manufacturers
   properties:
   - type: Documentation
@@ -1077,7 +1085,8 @@ apis:
   description: Child Seat search and list endpoints
   humanURL: https://catalog.data.faa.gov/
   baseURL: https://catalog.data.faa.gov/api/3
-  tags:
+  tags: []
+  tags_raw:
   - childSeats
   properties:
   - type: OpenAPI
@@ -1088,6 +1097,8 @@ apis:
   humanURL: https://catalog.data.faa.gov/
   baseURL: https://catalog.data.faa.gov/api/3
   tags:
+  - Equipment
+  tags_raw:
   - equipment
   properties:
   - type: OpenAPI
@@ -1107,7 +1118,8 @@ apis:
   description: Foreign Campaign search and list endpoints
   humanURL: https://catalog.data.faa.gov/
   baseURL: https://catalog.data.faa.gov/api/3
-  tags:
+  tags: []
+  tags_raw:
   - foreignCampaigns
   properties:
   - type: OpenAPI
@@ -1117,7 +1129,8 @@ apis:
   description: Recalls, Investigations, Complaints, and Manufacturer Communications
   humanURL: https://catalog.data.faa.gov/
   baseURL: https://catalog.data.faa.gov/api/3
-  tags:
+  tags: []
+  tags_raw:
   - safetyIssues
   properties:
   - type: OpenAPI
@@ -1128,6 +1141,8 @@ apis:
   humanURL: https://catalog.data.faa.gov/
   baseURL: https://catalog.data.faa.gov/api/3
   tags:
+  - Tires
+  tags_raw:
   - tires
   properties:
   - type: OpenAPI
@@ -1138,6 +1153,8 @@ apis:
   humanURL: https://catalog.data.faa.gov/
   baseURL: https://catalog.data.faa.gov/api/3
   tags:
+  - Vehicles
+  tags_raw:
   - vehicles
   properties:
   - type: OpenAPI
