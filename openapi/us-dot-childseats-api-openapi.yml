@@ -1,0 +1,843 @@
+openapi: 3.2.0
+info:
+  title: NHTSA Child Seats API
+  version: 1.6.0
+  description: Child Seat search and list endpoints
+servers:
+- url: https://mobile.fmcsa.dot.gov/qc/services
+tags:
+- description: Child Seat search and list endpoints
+  name: childSeats
+paths:
+  /childSeats:
+    get:
+      parameters:
+      - allowEmptyValue: false
+        description: A comma separated list of data to return (modes, complaints, recalls, investigations, manufacturerCommunications).
+        in: query
+        name: data
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: Select which data set to return, either "ratings" or "safetyIssues". Defaults to 'all'
+        in: query
+        name: dataSet
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: Child weight for any childSeat mode
+        in: query
+        name: weight
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: Child height for any childSeat mode
+        in: query
+        name: height
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: Child age for any childSeat mode
+        in: query
+        name: age
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: Child height for any childSeat mode
+        in: query
+        name: modelName
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: Returns child seats based on model
+        in: query
+        name: manufacturerName
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - $ref: '#/components/parameters/Filter'
+      - $ref: '#/components/parameters/Sort'
+      - allowEmptyValue: false
+        description: order in which to sort
+        in: query
+        name: order
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+          enum:
+          - asc
+          - desc
+          default: asc
+      - allowEmptyValue: false
+        description: The maximum number of records to return
+        in: query
+        name: max
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - allowEmptyValue: false
+        description: The offset of the records set to return for pagination.
+        in: query
+        name: offset
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Returns zero or more childSeats
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ChildseatWrapped'
+                title: ArrayOfChildSeats
+                type: array
+        '400':
+          description: Invalid Request
+        '500':
+          description: Internal Server Error
+      tags:
+      - childSeats
+      summary: Get child seats
+      x-summary-source: derived
+      operationId: getChildSeats
+      x-operation-id-source: derived
+  /childSeats/bySearch:
+    get:
+      parameters:
+      - allowEmptyValue: false
+        description: returns zero or more child seats based on search query
+        in: query
+        name: query
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - $ref: '#/components/parameters/Filter'
+      - $ref: '#/components/parameters/Sort'
+      - allowEmptyValue: false
+        description: order in which to sort
+        in: query
+        name: order
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+          enum:
+          - asc
+          - desc
+          default: asc
+      - allowEmptyValue: false
+        description: A comma separated list of data to return (modes, complaints, recalls, investigations, manufacturercommunications).
+        in: query
+        name: data
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: Select which data set to return, either "ratings" or "safetyIssues". Defaults to 'all'
+        in: query
+        name: dataSet
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: The maximum number of records to return
+        in: query
+        name: max
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - allowEmptyValue: false
+        description: The offset of the records listing (for pagination).
+        in: query
+        name: offset
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Fuzzy search for a child seat based on make, productModel, and modelNumber
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChildseatWrapped'
+        '400':
+          description: Invalid Request
+        '500':
+          description: Internal Server Error
+      tags:
+      - childSeats
+      summary: Get child seats by search
+      x-summary-source: derived
+      operationId: getChildSeatsBySearch
+      x-operation-id-source: derived
+  /childSeats/inspectionStations:
+    get:
+      parameters:
+      - allowEmptyValue: false
+        description: returns inspections stations within provided usState; use states provided by /carseats
+        in: query
+        name: usState
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: latitude of the child seat inspection stations overrides usState query param
+        in: query
+        name: latitude
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: longtiude of the child seat inspection stations overrides usState query param
+        in: query
+        name: longitude
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: maximum distance to search for an inspection station
+        in: query
+        name: distance
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: number
+          format: ''
+          enum:
+          - '25'
+          - '50'
+          - '75'
+          - '100'
+          default: 25
+      - allowEmptyValue: false
+        description: only return inspection stations that have spanish speaking contacts
+        in: query
+        name: onlySpanishSpeaking
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: boolean
+          format: ''
+          default: false
+      - allowEmptyValue: false
+        description: only return inspection statings that have an event associated with them
+        in: query
+        name: onlyWithEvent
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: boolean
+          format: ''
+          default: false
+      - allowEmptyValue: false
+        description: The maximum number of records to return. Use '-1' to get all records.
+        in: query
+        name: max
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - allowEmptyValue: false
+        description: The offset of the records listing (for pagination).
+        in: query
+        name: offset
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Returns zero or more inspections stations based on queries provided
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InspectionStationDetailsWrapped'
+        '400':
+          description: Invalid Request
+        '500':
+          description: Internal Server Error
+      tags:
+      - childSeats
+      summary: Get child seats inspection stations
+      x-summary-source: derived
+      operationId: getChildSeatsInspectionStations
+      x-operation-id-source: derived
+  /childSeats/inspectionStations/states:
+    get:
+      parameters:
+      - allowEmptyValue: false
+        description: The maximum number of records to return. Use '-1' to get all records.
+        in: query
+        name: max
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - allowEmptyValue: false
+        description: The offset of the records listing (for pagination).
+        in: query
+        name: offset
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Returns all states with inspection stations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartialChildSeatWrapped'
+        '400':
+          description: Invalid Request
+        '500':
+          description: Internal Server Error
+      tags:
+      - childSeats
+      summary: Get child seats inspection stations states
+      x-summary-source: derived
+      operationId: getChildSeatsInspectionStationsStates
+      x-operation-id-source: derived
+  /childSeats/manufacturers:
+    get:
+      parameters:
+      - allowEmptyValue: false
+        description: Select which data set to return, either "ratings" or "safetyIssues". Defaults to 'all'
+        in: query
+        name: dataSet
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: The maximum number of records to return. Use '-1' to get all records.
+        in: query
+        name: max
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - allowEmptyValue: false
+        description: The offset of the records listing (for pagination).
+        in: query
+        name: offset
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Returns all available child seat manufacturers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartialChildSeatWrapped'
+        '400':
+          description: Invalid Request
+        '500':
+          description: Internal Server Error
+      tags:
+      - childSeats
+      summary: Get child seats manufacturers
+      x-summary-source: derived
+      operationId: getChildSeatsManufacturers
+      x-operation-id-source: derived
+  /childSeats/modes:
+    get:
+      responses:
+        '200':
+          description: Returns list of child seat modes and their recommended age range in years
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartialChildSeatWrapped'
+        '400':
+          description: Invalid Request
+        '500':
+          description: Internal Server Error
+      tags:
+      - childSeats
+      summary: Get child seats modes
+      x-summary-source: derived
+      operationId: getChildSeatsModes
+      x-operation-id-source: derived
+  /childSeats/{id}:
+    get:
+      parameters:
+      - description: ID of the child seat
+        in: path
+        name: id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - allowEmptyValue: false
+        description: A comma separated list of data to return (modes, complaints, recalls, investigations, manufacturercommunications).
+        in: query
+        name: data
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      responses:
+        '200':
+          description: Returns a single child seat with the specified ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChildseatWrapped'
+        '400':
+          description: Invalid Request
+        '500':
+          description: Internal Server Error
+      tags:
+      - childSeats
+      summary: Get child seats by id
+      x-summary-source: derived
+      operationId: getChildSeatsById
+      x-operation-id-source: derived
+components:
+  schemas:
+    MFRCommunicationAggregate:
+      properties:
+        communicationDate:
+          type: string
+        components:
+          items:
+            $ref: '#/components/schemas/Components'
+          type: array
+        manufacturerCommunicationNumber:
+          type: string
+        nhtsaIdNumber:
+          type: string
+        subject:
+          type: string
+        summary:
+          type: string
+      type: object
+    Pagination:
+      properties:
+        count:
+          type: integer
+        currentUrl:
+          type: string
+        max:
+          type: integer
+        nextUrl:
+          type: string
+        offset:
+          type: integer
+        order:
+          type: string
+        previousUrl:
+          type: string
+        sort:
+          type: string
+        total:
+          type: integer
+      type: object
+    InspectionStationDetails:
+      properties:
+        city:
+          type: string
+        contact:
+          type: string
+        hasEvent:
+          type: boolean
+        hours:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        name:
+          type: string
+        note:
+          description: a list of dates.
+          type: string
+        phone:
+          type: string
+        spanishSpeaking:
+          type: boolean
+        state:
+          type: string
+        stateAbbr:
+          type: string
+        streetAddress:
+          type: string
+        zip:
+          type: string
+      type: object
+    PartialChildSeat:
+      properties:
+        childSeatMode:
+          type: string
+        manufacturerName:
+          type: string
+        maximumChildAge:
+          type: integer
+        minimumChildAge:
+          type: integer
+      type: object
+    ComplaintAggregate:
+      properties:
+        city:
+          type: string
+        components:
+          items:
+            $ref: '#/components/schemas/Components'
+          type: array
+        crash:
+          type: integer
+        dateFiled:
+          type: string
+        dateOfIncident:
+          type: string
+        description:
+          type: string
+        fire:
+          type: integer
+        nhtsaIdNumber:
+          type: string
+        numberOfDeaths:
+          type: integer
+        numberOfInjuries:
+          type: integer
+        stateAbbreviation:
+          type: string
+        vin:
+          type: string
+      type: object
+    ChildseatWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/Childseat'
+          type: array
+      type: object
+    ChildSeatMode:
+      properties:
+        harnessType:
+          type: string
+        maxChildHeight:
+          type: number
+        maxChildHeightFinal:
+          type: number
+        maxChildWeightFinal:
+          type: number
+        maxUsingLowerAnchors:
+          type: number
+        maxUsingLowerAnchorsFinal:
+          type: number
+        maxUsingSeatBelts:
+          type: number
+        minChildHeight:
+          type: number
+        minUsingLowerAnchors:
+          type: number
+        minUsingSeatBelts:
+          type: number
+        mode:
+          description: Name of the mode, example "Foward-Facing"
+          type: string
+        modeWeight:
+          type: number
+        ratings:
+          items:
+            $ref: '#/components/schemas/ChildSeatModeRating'
+          type: array
+        recommendedAge:
+          type: boolean
+        weightHeightRange:
+          type: string
+      type: object
+    Childseat:
+      properties:
+        id:
+          type: integer
+        make:
+          type: string
+        manufactureDate:
+          type: string
+        modelNumber:
+          type: string
+        modes:
+          items:
+            $ref: '#/components/schemas/ChildSeatMode'
+          type: array
+        productModel:
+          type: string
+        safetyIssues:
+          $ref: '#/components/schemas/SafetyIssueAggregate'
+        seatType:
+          type: string
+      type: object
+    SafetyIssueAggregate:
+      properties:
+        complaints:
+          items:
+            $ref: '#/components/schemas/ComplaintAggregate'
+          type: array
+        investigation:
+          items:
+            $ref: '#/components/schemas/InvestigationAggregate'
+          type: array
+        manufacturerCommunications:
+          items:
+            $ref: '#/components/schemas/MFRCommunicationAggregate'
+          type: array
+        recalls:
+          items:
+            $ref: '#/components/schemas/RecallAggregate'
+          type: array
+      type: object
+    Components:
+      properties:
+        name:
+          type: string
+      type: object
+    Meta:
+      properties:
+        messages:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        pagination:
+          items:
+            $ref: '#/components/schemas/Pagination'
+          type: array
+        status:
+          type: integer
+      type: object
+    InspectionStationDetailsWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/InspectionStationDetails'
+          type: array
+      type: object
+    PartialChildSeatWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/PartialChildSeat'
+          type: array
+      type: object
+    Recalls:
+      properties:
+        nhtsaCampaignNumber:
+          type: string
+        subject:
+          type: string
+      type: object
+    ChildSeatModeRating:
+      properties:
+        label:
+          type: string
+        notes:
+          type: string
+        rating:
+          type: integer
+        ratingType:
+          type: string
+      type: object
+    RecallAggregate:
+      properties:
+        components:
+          items:
+            $ref: '#/components/schemas/Components'
+          type: array
+        consequence:
+          type: string
+        correctiveAction:
+          type: string
+        investigations:
+          items:
+            $ref: '#/components/schemas/Investigations'
+          type: array
+        manufacturer:
+          type: string
+        nhtsaCampaignNumber:
+          type: integer
+        notes:
+          type: string
+        potentialNumberOfUnitsAffected:
+          type: string
+        reportsReceivedDate:
+          type: string
+        subject:
+          type: string
+        summary:
+          type: string
+      type: object
+    Investigations:
+      properties:
+        nhtsaActionNumber:
+          type: string
+        subject:
+          type: string
+      type: object
+    Message:
+      properties:
+        errorCode:
+          type: string
+        errorDetail:
+          type: string
+        errorMessage:
+          type: string
+        userMessage:
+          type: string
+      type: object
+    InvestigationAggregate:
+      properties:
+        components:
+          items:
+            $ref: '#/components/schemas/Components'
+          type: array
+        dateClosed:
+          type: string
+        dateOpened:
+          type: string
+        nhtsaCampaignNumber:
+          type: string
+        recalls:
+          items:
+            $ref: '#/components/schemas/Recalls'
+          type: array
+        subject:
+          type: string
+        summary:
+          type: string
+        type:
+          type: string
+      type: object
+  parameters:
+    Sort:
+      allowEmptyValue: false
+      description: key to sort on
+      in: query
+      name: sort
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        format: ''
+        enum:
+        - make
+        - productModel
+        - seatType
+        - childWeight
+        - childHeight
+        - recallsCount
+        - investigationsCount
+        - complaintsCount
+        - manufacturerCommunicationsCount
+        default: make
+    Filter:
+      allowEmptyValue: true
+      description: Filter options based on seatType
+      in: query
+      name: seatTypeFilter
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        format: ''
+        enum:
+        - seatTypeInfant
+        - seatTypeCombination
+        - seatTypeConvertible
+        - seatTypeBooster
+        - seatType3-in-1

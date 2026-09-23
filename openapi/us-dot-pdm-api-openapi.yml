@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: ODE REST PDM API
-  description: Description of functions available from the Operational Data Environment (ODE) via RESTful interface. Ranges given follow interval notation, for example (0,1) or (0..1) means 0 &lt; x &lt; 1 and [0,1] or [0..1] means 0 &le; x &le; 1.
+  description: Description of functions available from the Operational Data Environment (ODE) via RESTful interface. Ranges given follow interval notation, for example (0,1) or (0..1) means 0 < x < 1 and [0,1] or [0..1] means 0 ≤ x ≤ 1.
   version: 0.0.1
 servers:
 - url: https://yourhostname/
@@ -49,6 +49,66 @@ paths:
         required: true
 components:
   schemas:
+    Status:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+    ProbeDataManagement:
+      type: object
+      properties:
+        ode:
+          $ref: '#/components/schemas/Ode'
+        pdm:
+          $ref: '#/components/schemas/PDM'
+        rsuList:
+          type: array
+          items:
+            $ref: '#/components/schemas/RSU'
+    Ode:
+      type: object
+      properties:
+        version:
+          type: integer
+    VehicleStatusRequest:
+      type: object
+      properties:
+        tag:
+          type: string
+        subTag:
+          type: string
+        lessThenValue:
+          type: string
+        moreThenValue:
+          type: string
+        sendAll:
+          type: string
+        status:
+          type: string
+    RSU:
+      type: object
+      description: Optional field, needed for SNMP deposit to RSU.
+      properties:
+        rsuIndex:
+          type: integer
+          description: Index of message storage on RSU.
+        rsuTarget:
+          type: string
+          description: IPv4 address of RSU
+        rsuUsername:
+          type: string
+          description: SNMP username (Not required if value is pre-configured in ODE properties)
+        rsuPassword:
+          type: string
+          description: SNMP password (Not required if value is pre-configured in ODE properties)
+        rsuRetries:
+          type: integer
+          description: Number of retries upon message send failure
+        rsuTimeout:
+          type: integer
+          description: Timeout measured in milliseconds
     PDM:
       type: object
       properties:
@@ -84,63 +144,3 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VehicleStatusRequest'
-    RSU:
-      type: object
-      description: Optional field, needed for SNMP deposit to RSU.
-      properties:
-        rsuIndex:
-          type: integer
-          description: Index of message storage on RSU.
-        rsuTarget:
-          type: string
-          description: IPv4 address of RSU
-        rsuUsername:
-          type: string
-          description: SNMP username (Not required if value is pre-configured in ODE properties)
-        rsuPassword:
-          type: string
-          description: SNMP password (Not required if value is pre-configured in ODE properties)
-        rsuRetries:
-          type: integer
-          description: Number of retries upon message send failure
-        rsuTimeout:
-          type: integer
-          description: Timeout measured in milliseconds
-    ProbeDataManagement:
-      type: object
-      properties:
-        ode:
-          $ref: '#/components/schemas/Ode'
-        pdm:
-          $ref: '#/components/schemas/PDM'
-        rsuList:
-          type: array
-          items:
-            $ref: '#/components/schemas/RSU'
-    Status:
-      type: object
-      properties:
-        success:
-          type: boolean
-        message:
-          type: string
-    VehicleStatusRequest:
-      type: object
-      properties:
-        tag:
-          type: string
-        subTag:
-          type: string
-        lessThenValue:
-          type: string
-        moreThenValue:
-          type: string
-        sendAll:
-          type: string
-        status:
-          type: string
-    Ode:
-      type: object
-      properties:
-        version:
-          type: integer

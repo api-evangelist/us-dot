@@ -1,0 +1,529 @@
+# x-archived-from: dot-tires-api-openapi.yml
+# x-archived-on: 2026-09-16
+openapi: 3.2.0
+info:
+  title: NHTSA childSeats Tires API
+  version: 1.6.0
+  description: Child Seat search and list endpoints
+servers:
+- url: https://mobile.fmcsa.dot.gov/qc/services
+tags:
+- description: Tire search and list endpoints
+  name: tires
+paths:
+  /tires:
+    get:
+      parameters:
+      - allowEmptyValue: false
+        description: A comma separated list of data to return (complaints, recalls, investigations, manufacturerCommunications, none, all), defaults to 'all'.
+        in: query
+        name: data
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: Select which data set to return, either "ratings" or "safetyIssues".
+        in: query
+        name: dataSet
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: brand of tireDetails
+        in: query
+        name: brand
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: line of the tireDetails
+        in: query
+        name: tireline
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: size of the tireDetails
+        in: query
+        name: size
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - $ref: '#/components/parameters/TireSort'
+      - allowEmptyValue: false
+        description: order in which to sort
+        in: query
+        name: order
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+          enum:
+          - asc
+          - desc
+          default: desc
+      - allowEmptyValue: false
+        description: The maximum number of records to return
+        in: query
+        name: max
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - allowEmptyValue: false
+        description: The offset of the records set to return for pagination.
+        in: query
+        name: offset
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Returns zero or more tires
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TireWrapped'
+                title: ArrayOfTires
+                type: array
+        '400':
+          description: Invalid Request
+        '500':
+          description: Internal Server Error
+      tags:
+      - tires
+  /tires/brands:
+    get:
+      parameters:
+      - allowEmptyValue: false
+        description: Select which data set to return, either "ratings" or "safetyIssues". Defaults to 'ratings'
+        in: query
+        name: dataSet
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: The maximum number of records to return. Use '-1' to get all records.
+        in: query
+        name: max
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - allowEmptyValue: false
+        description: The offset of the records listing (for pagination).
+        in: query
+        name: offset
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Returns all available tireDetails brands
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TireBrandWrapped'
+        '400':
+          description: Invalid Request
+        '500':
+          description: Internal Server Error
+      tags:
+      - tires
+  /tires/bySearch:
+    get:
+      parameters:
+      - allowEmptyValue: false
+        description: returns zero or more tires based on search query
+        in: query
+        name: query
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - $ref: '#/components/parameters/TireSort'
+      - allowEmptyValue: false
+        description: order in which to sort
+        in: query
+        name: order
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+          enum:
+          - asc
+          - desc
+          default: desc
+      - allowEmptyValue: false
+        description: A comma separated list of data to return (complaints, recalls, investigations, manufacturerCommunications, none, all), defaults to 'all'.
+        in: query
+        name: data
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: Select which data set to return, either "ratings" or "safetyIssues".
+        in: query
+        name: dataSet
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: 'The maximum number of records to return, upper bound: 50.'
+        in: query
+        name: max
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - allowEmptyValue: false
+        description: The offset of the records listing (for pagination).
+        in: query
+        name: offset
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Fuzzy search for a tireDetails based on productName and size
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TireWrapped'
+        '400':
+          description: Invalid Request
+        '500':
+          description: Internal Server Error
+      tags:
+      - tires
+  /tires/{id}:
+    get:
+      parameters:
+      - description: ID of the tireDetails
+        in: path
+        name: id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - allowEmptyValue: false
+        description: A comma separated list of data to return (complaints, recalls, investigations, manufacturerCommunications, none, all), defaults to 'all'.
+        in: query
+        name: data
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      responses:
+        '200':
+          description: Returns a single tireDetails with the specified ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TireWrapped'
+        '400':
+          description: Invalid Request
+        '500':
+          description: Internal Server Error
+      tags:
+      - tires
+components:
+  schemas:
+    Recalls:
+      properties:
+        nhtsaCampaignNumber:
+          type: string
+        subject:
+          type: string
+      type: object
+    TireWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/Tire'
+          type: array
+      type: object
+    InvestigationAggregate:
+      properties:
+        components:
+          items:
+            $ref: '#/components/schemas/Components'
+          type: array
+        dateClosed:
+          type: string
+        dateOpened:
+          type: string
+        nhtsaCampaignNumber:
+          type: string
+        recalls:
+          items:
+            $ref: '#/components/schemas/Recalls'
+          type: array
+        subject:
+          type: string
+        summary:
+          type: string
+        type:
+          type: string
+      type: object
+    ComplaintAggregate:
+      properties:
+        city:
+          type: string
+        components:
+          items:
+            $ref: '#/components/schemas/Components'
+          type: array
+        crash:
+          type: integer
+        dateFiled:
+          type: string
+        dateOfIncident:
+          type: string
+        description:
+          type: string
+        fire:
+          type: integer
+        nhtsaIdNumber:
+          type: string
+        numberOfDeaths:
+          type: integer
+        numberOfInjuries:
+          type: integer
+        stateAbbreviation:
+          type: string
+        vin:
+          type: string
+      type: object
+    TireBrand:
+      properties:
+        brand:
+          type: string
+      type: object
+    RecallAggregate:
+      properties:
+        components:
+          items:
+            $ref: '#/components/schemas/Components'
+          type: array
+        consequence:
+          type: string
+        correctiveAction:
+          type: string
+        investigations:
+          items:
+            $ref: '#/components/schemas/Investigations'
+          type: array
+        manufacturer:
+          type: string
+        nhtsaCampaignNumber:
+          type: integer
+        notes:
+          type: string
+        potentialNumberOfUnitsAffected:
+          type: string
+        reportsReceivedDate:
+          type: string
+        subject:
+          type: string
+        summary:
+          type: string
+      type: object
+    Investigations:
+      properties:
+        nhtsaActionNumber:
+          type: string
+        subject:
+          type: string
+      type: object
+    Components:
+      properties:
+        name:
+          type: string
+      type: object
+    Message:
+      properties:
+        errorCode:
+          type: string
+        errorDetail:
+          type: string
+        errorMessage:
+          type: string
+        userMessage:
+          type: string
+      type: object
+    Tire:
+      properties:
+        brand:
+          type: string
+        const:
+          type: string
+        productName:
+          type: string
+        safetyIssues:
+          $ref: '#/components/schemas/SafetyIssueAggregate'
+        size:
+          type: string
+        temp:
+          type: string
+        tireline:
+          type: string
+        trac:
+          type: string
+        wear:
+          type: string
+      type: object
+    MFRCommunicationAggregate:
+      properties:
+        communicationDate:
+          type: string
+        components:
+          items:
+            $ref: '#/components/schemas/Components'
+          type: array
+        manufacturerCommunicationNumber:
+          type: string
+        nhtsaIdNumber:
+          type: string
+        subject:
+          type: string
+        summary:
+          type: string
+      type: object
+    TireBrandWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/TireBrand'
+          type: array
+      type: object
+    Meta:
+      properties:
+        messages:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        pagination:
+          items:
+            $ref: '#/components/schemas/Pagination'
+          type: array
+        status:
+          type: integer
+      type: object
+    SafetyIssueAggregate:
+      properties:
+        complaints:
+          items:
+            $ref: '#/components/schemas/ComplaintAggregate'
+          type: array
+        investigation:
+          items:
+            $ref: '#/components/schemas/InvestigationAggregate'
+          type: array
+        manufacturerCommunications:
+          items:
+            $ref: '#/components/schemas/MFRCommunicationAggregate'
+          type: array
+        recalls:
+          items:
+            $ref: '#/components/schemas/RecallAggregate'
+          type: array
+      type: object
+    Pagination:
+      properties:
+        count:
+          type: integer
+        currentUrl:
+          type: string
+        max:
+          type: integer
+        nextUrl:
+          type: string
+        offset:
+          type: integer
+        order:
+          type: string
+        previousUrl:
+          type: string
+        sort:
+          type: string
+        total:
+          type: integer
+      type: object
+  parameters:
+    TireSort:
+      allowEmptyValue: false
+      description: key to sort on
+      in: query
+      name: sort
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        format: ''
+        enum:
+        - productName
+        - size
+        - trac
+        - temp
+        - wear
+        - recallsCount
+        - investigationsCount
+        - complaintsCount
+        - manufacturerCommunicationsCount
+        default: productName

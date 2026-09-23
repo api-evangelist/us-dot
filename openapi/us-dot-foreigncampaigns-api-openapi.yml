@@ -1,0 +1,254 @@
+openapi: 3.2.0
+info:
+  title: NHTSA childSeats Foreign Campaigns API
+  version: 1.6.0
+  description: Child Seat search and list endpoints
+servers:
+- url: https://mobile.fmcsa.dot.gov/qc/services
+tags:
+- description: Foreign Campaign search and list endpoints
+  name: foreignCampaigns
+paths:
+  /foreignCampaigns:
+    get:
+      parameters:
+      - allowEmptyValue: false
+        description: manufacturer associated with the foreign campaign
+        in: query
+        name: manufacturer
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: 'The date to restrict the search to. Format: yyyy-MM-dd'
+        in: query
+        name: dateStart
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: ''
+      - allowEmptyValue: false
+        description: 'The date to restrict the search to. Format: yyyy-MM-dd'
+        in: query
+        name: dateEnd
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: ''
+      - allowEmptyValue: false
+        description: order in which to sort
+        in: query
+        name: order
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+          enum:
+          - asc
+          - desc
+          default: desc
+      - allowEmptyValue: false
+        description: The maximum number of records to return
+        in: query
+        name: max
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - allowEmptyValue: false
+        description: The offset of the records set to return for pagination.
+        in: query
+        name: offset
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Returns zero or more Foreign Campaigns
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ForeignCampaignWrapped'
+                title: ArrayOfForeignCampaign
+                type: array
+        '400':
+          description: Invalid Request
+        '500':
+          description: Internal Server Error
+      tags:
+      - foreignCampaigns
+      summary: Get foreign campaigns
+      x-summary-source: derived
+      operationId: getForeignCampaigns
+      x-operation-id-source: derived
+  /foreignCampaigns/manufacturers:
+    get:
+      parameters:
+      - allowEmptyValue: false
+        description: The maximum number of records to return. Use '-1' to get all records.
+        in: query
+        name: max
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - allowEmptyValue: false
+        description: The offset of the records listing (for pagination).
+        in: query
+        name: offset
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Returns all available Foreign Campaign manufacturers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Invalid Request
+        '500':
+          description: Internal Server Error
+      tags:
+      - foreignCampaigns
+      summary: Get foreign campaigns manufacturers
+      x-summary-source: derived
+      operationId: getForeignCampaignsManufacturers
+      x-operation-id-source: derived
+  /foreignCampaigns/{id}:
+    get:
+      parameters:
+      - description: ID of the Foreign Campaign
+        in: path
+        name: id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Returns a single Foreign Campaign with the specified ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForeignCampaignWrapped'
+        '400':
+          description: Invalid Request
+        '500':
+          description: Internal Server Error
+      tags:
+      - foreignCampaigns
+      summary: Get foreign campaigns by id
+      x-summary-source: derived
+      operationId: getForeignCampaignsById
+      x-operation-id-source: derived
+components:
+  schemas:
+    Documents:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        size:
+          type: string
+        type:
+          type: string
+        url:
+          type: string
+      type: object
+    ForeignCampaignWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/ForeignCampaign'
+          type: array
+      type: object
+    Message:
+      properties:
+        errorCode:
+          type: string
+        errorDetail:
+          type: string
+        errorMessage:
+          type: string
+        userMessage:
+          type: string
+      type: object
+    Meta:
+      properties:
+        messages:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        pagination:
+          items:
+            $ref: '#/components/schemas/Pagination'
+          type: array
+        status:
+          type: integer
+      type: object
+    ForeignCampaign:
+      properties:
+        associatedDocuments:
+          items:
+            $ref: '#/components/schemas/Documents'
+          type: array
+        dateReceived:
+          format: date
+          type: string
+        foreignRecallNumber:
+          type: string
+        id:
+          type: integer
+        manufacturer:
+          type: string
+        recallTypeCode:
+          type: string
+      type: object
+    Pagination:
+      properties:
+        count:
+          type: integer
+        currentUrl:
+          type: string
+        max:
+          type: integer
+        nextUrl:
+          type: string
+        offset:
+          type: integer
+        order:
+          type: string
+        previousUrl:
+          type: string
+        sort:
+          type: string
+        total:
+          type: integer
+      type: object

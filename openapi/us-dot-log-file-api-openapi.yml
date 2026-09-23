@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
   title: ODE REST log file API
-  description: Description of functions available from the Operational Data Environment (ODE) via RESTful interface. Ranges given follow interval notation, for example (0,1) or (0..1) means 0 &lt; x &lt; 1 and [0,1] or [0..1] means 0 &le; x &le; 1.
+  description: Description of functions available from the Operational Data Environment (ODE) via RESTful interface. Ranges given follow interval notation, for example (0,1) or (0..1) means 0 < x < 1 and [0,1] or [0..1] means 0 ≤ x ≤ 1.
   version: 0.0.1
 servers:
 - url: https://yourhostname/
 tags:
-- name: log file
+- name: Log File
 paths:
   /upload/obulog:
     post:
@@ -14,7 +14,7 @@ paths:
       operationId: upload-obulog
       description: Uploads an OBU log file to ODE upload folder to be processed and propaged
       tags:
-      - log file
+      - Log File
       responses:
         '200':
           description: File uploaded successfully

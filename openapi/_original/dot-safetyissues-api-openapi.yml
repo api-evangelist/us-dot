@@ -1,0 +1,493 @@
+# x-archived-from: dot-safetyissues-api-openapi.yml
+# x-archived-on: 2026-09-16
+openapi: 3.2.0
+info:
+  title: NHTSA childSeats Safety Issues API
+  version: 1.6.0
+  description: Child Seat search and list endpoints
+servers:
+- url: https://mobile.fmcsa.dot.gov/qc/services
+tags:
+- description: Recalls, Investigations, Complaints, and Manufacturer Communications
+  name: safetyIssues
+paths:
+  /safetyIssues:
+    get:
+      parameters:
+      - allowEmptyValue: false
+        description: The maximum number of records to return
+        in: query
+        name: max
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - allowEmptyValue: false
+        description: The offset of the records set to return for pagination.
+        in: query
+        name: offset
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The list of safety issues
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SafetyIssue'
+                title: ArrayOfSafetyIssues
+                type: array
+        '400':
+          description: Invalid Request
+        '500':
+          description: Internal Server Error
+      tags:
+      - safetyIssues
+  /safetyIssues/byDate:
+    get:
+      parameters:
+      - allowEmptyValue: false
+        description: The start date to look up safetyIssues by.
+        in: query
+        name: dateStart
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: date
+      - allowEmptyValue: false
+        description: The end date to look up safetyIssues by.
+        in: query
+        name: dateEnd
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: date
+      - allowEmptyValue: false
+        description: 'The specified issue type only: ''recall'', ''investigation''.(defaults to recall)'
+        in: query
+        name: issueType
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: The maximum number of records to return
+        in: query
+        name: max
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - allowEmptyValue: false
+        description: The offset of the records listing (for pagination).
+        in: query
+        name: offset
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Paginated list of SafetyIssues from within the specified date range.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SafetyIssueAggregateWrapped'
+        '400':
+          description: Invalid Request
+        '500':
+          description: Internal Server Error
+      tags:
+      - safetyIssues
+  /safetyIssues/byKeywords:
+    get:
+      parameters:
+      - allowEmptyValue: false
+        description: The keyword[s] to search descriptions for (Only applicable to 'complaint' type). Natural language (words, spaces) is allowed.
+        in: query
+        name: keywords
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: match must have all keywords. true or false. defaults to true
+        in: query
+        name: allKeywords
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: boolean
+          format: ''
+      - allowEmptyValue: false
+        description: 'Valid inputs: [vehicle], [childSeat], [tireDetails], [equipment] without brackets. Choose which product type to limit the search to.'
+        in: query
+        name: productType
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: Find only products made in the specified year or later
+        in: query
+        name: productYearStart
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - allowEmptyValue: false
+        description: Find only products made in the specified year or before
+        in: query
+        name: productYearEnd
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - allowEmptyValue: false
+        description: Restrict query to the specified make only
+        in: query
+        name: productMake
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: Restrict query to the specified model only
+        in: query
+        name: productModel
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: 'Valid inputs: [recall], [manufacturerCommunication], [complaint], [investigation] without brackets. Choose which issue type to limit the search to.'
+        in: query
+        name: issueType
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: The maximum number of records to return
+        in: query
+        name: max
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - allowEmptyValue: false
+        description: The offset of the records listing (for pagination).
+        in: query
+        name: offset
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: A list of issues containing the key word[s] in their descriptions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SafetyIssueAggregateWrapped'
+        '400':
+          description: Invalid Request
+        '500':
+          description: Internal Server Error
+      tags:
+      - safetyIssues
+  /safetyIssues/byNhtsaId:
+    get:
+      parameters:
+      - allowEmptyValue: false
+        description: The nhtsa id to search for.
+        in: query
+        name: nhtsaId
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: int64
+      - allowEmptyValue: false
+        description: 'Filter the response by the specified field. Valid inputs: [issueType]'
+        in: query
+        name: filter
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      - allowEmptyValue: false
+        description: 'The value to use as a filter. Valid inputs: [recalls,complaints,investigations,manufacturerCommunications]'
+        in: query
+        name: filterValue
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: ''
+      responses:
+        '200':
+          description: List of SafetyIssues identified by the specified nhtsaId.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SafetyIssueAggregateWrapped'
+        '400':
+          description: Invalid Request
+        '500':
+          description: Internal Server Error
+      tags:
+      - safetyIssues
+components:
+  schemas:
+    Recalls:
+      properties:
+        nhtsaCampaignNumber:
+          type: string
+        subject:
+          type: string
+      type: object
+    ComplaintAggregate:
+      properties:
+        city:
+          type: string
+        components:
+          items:
+            $ref: '#/components/schemas/Components'
+          type: array
+        crash:
+          type: integer
+        dateFiled:
+          type: string
+        dateOfIncident:
+          type: string
+        description:
+          type: string
+        fire:
+          type: integer
+        nhtsaIdNumber:
+          type: string
+        numberOfDeaths:
+          type: integer
+        numberOfInjuries:
+          type: integer
+        stateAbbreviation:
+          type: string
+        vin:
+          type: string
+      type: object
+    InvestigationAggregate:
+      properties:
+        components:
+          items:
+            $ref: '#/components/schemas/Components'
+          type: array
+        dateClosed:
+          type: string
+        dateOpened:
+          type: string
+        nhtsaCampaignNumber:
+          type: string
+        recalls:
+          items:
+            $ref: '#/components/schemas/Recalls'
+          type: array
+        subject:
+          type: string
+        summary:
+          type: string
+        type:
+          type: string
+      type: object
+    RecallAggregate:
+      properties:
+        components:
+          items:
+            $ref: '#/components/schemas/Components'
+          type: array
+        consequence:
+          type: string
+        correctiveAction:
+          type: string
+        investigations:
+          items:
+            $ref: '#/components/schemas/Investigations'
+          type: array
+        manufacturer:
+          type: string
+        nhtsaCampaignNumber:
+          type: integer
+        notes:
+          type: string
+        potentialNumberOfUnitsAffected:
+          type: string
+        reportsReceivedDate:
+          type: string
+        subject:
+          type: string
+        summary:
+          type: string
+      type: object
+    SafetyIssueAggregateWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/SafetyIssueAggregate'
+          type: array
+      type: object
+    SafetyIssue:
+      properties:
+        artemisId:
+          format: int64
+          type: integer
+        createDate:
+          format: date
+          type: string
+        description:
+          type: string
+        id:
+          format: int64
+          type: integer
+        issueYear:
+          type: string
+        subject:
+          type: string
+        updateDate:
+          format: date
+          type: string
+      type: object
+    Investigations:
+      properties:
+        nhtsaActionNumber:
+          type: string
+        subject:
+          type: string
+      type: object
+    Components:
+      properties:
+        name:
+          type: string
+      type: object
+    Message:
+      properties:
+        errorCode:
+          type: string
+        errorDetail:
+          type: string
+        errorMessage:
+          type: string
+        userMessage:
+          type: string
+      type: object
+    MFRCommunicationAggregate:
+      properties:
+        communicationDate:
+          type: string
+        components:
+          items:
+            $ref: '#/components/schemas/Components'
+          type: array
+        manufacturerCommunicationNumber:
+          type: string
+        nhtsaIdNumber:
+          type: string
+        subject:
+          type: string
+        summary:
+          type: string
+      type: object
+    Meta:
+      properties:
+        messages:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        pagination:
+          items:
+            $ref: '#/components/schemas/Pagination'
+          type: array
+        status:
+          type: integer
+      type: object
+    SafetyIssueAggregate:
+      properties:
+        complaints:
+          items:
+            $ref: '#/components/schemas/ComplaintAggregate'
+          type: array
+        investigation:
+          items:
+            $ref: '#/components/schemas/InvestigationAggregate'
+          type: array
+        manufacturerCommunications:
+          items:
+            $ref: '#/components/schemas/MFRCommunicationAggregate'
+          type: array
+        recalls:
+          items:
+            $ref: '#/components/schemas/RecallAggregate'
+          type: array
+      type: object
+    Pagination:
+      properties:
+        count:
+          type: integer
+        currentUrl:
+          type: string
+        max:
+          type: integer
+        nextUrl:
+          type: string
+        offset:
+          type: integer
+        order:
+          type: string
+        previousUrl:
+          type: string
+        sort:
+          type: string
+        total:
+          type: integer
+      type: object
