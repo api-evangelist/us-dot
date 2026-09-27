@@ -167,6 +167,15 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ForeignCampaignWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/ForeignCampaign'
+          type: array
+      type: object
     Documents:
       properties:
         description:
@@ -180,14 +189,23 @@ components:
         url:
           type: string
       type: object
-    ForeignCampaignWrapped:
+    ForeignCampaign:
       properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        results:
+        associatedDocuments:
           items:
-            $ref: '#/components/schemas/ForeignCampaign'
+            $ref: '#/components/schemas/Documents'
           type: array
+        dateReceived:
+          format: date
+          type: string
+        foreignRecallNumber:
+          type: string
+        id:
+          type: integer
+        manufacturer:
+          type: string
+        recallTypeCode:
+          type: string
       type: object
     Message:
       properties:
@@ -212,24 +230,6 @@ components:
           type: array
         status:
           type: integer
-      type: object
-    ForeignCampaign:
-      properties:
-        associatedDocuments:
-          items:
-            $ref: '#/components/schemas/Documents'
-          type: array
-        dateReceived:
-          format: date
-          type: string
-        foreignRecallNumber:
-          type: string
-        id:
-          type: integer
-        manufacturer:
-          type: string
-        recallTypeCode:
-          type: string
       type: object
     Pagination:
       properties:

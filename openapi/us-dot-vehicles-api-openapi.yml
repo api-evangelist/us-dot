@@ -1200,83 +1200,73 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    MFRCommunicationAggregate:
+    Media:
       properties:
-        communicationDate:
+        type:
+          type: string
+        url:
+          type: string
+      type: object
+    InvestigationAggregate:
+      properties:
+        components:
+          items:
+            $ref: '#/components/schemas/Components'
+          type: array
+        dateClosed:
+          type: string
+        dateOpened:
+          type: string
+        nhtsaCampaignNumber:
+          type: string
+        recalls:
+          items:
+            $ref: '#/components/schemas/Recalls'
+          type: array
+        subject:
+          type: string
+        summary:
+          type: string
+        type:
+          type: string
+      type: object
+    ComplaintAggregate:
+      properties:
+        city:
           type: string
         components:
           items:
             $ref: '#/components/schemas/Components'
           type: array
-        manufacturerCommunicationNumber:
+        crash:
+          type: integer
+        dateFiled:
           type: string
+        dateOfIncident:
+          type: string
+        description:
+          type: string
+        fire:
+          type: integer
         nhtsaIdNumber:
           type: string
-        subject:
+        numberOfDeaths:
+          type: integer
+        numberOfInjuries:
+          type: integer
+        stateAbbreviation:
           type: string
-        summary:
+        vin:
           type: string
       type: object
-    Rating:
+    Feature:
       properties:
-        display:
+        label:
           type: string
         notes:
           type: string
-        position:
+        value:
           type: string
-        possibility:
-          type: integer
-        rating:
-          type: integer
-        ratings:
-          items:
-            $ref: '#/components/schemas/Rating'
-          type: array
-        safetyConcerns:
-          type: string
-        tip:
-          type: integer
-      type: object
-    RecommendedFeature:
-      properties:
-        description:
-          type: string
-        icon:
-          type: string
-        installed:
-          type: boolean
-        key:
-          type: string
-        label:
-          type: string
-        note:
-          type: string
-        type:
-          type: string
-        video:
-          type: string
-      type: object
-    Pagination:
-      properties:
-        count:
-          type: integer
-        currentUrl:
-          type: string
-        max:
-          type: integer
-        nextUrl:
-          type: string
-        offset:
-          type: integer
-        order:
-          type: string
-        previousUrl:
-          type: string
-        sort:
-          type: string
-        total:
-          type: integer
       type: object
     VehicleDetails:
       properties:
@@ -1315,85 +1305,26 @@ components:
         vehiclePicture:
           type: string
       type: object
-    VehicleBasicWrapped:
+    Pagination:
       properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        results:
-          items:
-            $ref: '#/components/schemas/VehicleBasic'
-          type: array
-      type: object
-    Feature:
-      properties:
-        label:
-          type: string
-        notes:
-          type: string
-        value:
-          type: string
-      type: object
-    ComplaintAggregate:
-      properties:
-        city:
-          type: string
-        components:
-          items:
-            $ref: '#/components/schemas/Components'
-          type: array
-        crash:
+        count:
           type: integer
-        dateFiled:
+        currentUrl:
           type: string
-        dateOfIncident:
-          type: string
-        description:
-          type: string
-        fire:
+        max:
           type: integer
-        nhtsaIdNumber:
+        nextUrl:
           type: string
-        numberOfDeaths:
+        offset:
           type: integer
-        numberOfInjuries:
+        order:
+          type: string
+        previousUrl:
+          type: string
+        sort:
+          type: string
+        total:
           type: integer
-        stateAbbreviation:
-          type: string
-        vin:
-          type: string
-      type: object
-    SafetyIssueAggregate:
-      properties:
-        complaints:
-          items:
-            $ref: '#/components/schemas/ComplaintAggregate'
-          type: array
-        investigation:
-          items:
-            $ref: '#/components/schemas/InvestigationAggregate'
-          type: array
-        manufacturerCommunications:
-          items:
-            $ref: '#/components/schemas/MFRCommunicationAggregate'
-          type: array
-        recalls:
-          items:
-            $ref: '#/components/schemas/RecallAggregate'
-          type: array
-      type: object
-    Components:
-      properties:
-        name:
-          type: string
-      type: object
-    VehicleDetailsWrapped:
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        results:
-          items:
-            $ref: '#/components/schemas/VehicleDetails'
-          type: array
       type: object
     CrashTestRating:
       properties:
@@ -1424,24 +1355,15 @@ components:
         type:
           type: string
       type: object
-    Meta:
+    Message:
       properties:
-        messages:
-          items:
-            $ref: '#/components/schemas/Message'
-          type: array
-        pagination:
-          items:
-            $ref: '#/components/schemas/Pagination'
-          type: array
-        status:
-          type: integer
-      type: object
-    Recalls:
-      properties:
-        nhtsaCampaignNumber:
+        errorCode:
           type: string
-        subject:
+        errorDetail:
+          type: string
+        errorMessage:
+          type: string
+        userMessage:
           type: string
       type: object
     VehicleBasic:
@@ -1477,6 +1399,15 @@ components:
         vehiclePicture:
           type: string
       type: object
+    PartialVehicleWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/PartialVehicle'
+          type: array
+      type: object
     RecallAggregate:
       properties:
         components:
@@ -1506,55 +1437,23 @@ components:
         summary:
           type: string
       type: object
-    PartialVehicle:
+    SafetyIssueAggregate:
       properties:
-        id:
-          type: integer
-        make:
-          type: string
-        manufacturerName:
-          type: string
-        model:
-          type: string
-        productYear:
-          type: integer
-        vehicleClass:
-          type: string
-        vehicleTrim:
-          type: string
-      type: object
-    Media:
-      properties:
-        type:
-          type: string
-        url:
-          type: string
-      type: object
-    Investigations:
-      properties:
-        nhtsaActionNumber:
-          type: string
-        subject:
-          type: string
-      type: object
-    SafetyFeature:
-      properties:
-        category:
-          type: string
-        features:
+        complaints:
           items:
-            $ref: '#/components/schemas/Feature'
+            $ref: '#/components/schemas/ComplaintAggregate'
           type: array
-        notes:
-          type: string
-      type: object
-    PartialVehicleWrapped:
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        results:
+        investigation:
           items:
-            $ref: '#/components/schemas/PartialVehicle'
+            $ref: '#/components/schemas/InvestigationAggregate'
+          type: array
+        manufacturerCommunications:
+          items:
+            $ref: '#/components/schemas/MFRCommunicationAggregate'
+          type: array
+        recalls:
+          items:
+            $ref: '#/components/schemas/RecallAggregate'
           type: array
       type: object
     SafetyRatingAggregate:
@@ -1572,37 +1471,138 @@ components:
             $ref: '#/components/schemas/SafetyFeature'
           type: array
       type: object
-    Message:
+    RecommendedFeature:
       properties:
-        errorCode:
+        description:
           type: string
-        errorDetail:
+        icon:
           type: string
-        errorMessage:
+        installed:
+          type: boolean
+        key:
           type: string
-        userMessage:
+        label:
+          type: string
+        note:
+          type: string
+        type:
+          type: string
+        video:
           type: string
       type: object
-    InvestigationAggregate:
+    Investigations:
       properties:
+        nhtsaActionNumber:
+          type: string
+        subject:
+          type: string
+      type: object
+    MFRCommunicationAggregate:
+      properties:
+        communicationDate:
+          type: string
         components:
           items:
             $ref: '#/components/schemas/Components'
           type: array
-        dateClosed:
+        manufacturerCommunicationNumber:
           type: string
-        dateOpened:
+        nhtsaIdNumber:
           type: string
-        nhtsaCampaignNumber:
-          type: string
-        recalls:
-          items:
-            $ref: '#/components/schemas/Recalls'
-          type: array
         subject:
           type: string
         summary:
           type: string
-        type:
+      type: object
+    PartialVehicle:
+      properties:
+        id:
+          type: integer
+        make:
+          type: string
+        manufacturerName:
+          type: string
+        model:
+          type: string
+        productYear:
+          type: integer
+        vehicleClass:
+          type: string
+        vehicleTrim:
+          type: string
+      type: object
+    Rating:
+      properties:
+        display:
+          type: string
+        notes:
+          type: string
+        position:
+          type: string
+        possibility:
+          type: integer
+        rating:
+          type: integer
+        ratings:
+          items:
+            $ref: '#/components/schemas/Rating'
+          type: array
+        safetyConcerns:
+          type: string
+        tip:
+          type: integer
+      type: object
+    SafetyFeature:
+      properties:
+        category:
+          type: string
+        features:
+          items:
+            $ref: '#/components/schemas/Feature'
+          type: array
+        notes:
+          type: string
+      type: object
+    VehicleDetailsWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/VehicleDetails'
+          type: array
+      type: object
+    VehicleBasicWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/VehicleBasic'
+          type: array
+      type: object
+    Recalls:
+      properties:
+        nhtsaCampaignNumber:
+          type: string
+        subject:
+          type: string
+      type: object
+    Meta:
+      properties:
+        messages:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        pagination:
+          items:
+            $ref: '#/components/schemas/Pagination'
+          type: array
+        status:
+          type: integer
+      type: object
+    Components:
+      properties:
+        name:
           type: string
       type: object

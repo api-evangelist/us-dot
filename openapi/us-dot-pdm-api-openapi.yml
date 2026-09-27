@@ -49,66 +49,6 @@ paths:
         required: true
 components:
   schemas:
-    Status:
-      type: object
-      properties:
-        success:
-          type: boolean
-        message:
-          type: string
-    ProbeDataManagement:
-      type: object
-      properties:
-        ode:
-          $ref: '#/components/schemas/Ode'
-        pdm:
-          $ref: '#/components/schemas/PDM'
-        rsuList:
-          type: array
-          items:
-            $ref: '#/components/schemas/RSU'
-    Ode:
-      type: object
-      properties:
-        version:
-          type: integer
-    VehicleStatusRequest:
-      type: object
-      properties:
-        tag:
-          type: string
-        subTag:
-          type: string
-        lessThenValue:
-          type: string
-        moreThenValue:
-          type: string
-        sendAll:
-          type: string
-        status:
-          type: string
-    RSU:
-      type: object
-      description: Optional field, needed for SNMP deposit to RSU.
-      properties:
-        rsuIndex:
-          type: integer
-          description: Index of message storage on RSU.
-        rsuTarget:
-          type: string
-          description: IPv4 address of RSU
-        rsuUsername:
-          type: string
-          description: SNMP username (Not required if value is pre-configured in ODE properties)
-        rsuPassword:
-          type: string
-          description: SNMP password (Not required if value is pre-configured in ODE properties)
-        rsuRetries:
-          type: integer
-          description: Number of retries upon message send failure
-        rsuTimeout:
-          type: integer
-          description: Timeout measured in milliseconds
     PDM:
       type: object
       properties:
@@ -144,3 +84,63 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VehicleStatusRequest'
+    Status:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+    Ode:
+      type: object
+      properties:
+        version:
+          type: integer
+    RSU:
+      type: object
+      description: Optional field, needed for SNMP deposit to RSU.
+      properties:
+        rsuIndex:
+          type: integer
+          description: Index of message storage on RSU.
+        rsuTarget:
+          type: string
+          description: IPv4 address of RSU
+        rsuUsername:
+          type: string
+          description: SNMP username (Not required if value is pre-configured in ODE properties)
+        rsuPassword:
+          type: string
+          description: SNMP password (Not required if value is pre-configured in ODE properties)
+        rsuRetries:
+          type: integer
+          description: Number of retries upon message send failure
+        rsuTimeout:
+          type: integer
+          description: Timeout measured in milliseconds
+    ProbeDataManagement:
+      type: object
+      properties:
+        ode:
+          $ref: '#/components/schemas/Ode'
+        pdm:
+          $ref: '#/components/schemas/PDM'
+        rsuList:
+          type: array
+          items:
+            $ref: '#/components/schemas/RSU'
+    VehicleStatusRequest:
+      type: object
+      properties:
+        tag:
+          type: string
+        subTag:
+          type: string
+        lessThenValue:
+          type: string
+        moreThenValue:
+          type: string
+        sendAll:
+          type: string
+        status:
+          type: string
