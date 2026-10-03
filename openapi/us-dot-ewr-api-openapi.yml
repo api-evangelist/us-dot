@@ -232,6 +232,32 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    EWRManufacturerDetail:
+      properties:
+        damages:
+          items:
+            $ref: '#/components/schemas/EWRReportPeriod'
+          type: array
+        id:
+          format: int64
+          type: integer
+        injuries:
+          items:
+            $ref: '#/components/schemas/EWRReportPeriod'
+          type: array
+        name:
+          type: string
+        productions:
+          items:
+            $ref: '#/components/schemas/EWRReportPeriod'
+          type: array
+      required:
+      - id
+      - name
+      - injuries
+      - productions
+      - damages
+      type: object
     EWRProduction:
       properties:
         make:
@@ -260,6 +286,75 @@ components:
       - modelYear
       - typeCode
       - totalProduction
+    EWRManufacturersWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/EWRManufacturer'
+          type: array
+      type: object
+    Meta:
+      properties:
+        messages:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        pagination:
+          items:
+            $ref: '#/components/schemas/Pagination'
+          type: array
+        status:
+          type: integer
+      type: object
+    EWRPropertyDamageWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/EWRPropertyDamage'
+          type: array
+      type: object
+    EWRProductionWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/EWRProduction'
+          type: array
+      type: object
+    EWRInjuryWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/EWRInjury'
+          type: array
+      type: object
+    Message:
+      properties:
+        errorCode:
+          type: string
+        errorDetail:
+          type: string
+        errorMessage:
+          type: string
+        userMessage:
+          type: string
+      type: object
+    EWRManufacturerDetailWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/EWRManufacturerDetail'
+          type: array
+      type: object
     EWRInjury:
       properties:
         sequenceId:
@@ -306,176 +401,6 @@ components:
       - injuries
       - stateOrCountryCode
       - components
-    EWRManufacturerDetailWrapped:
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        results:
-          items:
-            $ref: '#/components/schemas/EWRManufacturerDetail'
-          type: array
-      type: object
-    EWRProductionWrapped:
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        results:
-          items:
-            $ref: '#/components/schemas/EWRProduction'
-          type: array
-      type: object
-    EWRReportPeriodCategory:
-      properties:
-        category:
-          type: string
-        categoryCode:
-          type: string
-        count:
-          format: int32
-          type: integer
-        reportId:
-          format: int64
-          type: integer
-        reportUrl:
-          type: string
-      required:
-      - category
-      - categoryCode
-      - count
-      - reportId
-      - reportUrl
-      type: object
-    EWRManufacturer:
-      properties:
-        id:
-          format: int64
-          type: integer
-        name:
-          type: string
-        reportTypes:
-          items:
-            type: string
-          type: array
-      required:
-      - id
-      - name
-      - reportTypes
-      type: object
-    EWRInjuryWrapped:
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        results:
-          items:
-            $ref: '#/components/schemas/EWRInjury'
-          type: array
-      type: object
-    EWRManufacturersWrapped:
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        results:
-          items:
-            $ref: '#/components/schemas/EWRManufacturer'
-          type: array
-      type: object
-    Message:
-      properties:
-        errorCode:
-          type: string
-        errorDetail:
-          type: string
-        errorMessage:
-          type: string
-        userMessage:
-          type: string
-      type: object
-    EWRReportPeriod:
-      properties:
-        quarter:
-          format: int32
-          type: integer
-        reports:
-          items:
-            $ref: '#/components/schemas/EWRReportPeriodCategory'
-          type: array
-        year:
-          format: int32
-          type: integer
-      required:
-      - year
-      - quarter
-      - reports
-      type: object
-    Meta:
-      properties:
-        messages:
-          items:
-            $ref: '#/components/schemas/Message'
-          type: array
-        pagination:
-          items:
-            $ref: '#/components/schemas/Pagination'
-          type: array
-        status:
-          type: integer
-      type: object
-    EWRManufacturerDetail:
-      properties:
-        damages:
-          items:
-            $ref: '#/components/schemas/EWRReportPeriod'
-          type: array
-        id:
-          format: int64
-          type: integer
-        injuries:
-          items:
-            $ref: '#/components/schemas/EWRReportPeriod'
-          type: array
-        name:
-          type: string
-        productions:
-          items:
-            $ref: '#/components/schemas/EWRReportPeriod'
-          type: array
-      required:
-      - id
-      - name
-      - injuries
-      - productions
-      - damages
-      type: object
-    EWRPropertyDamageWrapped:
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        results:
-          items:
-            $ref: '#/components/schemas/EWRPropertyDamage'
-          type: array
-      type: object
-    Pagination:
-      properties:
-        count:
-          type: integer
-        currentUrl:
-          type: string
-        max:
-          type: integer
-        nextUrl:
-          type: string
-        offset:
-          type: integer
-        order:
-          type: string
-        previousUrl:
-          type: string
-        sort:
-          type: string
-        total:
-          type: integer
-      type: object
     EWRPropertyDamage:
       properties:
         year:
@@ -607,3 +532,78 @@ components:
       type: object
       required:
       - year
+    EWRManufacturer:
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        reportTypes:
+          items:
+            type: string
+          type: array
+      required:
+      - id
+      - name
+      - reportTypes
+      type: object
+    Pagination:
+      properties:
+        count:
+          type: integer
+        currentUrl:
+          type: string
+        max:
+          type: integer
+        nextUrl:
+          type: string
+        offset:
+          type: integer
+        order:
+          type: string
+        previousUrl:
+          type: string
+        sort:
+          type: string
+        total:
+          type: integer
+      type: object
+    EWRReportPeriod:
+      properties:
+        quarter:
+          format: int32
+          type: integer
+        reports:
+          items:
+            $ref: '#/components/schemas/EWRReportPeriodCategory'
+          type: array
+        year:
+          format: int32
+          type: integer
+      required:
+      - year
+      - quarter
+      - reports
+      type: object
+    EWRReportPeriodCategory:
+      properties:
+        category:
+          type: string
+        categoryCode:
+          type: string
+        count:
+          format: int32
+          type: integer
+        reportId:
+          format: int64
+          type: integer
+        reportUrl:
+          type: string
+      required:
+      - category
+      - categoryCode
+      - count
+      - reportId
+      - reportUrl
+      type: object

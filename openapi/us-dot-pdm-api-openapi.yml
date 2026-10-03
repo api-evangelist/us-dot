@@ -49,6 +49,26 @@ paths:
         required: true
 components:
   schemas:
+    VehicleStatusRequest:
+      type: object
+      properties:
+        tag:
+          type: string
+        subTag:
+          type: string
+        lessThenValue:
+          type: string
+        moreThenValue:
+          type: string
+        sendAll:
+          type: string
+        status:
+          type: string
+    Ode:
+      type: object
+      properties:
+        version:
+          type: integer
     PDM:
       type: object
       properties:
@@ -84,18 +104,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VehicleStatusRequest'
-    Status:
+    ProbeDataManagement:
       type: object
       properties:
-        success:
-          type: boolean
-        message:
-          type: string
-    Ode:
-      type: object
-      properties:
-        version:
-          type: integer
+        ode:
+          $ref: '#/components/schemas/Ode'
+        pdm:
+          $ref: '#/components/schemas/PDM'
+        rsuList:
+          type: array
+          items:
+            $ref: '#/components/schemas/RSU'
     RSU:
       type: object
       description: Optional field, needed for SNMP deposit to RSU.
@@ -118,29 +137,10 @@ components:
         rsuTimeout:
           type: integer
           description: Timeout measured in milliseconds
-    ProbeDataManagement:
+    Status:
       type: object
       properties:
-        ode:
-          $ref: '#/components/schemas/Ode'
-        pdm:
-          $ref: '#/components/schemas/PDM'
-        rsuList:
-          type: array
-          items:
-            $ref: '#/components/schemas/RSU'
-    VehicleStatusRequest:
-      type: object
-      properties:
-        tag:
-          type: string
-        subTag:
-          type: string
-        lessThenValue:
-          type: string
-        moreThenValue:
-          type: string
-        sendAll:
-          type: string
-        status:
+        success:
+          type: boolean
+        message:
           type: string

@@ -500,8 +500,8 @@ components:
   schemas:
     pilotDataSearchResponse_example: {}
     pilotDataSearch_example: {}
-    trackingData_example: {}
     pilotData_example: {}
+    trackingData_example: {}
 x-amf-baseUriParameters:
   domain:
     displayName: Domain name (By enviornment)

@@ -163,6 +163,13 @@ paths:
                 $ref: '#/components/schemas/Status'
 components:
   schemas:
+    TravelerInputData:
+      type: object
+      properties:
+        request:
+          $ref: '#/components/schemas/request'
+        tim:
+          $ref: '#/components/schemas/tim'
     SDW:
       type: object
       properties:
@@ -204,155 +211,15 @@ components:
                   type: string
                 longitude:
                   type: string
-    Attribute:
-      type: object
-      properties:
-        localNodes:
-          type: array
-          items:
-            type: integer
-        disabledLists:
-          type: array
-          items:
-            type: integer
-        enabledLists:
-          type: array
-          items:
-            type: integer
-        dataLists:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataList'
-        dWidth:
-          type: integer
-        dEleveation:
-          type: integer
-    SNMP:
-      type: object
-      description: Optional field, needed for SNMP deposit to RSU.
-      properties:
-        rsuid:
-          type: string
-        msgid:
-          type: string
-        mode:
-          type: string
-        channel:
-          type: string
-        interval:
-          type: string
-        deliverystart:
-          type: string
-          description: ISO string for message delivery start time. Takes priority over "deliverystart" field in SDW.
-        deliverystop:
-          type: string
-          description: ISO string for message delivery stop time. Takes priority over "deliverystop" field in SDW.
-        enable:
-          type: string
-        status:
-          type: string
-    Status:
-      type: object
-      properties:
-        success:
-          type: boolean
-        message:
-          type: string
-    RSU:
-      type: object
-      description: Optional field, needed for SNMP deposit to RSU.
-      properties:
-        rsuIndex:
-          type: integer
-          description: Index of message storage on RSU.
-        rsuTarget:
-          type: string
-          description: IPv4 address of RSU
-        rsuUsername:
-          type: string
-          description: SNMP username (Not required if value is pre-configured in ODE properties)
-        rsuPassword:
-          type: string
-          description: SNMP password (Not required if value is pre-configured in ODE properties)
-        rsuRetries:
-          type: integer
-          description: Number of retries upon message send failure
-        rsuTimeout:
-          type: integer
-          description: Timeout measured in milliseconds
-    MsgID:
-      type: object
-      properties:
-        roadSignID:
-          $ref: '#/components/schemas/RoadSignID'
-        furtherInfoID:
-          type: string
-          description: A link to any other incident information data that may be available in the normal ATIS incident description or other messages, a 4-digit hex string.
-    OdePosition3D:
-      type: object
-      properties:
-        latitude:
-          type: number
-          description: Latitude in degrees [-90.0..90.0]
-        longitude:
-          type: number
-          description: Longitude in degrees [-90.0..90.0]
-        elevation:
-          type: number
-          description: Elevation in meters [-409.5..6143.9]
-    NodeListXY:
-      type: object
-      properties:
-        nodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Node'
-        computed:
-          $ref: '#/components/schemas/ComputedLane'
-    Circle:
-      type: object
-      properties:
-        position:
-          $ref: '#/components/schemas/OdePosition3D'
-        radius:
-          type: integer
-        units:
-          type: integer
-    Path:
+    SpeedLimit:
       type: object
       properties:
         type:
-          type: string
-        scale:
           type: integer
-        nodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Node'
-        computedLane:
-          $ref: '#/components/schemas/ComputedLane'
-    Geometry:
-      type: object
-      description: GeometricProjection data frame is used to describe various geometric spatial areas
-      properties:
-        direction:
-          type: string
-          description: HeadingSlice bitstring representing field of view over which this projection applies
-        extent:
-          type: integer
-          description: Extent enumeration integer value [0=useInstantlyOnly,...,15=forever]
-        laneWidth:
+          description: SpeedLimitType enumeration integer value [0=unknown,1=maxSpeedInSchoolZone,..,12=vehiclesWithTrailersNightMaxSpeed]
+        velocity:
           type: number
-          description: Lane width measured in meters [0.00..327.67m] in increments of 0.01m.
-        circle:
-          $ref: '#/components/schemas/Circle'
-    TravelerInputData:
-      type: object
-      properties:
-        request:
-          $ref: '#/components/schemas/request'
-        tim:
-          $ref: '#/components/schemas/tim'
+          description: Velocity in meters per second [0.00..163.82] in increments of 0.02 m/s.
     ComputedLane:
       type: object
       properties:
@@ -374,59 +241,6 @@ components:
         scaleYaxis:
           type: number
           description: Scale factor in percent [0..202.35%].
-    Node:
-      type: object
-      properties:
-        delta:
-          type: string
-          description: Valid values for offset values are offset XY values is node-XY. For this delta, x and y must be defined in meters from achor point. Valid values for offset Lat/Lon values is node-LL. For this delta nodeLat and NodeLong must be defined indegrees from anchor point. Valid values for absolute Lat/Lon is node-LatLon. For this delta nodeLat and nodeLong must be defined for each nodenot relative to anchor point.
-        nodeLat:
-          type: number
-          description: Latitude in degrees for node-LL (offset) or node-LatLon
-        nodeLong:
-          type: number
-          description: Longitude in degrees for Node-LL (offset) or node-LatLon
-        x:
-          type: number
-          description: Offset x axis in meters for node-XY delta
-        y:
-          type: number
-          description: Offset y axis in meters for node-XY delta
-        attributes:
-          $ref: '#/components/schemas/Attribute'
-    Region:
-      type: object
-      properties:
-        name:
-          type: string
-        regulatorID:
-          type: integer
-        segmentId:
-          type: integer
-        anchor_lat:
-          type: integer
-        anchor_long:
-          type: integer
-        anchor_eleveation:
-          type: integer
-        laneWidth:
-          type: number
-          description: Lane width measured in meters [0.00..327.67m] in increments of 0.01m.
-        directionality:
-          type: integer
-        closedPath:
-          type: string
-        direction:
-          type: string
-        description:
-          type: string
-          description: Valid values are "path" OR "geometry". oldregion is not supported
-        path:
-          $ref: '#/components/schemas/Path'
-        geometry:
-          $ref: '#/components/schemas/Geometry'
-        oldRegion:
-          $ref: '#/components/schemas/OldRegion'
     RoadSignID:
       type: object
       properties:
@@ -440,18 +254,6 @@ components:
         crc:
           type: string
           description: Message cyclic-redundancy-check code in 4-digit hex string.
-    ShapePointSet:
-      type: object
-      properties:
-        anchor:
-          $ref: '#/components/schemas/OdePosition3D'
-        laneWidth:
-          type: integer
-        directionality:
-          type: string
-          description: one of ENUMERATED { unavailable (0), -- unknown or NA, not typically used in valid expressions forward (1), -- direction of travel follows node ordering reverse (2), -- direction of travel is the reverse of node ordering both (3) -- direction of travel allowed in both directions
-        nodeList:
-          $ref: '#/components/schemas/NodeListXY'
     TravelerDataFrame:
       type: object
       required:
@@ -493,21 +295,181 @@ components:
           items:
             type: string
             description: If the value is purely an integer number, it will be interpreted as ITIS code.  If it is not an integer, it will be interpreted as a text message. If you intend to send an integral value as a literal integer, prefix the number with a single quote ('), for example, "'98765" will be interpreted as literal 98765. The prefix character will be removed before populating  the TIM message One may mix ITIS code and text in the  items array.
-    OldRegion:
+    SNMP:
+      type: object
+      description: Optional field, needed for SNMP deposit to RSU.
+      properties:
+        rsuid:
+          type: string
+        msgid:
+          type: string
+        mode:
+          type: string
+        channel:
+          type: string
+        interval:
+          type: string
+        deliverystart:
+          type: string
+          description: ISO string for message delivery start time. Takes priority over "deliverystart" field in SDW.
+        deliverystop:
+          type: string
+          description: ISO string for message delivery stop time. Takes priority over "deliverystop" field in SDW.
+        enable:
+          type: string
+        status:
+          type: string
+    OdePosition3D:
       type: object
       properties:
+        latitude:
+          type: number
+          description: Latitude in degrees [-90.0..90.0]
+        longitude:
+          type: number
+          description: Longitude in degrees [-90.0..90.0]
+        elevation:
+          type: number
+          description: Elevation in meters [-409.5..6143.9]
+    Attribute:
+      type: object
+      properties:
+        localNodes:
+          type: array
+          items:
+            type: integer
+        disabledLists:
+          type: array
+          items:
+            type: integer
+        enabledLists:
+          type: array
+          items:
+            type: integer
+        dataLists:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataList'
+        dWidth:
+          type: integer
+        dEleveation:
+          type: integer
+    tim:
+      type: object
+      properties:
+        msgCnt:
+          type: integer
+          description: Range [0..127], used to provide a sequence number within a stream of messages with the same DSRCmsgID and from the same sender.
+        timestamp:
+          type: string
+          description: ISO 8601 time of message creation, for example "2017-08-03T22:25:36.297Z".
+        packetId:
+          type: string
+          description: Provides a unique message ID, in a 9-digit hex string.
+        urlB:
+          type: string
+          description: Standard URL link to designated resource.
+        dataFrames:
+          type: array
+          items:
+            $ref: '#/components/schemas/TravelerDataFrame'
+    Path:
+      type: object
+      properties:
+        type:
+          type: string
+        scale:
+          type: integer
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Node'
+        computedLane:
+          $ref: '#/components/schemas/ComputedLane'
+    Region:
+      type: object
+      properties:
+        name:
+          type: string
+        regulatorID:
+          type: integer
+        segmentId:
+          type: integer
+        anchor_lat:
+          type: integer
+        anchor_long:
+          type: integer
+        anchor_eleveation:
+          type: integer
+        laneWidth:
+          type: number
+          description: Lane width measured in meters [0.00..327.67m] in increments of 0.01m.
+        directionality:
+          type: integer
+        closedPath:
+          type: string
         direction:
           type: string
-        extent:
-          type: integer
-        area:
+        description:
           type: string
-        regionPointSet:
-          $ref: '#/components/schemas/RegionPointSet'
-        circle:
-          $ref: '#/components/schemas/Circle'
-        shapePointSet:
-          $ref: '#/components/schemas/ShapePointSet'
+          description: Valid values are "path" OR "geometry". oldregion is not supported
+        path:
+          $ref: '#/components/schemas/Path'
+        geometry:
+          $ref: '#/components/schemas/Geometry'
+        oldRegion:
+          $ref: '#/components/schemas/OldRegion'
+    Circle:
+      type: object
+      properties:
+        position:
+          $ref: '#/components/schemas/OdePosition3D'
+        radius:
+          type: integer
+        units:
+          type: integer
+    RSU:
+      type: object
+      description: Optional field, needed for SNMP deposit to RSU.
+      properties:
+        rsuIndex:
+          type: integer
+          description: Index of message storage on RSU.
+        rsuTarget:
+          type: string
+          description: IPv4 address of RSU
+        rsuUsername:
+          type: string
+          description: SNMP username (Not required if value is pre-configured in ODE properties)
+        rsuPassword:
+          type: string
+          description: SNMP password (Not required if value is pre-configured in ODE properties)
+        rsuRetries:
+          type: integer
+          description: Number of retries upon message send failure
+        rsuTimeout:
+          type: integer
+          description: Timeout measured in milliseconds
+    RegionList:
+      type: object
+      properties:
+        xOffset:
+          type: number
+          description: OffsetLL-B16 measured in degrees [-0.0032767..0.0032767]
+        yOffset:
+          type: number
+          description: OffsetLL-B16 measured in degrees [-0.0032767..0.0032767]
+        zOffset:
+          type: number
+          description: (OPTIONAL) OffsetLL-B16 measured in degrees [-0.0032767..0.0032767]
+    MsgID:
+      type: object
+      properties:
+        roadSignID:
+          $ref: '#/components/schemas/RoadSignID'
+        furtherInfoID:
+          type: string
+          description: A link to any other incident information data that may be available in the normal ATIS incident description or other messages, a 4-digit hex string.
     RegionPointSet:
       type: object
       properties:
@@ -540,6 +502,33 @@ components:
           description: MergeDivergeNodeAngle in degrees [-240..240] in increments of 1.5.
         speedLimits:
           $ref: '#/components/schemas/SpeedLimit'
+    ShapePointSet:
+      type: object
+      properties:
+        anchor:
+          $ref: '#/components/schemas/OdePosition3D'
+        laneWidth:
+          type: integer
+        directionality:
+          type: string
+          description: one of ENUMERATED { unavailable (0), -- unknown or NA, not typically used in valid expressions forward (1), -- direction of travel follows node ordering reverse (2), -- direction of travel is the reverse of node ordering both (3) -- direction of travel allowed in both directions
+        nodeList:
+          $ref: '#/components/schemas/NodeListXY'
+    Geometry:
+      type: object
+      description: GeometricProjection data frame is used to describe various geometric spatial areas
+      properties:
+        direction:
+          type: string
+          description: HeadingSlice bitstring representing field of view over which this projection applies
+        extent:
+          type: integer
+          description: Extent enumeration integer value [0=useInstantlyOnly,...,15=forever]
+        laneWidth:
+          type: number
+          description: Lane width measured in meters [0.00..327.67m] in increments of 0.01m.
+        circle:
+          $ref: '#/components/schemas/Circle'
     request:
       type: object
       properties:
@@ -551,43 +540,54 @@ components:
           $ref: '#/components/schemas/SNMP'
         sdw:
           $ref: '#/components/schemas/SDW'
-    tim:
+    NodeListXY:
       type: object
       properties:
-        msgCnt:
-          type: integer
-          description: Range [0..127], used to provide a sequence number within a stream of messages with the same DSRCmsgID and from the same sender.
-        timestamp:
-          type: string
-          description: ISO 8601 time of message creation, for example "2017-08-03T22:25:36.297Z".
-        packetId:
-          type: string
-          description: Provides a unique message ID, in a 9-digit hex string.
-        urlB:
-          type: string
-          description: Standard URL link to designated resource.
-        dataFrames:
+        nodes:
           type: array
           items:
-            $ref: '#/components/schemas/TravelerDataFrame'
-    SpeedLimit:
+            $ref: '#/components/schemas/Node'
+        computed:
+          $ref: '#/components/schemas/ComputedLane'
+    OldRegion:
       type: object
       properties:
-        type:
+        direction:
+          type: string
+        extent:
           type: integer
-          description: SpeedLimitType enumeration integer value [0=unknown,1=maxSpeedInSchoolZone,..,12=vehiclesWithTrailersNightMaxSpeed]
-        velocity:
-          type: number
-          description: Velocity in meters per second [0.00..163.82] in increments of 0.02 m/s.
-    RegionList:
+        area:
+          type: string
+        regionPointSet:
+          $ref: '#/components/schemas/RegionPointSet'
+        circle:
+          $ref: '#/components/schemas/Circle'
+        shapePointSet:
+          $ref: '#/components/schemas/ShapePointSet'
+    Status:
       type: object
       properties:
-        xOffset:
+        success:
+          type: boolean
+        message:
+          type: string
+    Node:
+      type: object
+      properties:
+        delta:
+          type: string
+          description: Valid values for offset values are offset XY values is node-XY. For this delta, x and y must be defined in meters from achor point. Valid values for offset Lat/Lon values is node-LL. For this delta nodeLat and NodeLong must be defined indegrees from anchor point. Valid values for absolute Lat/Lon is node-LatLon. For this delta nodeLat and nodeLong must be defined for each nodenot relative to anchor point.
+        nodeLat:
           type: number
-          description: OffsetLL-B16 measured in degrees [-0.0032767..0.0032767]
-        yOffset:
+          description: Latitude in degrees for node-LL (offset) or node-LatLon
+        nodeLong:
           type: number
-          description: OffsetLL-B16 measured in degrees [-0.0032767..0.0032767]
-        zOffset:
+          description: Longitude in degrees for Node-LL (offset) or node-LatLon
+        x:
           type: number
-          description: (OPTIONAL) OffsetLL-B16 measured in degrees [-0.0032767..0.0032767]
+          description: Offset x axis in meters for node-XY delta
+        y:
+          type: number
+          description: Offset y axis in meters for node-XY delta
+        attributes:
+          $ref: '#/components/schemas/Attribute'

@@ -67,34 +67,13 @@ paths:
           content: {}
 components:
   schemas:
-    Closure:
-      required:
-      - airport
-      - reason
-      - reopen
+    GroundStops:
       type: object
       properties:
-        airport:
-          type: string
-          xml:
-            name: airport
-        reason:
-          type: string
-          xml:
-            name: reason
-        reopen:
-          type: string
-          xml:
-            name: reopen
-      xml:
-        name: closure
-    ArriveDepartDelays:
-      type: object
-      properties:
-        ArriveDepartDelay:
+        GroundStop:
           type: array
           items:
-            $ref: '#/components/schemas/ArriveDepartDelay'
+            $ref: '#/components/schemas/GroundStop'
     GroundDelays:
       type: object
       properties:
@@ -102,6 +81,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GroundDelay'
+    Closures:
+      type: object
+      properties:
+        Closure:
+          type: array
+          items:
+            $ref: '#/components/schemas/Closure'
+    ArriveDepartDelays:
+      type: object
+      properties:
+        ArriveDepartDelay:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArriveDepartDelay'
     GroundDelay:
       required:
       - airport
@@ -123,74 +116,6 @@ components:
             name: reason
       xml:
         name: GroundDelay
-    Weather:
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            type: object
-            properties: {}
-      xml:
-        name: Weather
-    Status:
-      required:
-      - avgDelay
-      - closureBegin
-      - closureEnd
-      - endTime
-      - maxDelay
-      - minDelay
-      - reason
-      - trend
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          xml:
-            name: Type
-        reason:
-          type: string
-          xml:
-            name: Reason
-        avgDelay:
-          type: string
-          xml:
-            name: AvgDelay
-        closureEnd:
-          type: string
-          xml:
-            name: ClosureEnd
-        closureBegin:
-          type: string
-          xml:
-            name: ClosureBegin
-        minDelay:
-          type: string
-          xml:
-            name: MinDelay
-        trend:
-          type: string
-          xml:
-            name: Trend
-        maxDelay:
-          type: string
-          xml:
-            name: MaxDelay
-        endTime:
-          type: string
-          xml:
-            name: EndTime
-      xml:
-        name: Status
-    GroundStops:
-      type: object
-      properties:
-        GroundStop:
-          type: array
-          items:
-            $ref: '#/components/schemas/GroundStop'
     Delays:
       type: object
       properties:
@@ -212,6 +137,16 @@ components:
             $ref: '#/components/schemas/Closures'
       xml:
         name: Delays
+    Weather:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            type: object
+            properties: {}
+      xml:
+        name: Weather
     ArriveDepartDelay:
       required:
       - airport
@@ -315,11 +250,76 @@ components:
           $ref: '#/components/schemas/Weather'
       xml:
         name: AirportStatus
-    Closures:
+    Closure:
+      required:
+      - airport
+      - reason
+      - reopen
       type: object
       properties:
-        Closure:
-          type: array
-          items:
-            $ref: '#/components/schemas/Closure'
+        airport:
+          type: string
+          xml:
+            name: airport
+        reason:
+          type: string
+          xml:
+            name: reason
+        reopen:
+          type: string
+          xml:
+            name: reopen
+      xml:
+        name: closure
+    Status:
+      required:
+      - avgDelay
+      - closureBegin
+      - closureEnd
+      - endTime
+      - maxDelay
+      - minDelay
+      - reason
+      - trend
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          xml:
+            name: Type
+        reason:
+          type: string
+          xml:
+            name: Reason
+        avgDelay:
+          type: string
+          xml:
+            name: AvgDelay
+        closureEnd:
+          type: string
+          xml:
+            name: ClosureEnd
+        closureBegin:
+          type: string
+          xml:
+            name: ClosureBegin
+        minDelay:
+          type: string
+          xml:
+            name: MinDelay
+        trend:
+          type: string
+          xml:
+            name: Trend
+        maxDelay:
+          type: string
+          xml:
+            name: MaxDelay
+        endTime:
+          type: string
+          xml:
+            name: EndTime
+      xml:
+        name: Status
 x-original-swagger-version: '2.0'
