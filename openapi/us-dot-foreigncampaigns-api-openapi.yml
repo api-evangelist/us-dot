@@ -191,6 +191,19 @@ components:
         userMessage:
           type: string
       type: object
+    Documents:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        size:
+          type: string
+        type:
+          type: string
+        url:
+          type: string
+      type: object
     Pagination:
       properties:
         count:
@@ -212,6 +225,15 @@ components:
         total:
           type: integer
       type: object
+    ForeignCampaignWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/ForeignCampaign'
+          type: array
+      type: object
     ForeignCampaign:
       properties:
         associatedDocuments:
@@ -228,27 +250,5 @@ components:
         manufacturer:
           type: string
         recallTypeCode:
-          type: string
-      type: object
-    ForeignCampaignWrapped:
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        results:
-          items:
-            $ref: '#/components/schemas/ForeignCampaign'
-          type: array
-      type: object
-    Documents:
-      properties:
-        description:
-          type: string
-        name:
-          type: string
-        size:
-          type: string
-        type:
-          type: string
-        url:
           type: string
       type: object

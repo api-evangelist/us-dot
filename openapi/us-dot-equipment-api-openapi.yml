@@ -262,6 +262,112 @@ components:
         status:
           type: integer
       type: object
+    Message:
+      properties:
+        errorCode:
+          type: string
+        errorDetail:
+          type: string
+        errorMessage:
+          type: string
+        userMessage:
+          type: string
+      type: object
+    Equipment:
+      properties:
+        brand:
+          type: string
+        productName:
+          type: string
+        safetyIssues:
+          $ref: '#/components/schemas/SafetyIssueAggregate'
+      type: object
+    Investigations:
+      properties:
+        nhtsaActionNumber:
+          type: string
+        subject:
+          type: string
+      type: object
+    Components:
+      properties:
+        name:
+          type: string
+      type: object
+    MFRCommunicationAggregate:
+      properties:
+        communicationDate:
+          type: string
+        components:
+          items:
+            $ref: '#/components/schemas/Components'
+          type: array
+        manufacturerCommunicationNumber:
+          type: string
+        nhtsaIdNumber:
+          type: string
+        subject:
+          type: string
+        summary:
+          type: string
+      type: object
+    Pagination:
+      properties:
+        count:
+          type: integer
+        currentUrl:
+          type: string
+        max:
+          type: integer
+        nextUrl:
+          type: string
+        offset:
+          type: integer
+        order:
+          type: string
+        previousUrl:
+          type: string
+        sort:
+          type: string
+        total:
+          type: integer
+      type: object
+    Recalls:
+      properties:
+        nhtsaCampaignNumber:
+          type: string
+        subject:
+          type: string
+      type: object
+    ComplaintAggregate:
+      properties:
+        city:
+          type: string
+        components:
+          items:
+            $ref: '#/components/schemas/Components'
+          type: array
+        crash:
+          type: integer
+        dateFiled:
+          type: string
+        dateOfIncident:
+          type: string
+        description:
+          type: string
+        fire:
+          type: integer
+        nhtsaIdNumber:
+          type: string
+        numberOfDeaths:
+          type: integer
+        numberOfInjuries:
+          type: integer
+        stateAbbreviation:
+          type: string
+        vin:
+          type: string
+      type: object
     SafetyIssueAggregate:
       properties:
         complaints:
@@ -279,6 +385,15 @@ components:
         recalls:
           items:
             $ref: '#/components/schemas/RecallAggregate'
+          type: array
+      type: object
+    EquipmentWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/Equipment'
           type: array
       type: object
     RecallAggregate:
@@ -310,95 +425,6 @@ components:
         summary:
           type: string
       type: object
-    Equipment:
-      properties:
-        brand:
-          type: string
-        productName:
-          type: string
-        safetyIssues:
-          $ref: '#/components/schemas/SafetyIssueAggregate'
-      type: object
-    ComplaintAggregate:
-      properties:
-        city:
-          type: string
-        components:
-          items:
-            $ref: '#/components/schemas/Components'
-          type: array
-        crash:
-          type: integer
-        dateFiled:
-          type: string
-        dateOfIncident:
-          type: string
-        description:
-          type: string
-        fire:
-          type: integer
-        nhtsaIdNumber:
-          type: string
-        numberOfDeaths:
-          type: integer
-        numberOfInjuries:
-          type: integer
-        stateAbbreviation:
-          type: string
-        vin:
-          type: string
-      type: object
-    Components:
-      properties:
-        name:
-          type: string
-      type: object
-    Message:
-      properties:
-        errorCode:
-          type: string
-        errorDetail:
-          type: string
-        errorMessage:
-          type: string
-        userMessage:
-          type: string
-      type: object
-    Pagination:
-      properties:
-        count:
-          type: integer
-        currentUrl:
-          type: string
-        max:
-          type: integer
-        nextUrl:
-          type: string
-        offset:
-          type: integer
-        order:
-          type: string
-        previousUrl:
-          type: string
-        sort:
-          type: string
-        total:
-          type: integer
-      type: object
-    Investigations:
-      properties:
-        nhtsaActionNumber:
-          type: string
-        subject:
-          type: string
-      type: object
-    Recalls:
-      properties:
-        nhtsaCampaignNumber:
-          type: string
-        subject:
-          type: string
-      type: object
     InvestigationAggregate:
       properties:
         components:
@@ -421,32 +447,6 @@ components:
           type: string
         type:
           type: string
-      type: object
-    MFRCommunicationAggregate:
-      properties:
-        communicationDate:
-          type: string
-        components:
-          items:
-            $ref: '#/components/schemas/Components'
-          type: array
-        manufacturerCommunicationNumber:
-          type: string
-        nhtsaIdNumber:
-          type: string
-        subject:
-          type: string
-        summary:
-          type: string
-      type: object
-    EquipmentWrapped:
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        results:
-          items:
-            $ref: '#/components/schemas/Equipment'
-          type: array
       type: object
   parameters:
     EquipmentSort:

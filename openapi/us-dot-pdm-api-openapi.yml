@@ -49,26 +49,6 @@ paths:
         required: true
 components:
   schemas:
-    VehicleStatusRequest:
-      type: object
-      properties:
-        tag:
-          type: string
-        subTag:
-          type: string
-        lessThenValue:
-          type: string
-        moreThenValue:
-          type: string
-        sendAll:
-          type: string
-        status:
-          type: string
-    Ode:
-      type: object
-      properties:
-        version:
-          type: integer
     PDM:
       type: object
       properties:
@@ -104,17 +84,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VehicleStatusRequest'
-    ProbeDataManagement:
-      type: object
-      properties:
-        ode:
-          $ref: '#/components/schemas/Ode'
-        pdm:
-          $ref: '#/components/schemas/PDM'
-        rsuList:
-          type: array
-          items:
-            $ref: '#/components/schemas/RSU'
     RSU:
       type: object
       description: Optional field, needed for SNMP deposit to RSU.
@@ -137,6 +106,37 @@ components:
         rsuTimeout:
           type: integer
           description: Timeout measured in milliseconds
+    ProbeDataManagement:
+      type: object
+      properties:
+        ode:
+          $ref: '#/components/schemas/Ode'
+        pdm:
+          $ref: '#/components/schemas/PDM'
+        rsuList:
+          type: array
+          items:
+            $ref: '#/components/schemas/RSU'
+    Ode:
+      type: object
+      properties:
+        version:
+          type: integer
+    VehicleStatusRequest:
+      type: object
+      properties:
+        tag:
+          type: string
+        subTag:
+          type: string
+        lessThenValue:
+          type: string
+        moreThenValue:
+          type: string
+        sendAll:
+          type: string
+        status:
+          type: string
     Status:
       type: object
       properties:

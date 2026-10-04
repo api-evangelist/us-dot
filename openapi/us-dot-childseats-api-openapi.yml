@@ -482,6 +482,78 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    MFRCommunicationAggregate:
+      properties:
+        communicationDate:
+          type: string
+        components:
+          items:
+            $ref: '#/components/schemas/Components'
+          type: array
+        manufacturerCommunicationNumber:
+          type: string
+        nhtsaIdNumber:
+          type: string
+        subject:
+          type: string
+        summary:
+          type: string
+      type: object
+    ChildSeatModeRating:
+      properties:
+        label:
+          type: string
+        notes:
+          type: string
+        rating:
+          type: integer
+        ratingType:
+          type: string
+      type: object
+    PartialChildSeat:
+      properties:
+        childSeatMode:
+          type: string
+        manufacturerName:
+          type: string
+        maximumChildAge:
+          type: integer
+        minimumChildAge:
+          type: integer
+      type: object
+    Childseat:
+      properties:
+        id:
+          type: integer
+        make:
+          type: string
+        manufactureDate:
+          type: string
+        modelNumber:
+          type: string
+        modes:
+          items:
+            $ref: '#/components/schemas/ChildSeatMode'
+          type: array
+        productModel:
+          type: string
+        safetyIssues:
+          $ref: '#/components/schemas/SafetyIssueAggregate'
+        seatType:
+          type: string
+      type: object
+    Components:
+      properties:
+        name:
+          type: string
+      type: object
+    Recalls:
+      properties:
+        nhtsaCampaignNumber:
+          type: string
+        subject:
+          type: string
+      type: object
     InspectionStationDetailsWrapped:
       properties:
         meta:
@@ -490,6 +562,65 @@ components:
           items:
             $ref: '#/components/schemas/InspectionStationDetails'
           type: array
+      type: object
+    SafetyIssueAggregate:
+      properties:
+        complaints:
+          items:
+            $ref: '#/components/schemas/ComplaintAggregate'
+          type: array
+        investigation:
+          items:
+            $ref: '#/components/schemas/InvestigationAggregate'
+          type: array
+        manufacturerCommunications:
+          items:
+            $ref: '#/components/schemas/MFRCommunicationAggregate'
+          type: array
+        recalls:
+          items:
+            $ref: '#/components/schemas/RecallAggregate'
+          type: array
+      type: object
+    PartialChildSeatWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/PartialChildSeat'
+          type: array
+      type: object
+    Investigations:
+      properties:
+        nhtsaActionNumber:
+          type: string
+        subject:
+          type: string
+      type: object
+    Meta:
+      properties:
+        messages:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        pagination:
+          items:
+            $ref: '#/components/schemas/Pagination'
+          type: array
+        status:
+          type: integer
+      type: object
+    Message:
+      properties:
+        errorCode:
+          type: string
+        errorDetail:
+          type: string
+        errorMessage:
+          type: string
+        userMessage:
+          type: string
       type: object
     ComplaintAggregate:
       properties:
@@ -518,123 +649,6 @@ components:
         stateAbbreviation:
           type: string
         vin:
-          type: string
-      type: object
-    Pagination:
-      properties:
-        count:
-          type: integer
-        currentUrl:
-          type: string
-        max:
-          type: integer
-        nextUrl:
-          type: string
-        offset:
-          type: integer
-        order:
-          type: string
-        previousUrl:
-          type: string
-        sort:
-          type: string
-        total:
-          type: integer
-      type: object
-    Investigations:
-      properties:
-        nhtsaActionNumber:
-          type: string
-        subject:
-          type: string
-      type: object
-    InvestigationAggregate:
-      properties:
-        components:
-          items:
-            $ref: '#/components/schemas/Components'
-          type: array
-        dateClosed:
-          type: string
-        dateOpened:
-          type: string
-        nhtsaCampaignNumber:
-          type: string
-        recalls:
-          items:
-            $ref: '#/components/schemas/Recalls'
-          type: array
-        subject:
-          type: string
-        summary:
-          type: string
-        type:
-          type: string
-      type: object
-    Meta:
-      properties:
-        messages:
-          items:
-            $ref: '#/components/schemas/Message'
-          type: array
-        pagination:
-          items:
-            $ref: '#/components/schemas/Pagination'
-          type: array
-        status:
-          type: integer
-      type: object
-    Recalls:
-      properties:
-        nhtsaCampaignNumber:
-          type: string
-        subject:
-          type: string
-      type: object
-    MFRCommunicationAggregate:
-      properties:
-        communicationDate:
-          type: string
-        components:
-          items:
-            $ref: '#/components/schemas/Components'
-          type: array
-        manufacturerCommunicationNumber:
-          type: string
-        nhtsaIdNumber:
-          type: string
-        subject:
-          type: string
-        summary:
-          type: string
-      type: object
-    ChildseatWrapped:
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        results:
-          items:
-            $ref: '#/components/schemas/Childseat'
-          type: array
-      type: object
-    PartialChildSeatWrapped:
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        results:
-          items:
-            $ref: '#/components/schemas/PartialChildSeat'
-          type: array
-      type: object
-    Message:
-      properties:
-        errorCode:
-          type: string
-        errorDetail:
-          type: string
-        errorMessage:
-          type: string
-        userMessage:
           type: string
       type: object
     InspectionStationDetails:
@@ -669,101 +683,28 @@ components:
         zip:
           type: string
       type: object
-    ChildSeatModeRating:
-      properties:
-        label:
-          type: string
-        notes:
-          type: string
-        rating:
-          type: integer
-        ratingType:
-          type: string
-      type: object
-    Childseat:
-      properties:
-        id:
-          type: integer
-        make:
-          type: string
-        manufactureDate:
-          type: string
-        modelNumber:
-          type: string
-        modes:
-          items:
-            $ref: '#/components/schemas/ChildSeatMode'
-          type: array
-        productModel:
-          type: string
-        safetyIssues:
-          $ref: '#/components/schemas/SafetyIssueAggregate'
-        seatType:
-          type: string
-      type: object
-    RecallAggregate:
+    InvestigationAggregate:
       properties:
         components:
           items:
             $ref: '#/components/schemas/Components'
           type: array
-        consequence:
+        dateClosed:
           type: string
-        correctiveAction:
-          type: string
-        investigations:
-          items:
-            $ref: '#/components/schemas/Investigations'
-          type: array
-        manufacturer:
+        dateOpened:
           type: string
         nhtsaCampaignNumber:
-          type: integer
-        notes:
           type: string
-        potentialNumberOfUnitsAffected:
-          type: string
-        reportsReceivedDate:
-          type: string
+        recalls:
+          items:
+            $ref: '#/components/schemas/Recalls'
+          type: array
         subject:
           type: string
         summary:
           type: string
-      type: object
-    SafetyIssueAggregate:
-      properties:
-        complaints:
-          items:
-            $ref: '#/components/schemas/ComplaintAggregate'
-          type: array
-        investigation:
-          items:
-            $ref: '#/components/schemas/InvestigationAggregate'
-          type: array
-        manufacturerCommunications:
-          items:
-            $ref: '#/components/schemas/MFRCommunicationAggregate'
-          type: array
-        recalls:
-          items:
-            $ref: '#/components/schemas/RecallAggregate'
-          type: array
-      type: object
-    Components:
-      properties:
-        name:
+        type:
           type: string
-      type: object
-    PartialChildSeat:
-      properties:
-        childSeatMode:
-          type: string
-        manufacturerName:
-          type: string
-        maximumChildAge:
-          type: integer
-        minimumChildAge:
-          type: integer
       type: object
     ChildSeatMode:
       properties:
@@ -799,6 +740,65 @@ components:
         recommendedAge:
           type: boolean
         weightHeightRange:
+          type: string
+      type: object
+    Pagination:
+      properties:
+        count:
+          type: integer
+        currentUrl:
+          type: string
+        max:
+          type: integer
+        nextUrl:
+          type: string
+        offset:
+          type: integer
+        order:
+          type: string
+        previousUrl:
+          type: string
+        sort:
+          type: string
+        total:
+          type: integer
+      type: object
+    ChildseatWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/Childseat'
+          type: array
+      type: object
+    RecallAggregate:
+      properties:
+        components:
+          items:
+            $ref: '#/components/schemas/Components'
+          type: array
+        consequence:
+          type: string
+        correctiveAction:
+          type: string
+        investigations:
+          items:
+            $ref: '#/components/schemas/Investigations'
+          type: array
+        manufacturer:
+          type: string
+        nhtsaCampaignNumber:
+          type: integer
+        notes:
+          type: string
+        potentialNumberOfUnitsAffected:
+          type: string
+        reportsReceivedDate:
+          type: string
+        subject:
+          type: string
+        summary:
           type: string
       type: object
   parameters:

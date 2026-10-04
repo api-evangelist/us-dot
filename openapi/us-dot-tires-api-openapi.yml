@@ -293,6 +293,94 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Message:
+      properties:
+        errorCode:
+          type: string
+        errorDetail:
+          type: string
+        errorMessage:
+          type: string
+        userMessage:
+          type: string
+      type: object
+    Meta:
+      properties:
+        messages:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        pagination:
+          items:
+            $ref: '#/components/schemas/Pagination'
+          type: array
+        status:
+          type: integer
+      type: object
+    TireWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/Tire'
+          type: array
+      type: object
+    Investigations:
+      properties:
+        nhtsaActionNumber:
+          type: string
+        subject:
+          type: string
+      type: object
+    TireBrand:
+      properties:
+        brand:
+          type: string
+      type: object
+    Components:
+      properties:
+        name:
+          type: string
+      type: object
+    MFRCommunicationAggregate:
+      properties:
+        communicationDate:
+          type: string
+        components:
+          items:
+            $ref: '#/components/schemas/Components'
+          type: array
+        manufacturerCommunicationNumber:
+          type: string
+        nhtsaIdNumber:
+          type: string
+        subject:
+          type: string
+        summary:
+          type: string
+      type: object
+    Pagination:
+      properties:
+        count:
+          type: integer
+        currentUrl:
+          type: string
+        max:
+          type: integer
+        nextUrl:
+          type: string
+        offset:
+          type: integer
+        order:
+          type: string
+        previousUrl:
+          type: string
+        sort:
+          type: string
+        total:
+          type: integer
+      type: object
     Tire:
       properties:
         brand:
@@ -314,37 +402,12 @@ components:
         wear:
           type: string
       type: object
-    Meta:
+    Recalls:
       properties:
-        messages:
-          items:
-            $ref: '#/components/schemas/Message'
-          type: array
-        pagination:
-          items:
-            $ref: '#/components/schemas/Pagination'
-          type: array
-        status:
-          type: integer
-      type: object
-    SafetyIssueAggregate:
-      properties:
-        complaints:
-          items:
-            $ref: '#/components/schemas/ComplaintAggregate'
-          type: array
-        investigation:
-          items:
-            $ref: '#/components/schemas/InvestigationAggregate'
-          type: array
-        manufacturerCommunications:
-          items:
-            $ref: '#/components/schemas/MFRCommunicationAggregate'
-          type: array
-        recalls:
-          items:
-            $ref: '#/components/schemas/RecallAggregate'
-          type: array
+        nhtsaCampaignNumber:
+          type: string
+        subject:
+          type: string
       type: object
     ComplaintAggregate:
       properties:
@@ -375,119 +438,24 @@ components:
         vin:
           type: string
       type: object
-    Components:
+    SafetyIssueAggregate:
       properties:
-        name:
-          type: string
-      type: object
-    Message:
-      properties:
-        errorCode:
-          type: string
-        errorDetail:
-          type: string
-        errorMessage:
-          type: string
-        userMessage:
-          type: string
-      type: object
-    InvestigationAggregate:
-      properties:
-        components:
+        complaints:
           items:
-            $ref: '#/components/schemas/Components'
+            $ref: '#/components/schemas/ComplaintAggregate'
           type: array
-        dateClosed:
-          type: string
-        dateOpened:
-          type: string
-        nhtsaCampaignNumber:
-          type: string
+        investigation:
+          items:
+            $ref: '#/components/schemas/InvestigationAggregate'
+          type: array
+        manufacturerCommunications:
+          items:
+            $ref: '#/components/schemas/MFRCommunicationAggregate'
+          type: array
         recalls:
           items:
-            $ref: '#/components/schemas/Recalls'
+            $ref: '#/components/schemas/RecallAggregate'
           type: array
-        subject:
-          type: string
-        summary:
-          type: string
-        type:
-          type: string
-      type: object
-    Pagination:
-      properties:
-        count:
-          type: integer
-        currentUrl:
-          type: string
-        max:
-          type: integer
-        nextUrl:
-          type: string
-        offset:
-          type: integer
-        order:
-          type: string
-        previousUrl:
-          type: string
-        sort:
-          type: string
-        total:
-          type: integer
-      type: object
-    Investigations:
-      properties:
-        nhtsaActionNumber:
-          type: string
-        subject:
-          type: string
-      type: object
-    TireBrandWrapped:
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        results:
-          items:
-            $ref: '#/components/schemas/TireBrand'
-          type: array
-      type: object
-    Recalls:
-      properties:
-        nhtsaCampaignNumber:
-          type: string
-        subject:
-          type: string
-      type: object
-    TireBrand:
-      properties:
-        brand:
-          type: string
-      type: object
-    TireWrapped:
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        results:
-          items:
-            $ref: '#/components/schemas/Tire'
-          type: array
-      type: object
-    MFRCommunicationAggregate:
-      properties:
-        communicationDate:
-          type: string
-        components:
-          items:
-            $ref: '#/components/schemas/Components'
-          type: array
-        manufacturerCommunicationNumber:
-          type: string
-        nhtsaIdNumber:
-          type: string
-        subject:
-          type: string
-        summary:
-          type: string
       type: object
     RecallAggregate:
       properties:
@@ -516,6 +484,38 @@ components:
         subject:
           type: string
         summary:
+          type: string
+      type: object
+    TireBrandWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/TireBrand'
+          type: array
+      type: object
+    InvestigationAggregate:
+      properties:
+        components:
+          items:
+            $ref: '#/components/schemas/Components'
+          type: array
+        dateClosed:
+          type: string
+        dateOpened:
+          type: string
+        nhtsaCampaignNumber:
+          type: string
+        recalls:
+          items:
+            $ref: '#/components/schemas/Recalls'
+          type: array
+        subject:
+          type: string
+        summary:
+          type: string
+        type:
           type: string
       type: object
   parameters:

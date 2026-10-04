@@ -232,31 +232,50 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    EWRManufacturerDetail:
+    Meta:
       properties:
-        damages:
+        messages:
           items:
-            $ref: '#/components/schemas/EWRReportPeriod'
+            $ref: '#/components/schemas/Message'
           type: array
-        id:
+        pagination:
+          items:
+            $ref: '#/components/schemas/Pagination'
+          type: array
+        status:
+          type: integer
+      type: object
+    Message:
+      properties:
+        errorCode:
+          type: string
+        errorDetail:
+          type: string
+        errorMessage:
+          type: string
+        userMessage:
+          type: string
+      type: object
+    EWRReportPeriodCategory:
+      properties:
+        category:
+          type: string
+        categoryCode:
+          type: string
+        count:
+          format: int32
+          type: integer
+        reportId:
           format: int64
           type: integer
-        injuries:
-          items:
-            $ref: '#/components/schemas/EWRReportPeriod'
-          type: array
-        name:
+        reportUrl:
           type: string
-        productions:
-          items:
-            $ref: '#/components/schemas/EWRReportPeriod'
-          type: array
       required:
-      - id
-      - name
-      - injuries
-      - productions
-      - damages
+      - category
+      - categoryCode
+      - count
+      - reportId
+      - reportUrl
       type: object
     EWRProduction:
       properties:
@@ -286,28 +305,6 @@ components:
       - modelYear
       - typeCode
       - totalProduction
-    EWRManufacturersWrapped:
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        results:
-          items:
-            $ref: '#/components/schemas/EWRManufacturer'
-          type: array
-      type: object
-    Meta:
-      properties:
-        messages:
-          items:
-            $ref: '#/components/schemas/Message'
-          type: array
-        pagination:
-          items:
-            $ref: '#/components/schemas/Pagination'
-          type: array
-        status:
-          type: integer
-      type: object
     EWRPropertyDamageWrapped:
       properties:
         meta:
@@ -317,90 +314,23 @@ components:
             $ref: '#/components/schemas/EWRPropertyDamage'
           type: array
       type: object
-    EWRProductionWrapped:
+    EWRReportPeriod:
       properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        results:
-          items:
-            $ref: '#/components/schemas/EWRProduction'
-          type: array
-      type: object
-    EWRInjuryWrapped:
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        results:
-          items:
-            $ref: '#/components/schemas/EWRInjury'
-          type: array
-      type: object
-    Message:
-      properties:
-        errorCode:
-          type: string
-        errorDetail:
-          type: string
-        errorMessage:
-          type: string
-        userMessage:
-          type: string
-      type: object
-    EWRManufacturerDetailWrapped:
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        results:
-          items:
-            $ref: '#/components/schemas/EWRManufacturerDetail'
-          type: array
-      type: object
-    EWRInjury:
-      properties:
-        sequenceId:
+        quarter:
           format: int32
           type: integer
+        reports:
+          items:
+            $ref: '#/components/schemas/EWRReportPeriodCategory'
+          type: array
         year:
-          type: string
-        incidentDate:
-          type: string
-        deaths:
           format: int32
           type: integer
-        injuries:
-          format: int32
-          type: integer
-        stateOrCountryCode:
-          type: string
-        components:
-          items:
-            type: string
-          type: array
-        make:
-          type: string
-        model:
-          type: string
-        vin:
-          type: string
-        productIdentifier:
-          type: string
-        tin:
-          type: string
-        vehicleMake:
-          type: string
-        vehicleModel:
-          type: string
-        vehicleYear:
-          type: string
-      type: object
       required:
-      - sequenceId
       - year
-      - incidentDate
-      - deaths
-      - injuries
-      - stateOrCountryCode
-      - components
+      - quarter
+      - reports
+      type: object
     EWRPropertyDamage:
       properties:
         year:
@@ -532,21 +462,14 @@ components:
       type: object
       required:
       - year
-    EWRManufacturer:
+    EWRManufacturersWrapped:
       properties:
-        id:
-          format: int64
-          type: integer
-        name:
-          type: string
-        reportTypes:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
           items:
-            type: string
+            $ref: '#/components/schemas/EWRManufacturer'
           type: array
-      required:
-      - id
-      - name
-      - reportTypes
       type: object
     Pagination:
       properties:
@@ -569,41 +492,118 @@ components:
         total:
           type: integer
       type: object
-    EWRReportPeriod:
+    EWRProductionWrapped:
       properties:
-        quarter:
-          format: int32
-          type: integer
-        reports:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
           items:
-            $ref: '#/components/schemas/EWRReportPeriodCategory'
+            $ref: '#/components/schemas/EWRProduction'
           type: array
-        year:
-          format: int32
-          type: integer
-      required:
-      - year
-      - quarter
-      - reports
       type: object
-    EWRReportPeriodCategory:
+    EWRManufacturerDetailWrapped:
       properties:
-        category:
-          type: string
-        categoryCode:
-          type: string
-        count:
-          format: int32
-          type: integer
-        reportId:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/EWRManufacturerDetail'
+          type: array
+      type: object
+    EWRManufacturerDetail:
+      properties:
+        damages:
+          items:
+            $ref: '#/components/schemas/EWRReportPeriod'
+          type: array
+        id:
           format: int64
           type: integer
-        reportUrl:
+        injuries:
+          items:
+            $ref: '#/components/schemas/EWRReportPeriod'
+          type: array
+        name:
           type: string
+        productions:
+          items:
+            $ref: '#/components/schemas/EWRReportPeriod'
+          type: array
       required:
-      - category
-      - categoryCode
-      - count
-      - reportId
-      - reportUrl
+      - id
+      - name
+      - injuries
+      - productions
+      - damages
       type: object
+    EWRInjuryWrapped:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/EWRInjury'
+          type: array
+      type: object
+    EWRManufacturer:
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        reportTypes:
+          items:
+            type: string
+          type: array
+      required:
+      - id
+      - name
+      - reportTypes
+      type: object
+    EWRInjury:
+      properties:
+        sequenceId:
+          format: int32
+          type: integer
+        year:
+          type: string
+        incidentDate:
+          type: string
+        deaths:
+          format: int32
+          type: integer
+        injuries:
+          format: int32
+          type: integer
+        stateOrCountryCode:
+          type: string
+        components:
+          items:
+            type: string
+          type: array
+        make:
+          type: string
+        model:
+          type: string
+        vin:
+          type: string
+        productIdentifier:
+          type: string
+        tin:
+          type: string
+        vehicleMake:
+          type: string
+        vehicleModel:
+          type: string
+        vehicleYear:
+          type: string
+      type: object
+      required:
+      - sequenceId
+      - year
+      - incidentDate
+      - deaths
+      - injuries
+      - stateOrCountryCode
+      - components
