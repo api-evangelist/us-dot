@@ -1,4 +1,4 @@
-# U.S. Department of Transportation (us-dot)
+# U.S. Department of Transportation
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,180 +64,226 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-The U.S. Department of Transportation (DOT) is the federal transportation regulator for the United States, the deepest travel market in the world. In aviation DOT is not a participant in the distribution chain — it is the counterweight to it: through the Office of the Secretary it writes and enforces 14 CFR Part 256 on electronic airline information systems (explicitly naming global distribution systems, corporate booking tools and internet flight search tools), Part 257 on code-share disclosure, Part 250 on oversales, Part 259 on enhanced passenger protections, Part 260 on fare and ancillary fee refunds, and 399.84 on full-fare advertising. Its Bureau of Transportation Statistics is the sole authoritative source for US airline economics — T-100 segment traffic, Form 41 financials, the Consumer Airfare Report city-pair fare tables, denied boardings and mishandled baggage — published as free Socrata SODA APIs. Its Federal Aviation Administration operates a Gravitee API portal at api.faa.gov whose public catalog is enumerable without login and serves genuinely open, unauthenticated OpenAPI 3.0.1 services for national airspace delay status and aeronautical chart product releases, alongside gated APIs for pilot records and safety reporting.
+The U.S. Department of Transportation (DOT) is the federal transportation regulator for the United States, the deepest travel market in the world. In aviation DOT is not a participant in the distribution chain — it is the counterweight to it: through the Office of the Secretary it writes and enforces 14 CFR Part 256 on electronic airline information systems (explicitly naming global distribution systems, corporate booking tools and internet flight search tools), Part 257 on code-share disclosure, Part 250 on oversales, Part 259 on enhanced passenger protections, Part 260 on fare and ancillary fee refunds, and 399.84 on full-fare advertising. Its Bureau of Transportation Statistics is the sole authoritative source for US airline economics — T-100 segment traffic, Form 41 financials, the Consumer Airfare Report city-pair fare tables, denied boardings and mishandled baggage — published as free Socrata SODA APIs. Its Federal Aviation Administration operates a Gravitee API portal at api.faa.gov whose public catalog is enumerable without login and serves genuinely open, unauthenticated OpenAPI 3.0.1 services for national airspace delay status and aeronautical chart product releases, alongside gated APIs for pilot records and safety reporting. Beyond aviation the operating administrations each run their own surface: NHTSA publishes anonymous vehicle, recall, complaint and safety-rating APIs; FRA publishes SOAP/WSDL rail safety services; FMCSA issues the department's only self-serve API key behind a Login.gov account. API posture, honestly: transportation.gov itself is bot-blocked (HTTP 403 to any non-browser client) and publishes no departmental OpenAPI, there is no OAuth, no idempotency key, no RFC 9457 errors, no Sunset headers and no security.txt anywhere — but the data surfaces underneath are open, unmetered, public domain and fully bulk-exportable. This is a provider with an excellent exit path and no commercial lock-in of any kind.
 
-API posture, honestly: transportation.gov itself is bot-blocked (HTTP 403 to any non-browser client) and publishes no departmental OpenAPI, but the data surfaces underneath it are open, unmetered, public domain, and fully bulk-exportable — this is a provider with an excellent exit path and no commercial lock-in of any kind.
+**Areas:** Travel · United States · Aviation · Airlines · Airports · Government · Regulator · Aviation Consumer Protection · Open Data · Transportation · Safety · Statistics
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/us-dot/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/us-dot/refs/heads/main/apis.yml)
+## U.S. Department of Transportation on APIs.io
 
-## Tags
+Everything profiled for U.S. Department of Transportation is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/us-dot/](https://apis.io/providers/us-dot/)** — or go straight to one of the APIs or properties below.
 
-- Travel
-- United States
-- Aviation
-- Airlines
-- Airports
-- Government
-- Regulator
-- Distribution
-- Aviation Consumer Protection
-- Open Data
+### APIs (41)
 
-## Timestamps
+- [FAA Data Catalog (CKAN Action API v3)](https://apis.io/apis/us-dot/faa-data-catalog-ckan-api/) — The Federal Aviation Administration's open data catalog, running CKAN 2.11.4 and exposing the full CKAN Action API v3 anonymously at /api/3/action/.…
+- [DOT Data Hub Open Data API](https://apis.io/apis/us-dot/dot-data-hub-soda-api/) — The departmental open data platform, served from both data.transportation.gov and datahub.transportation.gov on Socrata SODA 2.1. For travel and aviation…
+- [Bureau of Transportation Statistics Open Data API](https://apis.io/apis/us-dot/bts-open-data-soda-api/) — The Bureau of Transportation Statistics open data platform on Socrata SODA 2.1, and the authoritative record of US commercial aviation activity. Aviation…
+- [NHTSA vPIC (Vehicle Product Information Catalog) API](https://apis.io/apis/us-dot/nhtsa-vpic-api/) — The National Highway Traffic Safety Administration's Vehicle Product Information Catalog and VIN decoder, and the most widely consumed API in the…
+- [NHTSA Safety API (recalls, complaints, safety ratings)](https://apis.io/apis/us-dot/nhtsa-safety-api/) — The NHTSA public safety API that powers the dynamic search applications on nhtsa.gov. Three families: /recalls for safety recalls by vehicle or campaign…
+- [FRA Safety Data Web Services](https://apis.io/apis/us-dot/fra-safety-data-api/) — The Federal Railroad Administration's rail safety web services, and the only SOAP surface in the department. Two WSDL 1.1 contracts were retrieved live and…
+- [FMCSA QCMobile API](https://apis.io/apis/us-dot/fmcsa-qcmobile-api/) — The Federal Motor Carrier Safety Administration's carrier data API — real-time queries on motor carrier registration, authority and safety data, including…
+- [U.S. Department of Transportation Air Carrier API](https://apis.io/apis/us-dot/us-dot-aircarrierapi-api/) — The AirCarrierApi API from U.S. Department of Transportation — 4 operation(s) for aircarrierapi.
+- [U.S. Department of Transportation Axhsubmitdiscrepancies API](https://apis.io/apis/us-dot/us-dot-axhsubmitdiscrepancies-api/) — The Axhsubmitdiscrepancies API from U.S. Department of Transportation — 1 operation(s) for axhsubmitdiscrepancies.
+- [U.S. Department of Transportation Coded Instrument Flight Procedures (CIFP) API](https://apis.io/apis/us-dot/us-dot-coded-instrument-flight-procedures-cifp-api/) — The Coded Instrument Flight Procedures (CIFP) API from U.S. Department of Transportation — 2 operation(s) for coded instrument flight procedures (cifp).
+- [U.S. Department of Transportation Daily Digital Obstacle File (DDOF) API](https://apis.io/apis/us-dot/us-dot-daily-digital-obstacle-file-ddof-api/) — The Daily Digital Obstacle File (DDOF) API from U.S. Department of Transportation — 2 operation(s) for daily digital obstacle file (ddof).
+- [U.S. Department of Transportation Digital Enroute Charts US (DDECUS) API](https://apis.io/apis/us-dot/us-dot-digital-enroute-charts-us-ddecus-api/) — The Digital Enroute Charts US (DDECUS) API from U.S. Department of Transportation — 2 operation(s) for digital enroute charts us (ddecus).
+- [U.S. Department of Transportation Digital Enroute Supplement (DERS) API](https://apis.io/apis/us-dot/us-dot-digital-enroute-supplement-ders-api/) — The Digital Enroute Supplement (DERS) API from U.S. Department of Transportation — 2 operation(s) for digital enroute supplement (ders).
+- [U.S. Department of Transportation FAA Airport Status Service API](https://apis.io/apis/us-dot/us-dot-faa-airport-status-service-api/) — The FAA Airport Status Service API from U.S. Department of Transportation — 2 operation(s) for faa airport status service.
+- [U.S. Department of Transportation Grand Canyon VFR Chart API](https://apis.io/apis/us-dot/us-dot-grand-canyon-vfr-chart-api/) — The Grand Canyon VFR Chart API from U.S. Department of Transportation — 2 operation(s) for grand canyon vfr chart.
+- [U.S. Department of Transportation Gulf of Mexico IFR Enroute Chart API](https://apis.io/apis/us-dot/us-dot-gulf-of-mexico-ifr-enroute-chart-api/) — The Gulf of Mexico IFR Enroute Chart API from U.S. Department of Transportation — 2 operation(s) for gulf of mexico ifr enroute chart.
+- [U.S. Department of Transportation IFR Enroute Charts API](https://apis.io/apis/us-dot/us-dot-ifr-enroute-charts-api/) — The IFR Enroute Charts API from U.S. Department of Transportation — 2 operation(s) for ifr enroute charts.
+- [U.S. Department of Transportation IFR Planning Charts API](https://apis.io/apis/us-dot/us-dot-ifr-planning-charts-api/) — The IFR Planning Charts API from U.S. Department of Transportation — 2 operation(s) for ifr planning charts.
+- [U.S. Department of Transportation log file API](https://apis.io/apis/us-dot/us-dot-log-file-api/) — The log file API from U.S. Department of Transportation — 1 operation(s) for log file.
+- [U.S. Department of Transportation NASR 28 Day Subscription API](https://apis.io/apis/us-dot/us-dot-nasr-28-day-subscription-api/) — The NASR 28 Day Subscription API from U.S. Department of Transportation — 2 operation(s) for nasr 28 day subscription.
+- [U.S. Department of Transportation Oceanic Route Charts API](https://apis.io/apis/us-dot/us-dot-oceanic-route-charts-api/) — The Oceanic Route Charts API from U.S. Department of Transportation — 2 operation(s) for oceanic route charts.
+- [U.S. Department of Transportation PDM API](https://apis.io/apis/us-dot/us-dot-pdm-api/) — The PDM API from U.S. Department of Transportation — 1 operation(s) for pdm.
+- [U.S. Department of Transportation Sectional Charts API](https://apis.io/apis/us-dot/us-dot-sectional-charts-api/) — The Sectional Charts API from U.S. Department of Transportation — 2 operation(s) for sectional charts.
+- [U.S. Department of Transportation SNMP API](https://apis.io/apis/us-dot/us-dot-snmp-api/) — The SNMP API from U.S. Department of Transportation — 1 operation(s) for snmp.
+- [U.S. Department of Transportation Supplement Chart API](https://apis.io/apis/us-dot/us-dot-supplement-chart-api/) — The Supplement Chart API from U.S. Department of Transportation — 2 operation(s) for supplement chart .
+- [U.S. Department of Transportation Terminal Area Charts API](https://apis.io/apis/us-dot/us-dot-terminal-area-charts-api/) — The Terminal Area Charts API from U.S. Department of Transportation — 2 operation(s) for terminal area charts.
+- [U.S. Department of Transportation TIM API](https://apis.io/apis/us-dot/us-dot-tim-api/) — The TIM API from U.S. Department of Transportation — 2 operation(s) for tim.
+- [U.S. Department of Transportation US Terminal Procedures Publication (TPP) API](https://apis.io/apis/us-dot/us-dot-us-terminal-procedures-publication-tpp-api/) — The US Terminal Procedures Publication (TPP) API from U.S. Department of Transportation — 2 operation(s) for us terminal procedures publication (tpp).
+- [U.S. Department of Transportation US VFR Wall Planning Chart API](https://apis.io/apis/us-dot/us-dot-us-vfr-wall-planning-chart-api/) — The US VFR Wall Planning Chart API from U.S. Department of Transportation — 2 operation(s) for us vfr wall planning chart.
+- [U.S. Department of Transportation Version API](https://apis.io/apis/us-dot/us-dot-version-api/) — The Version API from U.S. Department of Transportation — 1 operation(s) for version.
+- [U.S. Department of Transportation VFR Helicopter Route Chart API](https://apis.io/apis/us-dot/us-dot-vfr-helicopter-route-chart-api/) — The VFR Helicopter Route Chart API from U.S. Department of Transportation — 4 operation(s) for vfr helicopter route chart.
+- [FMCSA SaferBus API](https://apis.io/apis/us-dot/fmcsa-saferbus-api/) — The FMCSA SaferBus API is a RESTful service making available safety performance data for U.S. DOT-registered bus companies. It enables developers to build…
+- [NHTSA Datasets and APIs](https://apis.io/apis/us-dot/nhtsa-datasets-api/) — NHTSA provides public datasets and APIs covering vehicle safety complaints, recalls, safety ratings (NCAP), and defect investigations. Complaint data…
+- [DOT Open Data Portal](https://apis.io/apis/us-dot/dot-data-portal/) — The U.S. Department of Transportation Open Data Portal provides access to transportation datasets published by DOT agencies including FMCSA, NHTSA, FTA,…
+- [U.S. Department of Transportation Child Seats API](https://apis.io/apis/us-dot/us-dot-childseats-api/) — Child Seat search and list endpoints
+- [U.S. Department of Transportation Equipment API](https://apis.io/apis/us-dot/us-dot-equipment-api/) — Equipment search and list endpoints
+- [U.S. Department of Transportation Ewr API](https://apis.io/apis/us-dot/us-dot-ewr-api/) — Early Warning Report endpoints
+- [U.S. Department of Transportation Foreign Campaigns API](https://apis.io/apis/us-dot/us-dot-foreigncampaigns-api/) — Foreign Campaign search and list endpoints
+- [U.S. Department of Transportation Safety Issues API](https://apis.io/apis/us-dot/us-dot-safetyissues-api/) — Recalls, Investigations, Complaints, and Manufacturer Communications
+- [U.S. Department of Transportation Tires API](https://apis.io/apis/us-dot/us-dot-tires-api/) — Tire search and list endpoints
+- [U.S. Department of Transportation Vehicles API](https://apis.io/apis/us-dot/us-dot-vehicles-api/) — Vehicle search and list endpoints
 
-- **Created:** 2026-07-28
-- **Modified:** 2026-07-28
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### FAA Airport Status Web Service (ASWS)
+#### AsyncAPI (2)
 
-Real-time National Airspace System delay and airport status service operated by the Federal Aviation Administration, a DOT operating administration. Two GET operations return current ground delays, ground stops, arrival/departure delays and closures across supported US airports, and per-airport status keyed by IATA or ICAO code. Verified anonymously with HTTP 200 on 2026-07-28 — no API key, no registration, no terms acceptance.
+Event-driven and webhook contracts.
 
-- **Human URL:** [https://api.faa.gov/s/](https://api.faa.gov/s/)
-- **Base URL:** `https://external-api.faa.gov/asws/api`
+- [Us Dot Event Surfaces](https://apis.io/asyncapis/us-dot/us-dot-event-surfaces/)
+- [USDOT ITS JPO Operational Data Environment (ODE) — Kafka event surface](https://apis.io/asyncapis/us-dot/us-dot-its-jpo-ode-asyncapi/)
 
-#### Tags
+#### Event channels (32)
 
-- Aviation
-- Airports
-- Delays
-- Air Traffic
-- FAA
+Individual events and webhooks the provider emits.
 
-#### Properties
+- [topic.Asn1DecoderInput](https://apis.io/channels/us-dot/topic-asn1decoderinput/)
+- [topic.Asn1DecoderOutput](https://apis.io/channels/us-dot/topic-asn1decoderoutput/)
+- [topic.Asn1EncoderInput](https://apis.io/channels/us-dot/topic-asn1encoderinput/)
+- [topic.Asn1EncoderOutput](https://apis.io/channels/us-dot/topic-asn1encoderoutput/)
+- [topic.FilteredOdeBsmJson](https://apis.io/channels/us-dot/topic-filteredodebsmjson/)
+- [topic.FilteredOdeSpatJson](https://apis.io/channels/us-dot/topic-filteredodespatjson/)
+- [topic.FilteredOdeTimJson](https://apis.io/channels/us-dot/topic-filteredodetimjson/)
+- [topic.OdeBsmJson](https://apis.io/channels/us-dot/topic-odebsmjson/)
+- [topic.OdeDriverAlertJson](https://apis.io/channels/us-dot/topic-odedriveralertjson/)
+- [topic.OdeMapJson](https://apis.io/channels/us-dot/topic-odemapjson/)
+- [topic.OdePsmJson](https://apis.io/channels/us-dot/topic-odepsmjson/)
+- [topic.OdeRawEncodedBSMJson](https://apis.io/channels/us-dot/topic-oderawencodedbsmjson/)
+- [topic.OdeRawEncodedMAPJson](https://apis.io/channels/us-dot/topic-oderawencodedmapjson/)
+- [topic.OdeRawEncodedPSMJson](https://apis.io/channels/us-dot/topic-oderawencodedpsmjson/)
+- [topic.OdeRawEncodedRSMJson](https://apis.io/channels/us-dot/topic-oderawencodedrsmjson/)
+- [topic.OdeRawEncodedRTCMJson](https://apis.io/channels/us-dot/topic-oderawencodedrtcmjson/)
+- [topic.OdeRawEncodedSDSMJson](https://apis.io/channels/us-dot/topic-oderawencodedsdsmjson/)
+- [topic.OdeRawEncodedSPATJson](https://apis.io/channels/us-dot/topic-oderawencodedspatjson/)
+- [topic.OdeRawEncodedSRMJson](https://apis.io/channels/us-dot/topic-oderawencodedsrmjson/)
+- [topic.OdeRawEncodedSSMJson](https://apis.io/channels/us-dot/topic-oderawencodedssmjson/)
+- [topic.OdeRawEncodedTIMJson](https://apis.io/channels/us-dot/topic-oderawencodedtimjson/)
+- [topic.OdeRsmJson](https://apis.io/channels/us-dot/topic-odersmjson/)
+- [topic.OdeRtcmJson](https://apis.io/channels/us-dot/topic-odertcmjson/)
+- [topic.OdeSdsmJson](https://apis.io/channels/us-dot/topic-odesdsmjson/)
+- [topic.OdeSpatJson](https://apis.io/channels/us-dot/topic-odespatjson/)
+- …and 7 more published on APIs.io
 
-- [OpenAPI](openapi/us-dot-faa-airport-status-web-service-openapi.yml)
-- [Documentation](https://api.faa.gov/s/)
+#### MCP servers (1)
 
-### FAA Aeronautic Product Release API (APRA)
+Model Context Protocol servers that expose the API to agents.
 
-FAA aeronautical chart and data publication download API. Thirty-four GET operations expose edition metadata and ZIP product downloads for the digital Terminal Procedures Publication (dTPP), IFR enroute and oceanic charts, VFR charts, the Coded Instrument Flight Procedures data set, the NFDC/NASR 28-day airspace subscription, the Digital Obstacle File and more. Verified anonymously with HTTP 200 on 2026-07-28.
+- [us-dot](https://apis.io/servers/us-dot/us-dot/)
 
-- **Human URL:** [https://api.faa.gov/s/](https://api.faa.gov/s/)
-- **Base URL:** `https://external-api.faa.gov/apra`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Aviation
-- Charts
-- Aeronautical Data
-- Airspace
-- FAA
+- [Us Dot Agentic Access](https://apis.io/agentic-access/us-dot/us-dot-agentic-access/)
 
-#### Properties
+#### JSON Schema (6)
 
-- [OpenAPI](openapi/us-dot-faa-aeronautic-product-release-api-openapi.yml)
-- [Documentation](https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/)
+The data models the API reads and writes.
 
-### FAA Air Carrier Pilot Records Database (PRD) API
+- [GeoJSON Bounding Box](https://apis.io/schemas/us-dot/us-dot-wzdx-4.2-boundingbox/)
+- [WZDx v4.2 DeviceFeed](https://apis.io/schemas/us-dot/us-dot-wzdx-4.2-devicefeed/)
+- [Direction Enumerated Type](https://apis.io/schemas/us-dot/us-dot-wzdx-4.2-direction/)
+- [WZDx Feed Information](https://apis.io/schemas/us-dot/us-dot-wzdx-4.2-feedinfo/)
+- [Road Event Feature (GeoJSON Feature)](https://apis.io/schemas/us-dot/us-dot-wzdx-4.2-roadeventfeature/)
+- [WZDx v4.2 Work Zone Feed](https://apis.io/schemas/us-dot/us-dot-wzdx-4.2-workzonefeed/)
 
-Data submission API for the FAA Pilot Records Database. Five paths covering pilot record create/update/delete, pilot data tracking, and asynchronous pilot data search request and response. Access is restricted by the FAA to operators under 14 CFR Part 121, 135, 125, 91K, Air Tour, Public Aircraft, or Part 91 Corporate.
+#### Examples (2)
 
-- **Human URL:** [https://api.faa.gov/s/](https://api.faa.gov/s/)
-- **Base URL:** `https://external.apic4e.faa.gov`
+Example requests and responses.
 
-#### Tags
+- [Us Dot Faa Sas Submit Discrepancies Request](https://apis.io/examples/us-dot/us-dot-faa-sas-submit-discrepancies-request/)
+- [Us Dot Faa Sas Submit Discrepancies Response](https://apis.io/examples/us-dot/us-dot-faa-sas-submit-discrepancies-response/)
 
-- Aviation
-- Pilot Records
-- Airlines
-- Compliance
-- FAA
+#### Collections (5)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [OpenAPI](openapi/us-dot-faa-air-carrier-prd-api-openapi.yml)
-- [Documentation](https://api.faa.gov/s/)
+- [Aeronautic Product Release API](https://apis.io/collections/us-dot/open-us-dot-faa-aeronautic-product-release-api/)
+- [PRD Air Carrier API](https://apis.io/collections/us-dot/open-us-dot-faa-air-carrier-prd-api/)
+- [Airport Status Web Service](https://apis.io/collections/us-dot/open-us-dot-faa-airport-status-web-service/)
+- [sas-api](https://apis.io/collections/us-dot/open-us-dot-faa-safety-assurance-system-api/)
+- [ODE REST API](https://apis.io/collections/us-dot/open-us-dot-its-jpo-ode-rest-api/)
 
-### FAA Safety Assurance System (SAS) API
+#### Overlays (5)
 
-Single-operation submission API for passenger discrepancy reporting into the FAA Safety Assurance System. The harvested OpenAPI 3.0.0 declares apiKey and appId security schemes, so a credential is required.
+OpenAPI overlays, including conversational phrasing for each operation.
 
-- **Human URL:** [https://api.faa.gov/s/](https://api.faa.gov/s/)
-- **Base URL:** `https://external.apic4e.faa.gov/axh-sasp-api/sas`
+- [Us Dot Faa Aeronautic Product Release Api Overlay](https://apis.io/overlays/us-dot/us-dot-faa-aeronautic-product-release-api-overlay/)
+- [Us Dot Faa Air Carrier Prd Overlay](https://apis.io/overlays/us-dot/us-dot-faa-air-carrier-prd-overlay/)
+- [Us Dot Faa Airport Status Web Service Overlay](https://apis.io/overlays/us-dot/us-dot-faa-airport-status-web-service-overlay/)
+- [Us Dot Faa Safety Assurance System Overlay](https://apis.io/overlays/us-dot/us-dot-faa-safety-assurance-system-overlay/)
+- [Us Dot Its Jpo Ode Rest Api Overlay](https://apis.io/overlays/us-dot/us-dot-its-jpo-ode-rest-api-overlay/)
 
-#### Tags
+#### Security (3)
 
-- Aviation
-- Safety
-- Compliance
-- FAA
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Properties
+- [Us Dot Authentication](https://apis.io/security/us-dot/us-dot-authentication/)
+- [Us Dot Domain Security](https://apis.io/security/us-dot/us-dot-domain-security/)
+- [Us Dot Vulnerability Disclosure](https://apis.io/security/us-dot/us-dot-vulnerability-disclosure/)
 
-- [OpenAPI](openapi/us-dot-faa-safety-assurance-system-api-openapi.yml)
-- [Documentation](https://api.faa.gov/s/)
+## Where to find this API
 
-### DOT Data Hub Open Data API
-
-The departmental open data platform, served from both data.transportation.gov and datahub.transportation.gov on Socrata SODA 2.1. For travel and aviation this is where the DOT Office of the Assistant Secretary for Aviation and International Affairs publishes the Consumer Airfare Report city-pair fare tables, the Airline Quarterly Financial Review, and international seat and passenger reports. Datasets are licensed Public Domain U.S. Government (USGOV_WORKS).
-
-- **Human URL:** [https://data.transportation.gov/](https://data.transportation.gov/)
-- **Base URL:** `https://datahub.transportation.gov/resource`
-
-#### Tags
-
-- Open Data
-- Aviation
-- Airfares
-- Airlines
-- Statistics
-
-#### Properties
-
-- [Documentation](https://dev.socrata.com/docs/endpoints.html)
-- [Portal](https://data.transportation.gov/)
-- [Portal](https://datahub.transportation.gov/)
-- [License](https://www.usa.gov/government-works)
-
-### Bureau of Transportation Statistics Open Data API
-
-The Bureau of Transportation Statistics open data platform on Socrata SODA 2.1, and the authoritative record of US commercial aviation activity. Aviation holdings verified live include T-100 segment summaries, Air Carrier Financial (Form 41) series, average air fare by carrier and quarter, mishandled baggage and wheelchairs, and involuntary denied boardings by airline.
-
-- **Human URL:** [https://data.bts.gov/](https://data.bts.gov/)
-- **Base URL:** `https://data.bts.gov/resource`
-
-#### Tags
-
-- Open Data
-- Aviation
-- Airlines
-- Statistics
-- BTS
-
-#### Properties
-
-- [Documentation](https://dev.socrata.com/docs/endpoints.html)
-- [Portal](https://data.bts.gov/)
-- [Bulk Data](https://www.transtats.bts.gov/)
-- [License](https://www.usa.gov/government-works)
-
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.transportation.gov/)
-- [Portal](https://data.transportation.gov/)
-- [Portal](https://data.bts.gov/)
 - [Documentation](https://api.faa.gov/s/)
-- [Bulk Data](https://www.transtats.bts.gov/)
-- [Bulk Data](https://registry.faa.gov/database/ReleasableAircraft.zip)
-- [GitHub Organization](https://github.com/usdot-jpo-ode)
-- [X](https://x.com/USDOT)
-- [License](https://www.usa.gov/government-works)
-- [Regulation — 14 CFR Part 256](https://www.ecfr.gov/current/title-14/chapter-II/subchapter-A/part-256)
+- [Getting started](https://mobile.fmcsa.dot.gov/QCDevsite/docs/getStarted)
+- [API reference](https://dev.socrata.com/docs/queries/)
+- [Sign up](https://mobile.fmcsa.dot.gov/QCDevsite/logingovInfo)
+- [Support](https://api.faa.gov/s/help)
+- [Blog](https://www.transportation.gov/blog)
+- [Security](https://www.transportation.gov/vulnerability-disclosure-policy)
+- [Terms of service](https://www.transportation.gov/web-policies)
+- [Privacy policy](https://www.transportation.gov/privacy)
+- [GitHub](https://github.com/usdot-jpo-ode)
+- [Status](https://status.socrata.com/)
 
-## Switching Cost
+## API Evangelist rating
 
-Recorded in full in [`review.yml`](review.yml).
+**Kin Score 49.5** — developing · rubric 0.25.0 · scored 2026-10-23
 
-- **Interface shape:** standard-plus-proprietary — OpenAPI 3.0.x and Socrata SODA 2.1 over plain HTTP, with DOT/FAA-specific payload vocabularies. No OpenTravel/OTA, HTNG or IATA NDC conformance anywhere.
-- **Second source:** no-alternative — DOT and FAA are the statutory origin for US airline economic filings, aircraft registration, aeronautical charts and airspace status. Commercial vendors (Cirium, OAG, FlightAware, aviationstack) repackage this data rather than replace it.
-- **Exit path:** bulk-export-documented — SODA `$limit`/`$offset` and `rows.csv?accessType=DOWNLOAD`, TranStats full-table ZIPs, `registry.faa.gov/database/ReleasableAircraft.zip` (HTTP 200), and APRA chart product ZIPs.
-- **Identifier portability:** IATA carrier and airport codes, ICAO airport codes, DOT/BTS airline IDs, BTS city market and airport IDs, FAA N-numbers. No PNRs, no GDS record IDs, nothing opaque.
-- **Contractual lock-in:** nothing published for developers — datasets are `USGOV_WORKS` public domain and the open APIs require no account. The contractual weight runs outward, as 14 CFR Chapter II obligations on carriers, ticket agents and electronic airline information systems.
-- **Distribution model:** not-applicable — DOT regulates the distribution chain rather than participating in it, asserting jurisdiction over GDSs, corporate booking tools and internet flight search tools under 14 CFR Part 256.
-- **Access gate:** self-serve — no key, no registration and no terms click-through on the public surface. The FAA NOTAM API (HTTP 401) and the PRD API (restricted to specific operator classes) are the exceptions.
+| Facet | Score |
+|---|---|
+| Discoverability | 89.3 |
+| Contract quality | 54.9 |
+| Contract governance | 4.5 |
+| Operational transparency | 44.7 |
+| Developer ergonomics | 58.9 |
+| Access clarity | 34.2 |
 
-## Maintainers
+**Agent readiness 30.8** — agent-ready
 
-- **Kin Lane** — kin@apievangelist.com
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | — |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 30.4** — Government & Public Sector
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/us-dot/](https://apis.io/providers/us-dot/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for U.S. Department of Transportation: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/us-dot/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
